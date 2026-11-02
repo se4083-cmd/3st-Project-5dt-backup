@@ -1,0 +1,208 @@
+{
+  "kind": "synthetic_shape_examples_not_live_state",
+  "requests": [
+    {
+      "role": "CUSTOMER",
+      "method": "POST",
+      "path": "/api/v1/tickets",
+      "model": "TicketCreate",
+      "headers": {
+        "Idempotency-Key": "example-create-001"
+      },
+      "body": {
+        "order_id": null,
+        "message": "합성 문의 예시"
+      }
+    },
+    {
+      "role": "CUSTOMER",
+      "method": "POST",
+      "path": "/api/v1/tickets/{ticket_id}/reopen",
+      "model": "ReopenRequest",
+      "headers": {
+        "Idempotency-Key": "example-reopen-001"
+      },
+      "body": {
+        "expected_revision": 2,
+        "message": "합성 재문의 예시"
+      }
+    },
+    {
+      "role": "CUSTOMER",
+      "method": "POST",
+      "path": "/api/v1/tickets/{ticket_id}/request-agent",
+      "model": "AgentRequest",
+      "headers": {
+        "Idempotency-Key": "example-agent-001"
+      },
+      "body": {
+        "expected_revision": 3,
+        "message": "합성 상담사 요청 예시",
+        "reason_code": "CUSTOMER_REQUEST"
+      }
+    },
+    {
+      "role": "CURRENT_ASSIGNED_AGENT",
+      "method": "POST",
+      "path": "/api/v1/staff/followups",
+      "model": "FollowupCreate",
+      "headers": {
+        "Idempotency-Key": "example-followup-001"
+      },
+      "body": {
+        "ticket_id": "00000000-0000-4000-8000-000000000001",
+        "owner_team_id": "00000000-0000-4000-8000-000000000002",
+        "owner_user_id": null,
+        "kind": "CHECK",
+        "public_note": "공개 예시",
+        "internal_note": "합성 내부 예시",
+        "blocks_resolution": true
+      }
+    },
+    {
+      "role": "CURRENT_ASSIGNED_AGENT",
+      "method": "PATCH",
+      "path": "/api/v1/staff/followups/{action_id}",
+      "model": "FollowupPatch",
+      "body": {
+        "expected_revision": 1,
+        "owner_user_id": "00000000-0000-4000-8000-000000000003"
+      }
+    },
+    {
+      "role": "CURRENT_ASSIGNED_AGENT",
+      "method": "POST",
+      "path": "/api/v1/staff/followups/{action_id}/status",
+      "model": "FollowupState",
+      "body": {
+        "expected_revision": 2,
+        "status": "DONE"
+      }
+    },
+    {
+      "role": "SCOPED_STAFF",
+      "method": "POST",
+      "path": "/api/v1/staff/customers/{customer_id}/360",
+      "body": {
+        "purpose_code": "ACTIVE_SUPPORT"
+      }
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/analytics/voc/top",
+      "query": {
+        "team_ids": [
+          "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+        ]
+      }
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/analytics/products/{product_id}",
+      "query": {
+        "team_ids": [
+          "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+        ],
+        "batch_id": "00000000-0000-4000-8000-000000000004"
+      }
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/analytics/kpi"
+    },
+    {
+      "role": "STAFF",
+      "method": "GET",
+      "path": "/api/v1/staff/capabilities"
+    },
+    {
+      "role": "EXPLICIT_TEAM_QUEUE_READER",
+      "method": "GET",
+      "path": "/api/v1/staff/exception-queue",
+      "query": {
+        "queue_scope": "ROUTED",
+        "reason": "HUMAN_REQUEST",
+        "limit": 20
+      }
+    },
+    {
+      "role": "EXPLICIT_UNROUTED_ADMIN",
+      "method": "GET",
+      "path": "/api/v1/staff/exception-queue/counts",
+      "query": {
+        "queue_scope": "UNROUTED"
+      }
+    },
+    {
+      "role": "CURRENT_ASSIGNED_AGENT_OR_SCOPED_ADMIN",
+      "method": "POST",
+      "path": "/api/v1/staff/tickets/{ticket_id}/internal",
+      "model": "DetailPurpose",
+      "body": {
+        "purpose_code": "ACTIVE_SUPPORT",
+        "include_history": false
+      }
+    },
+    {
+      "role": "EXPLICIT_AUTOMATION_READER_ADMIN",
+      "method": "GET",
+      "path": "/api/v1/staff/automation-control"
+    },
+    {
+      "role": "EXPLICIT_AUTOMATION_STOP_ADMIN",
+      "method": "POST",
+      "path": "/api/v1/staff/automation-control/stop",
+      "model": "StopCommand",
+      "body": {
+        "expected_revision": 1,
+        "reason_code": "SAFETY_INCIDENT"
+      }
+    },
+    {
+      "role": "EXPLICIT_AUTOMATION_RESUME_ADMIN",
+      "method": "POST",
+      "path": "/api/v1/staff/automation-control/resume",
+      "model": "ResumeCommand",
+      "body": {
+        "expected_revision": 2,
+        "stopped_revision": 2,
+        "reason_code": "INCIDENT_RESOLVED"
+      }
+    },
+    {
+      "role": "EXPLICIT_RETENTION_TEAM_ADMIN",
+      "method": "POST",
+      "path": "/api/v1/staff/retention/dry-run",
+      "model": "RetentionRequest",
+      "body": {
+        "purpose_code": "RETENTION_REVIEW",
+        "as_of": "2026-10-31T03:00:00Z",
+        "scope": "TEAM",
+        "policy": {
+          "version": "DEV_RETENTION_V1",
+          "raw_days": 30,
+          "aggregate_days": 90
+        }
+      }
+    },
+    {
+      "role": "EXPLICIT_RETENTION_GLOBAL_ADMIN",
+      "method": "POST",
+      "path": "/api/v1/staff/retention/dry-run",
+      "model": "RetentionRequest",
+      "body": {
+        "purpose_code": "RETENTION_REVIEW",
+        "as_of": "2026-10-31T03:00:00Z",
+        "scope": "GLOBAL",
+        "policy": {
+          "version": "DEV_RETENTION_V1",
+          "raw_days": 30,
+          "aggregate_days": 90
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "result": "PASS",
+  "source": "LOCAL_SYNTHETIC",
+  "checks": [
+    "login_order_ticket",
+    "idempotent_replay_and_conflict",
+    "cross_customer_denial",
+    "fixed_auto_reply_common_commit",
+    "reopen_and_human_handoff",
+    "test_handoff_claim_assignment",
+    "followup_preservation_takeover_done",
+    "mandatory_followup_resolution_gate",
+    "explicit_test_human_resolution",
+    "scoped_customer360",
+    "public_internal_dto_separation",
+    "local_service_auth",
+    "synthetic_receive_validate_publish",
+    "admin_kpi_top10_detail_trend",
+    "exact_subset_and_scope_denial",
+    "noneligible_nulls",
+    "failed_batch_keeps_previous_success",
+    "explicit_queue_and_unrouted_capabilities",
+    "queue_does_not_grant_internal_or_360",
+    "staff_internal_nested_allowlist",
+    "stop_blocks_claim_and_inflight_commit",
+    "resume_fences_old_generation",
+    "paused_handoff_human_followup_continue",
+    "control_revision_and_history",
+    "resume_does_not_activate_rules",
+    "retention_explicit_team_global_permissions",
+    "retention_hidden_custody_and_shared_storage_isolation",
+    "retention_inventory_and_blocked_unknown_states",
+    "retention_business_content_unchanged",
+    "retention_no_execute_or_arbitrary_target",
+    "review_invalid_cursor_422_across_eight_http_pages",
+    "review_revoked_assignment_visible_in_scoped_queue",
+    "review_delayed_expired_lease_has_no_partial_final_writes"
+  ],
+  "examples": {
+    "ticket_receipt": {
+      "ticket_id": "b4568b69-9a36-4887-bcaf-eb53fb4b647c",
+      "created_at": "2026-11-02T08:14:48.232866Z"
+    },
+    "followup_public_fields": [
+      "action_id",
+      "completed_at",
+      "cycle_no",
+      "due_at",
+      "public_note",
+      "status",
+      "ticket_id",
+      "updated_at"
+    ],
+    "customer360_counts": {
+      "total_ticket_count": 1,
+      "unresolved_ticket_count": 1,
+      "followup_count": 1
+    },
+    "analytics_meta": {
+      "batch_id": "903058d6-9e8b-4698-8acd-6f9e46acef96",
+      "schema_version": "analytics-v1",
+      "rule_version": "voc_rule_v1",
+      "source": "LOCAL_SYNTHETIC",
+      "source_as_of": "2026-10-31T03:00:00Z",
+      "generated_at": "2026-10-31T03:00:00Z",
+      "window_end": "2026-10-30T15:00:00Z",
+      "windows": {
+        "history_start": "2026-10-02T15:00:00Z",
+        "operational_start": "2026-10-02T15:00:00Z",
+        "sales_start": "2026-10-02T15:00:00Z",
+        "prior_start": "2026-10-16T15:00:00Z",
+        "recent_start": "2026-10-23T15:00:00Z",
+        "window_end": "2026-10-30T15:00:00Z"
+      },
+      "published_at": "2026-11-02T08:14:50.555211Z",
+      "is_current": true,
+      "scope_key": "ALL4",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "6efbae37-4e53-59e9-b68c-9711bef485b1",
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ],
+      "stale": true,
+      "origin_verification": "SERVICE_DECLARED_NOT_INDEPENDENTLY_VERIFIED",
+      "cache_fingerprint": "cfa74aac8c53604434a97bf1fb4f6519988b43ef5af017604459860bc82d7b5a",
+      "sales_denominator_scope": "GLOBAL_PRODUCT_PAID_28D"
+    },
+    "phase6_internal_public_fields": [
+      "as_of",
+      "current_proposals",
+      "customer_ref",
+      "cycle_no",
+      "execution_authority",
+      "historical_proposals",
+      "history_included",
+      "material_status",
+      "revision",
+      "ticket_id",
+      "truncated"
+    ],
+    "phase6_paused_generation": 2,
+    "phase6_control_history_revisions": [
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
+    "retention_policy_hash": "1b59b714ac487de974c881e93791fb05c9a602f14015851e36e890b6a8db3474",
+    "retention_dry_run": true,
+    "retention_execution_status": "PREVIEW_ONLY_NOT_DELETION_AUTHORIZATION",
+    "retention_stores_not_inspected": [
+      "BLOB_AND_EXTERNAL_EXTRACTS",
+      "FABRIC_BRONZE_SILVER_GOLD",
+      "BACKUPS_REPLICAS_WAL",
+      "API_POSTGRES_AND_EXTERNAL_LOGS",
+      "LOCAL_FILES_EXPORTS_CACHES",
+      "LOCAL_TEAMS_PRODUCTS_SCOPE_CAPABILITIES_PUBLICATION_CONTROL_HISTORY"
+    ],
+    "review_cursor_pages": 8,
+    "review_lease_rejection": "INVALID_LEASE"
+  },
+  "canonical_content_hash": "c57c6b6b541cb4abdfd4fff202f8ed6f25628913e7388fae9b976a2152482486",
+  "test_doubles": [
+    "fixed automatic reply",
+    "assignment fixture",
+    "human gate + test final writer",
+    "provided synthetic analytics"
+  ],
+  "transport": "real Uvicorn HTTP on 127.0.0.1",
+  "database": "PostgreSQL",
+  "schema_removed": true,
+  "api_gracefully_stopped": true,
+  "openapi_matches": true,
+  "logs_sensitive_values_absent": true,
+  "external_processing_engines_executed": [],
+  "note": "LOCAL_SYNTHETIC fixed replies, assignment fixtures and shared DB finalization tests; no actual B/AI/RAG/Fabric or external dispatch engine executed."
+}

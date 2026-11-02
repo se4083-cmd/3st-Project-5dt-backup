@@ -1,0 +1,56 @@
+{
+  "canonical_version": "csflow-json-v1",
+  "source": "LOCAL_SYNTHETIC_OFFLINE_EXAMPLE",
+  "primitive_python_input": {
+    "Decimal": "50.000000",
+    "datetime": "2026-10-31T12:00:00+09:00",
+    "float": 1.0
+  },
+  "normalized_sample": {
+    "z": "50",
+    "at": "2026-10-31T03:00:00Z",
+    "a": 1
+  },
+  "canonical_json": "{\"a\":1,\"at\":\"2026-10-31T03:00:00Z\",\"z\":\"50\"}",
+  "sha256": "faa053bfb3b7274e44ef67629ed090ccf1892760263bcd1ebae3dec8f1c3e105",
+  "submission_file": "analytics-batch.json",
+  "submission_content_sha256": "bcfa83a6fe5e9effc155982ee5a3d0fed80911be7946f91d945fc2e616448e85",
+  "payload_sha256": {
+    "analytics_daily": "d2baefb3416689fc966b350f54717b230e71295c65c0f4370db5becfc0d44f34",
+    "analytics_product_daily": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "analytics_product_voc_daily": "7720670eb7778adad598251ec092bdb551f4e37b5059e18ad6465058972dcd0d",
+    "analytics_product_risk": "26cf0038c28316a584786424907680b43d2524faf61a6c4cd60a80ffe61dc005"
+  },
+  "pk_sorted_daily_rows": [
+    {
+      "day": "2026-10-29",
+      "team_key": "30823eec-3021-5baa-aa22-cf7f8bf23e08",
+      "category": "PRODUCT",
+      "ticket_count": 10,
+      "auto_closed_count": 4,
+      "handoff_count": 6,
+      "reopened_count": 0,
+      "sla_breach_count": 0,
+      "duration_sum_seconds": 120,
+      "duration_n": 3,
+      "approval_count": 0,
+      "review_count": 0
+    },
+    {
+      "day": "2026-10-30",
+      "team_key": "30823eec-3021-5baa-aa22-cf7f8bf23e08",
+      "category": "PRODUCT",
+      "ticket_count": 10,
+      "auto_closed_count": 4,
+      "handoff_count": 6,
+      "reopened_count": 0,
+      "sla_breach_count": 0,
+      "duration_sum_seconds": 120,
+      "duration_n": 3,
+      "approval_count": 0,
+      "review_count": 0
+    }
+  ],
+  "pk_sorted_daily_sha256": "6a35ac174152385bbe5157b7a2536ae6c60f7e0b90c3c7b553945eca919eb10f",
+  "source_input_hashes": "File-byte hashes are a separate upstream claim; not these payload hashes"
+}

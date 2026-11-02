@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16.15
+    command: ["postgres", "-c", "log_error_verbosity=terse", "-c", "log_parameter_max_length=0", "-c", "log_parameter_max_length_on_error=0", "-c", "log_statement=none"]
+    environment:
+      POSTGRES_USER: csflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: csflow
+      TZ: UTC
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - csflow_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U csflow -d csflow"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  csflow_pg:

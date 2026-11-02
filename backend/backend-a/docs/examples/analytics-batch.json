@@ -1,0 +1,143 @@
+{
+  "manifest": {
+    "batch_id": "17782183-99b8-4fec-8936-5b01a8b72e83",
+    "schema_version": "analytics-v1",
+    "rule_version": "voc_rule_v1",
+    "source": "LOCAL_SYNTHETIC",
+    "source_as_of": "2026-10-31T03:00:00Z",
+    "generated_at": "2026-10-31T03:00:00Z",
+    "windows": {
+      "history_start": "2026-10-02T15:00:00Z",
+      "operational_start": "2026-10-02T15:00:00Z",
+      "sales_start": "2026-10-02T15:00:00Z",
+      "prior_start": "2026-10-16T15:00:00Z",
+      "recent_start": "2026-10-23T15:00:00Z",
+      "window_end": "2026-10-30T15:00:00Z"
+    },
+    "calendar_timezone": "Asia/Seoul",
+    "team_ids": [
+      "30823eec-3021-5baa-aa22-cf7f8bf23e08"
+    ],
+    "product_ids": [
+      "3ac5f79e-0428-5317-9a07-1fd81f2ad932"
+    ],
+    "scopes": [
+      {
+        "scope_key": "T1",
+        "team_ids": [
+          "30823eec-3021-5baa-aa22-cf7f8bf23e08"
+        ]
+      }
+    ],
+    "row_counts": {
+      "analytics_daily": 1,
+      "analytics_product_daily": 0,
+      "analytics_product_voc_daily": 1,
+      "analytics_product_risk": 1
+    },
+    "payload_checksums": {
+      "analytics_daily": "d2baefb3416689fc966b350f54717b230e71295c65c0f4370db5becfc0d44f34",
+      "analytics_product_daily": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "analytics_product_voc_daily": "7720670eb7778adad598251ec092bdb551f4e37b5059e18ad6465058972dcd0d",
+      "analytics_product_risk": "26cf0038c28316a584786424907680b43d2524faf61a6c4cd60a80ffe61dc005"
+    },
+    "source_input_hashes": {
+      "orders": null,
+      "tickets": null,
+      "customer_contacts": null,
+      "followup_actions": null,
+      "coverage": null
+    },
+    "kpi_definition": "fixture-ticket-v1",
+    "product_kpi_definition": "issue-tag-grain-v1",
+    "sales_denominator_scope": "GLOBAL_PRODUCT_PAID_28D"
+  },
+  "payload": {
+    "analytics_daily": [
+      {
+        "day": "2026-10-30",
+        "team_key": "30823eec-3021-5baa-aa22-cf7f8bf23e08",
+        "category": "PRODUCT",
+        "ticket_count": 10,
+        "auto_closed_count": 4,
+        "handoff_count": 6,
+        "reopened_count": 0,
+        "sla_breach_count": 0,
+        "duration_sum_seconds": 120,
+        "duration_n": 3,
+        "approval_count": 0,
+        "review_count": 0
+      }
+    ],
+    "analytics_product_daily": [],
+    "analytics_product_voc_daily": [
+      {
+        "scope_key": "T1",
+        "product_id": "3ac5f79e-0428-5317-9a07-1fd81f2ad932",
+        "day": "2026-10-30",
+        "primary_issue": "DAMAGED",
+        "episode_count": 5,
+        "unresolved_count": 2
+      }
+    ],
+    "analytics_product_risk": [
+      {
+        "scope_key": "T1",
+        "product_id": "3ac5f79e-0428-5317-9a07-1fd81f2ad932",
+        "rule_version": "voc_rule_v1",
+        "data_status": "ELIGIBLE",
+        "score": "50",
+        "rank": 1,
+        "risk_band": "WATCH",
+        "metrics": {
+          "C": 5,
+          "P": 1,
+          "S": 100,
+          "N": 4,
+          "M": 1,
+          "U": 2,
+          "K": 3,
+          "raw_rate": 0.05,
+          "smoothed_rate": 0.05,
+          "growth": 4,
+          "top_issue": "DAMAGED",
+          "outside_cohort": 0,
+          "excluded_count": 0,
+          "sales_complete": true,
+          "quality_ok": true,
+          "complaints_complete": true,
+          "episode_state_complete": true
+        },
+        "components": {
+          "volume": {
+            "normalized": 0.5,
+            "weight": 0.1,
+            "contribution": 5
+          },
+          "rate": {
+            "normalized": 0.5,
+            "weight": 0.35,
+            "contribution": 17.5
+          },
+          "growth": {
+            "normalized": 0.5,
+            "weight": 0.25,
+            "contribution": 12.5
+          },
+          "repeat": {
+            "normalized": 0.5,
+            "weight": 0.2,
+            "contribution": 10
+          },
+          "unresolved": {
+            "normalized": 0.5,
+            "weight": 0.1,
+            "contribution": 5
+          }
+        },
+        "source_as_of": "2026-10-31T03:00:00Z",
+        "window_end": "2026-10-30T15:00:00Z"
+      }
+    ]
+  }
+}

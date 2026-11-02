@@ -1,0 +1,11 @@
+{
+  "actual_python": "3.13.15",
+  "host_os": "Windows",
+  "explicit_413": "Content Too Large",
+  "explicit_422": "Unprocessable Content",
+  "only_openapi_change_from_060_after_phrase_fix": "info.version 0.6.1",
+  "full_document_comparison_remains_strict": true,
+  "canonical_hash_vectors_unchanged": true,
+  "python312_http_defaults_simulated": true,
+  "actual_linux_python312_rerun": false
+}

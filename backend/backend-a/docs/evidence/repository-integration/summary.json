@@ -1,0 +1,35 @@
+{
+  "execution": "new_repository_relocation_checks_only",
+  "historical_full_postgres": 368,
+  "historical_http_flows": 33,
+  "historical_counts_not_reexecuted_or_added_to_new_checks": true,
+  "new_partial_results": {
+    "partial-sqlite.xml": {
+      "tests": "65",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "4",
+      "time": "25.492"
+    },
+    "path-postgres.xml": {
+      "tests": "4",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "7.569"
+    }
+  },
+  "new_api_health": {
+    "/health/live": 200,
+    "/health/ready": 200
+  },
+  "new_api_openapi_equal": true,
+  "new_root_alembic_current": "0006",
+  "ruff_check_and_format": true,
+  "strict_handoff_canonical_checks": true,
+  "full_fixture_source_committed": false,
+  "test_credentials_are_review_placeholders": true,
+  "workflow_count_before_push": 0,
+  "original_sources_unchanged": true,
+  "cloud_deployment_or_external_engine_calls": false
+}

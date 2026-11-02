@@ -1,0 +1,33 @@
+# Private local configuration; example only is tracked.
+.env
+.env.*
+!.env.example
+local.env
+**/local.env
+.venv*/
+venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.cache/
+*.egg-info/
+dist/
+build/
+*.db
+*.db-*
+*.sqlite*
+*.dump
+*.backup
+*.log
+*.pid
+*.zip
+*.pem
+*.pfx
+*.key
+test-results/
+.coverage
+htmlcov/
+# External full dataset is never redistributed with the implementation.
+/reference/*
+!/reference/README.md
