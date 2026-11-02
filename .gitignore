@@ -218,3 +218,37 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local inquiry analysis rules (preserved from csflow-openai)
+# Local environment settings
+.env
+.env.*
+!.env.example
+
+# Virtual environments
+.venv/
+venv/
+
+# Python cache and local logs
+__pycache__/
+*.py[cod]
+*.log
+
+# Generated reports, personal settings, archives and temporary files
+check_results/
+.vscode/
+.idea/
+*.local
+*.local.*
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.tgz
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+!.env.example
