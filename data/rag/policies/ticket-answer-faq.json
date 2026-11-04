@@ -1,0 +1,43 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "27ed5cdc-4071-5580-bd54-51331dac42fb",
+  "policy_key": "V2_TICKET_ANSWER_FAQ",
+  "title": "접수한 문의와 답변 확인 방법",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "ACCOUNT"
+  ],
+  "allowed_intents": [
+    "TICKET_ANSWER_FAQ"
+  ],
+  "allow_kind": "GENERAL_FAQ",
+  "order_required": false,
+  "template_key": "V2_TICKET_ANSWER_FAQ_V1",
+  "clause_id": "V2_FAQ_01",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "문의",
+    "질문",
+    "접수",
+    "답변",
+    "진행",
+    "결과",
+    "확인",
+    "어디",
+    "조회",
+    "내문의"
+  ],
+  "body": "접수한 문의 상세에서 현재 진행 단계와 확정된 답변을 확인할 수 있습니다. 추가로 궁금한 점은 같은 문의에서 재문의할 수 있습니다.",
+  "content_hash": "07220c5d3614eaa51cd1c7061c260a7804e3e133c09883b4d9967d64809cd4e9",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

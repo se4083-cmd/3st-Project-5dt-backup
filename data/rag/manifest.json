@@ -1,0 +1,22 @@
+{
+  "schema_version": "csflow.rag.corpus.v1",
+  "scope": "DEMO_ONLY",
+  "corpus_id": "csflow-v2-local-demo",
+  "revision": 1,
+  "files": [
+    "policies/delivery-status.json",
+    "policies/ticket-answer-faq.json",
+    "policies/order-free-inquiry.json",
+    "policies/return-steps.json",
+    "policies/exchange-steps.json",
+    "policies/human-handoff.json",
+    "policies/refund-review.json",
+    "policies/compensation-review.json",
+    "policies/account-rights-review.json",
+    "policies/payment-review.json"
+  ],
+  "description": "기획서 L2 안내/L3 이관 경계를 검증하기 위한 독립 합성 지식 묶음. 운영 승인 정책이 아닙니다.",
+  "retrieval_mode": "LOCAL_BM25",
+  "generation_mode": "RETRIEVAL_TEMPLATE",
+  "derived_from_production_data": false
+}

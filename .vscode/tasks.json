@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label":"CS Flow v2 시작","type":"npm","script":"dev","isBackground":true,"problemMatcher":[],"presentation":{"reveal":"always","panel":"dedicated"}},
+    {"label":"CS Flow v2 검사","type":"npm","script":"verify","problemMatcher":[]}
+  ]
+}

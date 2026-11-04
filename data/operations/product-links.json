@@ -1,0 +1,21 @@
+{
+  "schema_version": "csflow.product-operation-links.v1",
+  "mapping_version": "v2-product-links-1",
+  "source": "SYNTHETIC_OPERATION_LINKS_NOT_ANALYTICS_EPISODES",
+  "scope": "LOCAL_CURRENT_ALL_DEMO_TEAMS",
+  "provenance": {
+    "data_origin": "SYNTHETIC",
+    "purpose": "Link the isolated v2 operations cases to existing synthetic product identifiers for local development.",
+    "analytics_episode_equivalence": false,
+    "analytics_source_modified": false
+  },
+  "scenario_products": {
+    "required_followup": "14e4b943-d1a8-51f6-9951-21ffee9945bf",
+    "shipping_status": "14e4b943-d1a8-51f6-9951-21ffee9945bf",
+    "refund_request": "14e4b943-d1a8-51f6-9951-21ffee9945bf"
+  },
+  "order_products": {
+    "DEMO-ORDER-001": "14e4b943-d1a8-51f6-9951-21ffee9945bf",
+    "DEMO-ORDER-002": "2a98daae-1440-5183-a1f5-2a19c8efd495"
+  }
+}

@@ -1,0 +1,5 @@
+[
+  { "id": "DEMO-ORDER-001", "customer_ref": "DEMO-CUSTOMER-001", "status": "IN_TRANSIT", "version": 1, "eta": null },
+  { "id": "DEMO-ORDER-002", "customer_ref": "DEMO-CUSTOMER-001", "status": "DELIVERED", "version": 1, "eta": null },
+  { "id": "DEMO-ORDER-003", "customer_ref": "DEMO-CUSTOMER-002", "status": "PREPARING", "version": 1, "eta": null }
+]

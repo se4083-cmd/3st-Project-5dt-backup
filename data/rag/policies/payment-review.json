@@ -1,0 +1,41 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "b1ebe1a0-3a38-57e8-bf28-010df4a20973",
+  "policy_key": "V2_PAYMENT_REVIEW",
+  "title": "결제 문의의 사람 검토",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "PAYMENT"
+  ],
+  "allowed_intents": [
+    "PAYMENT_REVIEW"
+  ],
+  "allow_kind": null,
+  "order_required": true,
+  "template_key": "V2_PAYMENT_REVIEW_V1",
+  "clause_id": "V2_PAYMENT_01",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "결제",
+    "청구",
+    "카드",
+    "취소",
+    "중복",
+    "실패",
+    "금액",
+    "승인"
+  ],
+  "body": "결제 오류, 결제 취소 및 중복 청구 문의는 담당자가 확인합니다. 이 개발용 기능은 실제 결제나 취소를 실행하지 않고 금액을 확정하지 않습니다.",
+  "content_hash": "fe18f2d29c2d7b094a926dc97494515fc11e9a8b35ccb36d68313012054674aa",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

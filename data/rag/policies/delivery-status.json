@@ -1,0 +1,45 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "a0a68caf-6ae6-5f9f-9e5b-20864e1c2486",
+  "policy_key": "V2_DELIVERY_STATUS",
+  "title": "현재 배송 상태 안내",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "DELIVERY"
+  ],
+  "allowed_intents": [
+    "DELIVERY_STATUS"
+  ],
+  "allow_kind": "ORDER_STATUS",
+  "order_required": true,
+  "template_key": "V2_DELIVERY_STATUS_V1",
+  "clause_id": "V2_DELIVERY_01",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "배송",
+    "배달",
+    "택배",
+    "상태",
+    "어디",
+    "어디쯤",
+    "조회",
+    "추적",
+    "도착",
+    "예정일",
+    "언제",
+    "배송중"
+  ],
+  "body": "연결된 합성 주문의 현재 배송 상태는 {{status}}입니다. {{eta_sentence}} 이 안내는 현재 조회한 상태에 대한 정보이며 배송 일정이나 주문 처리를 변경하지 않습니다.",
+  "content_hash": "b98ec7b1dd11e533fafb9552d9a38f5c01d47983f767fb957d84db2a4d11005a",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

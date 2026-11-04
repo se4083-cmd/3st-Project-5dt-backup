@@ -1,0 +1,42 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "8393074b-b9ee-5a22-be3c-53fcda250d87",
+  "policy_key": "V2_ORDER_FREE_INQUIRY",
+  "title": "주문이 없는 일반 문의 접수",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "ACCOUNT"
+  ],
+  "allowed_intents": [
+    "ORDER_FREE_INQUIRY"
+  ],
+  "allow_kind": "POLICY_GUIDANCE",
+  "order_required": false,
+  "template_key": "V2_ORDER_FREE_INQUIRY_V1",
+  "clause_id": "V2_FAQ_02",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "주문",
+    "없이",
+    "없어도",
+    "일반",
+    "문의",
+    "접수",
+    "질문",
+    "가능",
+    "안했는데"
+  ],
+  "body": "주문과 관계 없는 일반 문의는 주문을 선택하지 않아도 접수할 수 있습니다. 특정 주문의 상태를 확인하는 문의에는 본인 주문 확인이 필요합니다.",
+  "content_hash": "4184e8393965f20ec44bdc50843cf9671d6d985e66384dcc8930fc6d06c522d4",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

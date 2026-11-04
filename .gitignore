@@ -218,3 +218,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# CS Flow AI v2 local runtime
+node_modules/
+dist/
+.local/
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-*
+*.db
+*.log
+coverage/
+.DS_Store
+Thumbs.db
+.openai/
+!frontend/src/lib/
+!frontend/src/lib/**

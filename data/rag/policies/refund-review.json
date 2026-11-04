@@ -1,0 +1,42 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "a9837f10-b4f3-55ec-84e9-35579944b6ed",
+  "policy_key": "V2_REFUND_REVIEW",
+  "title": "환불 문의의 사람 검토",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "REFUND"
+  ],
+  "allowed_intents": [
+    "REFUND_REVIEW"
+  ],
+  "allow_kind": null,
+  "order_required": true,
+  "template_key": "V2_REFUND_REVIEW_V1",
+  "clause_id": "V2_REFUND_01",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "환불",
+    "승인",
+    "지급",
+    "금액",
+    "전액",
+    "환급",
+    "돈",
+    "돌려",
+    "취소"
+  ],
+  "body": "환불 승인, 환불 금액 및 지급 여부는 사람이 확인합니다. 자동 안내는 환불을 실행하거나 금액과 지급 시점을 약속하지 않습니다. 고객의 요청 내용과 확인이 필요한 항목을 담당 팀에 전달합니다.",
+  "content_hash": "aa6608cc282d7cb644714b2f2a56d5b8978558f8e383b5433f8b3b1031778fa1",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

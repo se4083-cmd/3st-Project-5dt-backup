@@ -1,0 +1,10 @@
+import { readdirSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('..', import.meta.url));
+const folders = ['backend/tests', 'ai/tests', 'tests'];
+const files = folders.flatMap(folder => existsSync(join(root, folder)) ? readdirSync(join(root, folder)).filter(name => name.endsWith('.test.mjs')).sort().map(name => join(folder, name)) : []);
+if (!files.length) throw new Error('No tests found');
+const result = spawnSync(process.execPath, ['--test', ...files], { cwd: root, stdio: 'inherit' });
+process.exit(result.status ?? 1);

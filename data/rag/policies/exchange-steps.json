@@ -1,0 +1,42 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "754636e5-6a85-5a7a-9ddc-6cd9444ffa36",
+  "policy_key": "V2_EXCHANGE_STEPS",
+  "title": "교환 신청 절차 안내",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "RETURN"
+  ],
+  "allowed_intents": [
+    "EXCHANGE_STEPS"
+  ],
+  "allow_kind": "RETURN_PROCEDURE",
+  "order_required": true,
+  "template_key": "V2_EXCHANGE_STEPS_V1",
+  "clause_id": "V2_RETURN_02",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "교환",
+    "절차",
+    "신청",
+    "접수",
+    "순서",
+    "방법",
+    "어떻게",
+    "어디",
+    "요청"
+  ],
+  "body": "교환을 요청하려면 본인 주문의 상세에서 교환 사유를 등록하고 처리 상태를 확인합니다. 재고, 상품 상태 및 예외 조건은 담당자가 확인합니다. 이 안내만으로 교환이 승인되거나 배송이 예약되지는 않습니다.",
+  "content_hash": "c0198f3faf5871d731e3d90077171e289363bd68fa92c482e05d01daa52408da",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

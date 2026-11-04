@@ -1,0 +1,42 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "5bb552f3-3c36-50e7-b639-e0dbcaaa69b6",
+  "policy_key": "V2_HUMAN_HANDOFF",
+  "title": "사람 상담 요청 처리",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "ACCOUNT"
+  ],
+  "allowed_intents": [
+    "HUMAN_HANDOFF"
+  ],
+  "allow_kind": null,
+  "order_required": false,
+  "template_key": "V2_HUMAN_HANDOFF_V1",
+  "clause_id": "V2_HANDOFF_01",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "상담사",
+    "상담원",
+    "담당자",
+    "사람",
+    "직원",
+    "연결",
+    "통화",
+    "대화",
+    "상담"
+  ],
+  "body": "고객이 사람 상담을 요청하면 자동 안내 경로를 중단하고 담당 팀의 대기열로 넘깁니다. 상담사가 배정되기 전에는 대기 중으로 표시하며, 기존 확정 답변은 유지합니다.",
+  "content_hash": "7eccd361416bf61cc1a1bae6d5cee6e13eaed2f622bcaa12cdd1f1302f1245b5",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

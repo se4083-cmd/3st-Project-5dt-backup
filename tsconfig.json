@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": true, "checkJs": false, "skipLibCheck": true,
+    "strict": true, "noEmit": true, "esModuleInterop": true,
+    "module": "ESNext", "moduleResolution": "Bundler",
+    "resolveJsonModule": true, "isolatedModules": true,
+    "jsx": "react-jsx", "types": ["vite/client", "node"],
+    "paths": { "@/*": ["./frontend/src/*"] }
+  },
+  "include": ["frontend/src", "vite.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}

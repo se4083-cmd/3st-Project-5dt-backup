@@ -1,0 +1,42 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "be3e4202-5544-507b-bbf2-dbddf131bdcf",
+  "policy_key": "V2_RETURN_STEPS",
+  "title": "반품 신청 절차 안내",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "RETURN"
+  ],
+  "allowed_intents": [
+    "RETURN_STEPS"
+  ],
+  "allow_kind": "RETURN_PROCEDURE",
+  "order_required": true,
+  "template_key": "V2_RETURN_STEPS_V1",
+  "clause_id": "V2_RETURN_01",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "반품",
+    "절차",
+    "신청",
+    "접수",
+    "순서",
+    "방법",
+    "어떻게",
+    "어디",
+    "요청"
+  ],
+  "body": "반품을 요청하려면 본인 주문의 상세에서 반품 신청 내용을 등록하고 처리 상태를 확인합니다. 이 개발용 안내는 신청 절차만 설명하며 반품 승인, 회수 예약, 환불 여부나 금액을 확정하지 않습니다.",
+  "content_hash": "89a3f79d04543cb57a05cfe4416089cd0ea7f7f8e622533b1891d07e61f98e9c",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

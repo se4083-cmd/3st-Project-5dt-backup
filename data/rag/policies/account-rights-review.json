@@ -1,0 +1,45 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "9d8df53d-a1ed-53b5-9f0e-f3807c0226b7",
+  "policy_key": "V2_ACCOUNT_RIGHTS_REVIEW",
+  "title": "계정 권리와 인증 변경 검토",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "ACCOUNT"
+  ],
+  "allowed_intents": [
+    "ACCOUNT_RIGHTS_REVIEW"
+  ],
+  "allow_kind": null,
+  "order_required": false,
+  "template_key": "V2_ACCOUNT_RIGHTS_REVIEW_V1",
+  "clause_id": "V2_ACCOUNT_01",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "계정",
+    "회원",
+    "아이디",
+    "로그인",
+    "정지",
+    "제한",
+    "해제",
+    "복구",
+    "변경",
+    "탈퇴",
+    "비밀번호",
+    "인증"
+  ],
+  "body": "계정 제한 해제, 계정 복구, 탈퇴 및 인증정보 변경은 자동으로 실행하지 않습니다. 담당자가 필요한 절차를 안내하도록 이관하며 비밀번호나 인증번호를 문의에 입력하도록 요청하지 않습니다.",
+  "content_hash": "53c6806f02c77341bacc1ad00c7ac91f526a918741fb3ab21ec253ce2d2140e6",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

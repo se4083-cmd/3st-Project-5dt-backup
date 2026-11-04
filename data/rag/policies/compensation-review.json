@@ -1,0 +1,40 @@
+{
+  "schema_version": "csflow.rag.document.v1",
+  "document_id": "b3c2484e-b27f-5480-981d-fc97d4a7f260",
+  "policy_key": "V2_COMPENSATION_REVIEW",
+  "title": "보상 요청의 사람 검토",
+  "version": 1,
+  "source": "V2_ISOLATED_SYNTHETIC_POLICY",
+  "scope": "DEMO_ONLY",
+  "active": true,
+  "approval_status": "DEMO_ONLY",
+  "allowed_topics": [
+    "REFUND"
+  ],
+  "allowed_intents": [
+    "COMPENSATION_REVIEW"
+  ],
+  "allow_kind": null,
+  "order_required": false,
+  "template_key": "V2_COMPENSATION_REVIEW_V1",
+  "clause_id": "V2_REFUND_02",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "keywords": [
+    "보상",
+    "배상",
+    "보상금",
+    "지급",
+    "확정",
+    "불편",
+    "손해"
+  ],
+  "body": "보상 요청은 담당자가 사실관계와 적용 조건을 확인합니다. 자동으로 보상 여부, 금액 또는 지급 일정을 결정하지 않으며 사람 검토로 넘깁니다.",
+  "content_hash": "b46fec49dd750a8195efc5ed1d7895761e0ab87d996dab9139225a0ec87fc9aa",
+  "provenance": {
+    "origin": "NEW_SYNTHETIC_V2_DEVELOPMENT_CORPUS",
+    "production_policy": false,
+    "created_on": "2026-11-04",
+    "note": "팀 승인 정책이나 실제 기업 정책을 복사하지 않은 독립 개발용 문서입니다."
+  }
+}

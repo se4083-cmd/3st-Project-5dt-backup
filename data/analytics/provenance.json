@@ -1,0 +1,84 @@
+{
+  "artifact": "CS Flow AI P1/P2 product-only aggregate fixture",
+  "prepared_date": "2026-11-04",
+  "source_folder_name": "CS_Flow_AI_합성운영데이터_및_후속검증",
+  "source_folder_id": "1HO3lkGf-DYCh-uWnXkdoi_7ozRCSPqz3",
+  "delivery_folder_date": "2026-11-02",
+  "snapshot_source_as_of": "2026-10-31T03:00:00Z",
+  "source_kind": "LOCAL_SYNTHETIC_VALIDATION_NOT_FABRIC",
+  "data_origin": "SYNTHETIC",
+  "batch_status": "VALIDATED",
+  "is_current": false,
+  "published_at": null,
+  "input_files": [
+    {
+      "file_name": "products.json",
+      "drive_file_id": "1-hq6ZCApiU9mGNCTzfAKshrbfYjnR7dC",
+      "manifest_path": "data/products.json",
+      "sha256": "be3a12e5dfdb8756755cc57a06acc999ebb72ae316d3584eecf8ccc61b5c57d3",
+      "manifest_sha256": "be3a12e5dfdb8756755cc57a06acc999ebb72ae316d3584eecf8ccc61b5c57d3",
+      "verified": true,
+      "bytes": 7826,
+      "rows": 20
+    },
+    {
+      "file_name": "analytics_product_risk.json",
+      "drive_file_id": "1v5qCW0n4FvcbbTO8bcI4XuQ2SHuWTpn6",
+      "manifest_path": "data/analytics_product_risk.json",
+      "sha256": "c573f9803ab1806c0df67abdc3528aa382c5f87139d3457960ebf89e072980ac",
+      "manifest_sha256": "c573f9803ab1806c0df67abdc3528aa382c5f87139d3457960ebf89e072980ac",
+      "verified": true,
+      "bytes": 423585,
+      "rows": 300
+    },
+    {
+      "file_name": "analytics_product_voc_daily.json",
+      "drive_file_id": "1HxORnwwB4ON99dH95VKJiYn_-9WfmKAs",
+      "manifest_path": "data/analytics_product_voc_daily.json",
+      "sha256": "4d950d6a9877e78ad65c5664c0442b267c7392e1788a05c50c4b7cc6442ad889",
+      "manifest_sha256": "4d950d6a9877e78ad65c5664c0442b267c7392e1788a05c50c4b7cc6442ad889",
+      "verified": true,
+      "bytes": 317447,
+      "rows": 840
+    },
+    {
+      "file_name": "analytics_batches.json",
+      "drive_file_id": "1LqizxhNQARs6Fwezysl3jhwipA6WcZtK",
+      "manifest_path": "data/analytics_batches.json",
+      "sha256": "11bb36f3541d37a50270461e6371466674d5fc2a2d952281626cca9435757a5f",
+      "manifest_sha256": "11bb36f3541d37a50270461e6371466674d5fc2a2d952281626cca9435757a5f",
+      "verified": true,
+      "bytes": 1946,
+      "rows": 1
+    }
+  ],
+  "rows": {
+    "products": 20,
+    "risks": 300,
+    "daily": 840,
+    "batches": 1
+  },
+  "distinct_scope_count": 15,
+  "data_status_counts": {
+    "LOW_SAMPLE": 146,
+    "ELIGIBLE": 154
+  },
+  "validation": {
+    "all_input_hashes_match_delivery_manifest": true,
+    "all_risk_daily_episode_totals_match": true,
+    "all_risk_daily_unresolved_totals_match": true,
+    "risk_scores_recomputed": false,
+    "risk_ranks_recomputed": false,
+    "source_code_executed": false,
+    "fabric_executed": false,
+    "backend_api_called": false
+  },
+  "notes": [
+    "20 products repeated across 15 overlapping team scopes produce 300 risk rows; these are not 300 distinct products.",
+    "Select exactly one batch and one scope. Never sum overlapping scopes.",
+    "The source daily table contains only the current seven-day W window. The batch history_start does not establish 28 days of daily coverage.",
+    "Only within the verified current W window may absent day/issue rows represent zero synthetic episodes. Earlier dates are unavailable, not zero.",
+    "Published/current operational data are not available in this fixture. VALIDATED does not mean published or Fabric-executed.",
+    "Products and aggregate counts only; no customer/contact/ticket/message/order-level records are included."
+  ]
+}
