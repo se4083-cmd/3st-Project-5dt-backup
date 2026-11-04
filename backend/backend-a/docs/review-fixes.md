@@ -40,4 +40,4 @@ scripts.check_handoff_contract는 여전히 실제 OpenAPI와 docs/openapi.json 
 
 검증은 .cache/local-review-fixes의 새 소유 PostgreSQL 클러스터와 무작위 schema·private Uvicorn을 사용한다. 기존 demo-local 데이터·비밀번호·seed는 검증에 사용하지 않는다. 코드 최종 확정 뒤 전체 PostgreSQL과 실제 HTTP를 실행하고 부분 수를 합산하지 않는다. 검증용 자원만 정리하며 기존 체험 서버에 패치를 적용할 경우 API만 정상 재시작하고 DB/seed/권한을 초기화하지 않는다.
 
-기존 CS_Flow_AI_Backend_A_review.zip은 수정 전0.6.0 독립 검토본이다. 이번 요청에서 덮어쓰거나 재포장하지 않으며 새 코드/검증을 포함한다고 주장하지 않는다. 클라우드·외부 API/모델/RAG/Fabric/발송·원격 push/Actions를 실행하지 않는다.
+CS_Flow_AI_Backend_A_review.zip은 수정 전0.6.0 독립 검토 소스다. 0.6.1 결함 검증 단계에서는 원본으로 유지했고, 이후 [문서 중립화](delivery-archives.md)에서 별도 백업 후 문서·패키지 해시만 갱신했다. 앱·데이터와 이 단계의 검증 수치는 그대로이며 최신 소스/새 업무 검증 결과를 포함한다는 뜻이 아니다. 클라우드·외부 API/모델/RAG/Fabric/발송 검증은 이 기록의 범위가 아니다.
