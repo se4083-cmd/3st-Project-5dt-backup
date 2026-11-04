@@ -8,7 +8,7 @@ import hashlib
 import json
 from uuid import uuid4
 
-from sqlalchemy import and_, exists, false, func, select
+from sqlalchemy import and_, exists, false, func, or_, select
 
 from app import audit
 from app import repository as repo
@@ -60,28 +60,42 @@ def scope(user):
     return false()
 
 
-def owner_valid(session, team_id, owner_id, ticket):
-    team = repo.row(session, teams, teams.c.team_id == team_id, teams.c.active.is_(True))
-    if not team:
-        return False
-    if owner_id is None:
-        return True
-    owner = repo.get_user(session, owner_id)
-    if not owner or not owner["active"] or owner["role"] not in {"AGENT", "ADMIN"}:
-        return False
-    if not session.scalar(
-        select(team_scope(owner, teams.c.team_id)).select_from(teams).where(teams.c.team_id == team_id)
-    ):
-        return False
-    if owner["role"] == "ADMIN":
-        return True
-    return (
-        ticket is not None
-        and ticket["team_id"] == team_id
-        and bool(
-            session.scalar(
-                select(exists().where(tickets.c.ticket_id == ticket["ticket_id"], repo.ticket_scope(owner)))
+def owner_valid_predicate(team_id, owner_id, ticket_id, *, as_of=None):
+    """Set-based equivalent of ownership policy; NULL owner is not an owned task.
+
+    Correlate the outer action/owner explicitly while keeping local aliases in
+    their own SELECTs. ADMIN product ownership and AGENT assignment differ.
+    """
+    owner, grant, team = users.alias(), user_team_scopes.alias(), teams.alias()
+    assigned = repo.agent_assignment_exists(owner.c.user_id, as_of=as_of).correlate(owner)
+    valid_ticket = exists(
+        select(1).where(tickets.c.ticket_id == ticket_id, tickets.c.team_id == team_id, assigned)
+    ).correlate_except(tickets)
+    return exists(
+        select(1)
+        .select_from(
+            owner.join(grant, grant.c.user_id == owner.c.user_id).join(
+                team, team.c.team_id == grant.c.team_id
             )
+        )
+        .where(
+            owner.c.user_id == owner_id,
+            owner.c.active.is_(True),
+            grant.c.team_id == team_id,
+            team.c.active.is_(True),
+            or_(owner.c.role == "ADMIN", and_(owner.c.role == "AGENT", valid_ticket)),
+        )
+    ).correlate_except(owner, grant, team)
+
+
+def owner_valid(session, team_id, owner_id, ticket):
+    if owner_id is None:
+        return bool(
+            session.scalar(select(exists().where(teams.c.team_id == team_id, teams.c.active.is_(True))))
+        )
+    return bool(
+        session.scalar(
+            select(owner_valid_predicate(team_id, owner_id, ticket["ticket_id"] if ticket else None))
         )
     )
 

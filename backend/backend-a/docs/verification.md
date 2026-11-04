@@ -1,6 +1,18 @@
 # Backend A 구현 검증 결과
 
-2026-11-02 KST에 이 작업 폴더에서 실제 실행한 결과입니다. 원본 ZIP에 들어 있던 과거 70개 검증과 이번 서비스 검증을 합산하지 않습니다.
+아래 기존 단계 결과는2026-11-02 KST의 원본 작업 폴더 실행 기록입니다. 원본 ZIP에 들어 있던 과거 70개 검증과 이번 서비스 검증을 합산하지 않습니다.
+
+## 2026-11-03 지정 이름 이전 — 새 실행 결과
+
+실제배포source0.6.1의동일ZIP으로이전했다. 새실행은전체32테이블내용/소유권/권한/138제약·인덱스/트리거/함수/sequence비교, 기존상태HTTPS16건, 핵심HTTPS18묶음61건, operator6tests이다. 원본 모든PK/rowhash가검증후에도일치했다. 초기2복원시도는target공개쓰기전 source자동복귀했고성공에포함하지않는다. 최종검증후 backup을추가확보하고구API/PG/Plan404·새ready200및공용DO_NOT_DELETE복원을확인했다. 기존전체PG368/HTTP33/관련PG92는반복/합산하지않는다. 상세[이전보고](azure-migration.md), evidence/azure-migration.
+
+## 2026-11-03 Azure 팀 개발 배포 — 새 실행 결과
+
+기존 아래368/로컬HTTP33은 이전 원본 검증이다. 이번에는 별도 로컬 PostgreSQL의 **관련92 passed(실패0/skip0),50.59초**, 초기 SQLite 보조26 passed, Ruff/엄격 계약 검사, 실제 Azure Linux Python3.13.18 빌드와 고정29개 dependency 설치를 확인했다. 새 전체 PostgreSQL/Linux 전체 pytest는 반복하지 않았다. 부분 결과를368에 합산하지 않는다.
+
+배포 HTTPS는 **18개 검증 묶음·기대 상태 요청61건 PASS**이며 최종 검증 시각은2026-11-03 10:53:51 KST이다. 인증/소유권·scope/멱등/revision/재문의·직접연결/후속/고객360·내부 DTO/PAUSED·권한/보관 업무표 불변·감사/분석 미게시/429·413/실제 앱 restart 데이터·중지 보존을 확인했다. 고정 배정·사람 확정 writer는 공통 gate의 합성 검증이며 실제 B 엔진이 아니다. 실제 AI/Fabric/발송/Frontend는 미연결이다.
+
+초기 환경 상속 테스트1건과 PC/클라우드 시계 차이로 중단된 HTTP 시도는 성공에 포함하지 않는다. 최종 코드의 API/lock/권한을 바꾸지 않고 격리 환경과 DB 시각 기반 검증 도구를 고쳤다. Windows CA 파일 경로와 팀 공유 삭제 잠금 문제도 인증서 검증/공유 잠금을 유지한 채 해결했다. 임시 operator 방화벽은 잠금 때문에 삭제 대신 loopback으로 비활성화했다. 배포/비용/복구와 증거는 [azure-deployment.md](azure-deployment.md), evidence/azure-team-dev에 있다.
 
 ## 0.6.1 독립 검토 결함 수정 — 최종 전체 회귀
 
@@ -299,3 +311,12 @@ $env:CSFLOW_FIXTURE_DIR=(Resolve-Path reference/fixture).Path
 4단계에서 분석 수신·검증·게시/KPI·VOC TOP10·상세·추세를 구현했습니다. 점수 재계산·실제 Fabric emitter/실행·서비스 발급기/Managed Identity 통합은 포함하지 않습니다. 후속 CRUD·고객360은3단계 구현입니다. Backend B의 AI/RAG·정책/승인 판단·실제 사람 응답/배정/인수·외부 부작용·heartbeat/복구 daemon은 포함하지 않습니다. 생성형 요약도 최소 계약만 준비했고 LLM 호출/품질 검증은 없습니다.
 
 Azure Linux 실행, App Service proxy/HTTPS/CORS 실기 검증, Flexible Server TLS/인증/네트워크, 실제 Fabric 연동, 실제 B와 E2E, 1,000상품 성능시험, 장애/부하시험, 감사 보존/삭제·외부 sink, 운영 rate limit은 미검증입니다. 이번 결과로 실운영 파이프라인 완성이나 분류/RAG 정확도를 주장하지 않습니다.
+# 2026-11-04 업무량 조회 로컬 확장 검증
+
+로컬0.7.0/head0007의 `GET /api/v1/staff/workload`를 추가했다. 기존 Azure0.6.1/0006 배포·계정·B/Fabric 연결은 바꾸지 않았다. [업무량 계약](workload.md), [이번 검증 상세](evidence/workload-local/README.md), [요약](evidence/workload-local/summary.json)을 기준으로 읽는다. 위 기존 검증 기록은 각 당시 범위 그대로이며 이번 결과에 합산하지 않는다.
+
+격리 PostgreSQL16.15 선택 회귀164사례 중 초기163 passed/1 OpenAPI 비교 실패 후 실제 OpenAPI를 재생성하고 관련60사례를 재검증해60 passed/skip0/실패0을 확인했다. 사례 ID별 중복 제거 최종 상태는164개 모두PASS다. SQLite 관련59 passed/2 PG전용skip은 별도 결과다. Ruff·OpenAPI/DTO/예시·git diff --check PASS. 새 PG 임시스키마 잔존0 및 클러스터 종료를 확인했다. 실제 Uvicorn/브라우저·Azure·B·AI 품질·Fabric 전체 연동 성공을 뜻하지 않는다.
+
+## 2026-11-04 미배정 의미 보완 — 0.7.1 / 0007
+
+이번 격리 PostgreSQL 선택 검증113 passed, 추가 혼합 합계·계약 검증7 passed(중복 있어 합산하지 않음), 실패/skip0. 이전164 PASS는 이번 결과에 재사용하지 않았다. 기존 unassigned 집합을 유지하고 현재 처리 경로별 분류를 추가했으며 B/Azure 상태는 변경하지 않았다. [이번 검증과 공유 전 검토](evidence/unassigned-paths-local/README.md)를 따른다.

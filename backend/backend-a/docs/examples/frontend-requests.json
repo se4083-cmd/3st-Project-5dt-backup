@@ -203,6 +203,21 @@
           "aggregate_days": 90
         }
       }
+    },
+    {
+      "role": "AGENT",
+      "method": "GET",
+      "path": "/api/v1/staff/workload",
+      "query": {}
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/staff/workload",
+      "query": {
+        "team_id": "22222222-2222-4222-8222-222222222222",
+        "limit": 20
+      }
     }
   ]
 }

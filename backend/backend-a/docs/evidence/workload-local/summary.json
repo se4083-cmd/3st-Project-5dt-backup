@@ -1,0 +1,37 @@
+{
+  "version": "0.7.0",
+  "migration_head": "0007",
+  "environment": "NEW_LOOPBACK_POSTGRESQL_16_15_AND_DISPOSABLE_SQLITE",
+  "http": "FASTAPI_TESTCLIENT_NOT_EXTERNAL_UVICORN",
+  "runs": {
+    "postgres-regression-initial.xml": {
+      "tests": 164,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "postgres-final.xml": {
+      "tests": 60,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "sqlite-related.xml": {
+      "tests": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    }
+  },
+  "postgres_distinct_cases_latest_outcome": {
+    "total": 164,
+    "passed": 164,
+    "failed": 0
+  },
+  "counts_not_added_across_runs": true,
+  "original_migrations_unchanged": true,
+  "real_grants": false,
+  "azure_changes": false,
+  "deployment": false,
+  "commit_push": false
+}

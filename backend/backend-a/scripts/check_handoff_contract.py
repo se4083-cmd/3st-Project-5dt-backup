@@ -16,6 +16,7 @@ from app.main import create_app
 from app.retention import RetentionRequest
 from app.schemas import AgentRequest, ReopenRequest, TicketCreate
 from app.staff_detail import DetailPurpose
+from app.workload_schemas import WorkloadPage
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -108,6 +109,29 @@ def main():
             raise RuntimeError("STAFF_DETAIL_IN_PUBLIC_SCHEMA")
     if schemas["StaffTicketDetail"].get("additionalProperties") is not False:
         raise RuntimeError("STAFF_DETAIL_ALLOWLIST_NOT_CLOSED")
+    workload = actual["paths"]["/api/v1/staff/workload"]["get"]
+    if workload["security"] != [{"HTTPBearer": []}]:
+        raise RuntimeError("WORKLOAD_AUTH_CONTRACT_MISMATCH")
+    if set(schemas["AgentWorkload"]["properties"]) != {"agent_id", "team_id", "tickets", "followups"}:
+        raise RuntimeError("WORKLOAD_AGGREGATE_ALLOWLIST_CHANGED")
+    if any(
+        schemas[name].get("additionalProperties") is not False
+        for name in (
+            "WorkloadPage",
+            "AgentWorkload",
+            "TicketCounts",
+            "DeadlineCounts",
+            "UnassignedCounts",
+            "HandlingPathCounts",
+        )
+    ):
+        raise RuntimeError("WORKLOAD_ALLOWLIST_NOT_CLOSED")
+    workload_example = WorkloadPage.model_validate_json(
+        (ROOT / "docs/examples/workload-response.json").read_text(encoding="utf-8")
+    )
+    for counts in (workload_example.team_queue.unassigned, workload_example.unrouted):
+        if counts is not None and sum(counts.by_handling_path.model_dump().values()) != counts.total:
+            raise RuntimeError("WORKLOAD_PATH_EXAMPLE_TOTAL_MISMATCH")
     retention_paths = [p for p in actual["paths"] if "/retention" in p]
     if retention_paths != ["/api/v1/staff/retention/dry-run"] or set(actual["paths"][retention_paths[0]]) != {
         "post"

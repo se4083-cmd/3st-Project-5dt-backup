@@ -1,10 +1,15 @@
 # Frontend 로컬 인수
 
+0.7.1 미배정 표시: `team_queue.unassigned.total`은 **‘유효 상담사 배정 없음’**으로 표시합니다. 전체를 ‘사람 배정 대기’라고 부르지 마세요. 새 `by_handling_path.automatic_path`는 ‘자동 처리 경로’, `human_assignment_waiting`은 ‘사람 배정 대기’, `unknown`은 ‘기타·판별 불가’입니다. 세 값의 합이 total이며 invalid_assignment_count는 별도 부분집합입니다. 전역 unrouted에도 같은 분류가 있습니다. FAILED/RETRY/PAUSED만 보고 사람 대기로 바꾸거나 자동 경로를 ‘AI 실행 중’으로 표시하지 않습니다. 기존 권한·snapshot·scope/page 합계 계약은 유지합니다.
+
 규범 계약은 api-contract.md와 실제 코드에서 생성한 openapi.json입니다. 요청 모양은 examples/frontend-requests.json이며 `python -m scripts.check_handoff_contract`로 모델/endpoint/공개 DTO를 검사합니다. 예시 UUID는 실제 서버 상태가 아니므로 실행 중 응답 ID를 사용합니다. 토큰/비밀번호는 예시 파일에 넣지 않습니다.
+
+0.7.0 업무량 화면은 `/auth/me`의 AGENT면 별도 grant 없이 `GET /staff/workload`로 본인만 조회합니다. ADMIN 팀 보기는 `/staff/capabilities`의 WORKLOAD_READ가 필요하고, 미라우팅은 추가 UNROUTED_QUEUE_READ가 있을 때만 include_unrouted=true로 요청합니다. `scope_totals`는 선택 팀 전체, `page_totals`는 현재 items뿐이며 agent_id도 목록만 제한합니다. team_queue/unrouted·invalid_assignment_count·waiting_customer를 총 문의 수에 다시 더하지 않습니다. [전체 응답 예시](examples/workload-response.json)는 합성 ADMIN의 agent_id 필터 사례입니다. 응답마다 as_of를 표시하고 scope/필터 변경 시 cursor를 버리세요. 실제 Frontend/Azure 연결은 이번에 검증하지 않았습니다.
 
 | 역할 | endpoint와 조건 |
 |---|---|
 | 고객 | /auth/login, /auth/me, /orders, /tickets 및 reopen/request-agent, /followups. 본인 공개 정보만 |
+| 업무량(0.7.0) | GET /staff/workload. AGENT는 별도 grant 없이 본인, ADMIN은 WORKLOAD_READ+현재 팀 scope. [요청/응답·카운트 계약](workload.md) |
 | 상담사 | /tickets는 현재 유효 배정·팀·category·회차, /staff/followups CRUD와 고객360은 같은 권한 범위. 예외 큐는 별도 명시 권한/현재 route만 |
 | 관리자 | 허용 팀 직원 후속/고객360, /admin/analytics의 KPI/VOC/상세. 전사 fallback 없음 |
 | 게시 서비스 | /analytics/batches 별도 서비스 JWT. 브라우저에 키/토큰을 배포하지 않음 |
@@ -40,3 +45,12 @@ past_retention_count는 기간상 후보, candidate_count는 최종 판정 가�
 ## 0.6.1 오류 수정
 
 scope/category/팀·배정 변경으로 상담사가 티켓에404를 받는 경우 처리 불가능한 배정이 예외 큐를 숨기지 않습니다. 관리자는 명시 route/허용 팀·capability 안에서만 해당 최소 큐 자료를 확인하며 그 사실로 상세/360 권한이 생기지 않습니다. 큐 목록/건수는 같은 조건입니다. 모든 페이지 cursor의 비정상 JSON 타입은422 INVALID_CURSOR이고500으로 재시도하지 않습니다. 날짜/UUID 두 문자열인 서버 next_cursor를 그대로 사용합니다. 계약413/422 설명은 Python 범위에서 고정됐으며 에러코드/스키마는 유지됩니다.
+
+## 2026-11-03 Azure 팀 개발 주소
+
+API base https://csflow-backend-a.azurewebsites.net/api/v1, Swagger /docs. 기존 JWT/RBAC/공개·직원 DTO/revision 계약을 유지한다. production 로그인429 LOGIN_RATE_LIMITED에는 Retry-After를 따르고 자동 무한 재시도를 하지 않는다. 일반 body128KiB413 REQUEST_TOO_LARGE, 분석8MB 제한이다. CORS는 아직빈 목록으로 실제 Frontend 브라우저 연동은 미검증이며 확정된 HTTPS origin만 배포 담당자에게 반영 요청해야 한다. 체험 계정/비밀번호 전달 방법과 상태는 azure-deployment.md를 따른다. 자동 처리는 PAUSED, 분석은200 UNAVAILABLE/NO_PUBLISHED_BATCH/meta=null이다. 합성 배정·고정 응답을 실제 B/AI로 표시하지 않는다.
+
+
+## 2026-11-03 지정 이름 이전 완료
+
+새 이름3개로 실제 이전·검증하고 구3개 삭제 및 공용잠금 복원을 완료했다. API https://csflow-backend-a.azurewebsites.net/api/v1, Swagger /docs, PG csflow-backend-a-pg, Plan csflow-backend-a-plan이다. 현재 state는 .cache/azure-backend-a이며 기존 DB를 seed로 대체하지 않았다. 원본32테이블·모든기존행 보존, 기존상태HTTP16건/핵심HTTPS61건/도구6개검증은[실제 이전 보고](azure-migration.md)를 따른다. 기존 전체368개 재실행이 아니다.

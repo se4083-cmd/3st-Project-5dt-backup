@@ -33,3 +33,14 @@ A의 retention/dry-run은 집계 미리보기이며 작업/배정/승인/후속�
 repository.agent_assignment_exists는 AGENT 티켓 권한과 exception-queue assigned 공통 정책입니다. 현재 배정 행만 남아 있어도 scope/category·팀·활성 상태·처리 stage가 맞지 않으면 처리 가능한 배정으로 판정하지 않습니다. B는 정규화 scope/category와 현재 회차 route를 계속 원자 관리하며 권한을 임의 복원하지 않습니다.
 
 commit_automatic_reply는 ticket→job→control SHARE 뒤 최종 INSERT 직전 실제 utcnow로 lease를 다시 검사하고 그 시각으로 메시지/해결/job 갱신을 저장합니다. INVALID_LEASE면 최종 저장/성공/감사를 남기지 않습니다. control 대기 중 lease가 만료될 수 있으므로 최초 검사만으로 실행/발송을 승인하지 않습니다. 기존 generation/회차/version/token/owner fence와 외부 발송 직전 재검사 계약은 그대로이며 실제 worker·외부 발송 보장은 미검증입니다.
+
+## 2026-11-03 Azure A 개발 DB 경계
+
+A API/DB를 실제 배포했으나 B worker/배정·사람 확정 엔진은 연결하지 않았다. 전용 DB backend_a, head0006, PostgreSQL16, verify-full 필수이다. 네트워크는 현재 A 앱 IP만 허용하므로 B의 실행 위치/고정 연결 경로/전용 최소 DB identity를 별도 합의해야 한다. owner 자격이나 A API 로그인 JWT를 DB 권한으로 공유하지 않는다. 비밀값은 이 문서에 없다.
+
+AUTO는 최초 PAUSED이며 worker를 가동하지 않았다. 기존 ticket→job→control SHARE, cycle/version/lease/generation, heartbeat·작업 시작/재시도/실제 발송 직전 재검사 계약이 그대로 필요하다. 테스트용 배정 시각은 개발 PC가 아닌 DB의 clock_timestamp를 사용해 시계 차이를 회피했다. lease 최종 판단은 transaction_timestamp가 아니라 모든 gate 뒤 실제 wall-clock이며 worker 시간 동기화도 확인해야 한다. HANDOFF/사람 업무는 유지한다. 중지된 작업을 성공으로 처리하거나 재개 권한을 임의 부여하지 않는다. 실제 외부 발송 중단 보장은 여전히 미검증이다. 상세는 azure-deployment.md.
+
+
+## 2026-11-03 Azure 이름 이전 후 현재 환경
+
+API base는 https://csflow-backend-a.azurewebsites.net/api/v1, PG는 csflow-backend-a-pg.postgres.database.azure.com/backend_a, Plan은csflow-backend-a-plan이다. source0.6.1/head0006과 기존 모든행/계정/권한·자동중지를 보존했다. 구3개 삭제·공용잠금 복원과 실제검증/백업은[azure-migration.md](azure-migration.md)를 따른다. B·AI·Fabric·발송은미연결/미검증이고 실제 Frontend origin은추측해등록하지 않았다. 서비스 인증 비밀값이나 DBpassword는이문서에없다.

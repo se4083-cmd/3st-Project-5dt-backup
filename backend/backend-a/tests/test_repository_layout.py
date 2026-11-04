@@ -16,4 +16,4 @@ def test_relocated_module_and_migration_paths(tmp_path, monkeypatch):
     assert Path(config.get_main_option("prepend_sys_path")).resolve() == backend_root
     migrations = ScriptDirectory.from_config(config)
     assert Path(migrations.dir).resolve() == backend_root / "migrations"
-    assert migrations.get_heads() == ["0006"]
+    assert migrations.get_heads() == ["0007"]

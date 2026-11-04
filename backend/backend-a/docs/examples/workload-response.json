@@ -1,0 +1,114 @@
+{
+  "as_of": "2026-11-04T03:00:00Z",
+  "view": "TEAM",
+  "deadline_basis": "STORED_DEADLINES_NOT_SLA_COMPLIANCE",
+  "ticket_deadline_policy": "LEGACY_24H_CONTINUOUS",
+  "due_soon_seconds": 7200,
+  "team_ids": [
+    "22222222-2222-4222-8222-222222222222"
+  ],
+  "agent_filter": "33333333-3333-4333-8333-333333333333",
+  "total_agents": 2,
+  "matching_agents": 1,
+  "items": [
+    {
+      "agent_id": "33333333-3333-4333-8333-333333333333",
+      "team_id": "22222222-2222-4222-8222-222222222222",
+      "tickets": {
+        "total": 2,
+        "overdue": 1,
+        "due_soon": 1,
+        "on_time": 0,
+        "no_due_date": 0,
+        "waiting_customer": 1,
+        "by_category": {
+          "DELIVERY": 2
+        }
+      },
+      "followups": {
+        "total": 1,
+        "overdue": 0,
+        "due_soon": 0,
+        "on_time": 0,
+        "no_due_date": 1
+      }
+    }
+  ],
+  "next_cursor": null,
+  "scope_totals": {
+    "tickets": {
+      "total": 3,
+      "overdue": 1,
+      "due_soon": 1,
+      "on_time": 1,
+      "no_due_date": 0,
+      "waiting_customer": 1,
+      "by_category": {
+        "DELIVERY": 2,
+        "FAQ": 1
+      }
+    },
+    "followups": {
+      "total": 2,
+      "overdue": 0,
+      "due_soon": 1,
+      "on_time": 0,
+      "no_due_date": 1
+    }
+  },
+  "page_totals": {
+    "tickets": {
+      "total": 2,
+      "overdue": 1,
+      "due_soon": 1,
+      "on_time": 0,
+      "no_due_date": 0,
+      "waiting_customer": 1,
+      "by_category": {
+        "DELIVERY": 2
+      }
+    },
+    "followups": {
+      "total": 1,
+      "overdue": 0,
+      "due_soon": 0,
+      "on_time": 0,
+      "no_due_date": 1
+    }
+  },
+  "team_queue": {
+    "unassigned": {
+      "total": 3,
+      "overdue": 1,
+      "due_soon": 1,
+      "on_time": 1,
+      "no_due_date": 0,
+      "waiting_customer": 0,
+      "by_category": {
+        "ACCOUNT": 1,
+        "DELIVERY": 2
+      },
+      "invalid_assignment_count": 2,
+      "by_handling_path": {
+        "automatic_path": 1,
+        "human_assignment_waiting": 1,
+        "unknown": 1
+      }
+    },
+    "waiting_followups": {
+      "total": 2,
+      "overdue": 0,
+      "due_soon": 0,
+      "on_time": 0,
+      "no_due_date": 2
+    },
+    "admin_owned_followups": {
+      "total": 1,
+      "overdue": 0,
+      "due_soon": 0,
+      "on_time": 1,
+      "no_due_date": 0
+    }
+  },
+  "unrouted": null
+}

@@ -37,7 +37,7 @@ def create_app(settings: Settings | None = None):
 
     app = FastAPI(
         title="CS Flow AI Backend A",
-        version="0.6.1",
+        version="0.7.1",
         debug=False,
         lifespan=lifespan,
         # Python3.12/3.13 use different HTTPStatus phrases for413/422.
@@ -125,7 +125,7 @@ def create_app(settings: Settings | None = None):
     def ready(request: Request):
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
-            if connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one() != "0006":
+            if connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one() != "0007":
                 return error_response(request, 503, "MIGRATIONS_REQUIRED")
         return {"status": "ready"}
 

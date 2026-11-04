@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "CS Flow AI Backend A",
-    "version": "0.6.1"
+    "version": "0.7.1"
   },
   "paths": {
     "/health/live": {
@@ -4237,6 +4237,187 @@
         ]
       }
     },
+    "/api/v1/staff/workload": {
+      "get": {
+        "tags": [
+          "staff operations"
+        ],
+        "summary": "Workload View",
+        "operationId": "workload_view_api_v1_staff_workload_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Id"
+            }
+          },
+          {
+            "name": "agent_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Agent Id"
+            }
+          },
+          {
+            "name": "include_unrouted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Unrouted"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkloadPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
     "/api/v1/staff/retention/dry-run": {
       "post": {
         "tags": [
@@ -5347,6 +5528,35 @@
         ],
         "title": "AgentRequest"
       },
+      "AgentWorkload": {
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Agent Id"
+          },
+          "team_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Team Id"
+          },
+          "tickets": {
+            "$ref": "#/components/schemas/TicketCounts"
+          },
+          "followups": {
+            "$ref": "#/components/schemas/DeadlineCounts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "agent_id",
+          "team_id",
+          "tickets",
+          "followups"
+        ],
+        "title": "AgentWorkload"
+      },
       "ApprovalFact": {
         "properties": {
           "approval_id": {
@@ -5888,6 +6098,38 @@
           "review_count"
         ],
         "title": "Daily"
+      },
+      "DeadlineCounts": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "overdue": {
+            "type": "integer",
+            "title": "Overdue",
+            "default": 0
+          },
+          "due_soon": {
+            "type": "integer",
+            "title": "Due Soon",
+            "default": 0
+          },
+          "on_time": {
+            "type": "integer",
+            "title": "On Time",
+            "default": 0
+          },
+          "no_due_date": {
+            "type": "integer",
+            "title": "No Due Date",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "DeadlineCounts"
       },
       "DetailPurpose": {
         "properties": {
@@ -6633,6 +6875,28 @@
         "additionalProperties": false,
         "type": "object",
         "title": "GateFacts"
+      },
+      "HandlingPathCounts": {
+        "properties": {
+          "automatic_path": {
+            "type": "integer",
+            "title": "Automatic Path",
+            "default": 0
+          },
+          "human_assignment_waiting": {
+            "type": "integer",
+            "title": "Human Assignment Waiting",
+            "default": 0
+          },
+          "unknown": {
+            "type": "integer",
+            "title": "Unknown",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "HandlingPathCounts"
       },
       "HistoryTicket": {
         "properties": {
@@ -9074,7 +9338,8 @@
                 "AUTOMATION_STOP",
                 "AUTOMATION_RESUME",
                 "RETENTION_TEAM_REVIEW",
-                "RETENTION_GLOBAL_REVIEW"
+                "RETENTION_GLOBAL_REVIEW",
+                "WORKLOAD_READ"
               ]
             },
             "type": "array",
@@ -9443,6 +9708,50 @@
         ],
         "title": "TicketActionReceipt"
       },
+      "TicketCounts": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "overdue": {
+            "type": "integer",
+            "title": "Overdue",
+            "default": 0
+          },
+          "due_soon": {
+            "type": "integer",
+            "title": "Due Soon",
+            "default": 0
+          },
+          "on_time": {
+            "type": "integer",
+            "title": "On Time",
+            "default": 0
+          },
+          "no_due_date": {
+            "type": "integer",
+            "title": "No Due Date",
+            "default": 0
+          },
+          "waiting_customer": {
+            "type": "integer",
+            "title": "Waiting Customer",
+            "default": 0
+          },
+          "by_category": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "By Category"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TicketCounts"
+      },
       "TicketCreate": {
         "properties": {
           "order_id": {
@@ -9700,6 +10009,58 @@
         ],
         "title": "Token"
       },
+      "UnassignedCounts": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "overdue": {
+            "type": "integer",
+            "title": "Overdue",
+            "default": 0
+          },
+          "due_soon": {
+            "type": "integer",
+            "title": "Due Soon",
+            "default": 0
+          },
+          "on_time": {
+            "type": "integer",
+            "title": "On Time",
+            "default": 0
+          },
+          "no_due_date": {
+            "type": "integer",
+            "title": "No Due Date",
+            "default": 0
+          },
+          "waiting_customer": {
+            "type": "integer",
+            "title": "Waiting Customer",
+            "default": 0
+          },
+          "by_category": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "By Category"
+          },
+          "invalid_assignment_count": {
+            "type": "integer",
+            "title": "Invalid Assignment Count",
+            "default": 0
+          },
+          "by_handling_path": {
+            "$ref": "#/components/schemas/HandlingPathCounts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "UnassignedCounts"
+      },
       "UnavailableMetric": {
         "properties": {
           "availability": {
@@ -9888,6 +10249,164 @@
           "window_end"
         ],
         "title": "Windows"
+      },
+      "WorkloadPage": {
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "view": {
+            "type": "string",
+            "enum": [
+              "SELF",
+              "TEAM"
+            ],
+            "title": "View"
+          },
+          "deadline_basis": {
+            "type": "string",
+            "const": "STORED_DEADLINES_NOT_SLA_COMPLIANCE",
+            "title": "Deadline Basis",
+            "default": "STORED_DEADLINES_NOT_SLA_COMPLIANCE"
+          },
+          "ticket_deadline_policy": {
+            "type": "string",
+            "const": "LEGACY_24H_CONTINUOUS",
+            "title": "Ticket Deadline Policy",
+            "default": "LEGACY_24H_CONTINUOUS"
+          },
+          "due_soon_seconds": {
+            "type": "integer",
+            "const": 7200,
+            "title": "Due Soon Seconds",
+            "default": 7200
+          },
+          "team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Team Ids"
+          },
+          "agent_filter": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agent Filter"
+          },
+          "total_agents": {
+            "type": "integer",
+            "title": "Total Agents"
+          },
+          "matching_agents": {
+            "type": "integer",
+            "title": "Matching Agents"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AgentWorkload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "scope_totals": {
+            "$ref": "#/components/schemas/WorkloadTotals"
+          },
+          "page_totals": {
+            "$ref": "#/components/schemas/WorkloadTotals"
+          },
+          "team_queue": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WorkloadTeamQueue"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unrouted": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UnassignedCounts"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "as_of",
+          "view",
+          "team_ids",
+          "agent_filter",
+          "total_agents",
+          "matching_agents",
+          "items",
+          "next_cursor",
+          "scope_totals",
+          "page_totals",
+          "team_queue",
+          "unrouted"
+        ],
+        "title": "WorkloadPage"
+      },
+      "WorkloadTeamQueue": {
+        "properties": {
+          "unassigned": {
+            "$ref": "#/components/schemas/UnassignedCounts"
+          },
+          "waiting_followups": {
+            "$ref": "#/components/schemas/DeadlineCounts"
+          },
+          "admin_owned_followups": {
+            "$ref": "#/components/schemas/DeadlineCounts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "unassigned",
+          "waiting_followups",
+          "admin_owned_followups"
+        ],
+        "title": "WorkloadTeamQueue"
+      },
+      "WorkloadTotals": {
+        "properties": {
+          "tickets": {
+            "$ref": "#/components/schemas/TicketCounts"
+          },
+          "followups": {
+            "$ref": "#/components/schemas/DeadlineCounts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "WorkloadTotals"
       }
     },
     "securitySchemes": {

@@ -1,0 +1,41 @@
+{
+  "version": "0.7.1",
+  "migration_head": "0007",
+  "new_migration": false,
+  "runs": {
+    "postgres-results.xml": {
+      "tests": 113,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "contract-results.xml": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "runs_overlap_not_summed": true,
+  "previous_164_not_reused": true,
+  "azure_access": false,
+  "deployment": false,
+  "actual_account_grants": false,
+  "b_state_assignment_logic_changed": false,
+  "fabric_check": {
+    "pinned_0_6_1_offline_verifier": "PASS",
+    "current_analytics_contract_unchanged": true,
+    "historical_schema_head": "0006",
+    "current_head": "0007"
+  },
+  "remote_read": "REPOSITORY_NOT_FOUND_NO_LIVE_HEAD_CONFIRMED",
+  "temporary_cluster_stopped": true,
+  "remaining_temporary_schemas": 0,
+  "git_index_export_check": {
+    "git_index_export_offline_verifier": "PASS",
+    "hashed_sql_jsonl_bytes_preserved": true,
+    "original_attributes_restored": true,
+    "sensitive_findings": []
+  },
+  "preserved_generated_schema_eof_blank_line": true
+}

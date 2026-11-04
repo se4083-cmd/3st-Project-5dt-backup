@@ -8,12 +8,13 @@ from sqlalchemy import select
 
 from app import automation_control as control
 from app import exception_queue as queue
-from app import retention, staff_detail
+from app import retention, staff_detail, workload
 from app.dependencies import DB, SnapshotDB, SnapshotUser, User
 from app.errors import APIError
 from app.resolution import WorkRejected
 from app.routers import Cursor, Limit
 from app.staff_models import automation_control_history, staff_permissions
+from app.workload_schemas import WorkloadPage
 
 router = APIRouter(prefix="/api/v1/staff", tags=["staff operations"])
 
@@ -43,6 +44,7 @@ class StaffCapabilities(BaseModel):
             "AUTOMATION_RESUME",
             "RETENTION_TEAM_REVIEW",
             "RETENTION_GLOBAL_REVIEW",
+            "WORKLOAD_READ",
         ]
     ]
 
@@ -62,12 +64,34 @@ def capabilities(session: SnapshotDB, user: SnapshotUser):
             "AUTOMATION_RESUME",
             "RETENTION_TEAM_REVIEW",
             "RETENTION_GLOBAL_REVIEW",
+            "WORKLOAD_READ",
         }
     )
     granted = session.scalars(
         select(staff_permissions.c.permission).where(staff_permissions.c.user_id == user["user_id"])
     )
     return {"capabilities": sorted(set(granted) & allowed)}
+
+
+@router.get("/workload", response_model=WorkloadPage)
+def workload_view(
+    session: SnapshotDB,
+    user: SnapshotUser,
+    team_id: UUID | None = None,
+    agent_id: UUID | None = None,
+    include_unrouted: bool = False,
+    limit: Limit = 20,
+    cursor: Cursor = None,
+):
+    return workload.view(
+        session,
+        user,
+        team_id=str(team_id) if team_id else None,
+        agent_id=str(agent_id) if agent_id else None,
+        include_unrouted=include_unrouted,
+        limit=limit,
+        cursor=cursor,
+    )
 
 
 @router.post("/retention/dry-run", response_model=retention.RetentionReport)

@@ -1,6 +1,6 @@
 # CS Flow AI Backend A
 
-**0.6.1 / migration0006**. Backend A의 인증/본인 주문·티켓, 재문의/사람 연결, 후속·고객360, 분석 수신/검증/로컬 게시·KPI/VOC, 예외 큐·직원 상세·중지/lease gate, 보관 dry-run을 제공한다. Backend B의 worker·배정/사람 응답 엔진이나 AI/RAG/Fabric 계산·외부 발송기는 포함하지 않는다.
+**0.7.1 / migration0007 (로컬 소스)**. 기존 Backend A 기능에 [현재 상담사 업무량 조회](docs/workload.md)를 추가했다. 0.7.1에서는 ‘유효 상담사 배정 없음’을 자동 경로/사람 배정 대기/판별 불가로 나눠 표시한다. AGENT 본인/명시 권한 ADMIN의 업무량·미배정·기한·후속 집계를 제공한다. 자동 배정/추천·새 SLA 엔진은 없다. Azure 배포는 이번에 변경하지 않았으며 기존 0.6.1/0006 기록과 구분한다. Backend B의 worker·배정/사람 응답 엔진이나 AI/RAG/Fabric 계산·외부 발송기는 포함하지 않는다.
 
 이 구현은 `backend/backend-a/` 안에 독립적으로 둔다. 기존 `backend/README.md`, 팀 루트/공유 설정과 Backend B·Frontend·AI·Fabric 코드는 변경하지 않는다. 실제 비밀값/개발 DB/검토 ZIP/다운로드 원천·전체 fixture/배포 workflow는 올리지 않는다.
 
@@ -100,6 +100,18 @@ verify는 별도 임시 schema의 테스트 권한/고정 답변·배정·사람
 - [A 완료/미검증](docs/backend-a-handoff.md), [기존 최종 검증](docs/verification.md), [이번 반입 검증](docs/repository-integration.md)
 - [0.6.1 결함 수정](docs/review-fixes.md), [API](docs/api-contract.md), [OpenAPI](docs/openapi.json)
 - [Frontend](docs/frontend-handoff.md), [Backend B](docs/backend-b-handoff.md), [Fabric](docs/fabric-handoff.md)
+- [Fabric 실제 DB·ERD·DDL·이벤트·Export 제안·Gold 계약 자료](docs/fabric-data-contract/README.md)
 - [보관 dry-run](docs/phase7-retention-preview.md), [작은 요청/해시 예시](docs/examples/)
 
 기존 compose/startup.sh·클라우드 배포 문서는 참고 소스이며 이번 업로드에서 실행하지 않는다. startup.sh는 로컬 절차가 아니다. .github/workflows는 반입하지 않았고 저장소에 배포/CI workflow를 추가·활성화하지 않는다. 원천 이용조건을 확인하지 않은 데이터는 이 폴더에 올리지 않는다.
+
+## 2026-11-03 Azure 팀 개발 배포
+
+이번 사용자 승인으로 A 전용 Linux App Service/PostgreSQL에 실제 배포했다. 위 로컬 실행 경로·guard는 유지한다. API/Swagger는 https://csflow-backend-a.azurewebsites.net/docs 이며 live/ready200과 HTTPS18개 묶음·61건을 새로 검증했다. 실제 B/AI/Fabric/발송은 미연결이고 자동 처리는 PAUSED, 분석은 NO_PUBLISHED_BATCH이다.
+
+[배포·비용·재배포·복구 안내](docs/azure-deployment.md), [새 검증 증거](docs/evidence/azure-team-dev/)를 읽는다. 담당 폴더의 python -m scripts.azure_deploy와 scripts.azure_verify는 명시적 Azure 운영 도구이며 local_runtime이 실행하지 않는다. 체험 비밀번호는 ignored .cache/azure-backend-a/demo-accounts.json을 로컬 편집기로 확인하고 출력/공유하지 않는다. 환경변수 이름만 [예시](docs/examples/azure-settings.names.json)에 있다.
+
+
+## 2026-11-03 지정 이름 이전 완료
+
+새 이름3개로 실제 이전·검증하고 구3개 삭제 및 공용잠금 복원을 완료했다. API https://csflow-backend-a.azurewebsites.net/api/v1, Swagger /docs, PG csflow-backend-a-pg, Plan csflow-backend-a-plan이다. 현재 state는 .cache/azure-backend-a이며 기존 DB를 seed로 대체하지 않았다. 원본32테이블·모든기존행 보존, 기존상태HTTP16건/핵심HTTPS61건/도구6개검증은[실제 이전 보고](docs/azure-migration.md)를 따른다. 기존 전체368개 재실행이 아니다.

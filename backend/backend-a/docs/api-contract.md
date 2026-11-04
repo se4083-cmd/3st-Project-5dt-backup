@@ -1,10 +1,13 @@
 # API와 Frontend 계약
 
+0.7.1/head0007: workload의 unassigned는 ‘유효 상담사 배정 없음’이며 자동 경로도 포함합니다. 기존 필드를 유지하고 `by_handling_path={automatic_path,human_assignment_waiting,unknown}`를 추가했습니다. 세 분류 합은 total이며 실제 AI 실행 여부를 뜻하지 않습니다. [근거·표시명·권한 계약](workload.md)을 따릅니다. 이번 보완에 새 migration은 없습니다.
+
 기본 경로 `/api/v1`, bearer JWT, JSON 요청/응답, UTC ISO 8601 시각입니다. JWT role/customer_id claim을 신뢰하지 않고 매 요청 사용자 활성·역할·DB scope를 다시 조회합니다. Refresh/logout/password reset은 이번 범위가 아니며 만료 기본값은 30분입니다. 브라우저 토큰은 가능하면 메모리에 보관하고 저장 전략은 Frontend와 별도 합의합니다.
 
 | 메서드/경로 | 동작 |
 |---|---|
 | POST /auth/login | login_name/password → access_token, token_type, expires_in |
+| GET /staff/workload | 0.7.0: AGENT 본인 또는 WORKLOAD_READ ADMIN의 현재 업무량·팀 미배정/후속 대기. [세부 계약](workload.md) |
 | GET /auth/me | user_id, login_name, role만 반환 |
 | GET /orders | 고객 본인 주문 목록 |
 | GET /orders/{order_id} | 고객 본인 주문 상세 |
@@ -15,7 +18,7 @@
 | GET /tickets/{ticket_id} | 공개 진행 상태·처리 방식·최근 공개 메시지 최대50건 |
 | GET /tickets/{ticket_id}/messages | 전체 공개 메시지의 페이지 조회 |
 | GET /health/live | 프로세스 응답 여부, DB 불필요 |
-| GET /health/ready | DB 접속과 Alembic revision0006 확인. AUTO 가능 여부는 별도 control gate |
+| GET /health/ready | DB 접속과 Alembic revision0007 확인. AUTO 가능 여부는 별도 control gate |
 
 응답에서 주문의 customer_id, 티켓의 내부 status/version/오류/라벨, 메시지의 approval_id/멱등키/내부 role, AI 근거·승인 snapshot을 제외합니다. TicketDetail에는 공개 MessagePublic만 포함합니다. staff에도 이 버전에서는 같은 공개 스키마를 사용합니다. stage는 업무 UI 값이며 내부 enum을 직접 화면에 표시하지 않습니다.
 
@@ -129,3 +132,8 @@ DEV_RETENTION_V1의 raw_days30/aggregate_days90은 제안이며1–3650 정수�
 ## 0.6.1 독립 검토 수정
 
 숫자/객체/null 등 cursor JSON 원소는422 INVALID_CURSOR이며 날짜·UUID 두 문자열만 파싱합니다. tickets/orders/messages/후속/예외 큐/고객360 페이지에 같은 parser를 사용합니다. 유효 배정은 현재 회차·배정 시각/종료·활성 AGENT/팀·사용자 팀·정규화 scope/category·티켓 stage 공통 정책으로 판정하며 큐 노출이 내부 접근 권한을 늘리지 않습니다. HTTP413/422 description은 Content Too Large/Unprocessable Content로 명시하여 Python 버전 차이를 없앴고 필드·인증·스키마 전체 비교는 유지합니다. 자세한 재현/수정은 review-fixes.md를 따릅니다.
+
+
+## 2026-11-03 Azure 이름 이전 후 현재 환경
+
+API base는 https://csflow-backend-a.azurewebsites.net/api/v1, PG는 csflow-backend-a-pg.postgres.database.azure.com/backend_a, Plan은csflow-backend-a-plan이다. source0.6.1/head0006과 기존 모든행/계정/권한·자동중지를 보존했다. 구3개 삭제·공용잠금 복원과 실제검증/백업은[azure-migration.md](azure-migration.md)를 따른다. B·AI·Fabric·발송은미연결/미검증이고 실제 Frontend origin은추측해등록하지 않았다. 서비스 인증 비밀값이나 DBpassword는이문서에없다.

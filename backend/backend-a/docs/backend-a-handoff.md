@@ -88,3 +88,12 @@ Frontend는 frontend-handoff/api-contract/OpenAPI/examples와 phase7 설계, B·
 repo.agent_assignment_exists를 AGENT ticket_scope와 큐 assigned에서 공유해 실제 권한 없는 배정이 큐를 숨기지 않게 했습니다. control SHARE 대기 뒤 최종 쓰기 직전 wall-clock lease/저장 시각을 갱신하며 숫자 UUID 등 cursor는 모든 페이지422입니다. OpenAPI413/422 설명만 고정했고 계약 전체 비교·해시 벡터 검사는 유지합니다. migration은 추가하지 않았습니다.
 
 최종 전체 회귀는 코드 변경 완료 뒤 실행했습니다. 실제 Linux/Python3.12 재실행·외부 worker/발송·클라우드 통합은 미검증입니다. 기존 검토 ZIP은0.6.0 원본 검토 자료이며 이번 수정 코드나 새 검증을 포함하지 않습니다. 체험 API를 다시 시작해도 DB/seed/권한·비밀번호는 초기화하지 않습니다.
+
+## 2026-11-03 실제 Azure 배포 추가
+
+이전 로컬 전용 문단은 당시 범위의 기록이다. 이번 명시 승인으로 A 전용 Korea Central App Service B1/PostgreSQL16 B1ms·32GiB에 배포했다. migration0006/PAUSED/별도 합성 계정과 실제 HTTPS18개 묶음61건을 확인했다. 새 관련 로컬 PostgreSQL92 passed이며 기존 전체368와 합산하지 않는다. 실제 Linux Python3.13.18 빌드·기동은 확인했지만 Linux 전체 pytest/B·AI/RAG·Fabric/Frontend/발송/PITR는 미검증이다. 원본 로컬 DB와 다른 팀 리소스는 변경하지 않았다. 비용·잠금·범위·작업 트리/패키지 해시는 azure-deployment.md와 evidence/azure-team-dev를 따른다.
+
+
+## 2026-11-03 Azure 이름 이전 후 현재 환경
+
+API base는 https://csflow-backend-a.azurewebsites.net/api/v1, PG는 csflow-backend-a-pg.postgres.database.azure.com/backend_a, Plan은csflow-backend-a-plan이다. source0.6.1/head0006과 기존 모든행/계정/권한·자동중지를 보존했다. 구3개 삭제·공용잠금 복원과 실제검증/백업은[azure-migration.md](azure-migration.md)를 따른다. B·AI·Fabric·발송은미연결/미검증이고 실제 Frontend origin은추측해등록하지 않았다. 서비스 인증 비밀값이나 DBpassword는이문서에없다.

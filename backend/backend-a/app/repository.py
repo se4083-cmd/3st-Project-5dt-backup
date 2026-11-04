@@ -28,7 +28,7 @@ def customer_for(session, user):
     return customer
 
 
-def agent_assignment_exists(agent_id=None):
+def agent_assignment_exists(agent_id=None, *, as_of=None):
     """A current assignment that its active agent can actually use.
 
     Shared by agent ticket authorization and exception-queue suppression.
@@ -42,7 +42,7 @@ def agent_assignment_exists(agent_id=None):
         assignment.c.cycle_no == tickets.c.cycle_no,
         assignment.c.team_id == tickets.c.team_id,
         assignment.c.ended_at.is_(None),
-        assignment.c.assigned_at <= utcnow(),
+        assignment.c.assigned_at <= (as_of if as_of is not None else utcnow()),
         agent.c.active.is_(True),
         agent.c.role == "AGENT",
         agent.c.team_id == assignment.c.team_id,

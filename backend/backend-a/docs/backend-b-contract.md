@@ -119,3 +119,8 @@ Fabric 운영 추출을 위해 회차별 TICKET_REOPENED/AGENT_REQUESTED/AUTOMAT
 ## 0.6.1 lease·배정 보정
 
 [독립 검토 수정](review-fixes.md)을 따른다. 자동 공통 확정은 모든 잠금 gate 후 첫 쓰기 직전에 wall-clock utcnow로 lease_until을 다시 검사한다. transaction_timestamp/SQL now의 고정 시각을 쓰지 않는다. 만료 시 INVALID_LEASE와 저장0이며 실제 발송에는 B의 별도 최종 재검사가 여전히 필요하다. 유효 상담사 배정은 repository.agent_assignment_exists의 회차·배정·활성 역할/팀·정규화 scope/category·stage 조건을 티켓 권한과 큐에서 공유한다. 라우팅/권한을 복원하거나 전사 공개하지 않는다.
+
+
+## 2026-11-03 Azure 이름 이전 후 현재 환경
+
+API base는 https://csflow-backend-a.azurewebsites.net/api/v1, PG는 csflow-backend-a-pg.postgres.database.azure.com/backend_a, Plan은csflow-backend-a-plan이다. source0.6.1/head0006과 기존 모든행/계정/권한·자동중지를 보존했다. 구3개 삭제·공용잠금 복원과 실제검증/백업은[azure-migration.md](azure-migration.md)를 따른다. B·AI·Fabric·발송은미연결/미검증이고 실제 Frontend origin은추측해등록하지 않았다. 서비스 인증 비밀값이나 DBpassword는이문서에없다.

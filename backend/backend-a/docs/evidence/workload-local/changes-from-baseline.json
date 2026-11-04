@@ -1,0 +1,26 @@
+{
+  "baseline_existing_files": 227,
+  "modified_existing_files": [
+    "docs/quality-voc-workload-design.md",
+    "README.md",
+    "app/followups.py",
+    "app/main.py",
+    "app/repository.py",
+    "app/staff_models.py",
+    "app/staff_router.py",
+    "docs/api-contract.md",
+    "docs/examples/frontend-requests.json",
+    "docs/frontend-handoff.md",
+    "docs/openapi.json",
+    "docs/verification.md",
+    "pyproject.toml",
+    "scripts/check_handoff_contract.py",
+    "tests/test_analytics_database.py",
+    "tests/test_phase3_database.py",
+    "tests/test_repository_layout.py"
+  ],
+  "deleted_existing_files": [],
+  "existing_migrations_fabric_azure_startup_public_limits_unchanged": true,
+  "previous_openapi_endpoints_preserved": true,
+  "allowed_capability_contract_extended": true
+}
