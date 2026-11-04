@@ -95,12 +95,13 @@ def test_migration_preserves_business_rows_grants_nothing_and_matches_models(set
                 )
         command.upgrade(Config(str(ROOT / "alembic.ini")), "head")
         with factory.begin() as s:
-            assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0007"
+            assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0008"
             assert before == [tuple(x) for x in s.execute(select(tickets))]
             assert grants == list(s.execute(select(staff_permissions)))
         command.check(Config(str(ROOT / "alembic.ini")))
         command.downgrade(Config(str(ROOT / "alembic.ini")), "0006")
         command.upgrade(Config(str(ROOT / "alembic.ini")), "0007")
+        command.upgrade(Config(str(ROOT / "alembic.ini")), "head")
         command.check(Config(str(ROOT / "alembic.ini")))
     finally:
         engine.dispose()
@@ -121,7 +122,7 @@ def test_downgrade_refuses_authorization_or_read_history(app, settings, monkeypa
     with pytest.raises(RuntimeError, match="retain 0007"):
         command.downgrade(Config(str(ROOT / "alembic.ini")), "0006")
     with app.state.session_factory() as s:
-        assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0007"
+        assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0008"
 
 
 def test_workload_audit_failure_returns_no_partial_response(client, app, monkeypatch):

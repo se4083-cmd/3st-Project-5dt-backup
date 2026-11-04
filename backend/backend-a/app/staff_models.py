@@ -25,6 +25,13 @@ PERMISSIONS = (
     "RETENTION_TEAM_REVIEW",
     "RETENTION_GLOBAL_REVIEW",
     "WORKLOAD_READ",
+    "P1_MONITOR_READ",
+    "P1_VOC_READ",
+    "P1_VOC_GENERATE",
+    "P1_VOC_REVIEW",
+    "P1_POLICY_READ",
+    "P1_POLICY_WRITE",
+    "P1_POLICY_REVIEW",
 )
 staff_permissions = Table(
     "staff_permissions",
@@ -34,7 +41,7 @@ staff_permissions = Table(
     Column("granted_by", Uuid(as_uuid=False), ForeignKey("users.user_id")),
     Column("granted_at", UTCDateTime(), nullable=False, default=utcnow),
     CheckConstraint(
-        "permission IN ('EXCEPTION_QUEUE_READ','UNROUTED_QUEUE_READ','AUTOMATION_READ','AUTOMATION_STOP','AUTOMATION_RESUME','RETENTION_TEAM_REVIEW','RETENTION_GLOBAL_REVIEW','WORKLOAD_READ')",
+        "permission IN ('EXCEPTION_QUEUE_READ','UNROUTED_QUEUE_READ','AUTOMATION_READ','AUTOMATION_STOP','AUTOMATION_RESUME','RETENTION_TEAM_REVIEW','RETENTION_GLOBAL_REVIEW','WORKLOAD_READ','P1_MONITOR_READ','P1_VOC_READ','P1_VOC_GENERATE','P1_VOC_REVIEW','P1_POLICY_READ','P1_POLICY_WRITE','P1_POLICY_REVIEW')",
         name="permission",
     ),
 )

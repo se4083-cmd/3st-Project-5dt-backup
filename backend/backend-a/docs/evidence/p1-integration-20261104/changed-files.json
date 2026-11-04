@@ -1,0 +1,162 @@
+[
+  {
+    "status": "M",
+    "path": "backend/backend-a/.env.example"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/README.md"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/__init__.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/__init__.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/models.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/monitoring_service.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/permissions.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/router.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/schemas.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/settings.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/main.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/schema.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/seed.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/staff_models.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-integration-20261104/changed-files.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-integration-20261104/cleanup.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-integration-20261104/http-smoke.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-integration-20261104/postgres.xml"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-integration-20261104/sqlite.xml"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-integration-20261104/summary.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-integration-20261104/zip-comparison.json"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/docs/openapi.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/p0-openapi.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/p1-api-contract.md"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/p1-integration-20261104.md"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/p1-runbook.md"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/migrations/versions/0008_p1_foundation.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/scripts/check_p0_contract.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/scripts/grant_p1_monitor.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/tests/p1/__init__.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/tests/p1/test_contract.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/tests/p1/test_migrations.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/tests/p1/test_monitoring.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_analytics_database.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_phase3_database.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_repository_layout.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_workload_postgres.py"
+  },
+  {
+    "status": "A",
+    "path": "docs/P1_DATABASE_CHANGES.md"
+  },
+  {
+    "status": "A",
+    "path": "docs/P1_DESIGN_DIFFERENCES.md"
+  },
+  {
+    "status": "A",
+    "path": "docs/P1_TEAM_AND_NEXT_STEP.md"
+  }
+]

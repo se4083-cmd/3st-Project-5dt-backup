@@ -115,3 +115,7 @@ verify는 별도 임시 schema의 테스트 권한/고정 답변·배정·사람
 ## 2026-11-03 지정 이름 이전 완료
 
 새 이름3개로 실제 이전·검증하고 구3개 삭제 및 공용잠금 복원을 완료했다. API https://csflow-backend-a.azurewebsites.net/api/v1, Swagger /docs, PG csflow-backend-a-pg, Plan csflow-backend-a-plan이다. 현재 state는 .cache/azure-backend-a이며 기존 DB를 seed로 대체하지 않았다. 원본32테이블·모든기존행 보존, 기존상태HTTP16건/핵심HTTPS61건/도구6개검증은[실제 이전 보고](docs/azure-migration.md)를 따른다. 기존 전체368개 재실행이 아니다.
+
+## P1 monitoring integration
+
+Read-only P1 monitoring is integrated on top of Backend A 0.7.1. Required schema head: **0008** (existing workload migration 0007 is preserved). See [runbook](docs/p1-runbook.md), [API contract](docs/p1-api-contract.md), and [integration report](docs/p1-integration-20261104.md). P1 is disabled by default; enabling it requires explicit ADMIN/team/capability grants. VOC and policy workflows are not implemented.

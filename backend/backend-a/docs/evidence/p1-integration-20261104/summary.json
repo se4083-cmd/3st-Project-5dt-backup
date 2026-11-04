@@ -1,0 +1,55 @@
+{
+  "baseline": "25e4aad720198ea2a3a0287ccf6f58f69c92d228",
+  "branch": "feature/backend-plus",
+  "recorded_at": "2026-11-04T14:24:40.263928+09:00",
+  "python": "3.12.14",
+  "postgresql": "17.11 (Debian official signed package metadata)",
+  "tests": {
+    "sqlite": {
+      "collected": 457,
+      "passed": 407,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 50,
+      "p1_collected": 24,
+      "p1_skipped": 1,
+      "p0_skipped": 49
+    },
+    "postgres": {
+      "collected": 457,
+      "passed": 447,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 10,
+      "p1_collected": 24,
+      "p1_skipped": 0,
+      "p0_skipped": 10
+    }
+  },
+  "p0_contract": {
+    "paths": 37,
+    "operations": 41,
+    "components_and_security": "unchanged"
+  },
+  "checks": {
+    "ruff_check": "PASS",
+    "ruff_format": "PASS (122 files)",
+    "handoff_contract": "PASS",
+    "alembic_heads": "0008 only; down_revision 0007",
+    "alembic_check": "PASS",
+    "http_smoke": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "limitations": [
+    "External full synthetic fixture absent (9 tests skipped in both suites)",
+    "Windows DPAPI test skipped (1)",
+    "Frontend integration/build/browser E2E not performed",
+    "No production/provider/Fabric connection/load test"
+  ],
+  "git": {
+    "commit_created": false,
+    "push_performed": false,
+    "changes": "working tree only; unstaged"
+  },
+  "archive_evidence": "Reviewed as historical results, not merged with this run."
+}

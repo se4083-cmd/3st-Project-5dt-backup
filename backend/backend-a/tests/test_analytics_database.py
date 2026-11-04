@@ -229,7 +229,7 @@ def test_readiness_requires_new_revision(client, app):
         c.execute(text("UPDATE alembic_version SET version_num='0003'"))
     assert client.get("/health/ready").json()["error"]["code"] == "MIGRATIONS_REQUIRED"
     with app.state.engine.begin() as c:
-        c.execute(text("UPDATE alembic_version SET version_num='0007'"))
+        c.execute(text("UPDATE alembic_version SET version_num='0008'"))
     assert client.get("/health/ready").status_code == 200
 
 

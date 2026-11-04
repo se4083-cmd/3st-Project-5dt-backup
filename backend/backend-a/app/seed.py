@@ -158,6 +158,10 @@ def seed_fixture(session, fixture_dir: Path):
         "queue_routes",
         "automation_control",
         "automation_control_history",
+        # P1 storage is outside the official P0 fixture contract.
+        "p1_idempotency",
+        "p1_tasks",
+        "p1_ai_call_attempts",
     }:
         raise ValueError("Fixture official table set differs from the reviewed 22-table contract")
     data = {
