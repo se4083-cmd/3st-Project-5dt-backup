@@ -1,5 +1,7 @@
 # CS Flow AI Backend A
 
+현재 feature/backend-plus의 전체 기능 schema head는 **0010**입니다. 아래 0006–0009 설명과 과거 검증 기록은 각 도입 당시 기준이며 최신 정책 기능/실행 안내를 함께 확인하세요.
+
 **0.7.1 / migration0007 (로컬 소스)**. 기존 Backend A 기능에 [현재 상담사 업무량 조회](docs/workload.md)를 추가했다. 0.7.1에서는 ‘유효 상담사 배정 없음’을 자동 경로/사람 배정 대기/판별 불가로 나눠 표시한다. AGENT 본인/명시 권한 ADMIN의 업무량·미배정·기한·후속 집계를 제공한다. 자동 배정/추천·새 SLA 엔진은 없다. Azure 배포는 이번에 변경하지 않았으며 기존 0.6.1/0006 기록과 구분한다. Backend B의 worker·배정/사람 응답 엔진이나 AI/RAG/Fabric 계산·외부 발송기는 포함하지 않는다.
 
 이 구현은 `backend/backend-a/` 안에 독립적으로 둔다. 기존 `backend/README.md`, 팀 루트/공유 설정과 Backend B·Frontend·AI·Fabric 코드는 변경하지 않는다. 실제 비밀값/개발 DB/검토 ZIP/다운로드 원천·전체 fixture/배포 workflow는 올리지 않는다.
@@ -123,3 +125,7 @@ Read-only P1 monitoring is integrated on top of Backend A 0.7.1. Required schema
 ## P1 VOC improvement proposals
 
 Synchronous, evidence-bound VOC drafts and explicit administrator review are available behind `P1_ENABLED=true` and `P1_VOC_ENABLED=true`. Default provider is visibly `MOCK`; Azure requires `P1_VOC_PROVIDER=AZURE_OPENAI` plus `P1_VOC_AZURE_ENABLED=true` and server-side credentials/deployment configuration. Existing published product VOC analytics and SQL permissions are reused. Required schema head is **0009**; migrations 0001–0008 are preserved. See [VOC API/runbook](docs/p1-voc-api.md) and [implementation and verification report](docs/p1-voc-implementation-20261104.md). Approval records a decision only; it never changes policy, operational knowledge, customer messages or worker behavior.
+
+## P1 policy version comparison and impact review
+
+Policy drafts, immutable versions, deterministic text comparisons and scoped historical-reference analysis are available behind `P1_ENABLED=true` and `P1_POLICY_ENABLED=true`. Required schema head is **0010** (after 0009). Approval changes only P1 review state and never changes knowledge documents, RAG indexes, Backend B or automation rules. See [policy API and React contract](docs/p1-policy-api.md) and [implementation/verification report](docs/p1-policy-implementation-20261104.md). Unconfirmed runtime effects stay `UNCONFIRMED`.

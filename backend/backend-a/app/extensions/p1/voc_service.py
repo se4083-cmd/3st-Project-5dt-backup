@@ -85,14 +85,16 @@ def replay(session, user, operation, key, hash_):
         return row["response_snapshot"]
 
 
-def remember(session, user, operation, key, hash_, result):
+def remember(session, user, operation, key, hash_, result, *, response_status=None):
     session.execute(
         p1_idempotency.insert().values(
             user_id=user["user_id"],
             operation=operation,
             key=key,
             request_hash=hash_,
-            response_status=201 if operation == "VOC_GENERATE" else 200,
+            response_status=response_status
+            if response_status is not None
+            else (201 if operation == "VOC_GENERATE" else 200),
             response_snapshot=normalize(result),
             created_at=utcnow(),
         )

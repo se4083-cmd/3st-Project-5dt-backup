@@ -103,7 +103,7 @@ def test_phase2_followup_upgrade_preserves_origin_and_legacy_fields(settings, mo
         assert row["cycle_no"] == row["responsibility_cycle_no"] == 1
         assert row["origin_team_id"] == row["owner_team_id"]
         assert row["cancelled_at"] is None and row["cancellation_reason"] is None
-        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == "0009"
+        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == "0010"
     engine.dispose()
 
 

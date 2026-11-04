@@ -165,6 +165,11 @@ def seed_fixture(session, fixture_dir: Path):
         "p1_voc_requests",
         "p1_voc_request_teams",
         "p1_voc_reviews",
+        "p1_policies",
+        "p1_policy_teams",
+        "p1_policy_versions",
+        "p1_policy_comparisons",
+        "p1_policy_reviews",
     }:
         raise ValueError("Fixture official table set differs from the reviewed 22-table contract")
     data = {

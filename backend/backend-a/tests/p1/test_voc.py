@@ -322,7 +322,7 @@ def test_downgrade_refuses_proposal_history(client, app):
     with pytest.raises(RuntimeError, match="retain 0009"):
         command.downgrade(Config(str(ROOT / "alembic.ini")), "0008")
     with app.state.engine.connect() as c:
-        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0009"
+        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0010"
 
 
 def test_existing_p1_monitoring_openapi_is_unchanged(app):
@@ -392,7 +392,8 @@ def test_0009_preserves_existing_p0_and_p1_rows(settings, monkeypatch):
                     created_at=utcnow(),
                 )
             )
-        tables = [t for t in metadata.sorted_tables if not t.name.startswith("p1_voc_")]
+        # Snapshot the 0008 baseline; VOC and policy tables arrive in later revisions.
+        tables = [t for t in metadata.sorted_tables if not t.name.startswith(("p1_voc_", "p1_polic"))]
 
         def snapshot():
             with factory() as s:

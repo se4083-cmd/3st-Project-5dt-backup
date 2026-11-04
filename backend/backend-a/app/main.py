@@ -17,6 +17,7 @@ from app.analytics_router import router as analytics_router
 from app.config import Settings, get_settings
 from app.db import build_engine, session_factory
 from app.errors import APIError
+from app.extensions.p1.policy_router import router as policy_router
 from app.extensions.p1.router import router as p1_router
 from app.extensions.p1.voc_router import router as voc_router
 from app.operations_router import router as operations_router
@@ -127,7 +128,7 @@ def create_app(settings: Settings | None = None):
     def ready(request: Request):
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
-            if connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one() != "0009":
+            if connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one() != "0010":
                 return error_response(request, 503, "MIGRATIONS_REQUIRED")
         return {"status": "ready"}
 
@@ -137,4 +138,5 @@ def create_app(settings: Settings | None = None):
     app.include_router(staff_router)
     app.include_router(p1_router)
     app.include_router(voc_router)
+    app.include_router(policy_router)
     return app

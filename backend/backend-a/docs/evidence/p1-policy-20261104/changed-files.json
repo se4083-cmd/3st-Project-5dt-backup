@@ -1,0 +1,130 @@
+[
+  {
+    "status": "M",
+    "path": "backend/backend-a/.env.example"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/README.md"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/policy_analysis.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/policy_models.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/policy_router.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/policy_schemas.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/app/extensions/p1/policy_service.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/extensions/p1/voc_service.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/main.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/schema.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/app/seed.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/changed-files.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/cleanup.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/focused-postgres.xml"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/focused-sqlite.xml"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/http-smoke.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/postgres.xml"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/sqlite.xml"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/evidence/p1-policy-20261104/summary.json"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/docs/openapi.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/p1-before-policy-contract.json"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/p1-policy-api.md"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/docs/p1-policy-implementation-20261104.md"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/migrations/versions/0010_policy_workspace.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/p1/test_migrations.py"
+  },
+  {
+    "status": "A",
+    "path": "backend/backend-a/tests/p1/test_policy.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/p1/test_voc.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_analytics_database.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_phase3_database.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_repository_layout.py"
+  },
+  {
+    "status": "M",
+    "path": "backend/backend-a/tests/test_workload_postgres.py"
+  },
+  {
+    "status": "M",
+    "path": "docs/P1_TEAM_AND_NEXT_STEP.md"
+  }
+]

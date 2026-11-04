@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "postgres": "17.11",
+  "migration": "0010; alembic check PASS",
+  "health_ready": 200,
+  "registration": 201,
+  "idempotent_replay": 200,
+  "append_version": 201,
+  "comparison": 201,
+  "review": 200,
+  "stale_review": 409,
+  "history": 200,
+  "missing_bearer": 401,
+  "existing_monitoring": 200,
+  "p0_business_rows_unchanged": true,
+  "activation": "NOT_SUPPORTED",
+  "unverified_impact": "UNCONFIRMED",
+  "external_azure_calls": 0,
+  "external_rag_calls": 0
+}

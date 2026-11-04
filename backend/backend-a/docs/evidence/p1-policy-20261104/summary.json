@@ -1,0 +1,90 @@
+{
+  "baseline": "0f0e0d46377b8de805aab932614d39131738deed",
+  "branch": "feature/backend-plus",
+  "recorded_at": "2026-11-04T15:35:33.159817+09:00",
+  "runtime": {
+    "python": "3.12.14",
+    "postgres": "17.11; isolated local cluster"
+  },
+  "tests": {
+    "sqlite": {
+      "collected": 530,
+      "passed": 476,
+      "skipped": 54,
+      "failures": 0,
+      "errors": 0,
+      "policy_collected": 29,
+      "policy_skipped": 2
+    },
+    "postgres": {
+      "collected": 530,
+      "passed": 520,
+      "skipped": 10,
+      "failures": 0,
+      "errors": 0,
+      "policy_collected": 29,
+      "policy_skipped": 0
+    },
+    "focused-sqlite": {
+      "collected": 29,
+      "passed": 27,
+      "skipped": 2,
+      "failures": 0,
+      "errors": 0,
+      "policy_collected": 29,
+      "policy_skipped": 2
+    },
+    "focused-postgres": {
+      "collected": 29,
+      "passed": 29,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "policy_collected": 29,
+      "policy_skipped": 0
+    }
+  },
+  "validation_sequence": "Full suites after correcting historical 0008 table inventory. Final scope-safe comparison query then revalidated with the entire policy module on both databases; counts are not additive.",
+  "checks": {
+    "p0_openapi": "37 paths / 41 operations and existing components/security unchanged",
+    "previous_p1_openapi": "8 operations (monitoring/VOC) and referenced schemas/security unchanged",
+    "new_operations": [
+      "POST /api/v1/admin/p1/policies",
+      "GET /api/v1/admin/p1/policies",
+      "GET /api/v1/admin/p1/policies/{policy_id}",
+      "POST /api/v1/admin/p1/policies/{policy_id}/versions",
+      "GET /api/v1/admin/p1/policies/{policy_id}/versions",
+      "GET /api/v1/admin/p1/policies/{policy_id}/versions/{version_id}",
+      "POST /api/v1/admin/p1/policies/{policy_id}/comparisons",
+      "GET /api/v1/admin/p1/policies/{policy_id}/comparisons",
+      "GET /api/v1/admin/p1/policy-comparisons/{comparison_id}",
+      "POST /api/v1/admin/p1/policy-comparisons/{comparison_id}/reviews"
+    ],
+    "alembic": "0010 only; down_revision 0009; check and empty roundtrip pass on both DBs",
+    "ruff_check": "PASS",
+    "ruff_format": "PASS: 137 files",
+    "git_diff_check": "PASS",
+    "http_smoke": "PASS"
+  },
+  "unverified": [
+    "Independent FAQ catalog mapping",
+    "Actual rule-condition semantic dependency",
+    "Backend B future/runtime behavior",
+    "Azure AI Search / external RAG indexes",
+    "Production impact, activation and load tests",
+    "9 external full synthetic fixture tests and 1 Windows DPAPI test"
+  ],
+  "safety": {
+    "activation_supported": false,
+    "operational_tables_modified": false,
+    "existing_migrations_modified": false,
+    "external_integrations_called": false,
+    "azure_resources_created": false,
+    "deployment_performed": false
+  },
+  "git": {
+    "commit_created": false,
+    "push_performed": false
+  },
+  "evidence_note": "Only final successful runs retained; JUnit hostname removed, outcomes preserved."
+}
