@@ -294,12 +294,12 @@ export function Dashboard({
             </span>
           </div>
           <p className="card-description">
-            제품 목록·상세, VOC TOP 10과 근거 패널은 3주차에 연결합니다. 현재는
-            공통 탐색 구조와 접근 범위를 확인합니다.
+            게시된 VOC TOP 10과 점수 산정 불가 제품을 같은 분석 배치로 확인합니다.
+            기본 상품 카탈로그는 별도 API 계약이 필요합니다.
           </p>
           {can(session, "PRODUCT_READ") && (
             <Link className="text-link" to="/products">
-              제품 화면 연결 →
+              제품·VOC 보기 →
             </Link>
           )}
         </section>

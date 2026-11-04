@@ -4,6 +4,12 @@ export const permissions = [
   "FOLLOWUP_READ",
   "PRODUCT_READ",
   "AUTOMATION_MANAGE",
+  "EXCEPTION_QUEUE_READ",
+  "UNROUTED_QUEUE_READ",
+  "AUTOMATION_READ",
+  "VOC_IMPROVEMENT_MANAGE",
+  "QUALITY_METRICS_READ",
+  "QUALITY_REVIEW",
 ] as const;
 export type Permission = (typeof permissions)[number];
 export type Role = "ADMIN" | "AGENT" | "ANALYST" | "CUSTOMER";

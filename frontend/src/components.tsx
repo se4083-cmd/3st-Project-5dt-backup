@@ -126,7 +126,7 @@ export const navigation: {
   permission: Permission;
 }[] = [
   { to: "/", label: "운영 홈", icon: "home", permission: "OPERATIONS_READ" },
-  { to: "/inquiries", label: "문의", icon: "chat", permission: "INQUIRY_READ" },
+  { to: "/inquiries", label: "문의", icon: "chat", permission: "EXCEPTION_QUEUE_READ" },
   {
     to: "/followups",
     label: "후속",
@@ -136,10 +136,11 @@ export const navigation: {
   { to: "/products", label: "제품", icon: "box", permission: "PRODUCT_READ" },
   {
     to: "/settings",
-    label: "운영 설정",
+    label: "자동화",
     icon: "settings",
-    permission: "AUTOMATION_MANAGE",
+    permission: "AUTOMATION_READ",
   },
+  { to: "/quality", label: "AI 품질", icon: "shield", permission: "QUALITY_REVIEW" },
 ];
 export function AppShell({
   session,
@@ -193,7 +194,7 @@ export function AppShell({
             <strong>{mock ? "DEVELOPMENT DEMO" : "BACKEND CONNECTION"}</strong>
             <p>
               {mock
-                ? "합성 응답으로 1주차 화면을 검토합니다."
+                ? "합성 응답으로 운영 화면 흐름을 검토합니다."
                 : "서버의 인증과 업무 범위에 따라 표시합니다."}
             </p>
           </div>
@@ -220,7 +221,7 @@ export function AppShell({
         <main id="main" className="main" tabIndex={-1}>
           {children}
           <footer>
-            CS Flow AI · React Frontend / Week 01{" "}
+            CS Flow AI · React Frontend{" "}
             <span>
               {mock ? "합성 데이터 · 실제 발송 없음" : "서버 권한 검증 필요"}
             </span>

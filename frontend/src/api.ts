@@ -213,13 +213,19 @@ export async function requestJson(
   path: string,
   signal: AbortSignal,
   transport: typeof fetch = fetch,
+  options: { method?: "GET" | "POST"; body?: object } = {},
 ): Promise<unknown> {
   let response: Response;
   try {
     response = await transport(path, {
       signal,
       credentials: "same-origin",
-      headers: { Accept: "application/json" },
+      method: options.method ?? "GET",
+      headers: {
+        Accept: "application/json",
+        ...(options.body ? { "Content-Type": "application/json" } : {}),
+      },
+      ...(options.body ? { body: JSON.stringify(options.body) } : {}),
       cache: "no-store",
       redirect: "error",
     });
@@ -235,8 +241,9 @@ export async function requestJson(
       const e = record(body.error);
       if (typeof e.code === "string" && /^[A-Z0-9_]{1,80}$/.test(e.code))
         code = e.code;
-      if (typeof e.trace_id === "string" && /^[\w-]{1,80}$/.test(e.trace_id))
-        traceId = e.trace_id;
+      const requestId = e.request_id ?? e.trace_id;
+      if (typeof requestId === "string" && /^[\w-]{1,80}$/.test(requestId))
+        traceId = requestId;
     } catch {
       /* Server internals and HTML error bodies never enter the UI. */
     }

@@ -55,7 +55,7 @@ export function fixtureSession(profile: Profile): Session {
     active: profile !== "inactive",
     permissions:
       profile === "limited"
-        ? ["OPERATIONS_READ", "INQUIRY_READ"]
+        ? ["OPERATIONS_READ", "INQUIRY_READ", "EXCEPTION_QUEUE_READ"]
         : [...permissions],
     allowedTeamIds:
       profile === "limited"

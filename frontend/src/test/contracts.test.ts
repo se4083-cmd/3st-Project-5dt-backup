@@ -125,4 +125,13 @@ describe("read-only API boundary", () => {
       ),
     ).rejects.toMatchObject({ code: "NETWORK_ERROR" });
   });
+  it("accepts Backend A request_id without reflecting its error message", async () => {
+    const response = new Response(JSON.stringify({ error: {
+      code: "RESOURCE_NOT_FOUND", request_id: "request-01", message: "private data",
+    } }), { status: 404 });
+    await expect(requestJson("/api/v1/test", new AbortController().signal,
+      vi.fn().mockResolvedValue(response))).rejects.toMatchObject({
+      status: 404, code: "RESOURCE_NOT_FOUND", traceId: "request-01",
+    });
+  });
 });
