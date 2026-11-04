@@ -1,5 +1,8 @@
 # API와 Frontend 계약
 
+0.9.0/0009: `/staff/quality`의 후보·표본·목적별 자료·수동 평가/담당/VOID·이력·지표를 추가했습니다. [권한·정확한 요청/응답·집계 계약](quality-review.md)을 따릅니다. QUALITY_SAMPLE_MANAGE/REVIEW/METRICS_READ/UNATTRIBUTED_MANAGE는 역할과 현재 팀/지정 조건을 함께 적용하며 기본 미부여입니다. 과거 as_of·전체 AI 정답률·자동 처리율/안전한 완료율을 제공하지 않습니다.
+
+
 0.8.0/head0008: [VOC 상품 개선 조치 등록·계획 이력](voc-improvements.md)을 추가했습니다. `/staff/voc-improvements`와 상세/plans/tickets는 ADMIN+명시 VOC_IMPROVEMENT_MANAGE+현재 팀 scope가 필요합니다. 담당·상태는 기존 followup API가 정본이며 Fabric 효과 availability는 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED, metrics=null입니다. 기존 analytics-v1 wire는 변경하지 않았습니다.
 
 

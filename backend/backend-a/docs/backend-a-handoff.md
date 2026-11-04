@@ -1,5 +1,8 @@
 # Backend A 7단계 로컬 구현·팀 인수 점검
 
+현재 로컬 소스는 **0.9.0 / 0009**, [수동 품질 평가 계약](quality-review.md)을 따릅니다. 기존 AutomaticReply 호출은 호환하고 provenance만 선택 확장했습니다. 실제 AI 호출·평가 정답 입증·외부 연동/배포·계정 grant·commit/push는 이번에 하지 않았습니다. 아래0.8.0 및 과거 기록과 구분합니다.
+
+
 현재 로컬 구현은 **0.8.0 / migration0008**입니다. [VOC 상품 개선 조치·계획 이력](voc-improvements.md)을 추가했고 담당/상태는 기존 product followup이 정본입니다. 실제 Fabric 효과 수신/계산/Export는 미구현이며 metrics=null입니다. VOC_IMPROVEMENT_MANAGE는 기본 미부여입니다. Backend B 실패/이관 검토 문서는 보존했고 B 실행 코드는 변경하지 않았습니다. Azure 버전/DB 상태는 이번에 확인하거나 변경하지 않았고 commit/push도 하지 않았습니다. 아래 과거 배포/검증 기록과 구분하세요.
 
 현재는 **0.6.1 / migration0006**, 최종 코드 이후 전체 PostgreSQL **368개 통과**(실패/skip0)와 실제 HTTP **33개 흐름 통과**입니다. 관련 부분PG38개·SQLite37개/1skip은 합산하지 않습니다. [독립 검토 수정](review-fixes.md)은 배정 권한/큐·lease 최종 만료·cursor422·Python HTTP 설명 차이를 다룹니다. 이전0.6.0의330개 결과와 구분하며 실제 B/AI/Fabric/발송 엔진 통합 완료를 의미하지 않습니다.

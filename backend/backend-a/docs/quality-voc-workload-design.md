@@ -1,5 +1,8 @@
 # AI 품질·VOC 개선·업무량/SLA 확장 설계안
 
+후속 **0.9.0/0009**에서 이번 최소 범위의 전향적 응답 기록·수동 표본/평가 이력·현재 snapshot 지표를 로컬 구현했습니다. [실제 계약](quality-review.md)이 아래 제안보다 우선합니다. ticket_cycles·과거 as_of·안전한 자동 완료·새 SLA·AI 호출/자기평가·Fabric 품질 mart는 여전히 미구현입니다.
+
+
 후속 0.8.0/0008: **2단계 상품 개선 profile·append-only 계획·문의 연결을 로컬 구현**했습니다. [실제 계약](voc-improvements.md)을 우선합니다. 효과 분석 수신/계산/조회는 아직 미구현이며 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED, metrics=null입니다. 아래 설계 당시/과거 검증 기록과 구분합니다.
 
 공유본에서는 개인 PC의 절대 경로를 `<PROJECT_ROOT>`로 표시한다. 후속0.7.1은 업무량의 미배정 의미와 경로별 분류를 보완했으며 [현재 계약](workload.md)을 따른다. 나머지 기능의 제안 범위는 그대로다.
@@ -409,8 +412,8 @@ before/after에 같은 ticket 문의가 이어져도 최초 문의 cohort 배치
 | 0 — 설계 완료 | 이 설계 검토 및 기존 dirty 기준점 확인 | 후속 사용자의 명시 구현 요청으로 1단계만 진행. 나머지는 자동 시작하지 않음 |
 | 1 — 로컬 구현 완료 | **권한 있는 현재 업무량·미배정·기존 24h 기한 조회**. 0.7.0/0007 capability/snapshot DTO. [실제 검증](evidence/workload-local/README.md) | 새 B worker·AI·Fabric 없이 격리 PostgreSQL로 검증. 추천/실배정과 분리. 실제 계정 grant/배포 없음 |
 | 2 — 로컬 구현 완료(0.8.0/0008) | **상품 개선 profile·계획 이력**과 기존 product followup wrapper. owner/status는 재사용, 실제 시행일·비교창 저장 | Fabric 효과 연동 미구현은 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED 및 null로 표시하고 등록 업무부터 사용. 기존 후속 terminal/권한 회귀 유지 |
-| 3 | **확정 응답 provenance + 전향 ticket_cycles**. 기존 writer transaction에 optional 확장, 과거 UNKNOWN 유지 | B에 새 필수 인자를 강제하기 전에 계약 sample으로 확인. 고정 합성 writer는 실제 AI 품질 증거가 아님 |
-| 4 | **품질 표본·사람 평가**. 좁은 검토 권한/자료 조회·불변 revision·표본 내 지표 | AI 없이 합성 provenance와 수동 평가로 API 계약 검증. 사람 rubric 검증은 실제 상담/정책 담당 참여 필요 |
+| 3 — 최소 provenance 구현(0.9.0), ticket_cycles 미구현 | **확정 응답 provenance + 전향 ticket_cycles 제안**. 기존 writer transaction에 optional 확장, 과거 UNKNOWN 유지 | B에 새 필수 인자를 강제하기 전에 계약 sample으로 확인. 고정 합성 writer는 실제 AI 품질 증거가 아님 |
+| 4 — 최소 로컬 구현(0.9.0/0009) | **품질 표본·사람 평가**. 좁은 검토 권한/자료 조회·불변 revision·표본 내 지표 | AI 없이 합성 provenance와 수동 평가로 API 계약 검증. 사람 rubric 검증은 실제 상담/정책 담당 참여 필요 |
 | 5 | **규칙 추천 읽기** 및 B의 재검증·공통 guard 배정 연동 | A 단독 추천은 가능, 실제 실행·동시배정 보장은 B 공동 PG 회귀 뒤에만 보고 |
 | 6 | **Fabric analytics-v2 효과 mart**의 수신/검증/불변·원자 게시/조회 | 합성 제출로 parser/정합·scope·게시만 검증. 실제 Export/원천 계산·Fabric 연결은 별도 팀 통합 |
 | 7 | 합의된 SLA clock·calendar/pause 정책·역사 지표, 안전한 자동 완료 정의 | 합의 전은 기존 기한 표시/unknown 유지. ML/새 scheduler 도입 없음 |
@@ -479,7 +482,7 @@ SQLite는 DTO/기본 정책 검증만 가능하고 SKIP LOCKED/PG partial UNIQUE
 
 **이미 있는 것:** 상품/티켓 후속, 팀 권한·유효 배정·예외 큐, 24시간 기한값, 자동 응답 공통 확정, Gold 수신·원자 게시.
 
-**남은 것:** 답변-근거 연결과 사람 평가 이력, 상품 개선 전후 결과 연동, 설명 가능한 추천. 현재 업무량과 상품 개선 계획 등록·이력은 로컬 구현했다.
+**남은 것:** 운영 rubric·실제 B/AI 근거 연동, 상품 개선 전후 결과 연동, 설명 가능한 추천. 최소 전향 응답 기록·사람 평가 이력은0.9.0에서 구현했다. 현재 업무량과 상품 개선 계획 등록·이력은 로컬 구현했다.
 
 **팀에 확인할 것:** 사람 평가 기준·표본 권한, 비교 기간/분모·Fabric v2, B 배정 충돌 계약, SLA와 ‘안전한 완료’ 정의.
 

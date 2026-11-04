@@ -13,6 +13,14 @@ from app.automation_control import ResumeCommand, StopCommand
 from app.config import Settings
 from app.followup_schemas import FollowupCreate, FollowupPatch, FollowupState
 from app.main import create_app
+from app.quality_schemas import (
+    MaterialRequest,
+    QualityMetrics,
+    Reassign,
+    ReviewCreate,
+    SampleCreate,
+    VoidSample,
+)
 from app.retention import RetentionRequest
 from app.schemas import AgentRequest, ReopenRequest, TicketCreate
 from app.staff_detail import DetailPurpose
@@ -100,6 +108,11 @@ def main():
         "ImprovementCreate": ImprovementCreate,
         "PlanCreate": PlanCreate,
         "TicketLink": TicketLink,
+        "SampleCreate": SampleCreate,
+        "MaterialRequest": MaterialRequest,
+        "ReviewCreate": ReviewCreate,
+        "Reassign": Reassign,
+        "VoidSample": VoidSample,
     }
     for item in examples["requests"]:
         if item["path"] not in actual["paths"] or item["method"].lower() not in actual["paths"][item["path"]]:
@@ -114,6 +127,31 @@ def main():
     if schemas["StaffTicketDetail"].get("additionalProperties") is not False:
         raise RuntimeError("STAFF_DETAIL_ALLOWLIST_NOT_CLOSED")
     workload = actual["paths"]["/api/v1/staff/workload"]["get"]
+    quality_example = QualityMetrics.model_validate_json(
+        (ROOT / "docs/examples/quality-metrics.json").read_text(encoding="utf-8")
+    )
+    if (
+        quality_example.attributed.accuracy_rate != 15 / 18
+        or quality_example.attributed.unreviewed_response_count != 80
+        or quality_example.attributed.evaluation_coverage != 0.2
+    ):
+        raise RuntimeError("QUALITY_METRIC_EXAMPLE_INVALID")
+    for name in (
+        "Candidate",
+        "SampleView",
+        "Material",
+        "Receipt",
+        "QualityMetrics",
+        "MetricCounts",
+        "HistoryPage",
+    ):
+        if schemas[name].get("additionalProperties") is not False:
+            raise RuntimeError("QUALITY_ALLOWLIST_NOT_CLOSED")
+    for path, methods in actual["paths"].items():
+        if path.startswith("/api/v1/staff/quality") and any(
+            operation["security"] != [{"HTTPBearer": []}] for operation in methods.values()
+        ):
+            raise RuntimeError("QUALITY_AUTH_CONTRACT_CHANGED")
     voc_root = "/api/v1/staff/voc-improvements"
     for path, methods in {
         voc_root: {"get", "post"},

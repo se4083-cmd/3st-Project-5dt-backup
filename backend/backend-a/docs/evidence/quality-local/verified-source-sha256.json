@@ -1,0 +1,17 @@
+{
+  "app/quality_metrics.py": "188ee5f07cb3d00a83549a2fc1a8f7fbef342bbb591f203999e21f4a2fbf4832",
+  "app/quality_models.py": "bc297bdae0bd7539d13a4549784d51cd079ae57c40dfc3654b3dc26566a0a55a",
+  "app/quality_provenance.py": "9fe3613faf8fef2b2a96e22c500293be5c7310da52df87bf31d7698c5d41372a",
+  "app/quality_router.py": "55d38ce35e42e43424a619ef384f836dabce8fbbc6bcc0eb687bdc47cb560fd4",
+  "app/quality_schemas.py": "0151e5310a08817ae7aa231ab6a0c95fd25c50b42ae3f601935df4f542a2e1a2",
+  "app/quality_service.py": "7ebf5a66650419d65f19a53db4ad31af32a8877d1cf243a26d293f29160a1a8f",
+  "app/finalization.py": "969583f843c14ef95ec80aef05da6843fd9889bc937e985eb32503d3f66c8cbb",
+  "app/retention.py": "fffa5616bbf68ea976190c6ebe0f709d32acb9f685aebf35ff06357f7cad16cc",
+  "app/seed.py": "4dfb81481902f692f5cd53171346e483e67b5d4e2dca5c4baf8e8e449e2fab4f",
+  "migrations/versions/0009_manual_quality.py": "131c454b71023d46c8db5bf709c46034351b3b960da185051b6c82a36a273894",
+  "tests/quality_helpers.py": "2e22732c48c788945d00ee9d719030e6f59fa937b67ffe527bd006e2e64f46b3",
+  "tests/test_quality.py": "d6d2da2a4536b4eb397e5f99c9fdc3311a2dba978236f35fdb3a14d0a7975c5c",
+  "tests/test_quality_contract.py": "4af0ec546a72392193f0f5506e37f63def4af1e04f262b4211c7a4fe58d8dc78",
+  "scripts/check_handoff_contract.py": "90bff3b7bec411696e98e293b206469068c9683ba5ef8bac79e290bdca051583",
+  "docs/openapi.json": "9069420d139992e7061247f9e046c33a5c93bb1e4669efd65745d74fc386bf8f"
+}

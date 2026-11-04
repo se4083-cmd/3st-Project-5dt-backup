@@ -14,6 +14,12 @@ from app.analytics_models import analytics_publication, analytics_receipts
 from app.automation_control import capability
 from app.errors import APIError
 from app.model_constraints import idempotency_keys, user_team_scopes
+from app.quality_models import evidence as qa_evidence
+from app.quality_models import receipts as qa_receipts
+from app.quality_models import reply_records as qa_replies
+from app.quality_models import revisions as qa_revisions
+from app.quality_models import rubrics as qa_rubrics
+from app.quality_models import samples as qa_samples
 from app.schemas import Input
 from app.staff_models import queue_routes
 from app.voc_models import plan_teams as voc_teams
@@ -135,6 +141,24 @@ def scope_for(session, user, body):
         ).correlate(m.tickets)
 
     safe = and_(
+        ~exists(
+            select(1)
+            .select_from(qa_replies)
+            .where(
+                qa_replies.c.ticket_id == m.tickets.c.ticket_id,
+                or_(
+                    qa_replies.c.attribution_team_id.is_(None),
+                    qa_replies.c.attribution_team_id.not_in(selected),
+                ),
+            )
+        ).correlate(m.tickets),
+        ~exists(
+            select(1)
+            .select_from(qa_replies.join(qa_samples))
+            .where(
+                qa_replies.c.ticket_id == m.tickets.c.ticket_id, qa_samples.c.review_team_id.not_in(selected)
+            )
+        ).correlate(m.tickets),
         m.tickets.c.team_id.in_(selected),
         ~outside(m.assignments, [m.assignments.c.team_id]),
         ~outside(queue_routes, [queue_routes.c.team_id]),
@@ -224,6 +248,7 @@ def ticket_guards(as_of):
         "APPROVAL_REFERENCE": linked(m.approvals),
         "AUDIT_REFERENCE": linked(m.audit_events),
         "VOC_IMPROVEMENT_TICKET_REFERENCE": linked(voc_links),
+        "QUALITY_CONFIRMED_REPLY_REFERENCE": linked(qa_replies),
         "VOC_COMMAND_RECEIPT_REFERENCE": linked(voc_receipts),
     }
 
@@ -333,6 +358,9 @@ def build_report(session, user, body: RetentionRequest):
                 table.c.cycle_no.is_(None), table.c.cycle_no >= t.c.cycle_no
             )
         if table is m.messages:
+            specific["QUALITY_QUESTION_REFERENCE"] = exists(
+                select(1).where(qa_replies.c.source_message_id == table.c.message_id)
+            ).correlate(table)
             specific["JOB_SOURCE_MESSAGE_REFERENCE"] = exists(
                 select(1).where(m.automation_jobs.c.source_message_id == table.c.message_id)
             ).correlate(table)
@@ -461,6 +489,15 @@ def build_report(session, user, body: RetentionRequest):
             )
         )
     for table, fields, clock in [
+        (
+            qa_replies,
+            ["reply_sha256", "question_sha256", "suggestion_id", "approval_id"],
+            qa_replies.c.committed_at,
+        ),
+        (qa_evidence, ["document_id", "document_version", "content_hash"], None),
+        (qa_samples, ["message_id", "review_team_id", "rubric_version"], qa_samples.c.selected_at),
+        (qa_revisions, ["reason_codes", "change_reason"], qa_revisions.c.recorded_at),
+        (qa_receipts, ["request_hash"], qa_receipts.c.created_at),
         (voc_profiles, ["product_id", "current_plan_revision"], voc_profiles.c.created_at),
         (
             voc_plans,
@@ -480,8 +517,16 @@ def build_report(session, user, body: RetentionRequest):
                 age_basis=str(clock) if clock is not None else "NO_APPROVED_RETENTION_CLOCK",
                 cutoff=raw_cut if clock is not None else None,
                 old=clock < raw_cut if clock is not None else false(),
-                guards={"VOC_WORKFLOW_HISTORY_REFERENCE": true()},
-                design={"VOC_RETENTION_POLICY_NOT_DEFINED": true()},
+                guards={
+                    "QUALITY_WORKFLOW_HISTORY_REFERENCE"
+                    if table.name.startswith(("quality_", "automatic_reply_"))
+                    else "VOC_WORKFLOW_HISTORY_REFERENCE": true()
+                },
+                design={
+                    "QUALITY_RETENTION_POLICY_NOT_DEFINED"
+                    if table.name.startswith(("quality_", "automatic_reply_"))
+                    else "VOC_RETENTION_POLICY_NOT_DEFINED": true()
+                },
                 supported=body.scope == "GLOBAL",
             )
         )
@@ -498,6 +543,7 @@ def build_report(session, user, body: RetentionRequest):
         (m.assignments, ["ticket_id", "cycle_no", "team_id"]),
         (m.automation_jobs, ["source_message_id", "error_code", "lease_token"]),
         (queue_routes, ["ticket_id", "cycle_no", "team_id"]),
+        (qa_rubrics, ["criteria"]),
     ]:
         targets.append(
             inspect(
@@ -507,6 +553,13 @@ def build_report(session, user, body: RetentionRequest):
                 data_class="REFERENCE_OR_METADATA",
                 age_basis="NO_APPROVED_RETENTION_CLOCK",
                 old=true(),
+                guards={
+                    "QUALITY_POLICY_EVIDENCE_REFERENCE": exists(
+                        select(1).where(qa_evidence.c.document_id == m.knowledge_documents.c.document_id)
+                    ).correlate(m.knowledge_documents)
+                }
+                if table is m.knowledge_documents
+                else {},
                 unknown={"REFERENCE_OR_PROFILE_RETENTION_NOT_DEFINED": true()},
                 supported=body.scope == "GLOBAL",
             )

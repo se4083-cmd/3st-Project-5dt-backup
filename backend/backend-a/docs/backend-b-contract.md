@@ -1,5 +1,8 @@
 # Backend B와 내구 작업 계약
 
+0.9.0 선택 확장: 내부 `AutomaticReply.provenance`에 실제 질문·suggestion id/revision/hash·approval·model/prompt·retrieval ref·당시 정책 id/version/hash/chunk를 전달할 수 있습니다. [실제 시그니처·예시·거부/원자 경계](quality-review.md)를 따릅니다. 미제공도 기존 성공 흐름을 유지하며 MISSING으로 기록합니다. 다른 회차/답변/근거는 거부합니다. 최신 제안/정책을 과거 응답에 추정 연결하지 않습니다. B 실패·HUMAN 전환·배정 writer는 추가하지 않았습니다.
+
+
 Backend A 0.6.1 / migration0006 기준입니다. A의 예외 큐·직원 상세·전역 중지와 generation gate에 보관 dry-run을 추가했습니다. B의 AI/RAG·정책/승인·라우팅·배정·외부 부작용 엔진은 구현하지 않았습니다. [6단계 설계](phase6-staff-queues-control.md), [보관 계약](phase7-retention-preview.md)과 [B 인수](backend-b-handoff.md)를 함께 따릅니다. 실제 HTTP의 고정 응답/배정은 계약 검증이며 B 엔진 통합 성공이 아닙니다.
 
 ## 작업 필드와 종류

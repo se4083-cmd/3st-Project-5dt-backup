@@ -1,5 +1,9 @@
 # Backend A 구현 검증 결과
 
+## 2026-11-04 수동 품질 평가 — 로컬0.9.0/0009
+
+[실제 실행 기록](evidence/quality-local/README.md): 신규33개 PG PASS, 영향 회귀222개 PG PASS, 마지막 지표 분리 후 관련6개·자료 제한 보완5개 PASS(중복 합산 금지). 초기 테스트 import1실패는 수정·재검증했다. 실제 AI 품질·B/AI/Fabric/Frontend/Azure 연동·계정 grant·commit/push는 이번에 하지 않았다.
+
 ## 2026-11-04 VOC 개선 조치 — 로컬0.8.0/0008
 
 [실제 검증 기록](evidence/voc-local/README.md): 최신 VOC31개 PASS, 환경/seed 호환 보완 후 분석·fixture54개 PASS. 관련 최초 회귀248 PASS/1 FAIL/4 SKIP에서 실패·skip 원인을 수정하고 해당 사례를 재검증했다. 실행은 서로 겹치므로 합산하지 않는다. 기존 migration/미커밋 B 검토 문서를 보존했으며 Azure·실제 계정·Fabric·B Worker·Frontend 화면·commit/push는 변경/검증하지 않았다.

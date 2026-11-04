@@ -1,0 +1,84 @@
+{
+  "version": "0.9.0",
+  "migration_file_head": "0009",
+  "basis_head": "968dfe9bd6325e562aa5d31a15aa02b84ddb433a",
+  "basis_branch": "feature/backend-a",
+  "initial_worktree_clean": true,
+  "runs": {
+    "quality-latest.xml": {
+      "tests": "33",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "51.404"
+    },
+    "regression.xml": {
+      "tests": "222",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "346.011"
+    },
+    "metric-final.xml": {
+      "tests": "6",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "8.774"
+    },
+    "material-final.xml": {
+      "tests": "5",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "6.082"
+    },
+    "retention-compatible.xml": {
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "3.456"
+    }
+  },
+  "overlap_not_summed": true,
+  "previous_pass_counts_reused": false,
+  "development_failure": "Missing DBAPIError import in newly added retention assertion; fixed; targeted rerun1 PASS, subsequent quality-latest33 PASS",
+  "postgres": "16.15 owned loopback cluster, separate temporary schema per test",
+  "new_actual_ai_quality_verified": false,
+  "external_integration_verified": false,
+  "account_grants": "isolated fixtures only",
+  "commit_push": false,
+  "original_migrations_0001_0008_unchanged": true,
+  "protected_B_VOC_analytics_sources_unchanged": true,
+  "existing_http_paths_unchanged": true,
+  "existing_shared_schema_change": "StaffCapabilities additive permissions only",
+  "not_verified": [
+    "Actual B Worker/AI/RAG provenance delivery",
+    "Actual model quality and operational rubric agreement",
+    "Actual Frontend UI",
+    "Fabric transfer or quality mart",
+    "Azure/deployment/shared DB",
+    "SQLite runtime for quality feature"
+  ],
+  "temporary_cluster_stopped": true,
+  "final_material_change": "Explicit truncation/incomplete state and judgment gate; 5 relevant PG cases passed",
+  "static_checks": {
+    "ruff": "PASS",
+    "actual_OpenAPI_and_examples": "PASS",
+    "file_migration_head": "0009",
+    "diff_check": "PASS"
+  },
+  "final_retention_compatibility": "Preserve existing VOC_RETENTION_POLICY_NOT_DEFINED; new QA reason separate. Empty-fixture assertion corrected to populated VOC fixture; final2 PASS.",
+  "remaining_temporary_schemas": 0,
+  "record_scope": "implementation/local validation before sharing",
+  "sharing_review": {
+    "source_hash15_matches": true,
+    "junit_consistent": true,
+    "ruff": "PASS",
+    "actual_openapi_examples": "PASS",
+    "migration_file_head": "0009",
+    "business_tests_rerun": false,
+    "external_runtime_verified": false
+  }
+}

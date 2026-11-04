@@ -1,5 +1,6 @@
 """Single import for complete model metadata (Core tables use SQLAlchemy 2.x sessions)."""
 
+from app import quality_models  # noqa: F401
 from app.analytics_models import analytics_publication, analytics_receipts  # noqa: F401
 from app.model_constraints import idempotency_keys, team_categories, user_team_scopes  # noqa: F401
 from app.models import metadata  # noqa: F401

@@ -46,6 +46,10 @@ class StaffCapabilities(BaseModel):
             "RETENTION_GLOBAL_REVIEW",
             "WORKLOAD_READ",
             "VOC_IMPROVEMENT_MANAGE",
+            "QUALITY_SAMPLE_MANAGE",
+            "QUALITY_REVIEW",
+            "QUALITY_METRICS_READ",
+            "QUALITY_UNATTRIBUTED_MANAGE",
         ]
     ]
 
@@ -55,7 +59,7 @@ def capabilities(session: SnapshotDB, user: SnapshotUser):
     if user["role"] not in {"ADMIN", "AGENT"}:
         raise APIError(403, "STAFF_ROLE_REQUIRED", user["user_id"])
     allowed = (
-        {"EXCEPTION_QUEUE_READ"}
+        {"EXCEPTION_QUEUE_READ", "QUALITY_REVIEW"}
         if user["role"] == "AGENT"
         else {
             "EXCEPTION_QUEUE_READ",
@@ -67,6 +71,10 @@ def capabilities(session: SnapshotDB, user: SnapshotUser):
             "RETENTION_GLOBAL_REVIEW",
             "WORKLOAD_READ",
             "VOC_IMPROVEMENT_MANAGE",
+            "QUALITY_SAMPLE_MANAGE",
+            "QUALITY_REVIEW",
+            "QUALITY_METRICS_READ",
+            "QUALITY_UNATTRIBUTED_MANAGE",
         }
     )
     granted = session.scalars(

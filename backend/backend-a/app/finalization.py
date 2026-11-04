@@ -9,10 +9,11 @@ from uuid import UUID, uuid4
 from pydantic import Field
 from sqlalchemy import exists, select
 
-from app import audit
+from app import audit, quality_provenance
 from app.automation_control import assert_automatic_allowed
 from app.db import utcnow
 from app.models import automation_jobs, messages, tickets
+from app.quality_schemas import ReplyProvenance
 from app.resolution import WorkRejected, assert_no_blocking_followups
 from app.schemas import ReopenRequest
 
@@ -23,6 +24,7 @@ class AutomaticReply(ReopenRequest):
     worker_id: str = Field(min_length=1, max_length=128)
     cycle_no: int = Field(ge=1)
     automation_generation: int | None = Field(default=None, ge=1)
+    provenance: ReplyProvenance | None = None
 
 
 def commit_automatic_reply(session, command: AutomaticReply):
@@ -92,12 +94,15 @@ def commit_automatic_reply(session, command: AutomaticReply):
     ):
         raise WorkRejected("AUTOMATION_GENERATION_CHANGED")
     message_id = str(uuid4())
+    prepared = quality_provenance.prepare(session, command, ticket, job, utcnow())
     with session.begin_nested():
         # Control SHARE acquisition and other gates may have waited beyond the
         # lease checked above. Ticket/job locks retain all other fence values.
         now = utcnow()
         if job["lease_until"] <= now:
             raise WorkRejected("INVALID_LEASE")
+        if prepared[2] is not None and prepared[2] <= now:
+            raise WorkRejected("PROVENANCE_EXPIRED")
         session.execute(
             messages.insert().values(
                 message_id=message_id,
@@ -124,6 +129,7 @@ def commit_automatic_reply(session, command: AutomaticReply):
                 updated_at=now,
             )
         )
+        quality_provenance.persist(session, message_id, ticket, job, command, prepared, now)
         session.execute(
             automation_jobs.update()
             .where(automation_jobs.c.job_id == str(command.job_id))

@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-11-04T04:00:00Z",
+  "response_start": "2026-11-04T00:00:00Z",
+  "response_end": "2026-11-05T00:00:00Z",
+  "team_ids": [
+    "22222222-2222-4222-8222-222222222222"
+  ],
+  "origin": "SYNTHETIC",
+  "rubric_version": "DEV_QUALITY_V1",
+  "period_basis": "REPLY_COMMITTED_AT_[START,END)_CURRENT_SNAPSHOT",
+  "sampling_method": "MANUAL_NOT_POPULATION_ACCURACY",
+  "attributed": {
+    "confirmed_response_count": 100,
+    "active_sample_count": 20,
+    "void_count": 0,
+    "reviewed_count": 20,
+    "unreviewed_sample_count": 0,
+    "unreviewed_response_count": 80,
+    "unselected_or_void_response_count": 80,
+    "correct": 15,
+    "incorrect": 3,
+    "accuracy_undeterminable": 2,
+    "policy_match": 0,
+    "policy_mismatch": 0,
+    "policy_undeterminable": 0,
+    "policy_not_applicable": 20,
+    "accuracy_denominator": 18,
+    "policy_denominator": 0,
+    "accuracy_rate": 0.8333333333333334,
+    "policy_alignment_rate": null,
+    "evaluation_coverage": 0.2
+  },
+  "review_team_sample_counts": {
+    "active_sample_count": 20,
+    "reviewed_count": 20,
+    "void_count": 0,
+    "unreviewed_sample_count": 0
+  },
+  "review_team_evaluation": {
+    "basis": "MANUAL_SAMPLE_BY_REVIEW_TEAM_NOT_PROCESSING_ATTRIBUTION",
+    "correct": 15,
+    "incorrect": 3,
+    "accuracy_undeterminable": 2,
+    "policy_match": 0,
+    "policy_mismatch": 0,
+    "policy_undeterminable": 0,
+    "policy_not_applicable": 20,
+    "accuracy_denominator": 18,
+    "policy_denominator": 0,
+    "accuracy_rate": 0.8333333333333334,
+    "policy_alignment_rate": null
+  },
+  "unattributed_confirmed_response_count": null,
+  "legacy_auto_unknown_count": null,
+  "unknown_counts_scope": "NOT_REQUESTED"
+}

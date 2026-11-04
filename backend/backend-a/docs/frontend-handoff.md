@@ -1,5 +1,8 @@
 # Frontend 로컬 인수
 
+0.9.0 품질 평가: [흐름·권한·API](quality-review.md). capabilities와 개발용 rubric을 읽은 뒤 origin별 후보→표본/담당→지정 reviewer의 material→reviews/history→metrics를 연결합니다. material은 purpose_code=QUALITY_REVIEW POST이며 일반 티켓 권한을 주지 않습니다. revision/key와 원천/누락/수동 표본 한계를 표시합니다. [100건 검산 응답](examples/quality-metrics.json)은 합성 형태 예시입니다. 화면/실제 AI/Fabric 연결은 미검증입니다.
+
+
 0.8.0: [VOC 상품 개선 API 계약·요청/응답](voc-improvements.md). capabilities의 VOC_IMPROVEMENT_MANAGE를 확인하고 상품 후속 신규 생성 또는 existing_action_id 등록을 연결합니다. 상세의 action/plan revision을 따로 보관하고 POST의 Idempotency-Key를 유지하세요. 담당/상태는 기존 followup API로 변경합니다. plan_refresh_required와 숨겨진 과거 scope, 효과 분석 미구현/null을 표시합니다. 화면은 이번에 구현하지 않았습니다.
 
 

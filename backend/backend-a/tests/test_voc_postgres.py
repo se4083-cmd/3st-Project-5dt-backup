@@ -49,13 +49,13 @@ def test_migration_preserves_old_data_and_grants_and_matches_metadata(settings, 
         cfg = Config(str(ROOT / "alembic.ini"))
         command.upgrade(cfg, "head")
         with factory.begin() as s:
-            assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0008"
+            assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0009"
             assert before == [tuple(x) for x in s.execute(select(staff_permissions))]
             assert business == [tuple(x) for x in s.execute(select(followup_actions))]
             assert s.scalar(select(func.count()).select_from(profiles)) == 0
         command.check(cfg)
         command.downgrade(cfg, "0007")
-        command.upgrade(cfg, "0008")
+        command.upgrade(cfg, "head")
         command.check(cfg)
     finally:
         engine.dispose()

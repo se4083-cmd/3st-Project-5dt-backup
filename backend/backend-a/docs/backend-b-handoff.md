@@ -1,5 +1,8 @@
 # Backend B 로컬 인수
 
+0.9.0 인수: `commit_automatic_reply(session, command)`의 반환값·호출자 commit 책임은 그대로입니다. 선택 `provenance` 및 새 PROVENANCE_* 거부 코드는 [품질 계약](quality-review.md)에 정리했습니다. policy body hash/원문과 실제 사용한 입력/근거를 제공하지 못하면 누락 상태로 남습니다. 이는 HTTP endpoint가 아니고 실제 AI/RAG/B Worker 연동 성공도 아닙니다. 기존 실패/이관 검토 제안은 그대로 미구현입니다.
+
+
 규범은 backend-b-contract.md, phase2-cycles.md, phase3-followups-customer360.md입니다. 서버는 worker daemon/B 엔진을 실행하지 않습니다. 로컬 검증은 tests/http_scenario.py의 고정 응답·배정 fixture·gate 뒤 테스트 최종 writer이며 실제 승인/발송 엔진 성공이 아닙니다.
 
 AUTO/HANDOFF는 claim_jobs의 job_kind로 분리합니다. PostgreSQL만 지원하며 caller가 claim transaction을 commit한 후 외부 작업을 수행합니다. ticket→job 잠금, cycle/version/expected_ticket_version, RUNNING token/worker/lease, requested_mode와 상태를 지킵니다. 고객 명령은 앞에 user 잠금이 있으므로 B가 ticket을 잡은 후 고객 user로 역행하지 않습니다.

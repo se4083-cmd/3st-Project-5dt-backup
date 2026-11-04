@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "CS Flow AI Backend A",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "paths": {
     "/health/live": {
@@ -6286,6 +6286,1467 @@
           }
         }
       }
+    },
+    "/api/v1/staff/quality/rubrics": {
+      "get": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Catalog",
+        "description": "Development proposal criteria; this is not an agreed operational rubric.",
+        "operationId": "catalog_api_v1_staff_quality_rubrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RubricView"
+                  },
+                  "type": "array",
+                  "title": "Response Catalog Api V1 Staff Quality Rubrics Get"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/staff/quality/candidates": {
+      "get": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Candidates",
+        "description": "ADMIN + QUALITY_SAMPLE_MANAGE; unattributed requires separate explicit permission.",
+        "operationId": "candidates_api_v1_staff_quality_candidates_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "APPLICATION",
+                "SYNTHETIC",
+                "UNKNOWN"
+              ],
+              "type": "string",
+              "default": "APPLICATION",
+              "title": "Origin"
+            }
+          },
+          {
+            "name": "unattributed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Unattributed"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Candidate_"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/quality/samples": {
+      "post": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Create",
+        "description": "ADMIN + QUALITY_SAMPLE_MANAGE + current team scope. One official message/rubric sample.",
+        "operationId": "create_api_v1_staff_quality_samples_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9._:-]+$",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SampleCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "200": {
+            "description": "Idempotent replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Samples",
+        "operationId": "samples_api_v1_staff_quality_samples_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_SampleView_"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/quality/samples/{sample_id}/material": {
+      "post": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Material",
+        "description": "QUALITY_REVIEW + assigned reviewer + current review team only. No general ticket access.",
+        "operationId": "material_api_v1_staff_quality_samples__sample_id__material_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sample_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Sample Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Material"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/quality/samples/{sample_id}/reviews": {
+      "post": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Review",
+        "operationId": "review_api_v1_staff_quality_samples__sample_id__reviews_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sample_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Sample Id"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9._:-]+$",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "200": {
+            "description": "Idempotent replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/staff/quality/samples/{sample_id}/assignment": {
+      "post": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Reassign",
+        "operationId": "reassign_api_v1_staff_quality_samples__sample_id__assignment_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sample_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Sample Id"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9._:-]+$",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reassign"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "200": {
+            "description": "Idempotent replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/staff/quality/samples/{sample_id}/void": {
+      "post": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Void",
+        "operationId": "void_api_v1_staff_quality_samples__sample_id__void_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sample_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Sample Id"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9._:-]+$",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoidSample"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "200": {
+            "description": "Idempotent replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/staff/quality/samples/{sample_id}/history": {
+      "get": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "History",
+        "operationId": "history_api_v1_staff_quality_samples__sample_id__history_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sample_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Sample Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "before_revision",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Before Revision"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/quality/metrics": {
+      "get": {
+        "tags": [
+          "manual quality review"
+        ],
+        "summary": "Metrics",
+        "description": "ADMIN + QUALITY_METRICS_READ; response committed-at cohort, current snapshot only.\nManual-sample accuracy is not a population estimate. Synthetic origin is separate.",
+        "operationId": "metrics_api_v1_staff_quality_metrics_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "response_start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Response Start"
+            }
+          },
+          {
+            "name": "response_end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Response End"
+            }
+          },
+          {
+            "name": "rubric_version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "DEV_QUALITY_V1",
+              "title": "Rubric Version"
+            }
+          },
+          {
+            "name": "origin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "APPLICATION",
+                "SYNTHETIC",
+                "UNKNOWN"
+              ],
+              "type": "string",
+              "default": "APPLICATION",
+              "title": "Origin"
+            }
+          },
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "include_unattributed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Unattributed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QualityMetrics"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -6557,6 +8018,81 @@
           "validation_result"
         ],
         "title": "BatchStatus"
+      },
+      "Candidate": {
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Message Id"
+          },
+          "ticket_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ticket Id"
+          },
+          "cycle_no": {
+            "type": "integer",
+            "title": "Cycle No"
+          },
+          "input_ticket_revision": {
+            "type": "integer",
+            "title": "Input Ticket Revision"
+          },
+          "result_ticket_revision": {
+            "type": "integer",
+            "title": "Result Ticket Revision"
+          },
+          "attribution_team_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attribution Team Id"
+          },
+          "provenance_state": {
+            "type": "string",
+            "enum": [
+              "MISSING",
+              "PARTIAL",
+              "COMPLETE"
+            ],
+            "title": "Provenance State"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "APPLICATION",
+              "SYNTHETIC",
+              "UNKNOWN"
+            ],
+            "title": "Origin"
+          },
+          "committed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Committed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "message_id",
+          "ticket_id",
+          "cycle_no",
+          "input_ticket_revision",
+          "result_ticket_revision",
+          "attribution_team_id",
+          "provenance_state",
+          "origin",
+          "committed_at"
+        ],
+        "title": "Candidate"
       },
       "Component": {
         "properties": {
@@ -7716,6 +9252,35 @@
         "type": "object",
         "title": "HandlingPathCounts"
       },
+      "HistoryPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReviewView"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_before_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Before Revision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_before_revision"
+        ],
+        "title": "HistoryPage"
+      },
       "HistoryTicket": {
         "properties": {
           "ticket_id": {
@@ -8500,6 +10065,165 @@
         ],
         "title": "MaskedOrder"
       },
+      "Material": {
+        "properties": {
+          "sample_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sample Id"
+          },
+          "message_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Message Id"
+          },
+          "cycle_no": {
+            "type": "integer",
+            "title": "Cycle No"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "APPLICATION",
+              "SYNTHETIC",
+              "UNKNOWN"
+            ],
+            "title": "Origin"
+          },
+          "provenance_state": {
+            "type": "string",
+            "title": "Provenance State"
+          },
+          "material_state": {
+            "type": "string",
+            "enum": [
+              "RECORDED_MATERIAL",
+              "INSUFFICIENT_MATERIAL",
+              "MATERIAL_CHANGED"
+            ],
+            "title": "Material State"
+          },
+          "reply": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question"
+          },
+          "policies": {
+            "items": {
+              "$ref": "#/components/schemas/PolicyMaterial"
+            },
+            "type": "array",
+            "title": "Policies"
+          },
+          "model_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Version"
+          },
+          "prompt_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prompt Version"
+          },
+          "rubric_version": {
+            "type": "string",
+            "title": "Rubric Version"
+          },
+          "rubric_criteria": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Rubric Criteria"
+          },
+          "redaction_state": {
+            "type": "string",
+            "const": "PATTERN_MASKED_NOT_PII_FREE_GUARANTEE",
+            "title": "Redaction State",
+            "default": "PATTERN_MASKED_NOT_PII_FREE_GUARANTEE"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "truncated_fields": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "REPLY",
+                "QUESTION",
+                "POLICY"
+              ]
+            },
+            "type": "array",
+            "title": "Truncated Fields"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sample_id",
+          "message_id",
+          "cycle_no",
+          "origin",
+          "provenance_state",
+          "material_state",
+          "reply",
+          "question",
+          "policies",
+          "model_version",
+          "prompt_version",
+          "rubric_version",
+          "rubric_criteria",
+          "as_of"
+        ],
+        "title": "Material"
+      },
+      "MaterialRequest": {
+        "properties": {
+          "purpose_code": {
+            "type": "string",
+            "pattern": "^[A-Z_]{1,64}$",
+            "title": "Purpose Code"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "purpose_code"
+        ],
+        "title": "MaterialRequest"
+      },
       "MessagePublic": {
         "properties": {
           "message_id": {
@@ -8538,6 +10262,131 @@
           "created_at"
         ],
         "title": "MessagePublic"
+      },
+      "MetricCounts": {
+        "properties": {
+          "confirmed_response_count": {
+            "type": "integer",
+            "title": "Confirmed Response Count"
+          },
+          "active_sample_count": {
+            "type": "integer",
+            "title": "Active Sample Count"
+          },
+          "void_count": {
+            "type": "integer",
+            "title": "Void Count"
+          },
+          "reviewed_count": {
+            "type": "integer",
+            "title": "Reviewed Count"
+          },
+          "unreviewed_sample_count": {
+            "type": "integer",
+            "title": "Unreviewed Sample Count"
+          },
+          "unreviewed_response_count": {
+            "type": "integer",
+            "title": "Unreviewed Response Count"
+          },
+          "unselected_or_void_response_count": {
+            "type": "integer",
+            "title": "Unselected Or Void Response Count"
+          },
+          "correct": {
+            "type": "integer",
+            "title": "Correct"
+          },
+          "incorrect": {
+            "type": "integer",
+            "title": "Incorrect"
+          },
+          "accuracy_undeterminable": {
+            "type": "integer",
+            "title": "Accuracy Undeterminable"
+          },
+          "policy_match": {
+            "type": "integer",
+            "title": "Policy Match"
+          },
+          "policy_mismatch": {
+            "type": "integer",
+            "title": "Policy Mismatch"
+          },
+          "policy_undeterminable": {
+            "type": "integer",
+            "title": "Policy Undeterminable"
+          },
+          "policy_not_applicable": {
+            "type": "integer",
+            "title": "Policy Not Applicable"
+          },
+          "accuracy_denominator": {
+            "type": "integer",
+            "title": "Accuracy Denominator"
+          },
+          "policy_denominator": {
+            "type": "integer",
+            "title": "Policy Denominator"
+          },
+          "accuracy_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accuracy Rate"
+          },
+          "policy_alignment_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy Alignment Rate"
+          },
+          "evaluation_coverage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evaluation Coverage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirmed_response_count",
+          "active_sample_count",
+          "void_count",
+          "reviewed_count",
+          "unreviewed_sample_count",
+          "unreviewed_response_count",
+          "unselected_or_void_response_count",
+          "correct",
+          "incorrect",
+          "accuracy_undeterminable",
+          "policy_match",
+          "policy_mismatch",
+          "policy_undeterminable",
+          "policy_not_applicable",
+          "accuracy_denominator",
+          "policy_denominator",
+          "accuracy_rate",
+          "policy_alignment_rate",
+          "evaluation_coverage"
+        ],
+        "title": "MetricCounts"
       },
       "Metrics": {
         "properties": {
@@ -8744,6 +10593,34 @@
         ],
         "title": "OrderPublic"
       },
+      "Page_Candidate_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "title": "Page[Candidate]"
+      },
       "Page_FollowupPublic_": {
         "properties": {
           "items": {
@@ -8911,6 +10788,34 @@
           "next_cursor"
         ],
         "title": "Page[OrderPublic]"
+      },
+      "Page_SampleView_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SampleView"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "title": "Page[SampleView]"
       },
       "Page_TicketPublic_": {
         "properties": {
@@ -9504,6 +11409,70 @@
         ],
         "title": "PolicyEvidence"
       },
+      "PolicyMaterial": {
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Document Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "content_hash": {
+            "type": "string",
+            "title": "Content Hash"
+          },
+          "chunk_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chunk Ref"
+          },
+          "material_state": {
+            "type": "string",
+            "enum": [
+              "VERIFIED_BODY",
+              "REFERENCES_ONLY",
+              "MATERIAL_CHANGED"
+            ],
+            "title": "Material State"
+          },
+          "body": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Body"
+          },
+          "truncated": {
+            "type": "boolean",
+            "title": "Truncated",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "document_id",
+          "version",
+          "content_hash",
+          "chunk_ref",
+          "material_state",
+          "body"
+        ],
+        "title": "PolicyMaterial"
+      },
       "ProductDaily": {
         "properties": {
           "day": {
@@ -9951,6 +11920,118 @@
         ],
         "title": "ProposalFact"
       },
+      "QualityMetrics": {
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "response_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Response Start"
+          },
+          "response_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Response End"
+          },
+          "team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Team Ids"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "APPLICATION",
+              "SYNTHETIC",
+              "UNKNOWN"
+            ],
+            "title": "Origin"
+          },
+          "rubric_version": {
+            "type": "string",
+            "title": "Rubric Version"
+          },
+          "period_basis": {
+            "type": "string",
+            "const": "REPLY_COMMITTED_AT_[START,END)_CURRENT_SNAPSHOT",
+            "title": "Period Basis",
+            "default": "REPLY_COMMITTED_AT_[START,END)_CURRENT_SNAPSHOT"
+          },
+          "sampling_method": {
+            "type": "string",
+            "const": "MANUAL_NOT_POPULATION_ACCURACY",
+            "title": "Sampling Method",
+            "default": "MANUAL_NOT_POPULATION_ACCURACY"
+          },
+          "attributed": {
+            "$ref": "#/components/schemas/MetricCounts"
+          },
+          "review_team_sample_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Review Team Sample Counts"
+          },
+          "review_team_evaluation": {
+            "$ref": "#/components/schemas/ReviewTeamEvaluation"
+          },
+          "unattributed_confirmed_response_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unattributed Confirmed Response Count"
+          },
+          "legacy_auto_unknown_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legacy Auto Unknown Count"
+          },
+          "unknown_counts_scope": {
+            "type": "string",
+            "enum": [
+              "NOT_REQUESTED",
+              "GLOBAL_UNATTRIBUTED_EXPLICIT_PERMISSION"
+            ],
+            "title": "Unknown Counts Scope"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "as_of",
+          "response_start",
+          "response_end",
+          "team_ids",
+          "origin",
+          "rubric_version",
+          "attributed",
+          "review_team_sample_counts",
+          "review_team_evaluation",
+          "unattributed_confirmed_response_count",
+          "legacy_auto_unknown_count",
+          "unknown_counts_scope"
+        ],
+        "title": "QualityMetrics"
+      },
       "QueueCounts": {
         "properties": {
           "total": {
@@ -10108,6 +12189,57 @@
           "as_of"
         ],
         "title": "QueuePage"
+      },
+      "Reassign": {
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "assigned_reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Assigned Reviewer Id"
+          },
+          "change_reason": {
+            "type": "string",
+            "enum": [
+              "REVIEWER_CHANGED",
+              "WORKLOAD_BALANCE",
+              "OTHER"
+            ],
+            "title": "Change Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_revision",
+          "assigned_reviewer_id",
+          "change_reason"
+        ],
+        "title": "Reassign"
+      },
+      "Receipt": {
+        "properties": {
+          "sample_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sample Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sample_id",
+          "revision"
+        ],
+        "title": "Receipt"
       },
       "ReopenRequest": {
         "properties": {
@@ -10336,6 +12468,71 @@
         ],
         "title": "RetentionRequest"
       },
+      "ReviewCreate": {
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "accuracy": {
+            "type": "string",
+            "enum": [
+              "CORRECT",
+              "INCORRECT",
+              "UNDETERMINABLE"
+            ],
+            "title": "Accuracy"
+          },
+          "policy_alignment": {
+            "type": "string",
+            "enum": [
+              "MATCH",
+              "MISMATCH",
+              "UNDETERMINABLE",
+              "NOT_APPLICABLE"
+            ],
+            "title": "Policy Alignment"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "VERIFIED_AGAINST_MATERIAL",
+                "FACT_ERROR",
+                "POLICY_CONTRADICTION",
+                "INSUFFICIENT_CONTEXT",
+                "POLICY_NOT_APPLICABLE",
+                "OTHER"
+              ]
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 1,
+            "title": "Reason Codes"
+          },
+          "change_reason": {
+            "type": "string",
+            "enum": [
+              "INITIAL_REVIEW",
+              "CORRECTION",
+              "NEW_INFORMATION",
+              "OTHER"
+            ],
+            "title": "Change Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_revision",
+          "accuracy",
+          "policy_alignment",
+          "reason_codes",
+          "change_reason"
+        ],
+        "title": "ReviewCreate"
+      },
       "ReviewPolicy": {
         "properties": {
           "version": {
@@ -10362,6 +12559,191 @@
         "additionalProperties": false,
         "type": "object",
         "title": "ReviewPolicy"
+      },
+      "ReviewTeamEvaluation": {
+        "properties": {
+          "basis": {
+            "type": "string",
+            "const": "MANUAL_SAMPLE_BY_REVIEW_TEAM_NOT_PROCESSING_ATTRIBUTION",
+            "title": "Basis",
+            "default": "MANUAL_SAMPLE_BY_REVIEW_TEAM_NOT_PROCESSING_ATTRIBUTION"
+          },
+          "correct": {
+            "type": "integer",
+            "title": "Correct"
+          },
+          "incorrect": {
+            "type": "integer",
+            "title": "Incorrect"
+          },
+          "accuracy_undeterminable": {
+            "type": "integer",
+            "title": "Accuracy Undeterminable"
+          },
+          "policy_match": {
+            "type": "integer",
+            "title": "Policy Match"
+          },
+          "policy_mismatch": {
+            "type": "integer",
+            "title": "Policy Mismatch"
+          },
+          "policy_undeterminable": {
+            "type": "integer",
+            "title": "Policy Undeterminable"
+          },
+          "policy_not_applicable": {
+            "type": "integer",
+            "title": "Policy Not Applicable"
+          },
+          "accuracy_denominator": {
+            "type": "integer",
+            "title": "Accuracy Denominator"
+          },
+          "policy_denominator": {
+            "type": "integer",
+            "title": "Policy Denominator"
+          },
+          "accuracy_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accuracy Rate"
+          },
+          "policy_alignment_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy Alignment Rate"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "correct",
+          "incorrect",
+          "accuracy_undeterminable",
+          "policy_match",
+          "policy_mismatch",
+          "policy_undeterminable",
+          "policy_not_applicable",
+          "accuracy_denominator",
+          "policy_denominator",
+          "accuracy_rate",
+          "policy_alignment_rate"
+        ],
+        "title": "ReviewTeamEvaluation"
+      },
+      "ReviewView": {
+        "properties": {
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "event_kind": {
+            "type": "string",
+            "enum": [
+              "SELECT",
+              "REVIEW",
+              "REASSIGN",
+              "VOID"
+            ],
+            "title": "Event Kind"
+          },
+          "actor_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Actor Id"
+          },
+          "assigned_reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Assigned Reviewer Id"
+          },
+          "accuracy": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CORRECT",
+                  "INCORRECT",
+                  "UNDETERMINABLE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accuracy"
+          },
+          "policy_alignment": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "MATCH",
+                  "MISMATCH",
+                  "UNDETERMINABLE",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy Alignment"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reason Codes"
+          },
+          "change_reason": {
+            "type": "string",
+            "title": "Change Reason"
+          },
+          "independent_review": {
+            "type": "string",
+            "enum": [
+              "YES",
+              "NO",
+              "UNKNOWN"
+            ],
+            "title": "Independent Review"
+          },
+          "recorded_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recorded At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "revision",
+          "event_kind",
+          "actor_id",
+          "assigned_reviewer_id",
+          "accuracy",
+          "policy_alignment",
+          "reason_codes",
+          "change_reason",
+          "independent_review",
+          "recorded_at"
+        ],
+        "title": "ReviewView"
       },
       "Risk-Input": {
         "properties": {
@@ -10613,6 +12995,34 @@
         ],
         "title": "RowCounts"
       },
+      "RubricView": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "status": {
+            "type": "string",
+            "const": "DEVELOPMENT_PROPOSAL",
+            "title": "Status"
+          },
+          "criteria": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Criteria"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "status",
+          "criteria"
+        ],
+        "title": "RubricView"
+      },
       "SafeSummaryInput": {
         "properties": {
           "total_tickets": {
@@ -10650,6 +13060,97 @@
           "human"
         ],
         "title": "SafeSummaryInput"
+      },
+      "SampleCreate": {
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Message Id"
+          },
+          "rubric_version": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{0,63}$",
+            "title": "Rubric Version",
+            "default": "DEV_QUALITY_V1"
+          },
+          "review_team_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Review Team Id"
+          },
+          "assigned_reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Assigned Reviewer Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "message_id",
+          "review_team_id",
+          "assigned_reviewer_id"
+        ],
+        "title": "SampleCreate"
+      },
+      "SampleView": {
+        "properties": {
+          "sample_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sample Id"
+          },
+          "message_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Message Id"
+          },
+          "rubric_version": {
+            "type": "string",
+            "title": "Rubric Version"
+          },
+          "review_team_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Review Team Id"
+          },
+          "assigned_reviewer_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Assigned Reviewer Id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "VOID"
+            ],
+            "title": "Status"
+          },
+          "current_revision": {
+            "type": "integer",
+            "title": "Current Revision"
+          },
+          "selected_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Selected At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sample_id",
+          "message_id",
+          "rubric_version",
+          "review_team_id",
+          "assigned_reviewer_id",
+          "status",
+          "current_revision",
+          "selected_at"
+        ],
+        "title": "SampleView"
       },
       "Scope": {
         "properties": {
@@ -10890,7 +13391,11 @@
                 "RETENTION_TEAM_REVIEW",
                 "RETENTION_GLOBAL_REVIEW",
                 "WORKLOAD_READ",
-                "VOC_IMPROVEMENT_MANAGE"
+                "VOC_IMPROVEMENT_MANAGE",
+                "QUALITY_SAMPLE_MANAGE",
+                "QUALITY_REVIEW",
+                "QUALITY_METRICS_READ",
+                "QUALITY_UNATTRIBUTED_MANAGE"
               ]
             },
             "type": "array",
@@ -11782,6 +14287,32 @@
           "items"
         ],
         "title": "VocList"
+      },
+      "VoidSample": {
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "change_reason": {
+            "type": "string",
+            "enum": [
+              "WRONG_TARGET",
+              "DUPLICATE",
+              "INVALID_SAMPLE",
+              "OTHER"
+            ],
+            "title": "Change Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_revision",
+          "change_reason"
+        ],
+        "title": "VoidSample"
       },
       "Windows": {
         "properties": {

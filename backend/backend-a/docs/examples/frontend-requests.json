@@ -264,6 +264,57 @@
         "expected_action_revision": 1,
         "expected_plan_revision": 2
       }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/staff/quality/samples",
+      "model": "SampleCreate",
+      "body": {
+        "message_id": "11111111-1111-4111-8111-111111111111",
+        "review_team_id": "22222222-2222-4222-8222-222222222222",
+        "assigned_reviewer_id": "33333333-3333-4333-8333-333333333333"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/staff/quality/samples/{sample_id}/material",
+      "model": "MaterialRequest",
+      "body": {
+        "purpose_code": "QUALITY_REVIEW"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/staff/quality/samples/{sample_id}/reviews",
+      "model": "ReviewCreate",
+      "body": {
+        "expected_revision": 1,
+        "accuracy": "CORRECT",
+        "policy_alignment": "MATCH",
+        "reason_codes": [
+          "VERIFIED_AGAINST_MATERIAL"
+        ],
+        "change_reason": "INITIAL_REVIEW"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/staff/quality/samples/{sample_id}/assignment",
+      "model": "Reassign",
+      "body": {
+        "expected_revision": 2,
+        "assigned_reviewer_id": "33333333-3333-4333-8333-333333333333",
+        "change_reason": "REVIEWER_CHANGED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/staff/quality/samples/{sample_id}/void",
+      "model": "VoidSample",
+      "body": {
+        "expected_revision": 3,
+        "change_reason": "WRONG_TARGET"
+      }
     }
   ]
 }
