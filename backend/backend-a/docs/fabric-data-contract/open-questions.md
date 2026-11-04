@@ -2,7 +2,7 @@
 
 ## 먼저 필요한 파일 — 팀 합의 필요
 
-1. 실제 적재한 **5개 JSONL·12,008건**의 파일 목록/테이블 대응, 파일별 건수·byte checksum·manifest, 실제 schema_contract.json과 Bronze/Silver printSchema 또는 DDL을 받을 수 있는가? A의 전체 DB 건수로 간주하지 않았다. 이번에 찾은 것은 기존 합성27항목 계약이다.
+1. 2026-11-04 첨부로 **합성5개 JSONL·12,008행과 schema_contract.json, 작은4개 A 제안 파일의 validation**은 받았다. [검토](audit-export-review.md). **원본 Manifest와 실제 Bronze/Silver printSchema·적재/승인 증거는 여전히 필요**하다. validation은 원본 Manifest나 전체12,008행 검증 결과가 아니다. A 실제 DB 건수로 간주하지 않는다.
 2. 지금 필요한 입력은 합성 fixture 재사용인가, 운영 A DB full snapshot인가? 운영 DB→Blob Export는 **미구현**이다. 첫 범위를 원문 없는 full snapshot으로 정하고 추출 주체(A/B/별도 운영 담당), 주기·소유권·네트워크·읽기 identity를 누가 맡을지 정해야 한다.
 3. 실제 Fabric Notebook/emitter가 사용할 Gold schema/rule_version, 팀/product registry와 subject/발급기를 공유할 수 있는가? A의 실제 API는 `/api/v1/analytics/batches`→`/{batch_id}/validate`→`/{batch_id}/publish`이고 `/internal/analytics/publish`는 없다. 현재 Azure 서비스 ID allowlist는 배포 증거상 비어 있다. 키는 별도 안전한 경로로 합의하며 문서/메신저에 넣지 않는다.
 
@@ -10,6 +10,8 @@
 
 | 우선순위 | 질문 | 미확정 시 안전한 처리 |
 |---|---|---|
+| P0 | 합성 CUSTOMER_CONTACT와 같은 실제 접촉 producer/occurred_at/채널/중복 기준을 누가 제공하는가? | A record는 해당 action을 만들지 않음. 감사 created_at을 접촉 시각으로 쓰거나 접촉을 추정 생성하지 않음 |
+| P0 | audit 7필드 allowlist·새 projection 버전과 customers 참조 보조 파일 유지/별도 registry에 동의하는가? | 기존4파일 보존 + customers 유지. payload 문자열/전체 JSONB와 원본 식별자 제외 |
 | P0 | ticket creation cohort/재문의/회차/메시지/VOC episode의 각 집계 단위와 관찰 기간은? | 현재 미합의 재문의/SLA/승인·검토 KPI는 unavailable 유지 |
 | P0 | 재문의·팀 재배정·지연 라벨 시 최초 팀/발생 팀/해결 팀 중 어디에 귀속하는가? | 현재 team_id/마지막 배정으로 과거 모든 이벤트를 재분류하지 않음 |
 | P0 | 불만 primary_issue를 누가 언제 확정하고 당시 product/order/team/cycle 상태를 어떻게 보존하는가? | snapshot만으로 customer_contacts/과거 episode를 생성할 수 있다고 보장하지 않음 |

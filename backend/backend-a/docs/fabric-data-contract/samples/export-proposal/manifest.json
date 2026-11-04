@@ -1,8 +1,8 @@
 {
   "contract_status": "PROPOSED_NOT_IMPLEMENTED",
   "source_system": "csflow-docs-local-synthetic",
-  "export_batch_id": "55e197e8-08ac-545a-a65d-a7878e0a834b",
-  "export_schema_version": "proposed-silver-v1",
+  "export_batch_id": "1c41f17b-fb07-5f96-b207-513f2e449643",
+  "export_schema_version": "proposed-silver-v1-audit-v1",
   "source_migration_head": "0006",
   "data_origin": "SYNTHETIC",
   "source_as_of": "2026-11-03T03:00:00.000000Z",
@@ -33,7 +33,7 @@
     "reason": "SMALL_EXAMPLE_NOT_A_COMPLETE_SOURCE"
   },
   "full_snapshot": true,
-  "table_coverage": "EXAMPLE_FIVE_PROJECTIONS_ONLY_NOT_ALL_SILVER_INPUTS",
+  "table_coverage": "EXAMPLE_SIX_PROJECTIONS_FIVE_CORE_PLUS_CUSTOMER_REFERENCE",
   "files": [
     {
       "object_key": "export-proposal/products/part-00001.jsonl",
@@ -64,6 +64,20 @@
       "row_count": 1,
       "byte_count": 577,
       "sha256": "d2e09334ef0d62970fb1f34b803ec437ede987519332b456f04e8b0a41a98a55"
+    },
+    {
+      "object_key": "export-proposal/audit_events/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 297,
+      "sha256": "423c959c78f63f211c57f8d2490875c89b14000fb7b672a263621b1e6c2be8c2"
     }
-  ]
+  ],
+  "fixture_basis": "HISTORICAL_0006_SYNTHETIC_ROWS_NOT_A_CURRENT_DATABASE_SNAPSHOT",
+  "audit_source_review": {
+    "version": "0.11.0",
+    "migration_file_head": "0011",
+    "git_head": "2af74b73eacb9e692e17b1ad166d35152085859d",
+    "database_checked": false
+  },
+  "silver_approval": "NOT_APPROVED"
 }

@@ -1,0 +1,621 @@
+{
+  "contract_status": "PROPOSED_NOT_IMPLEMENTED",
+  "data_origin": "SYNTHETIC",
+  "export_schema_version": "proposed-silver-v1-audit-v1",
+  "purpose": "EXPORT_PROJECTION_NOT_PHYSICAL_DB_OR_GOLD_SCHEMA",
+  "historical_fixture_migration_head": "0006",
+  "audit_source_review": {
+    "version": "0.11.0",
+    "migration_file_head": "0011",
+    "git_head": "2af74b73eacb9e692e17b1ad166d35152085859d",
+    "database_checked": false
+  },
+  "unknown_fields": "REJECT",
+  "all_fields_required": true,
+  "audit_selection": {
+    "target_type": "TICKET",
+    "result": [
+      "SUCCESS"
+    ],
+    "reason_codes_by_action": {
+      "TICKET_CREATED": [
+        "CUSTOMER_SUBMITTED"
+      ],
+      "TICKET_REOPENED": [
+        "CUSTOMER_REOPENED",
+        "HUMAN_CONTINUATION"
+      ],
+      "AGENT_REQUESTED": [
+        "CUSTOMER_REQUEST",
+        "DISSATISFIED",
+        "COMPLEX_ISSUE",
+        "OTHER"
+      ],
+      "AUTOMATIC_REPLY_COMMITTED": [
+        "FENCED_COMMIT"
+      ]
+    },
+    "ticket_rule": "NON_NULL_AND_IN_EXPORTED_ALLOWED_TICKETS",
+    "cycle_rule": "PRESERVE_SOURCE_NULL_NO_CURRENT_CYCLE_FILL",
+    "payload": "EXCLUDED_ENTIRELY",
+    "created_at": "AUDIT_RECORD_TIME_NOT_CONTACT_TIME"
+  },
+  "tables": [
+    {
+      "table": "products",
+      "primary_key": [
+        "product_id"
+      ],
+      "fields": [
+        {
+          "name": "active",
+          "source_column": "active",
+          "source_pg_type": "boolean",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "boolean"
+        },
+        {
+          "name": "category",
+          "source_column": "category",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "created_at",
+          "source_column": "created_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "product_id",
+          "source_column": "product_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "uuid"
+        },
+        {
+          "name": "sku",
+          "source_column": "sku",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "updated_at",
+          "source_column": "updated_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        }
+      ],
+      "foreign_keys": [],
+      "fixture_rows": 1
+    },
+    {
+      "table": "customers",
+      "primary_key": [
+        "customer_ref"
+      ],
+      "fields": [
+        {
+          "name": "customer_ref",
+          "source_column": "customer_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "deleted_at",
+          "source_column": "deleted_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "utc_timestamp_6"
+        }
+      ],
+      "foreign_keys": [],
+      "fixture_rows": 1
+    },
+    {
+      "table": "orders",
+      "primary_key": [
+        "order_ref"
+      ],
+      "fields": [
+        {
+          "name": "amount",
+          "source_column": "amount",
+          "source_pg_type": "numeric(12,2)",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "decimal_2_string"
+        },
+        {
+          "name": "customer_ref",
+          "source_column": "customer_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "order_ref",
+          "source_column": "order_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "order_status",
+          "source_column": "order_status",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "paid_at",
+          "source_column": "paid_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "payment_status",
+          "source_column": "payment_status",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "placed_at",
+          "source_column": "placed_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "product_id",
+          "source_column": "product_id",
+          "source_pg_type": "uuid",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "uuid"
+        },
+        {
+          "name": "quantity",
+          "source_column": "quantity",
+          "source_pg_type": "bigint",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "integer"
+        },
+        {
+          "name": "version",
+          "source_column": "version",
+          "source_pg_type": "bigint",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "integer"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "customer_ref",
+          "table": "customers",
+          "target_column": "customer_ref"
+        },
+        {
+          "column": "product_id",
+          "table": "products",
+          "target_column": "product_id"
+        }
+      ],
+      "fixture_rows": 1
+    },
+    {
+      "table": "tickets",
+      "primary_key": [
+        "ticket_ref"
+      ],
+      "fields": [
+        {
+          "name": "category",
+          "source_column": "category",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "created_at",
+          "source_column": "created_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "customer_ref",
+          "source_column": "customer_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "cycle_no",
+          "source_column": "cycle_no",
+          "source_pg_type": "bigint",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "integer"
+        },
+        {
+          "name": "first_replied_at",
+          "source_column": "first_replied_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "is_complaint",
+          "source_column": "is_complaint",
+          "source_pg_type": "boolean",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "boolean"
+        },
+        {
+          "name": "label_status",
+          "source_column": "label_status",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "order_ref",
+          "source_column": "order_id",
+          "source_pg_type": "uuid",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "primary_issue",
+          "source_column": "primary_issue",
+          "source_pg_type": "text",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "string"
+        },
+        {
+          "name": "product_id",
+          "source_column": "product_id",
+          "source_pg_type": "uuid",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "uuid"
+        },
+        {
+          "name": "requested_mode",
+          "source_column": "requested_mode",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "resolution_mode",
+          "source_column": "resolution_mode",
+          "source_pg_type": "text",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "string"
+        },
+        {
+          "name": "resolved_at",
+          "source_column": "resolved_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "status",
+          "source_column": "status",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "team_id",
+          "source_column": "team_id",
+          "source_pg_type": "uuid",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "uuid"
+        },
+        {
+          "name": "ticket_ref",
+          "source_column": "ticket_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "updated_at",
+          "source_column": "updated_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "version",
+          "source_column": "version",
+          "source_pg_type": "bigint",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "integer"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "customer_ref",
+          "table": "customers",
+          "target_column": "customer_ref"
+        },
+        {
+          "column": "order_ref",
+          "table": "orders",
+          "target_column": "order_ref"
+        },
+        {
+          "column": "product_id",
+          "table": "products",
+          "target_column": "product_id"
+        }
+      ],
+      "fixture_rows": 1
+    },
+    {
+      "table": "followup_actions",
+      "primary_key": [
+        "action_ref"
+      ],
+      "fields": [
+        {
+          "name": "action_ref",
+          "source_column": "action_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "blocks_resolution",
+          "source_column": "blocks_resolution",
+          "source_pg_type": "boolean",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "boolean"
+        },
+        {
+          "name": "cancellation_reason",
+          "source_column": "cancellation_reason",
+          "source_pg_type": "character varying(64)",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "string"
+        },
+        {
+          "name": "cancelled_at",
+          "source_column": "cancelled_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "completed_at",
+          "source_column": "completed_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "created_at",
+          "source_column": "created_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "cycle_no",
+          "source_column": "cycle_no",
+          "source_pg_type": "bigint",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "integer"
+        },
+        {
+          "name": "due_at",
+          "source_column": "due_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "origin_team_id",
+          "source_column": "origin_team_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "uuid"
+        },
+        {
+          "name": "owner_team_id",
+          "source_column": "owner_team_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "uuid"
+        },
+        {
+          "name": "product_id",
+          "source_column": "product_id",
+          "source_pg_type": "uuid",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "uuid"
+        },
+        {
+          "name": "responsibility_cycle_no",
+          "source_column": "responsibility_cycle_no",
+          "source_pg_type": "bigint",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "integer"
+        },
+        {
+          "name": "status",
+          "source_column": "status",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "ticket_ref",
+          "source_column": "ticket_id",
+          "source_pg_type": "uuid",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "updated_at",
+          "source_column": "updated_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "version",
+          "source_column": "version",
+          "source_pg_type": "bigint",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "integer"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "product_id",
+          "table": "products",
+          "target_column": "product_id"
+        },
+        {
+          "column": "ticket_ref",
+          "table": "tickets",
+          "target_column": "ticket_ref"
+        }
+      ],
+      "fixture_rows": 1
+    },
+    {
+      "table": "audit_events",
+      "primary_key": [
+        "event_ref"
+      ],
+      "fields": [
+        {
+          "name": "action",
+          "source_column": "action",
+          "source_pg_type": "text",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "created_at",
+          "source_column": "created_at",
+          "source_pg_type": "timestamp with time zone",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "utc_timestamp_6"
+        },
+        {
+          "name": "cycle_no",
+          "source_column": "cycle_no",
+          "source_pg_type": "bigint",
+          "source_nullable": true,
+          "nullable": true,
+          "wire_type": "integer"
+        },
+        {
+          "name": "event_ref",
+          "source_column": "event_id",
+          "source_pg_type": "uuid",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        },
+        {
+          "name": "reason_code",
+          "source_column": "reason_code",
+          "source_pg_type": "character varying(64)",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "result",
+          "source_column": "result",
+          "source_pg_type": "character varying(16)",
+          "source_nullable": false,
+          "nullable": false,
+          "wire_type": "string"
+        },
+        {
+          "name": "ticket_ref",
+          "source_column": "ticket_id",
+          "source_pg_type": "uuid",
+          "source_nullable": true,
+          "nullable": false,
+          "wire_type": "hmac_sha256_hex"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "ticket_ref",
+          "table": "tickets",
+          "target_column": "ticket_ref"
+        }
+      ],
+      "fixture_rows": 1
+    }
+  ]
+}

@@ -2,6 +2,6 @@
   "all_samples": "SYNTHETIC_DOCUMENTATION_ONLY",
   "api_responses": "Pydantic-validated examples, not live HTTP receipts",
   "gold_sample": "Independent supplied facts; NOT computed from tiny db-projections",
-  "proposal_five_jsonl": "Five rows, unrelated to a claimed 12008-row delivery",
+  "proposal_six_jsonl": "Six rows including audit and customer reference; NOT the supplied 12008-row dataset",
   "export_pipeline_implemented": false
 }

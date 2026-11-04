@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "LOCAL_DELIVERY_ZIP_ONLY",
+  "file": "fabric-audit-export-proposal-20261104.zip",
+  "byte_count": 37168,
+  "sha256": "e0659eabdf8cee31dda8de5be714195905270eb65a91a14d1828a73552f65bd8",
+  "member_count": 16,
+  "jsonl_files": 6,
+  "rows": 6,
+  "checks": [
+    "CRC",
+    "EXPLICIT_FILE_INVENTORY",
+    "RELATIVE_LINKS",
+    "MANIFEST_COUNT_BYTES_SHA256",
+    "RECURSIVE_IDENTITY_SCAN"
+  ],
+  "original_data_schema_manifest": "BYTE_IDENTICAL",
+  "replaced_archive_sha256": "029ef02722494ae7b9d24b45ca87d9d9a3651af6a65b8707b898efe1d5e7a373",
+  "replacement_reason": "ROLE_BASED_DOCUMENTATION_ONLY_NO_APPLICATION_OR_DATA_CHANGE",
+  "original_backed_up_outside_team_checkout": true,
+  "sent": false,
+  "standalone_delivery_verifier": "PASS_SHARED_IDENTICAL_CONTENT_CHECKED_ONCE"
+}

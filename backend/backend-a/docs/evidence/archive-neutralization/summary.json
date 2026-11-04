@@ -1,0 +1,169 @@
+{
+  "status": "PASS",
+  "date_kst": "2026-11-04",
+  "scope": "CURRENT_DELIVERIES_DOCUMENTATION_ONLY",
+  "refreshed_archives": [
+    {
+      "file": "fabric-audit-export-proposal-20261104.zip",
+      "category": "AUDIT_PROPOSAL",
+      "previous_sha256": "029ef02722494ae7b9d24b45ca87d9d9a3651af6a65b8707b898efe1d5e7a373",
+      "sha256": "e0659eabdf8cee31dda8de5be714195905270eb65a91a14d1828a73552f65bd8",
+      "byte_count": 37168,
+      "member_count": 16,
+      "backup_file": "fabric-audit-export-proposal-20261104.029ef0272249.original.zip",
+      "backup_verified": true,
+      "changed_members": [
+        "README.md",
+        "audit-export-review.md"
+      ],
+      "added_members": [
+        "data-contract-review.md"
+      ],
+      "removed_members": [],
+      "forbidden_matches": 0,
+      "nested_archives": 0,
+      "relative_links": 11,
+      "legacy_package_manifest_updated": false,
+      "change_reason": "ROLE_BASED_DOCUMENTATION_ONLY_NO_APPLICATION_OR_DATA_CHANGE",
+      "standalone_verifier": "PASS_SHARED_IDENTICAL_CONTENT_CHECKED_ONCE",
+      "jsonl_and_schema_preserved": true,
+      "export_manifest_preserved": true
+    },
+    {
+      "file": "fabric-audit-export-final-with-doc11-reply-20261104.zip",
+      "category": "AUDIT_PROPOSAL",
+      "previous_sha256": "a5dae6fba68f91cb0c65d6d889bd143c0d28b519de171768d0e9c2c6fc1553ed",
+      "sha256": "e0659eabdf8cee31dda8de5be714195905270eb65a91a14d1828a73552f65bd8",
+      "byte_count": 37168,
+      "member_count": 16,
+      "backup_file": "fabric-audit-export-final-with-doc11-reply-20261104.a5dae6fba68f.original.zip",
+      "backup_verified": true,
+      "changed_members": [
+        "README.md",
+        "audit-export-review.md"
+      ],
+      "added_members": [
+        "data-contract-review.md"
+      ],
+      "removed_members": [
+        "doc11-itemized-reply.md"
+      ],
+      "forbidden_matches": 0,
+      "nested_archives": 0,
+      "relative_links": 11,
+      "legacy_package_manifest_updated": false,
+      "change_reason": "ROLE_BASED_DOCUMENTATION_ONLY_NO_APPLICATION_OR_DATA_CHANGE",
+      "standalone_verifier": "PASS_SHARED_IDENTICAL_CONTENT_CHECKED_ONCE",
+      "jsonl_and_schema_preserved": true,
+      "export_manifest_preserved": true
+    },
+    {
+      "file": "review-delivery.zip",
+      "category": "AUDIT_PROPOSAL",
+      "previous_sha256": "be57101f32d7e7a423cbb85615a0c3d43b4df1accb619434d5ff4f7a00825122",
+      "sha256": "e0659eabdf8cee31dda8de5be714195905270eb65a91a14d1828a73552f65bd8",
+      "byte_count": 37168,
+      "member_count": 16,
+      "backup_file": "review-delivery.be57101f32d7.original.zip",
+      "backup_verified": true,
+      "changed_members": [
+        "README.md",
+        "audit-export-review.md"
+      ],
+      "added_members": [
+        "data-contract-review.md"
+      ],
+      "removed_members": [
+        "doc11-itemized-reply.md"
+      ],
+      "forbidden_matches": 0,
+      "nested_archives": 0,
+      "relative_links": 11,
+      "legacy_package_manifest_updated": false,
+      "change_reason": "ROLE_BASED_DOCUMENTATION_ONLY_NO_APPLICATION_OR_DATA_CHANGE",
+      "standalone_verifier": "PASS_SHARED_IDENTICAL_CONTENT_CHECKED_ONCE",
+      "jsonl_and_schema_preserved": true,
+      "export_manifest_preserved": true
+    },
+    {
+      "file": "CS_Flow_AI_Backend_A_review.zip",
+      "category": "LEGACY_REVIEW_0_6_0",
+      "previous_sha256": "ca959c27a1cf28d89ed3bde416d1ca5b4628df5aba68f3b684eb77c5f3c3f4f0",
+      "sha256": "521881f2a5ffcbbce91158dff00ce1fe831e2912687985cd09dc2d79459115fa",
+      "byte_count": 5518929,
+      "member_count": 225,
+      "backup_file": "CS_Flow_AI_Backend_A_review.ca959c27a1cf.original.zip",
+      "backup_verified": true,
+      "changed_members": [
+        "PACKAGE_MANIFEST.json",
+        "README.md",
+        "docs/backend-a-handoff.md",
+        "docs/decisions.md",
+        "docs/next-step-prompt.md"
+      ],
+      "added_members": [
+        "ARCHIVE_NOTES.md"
+      ],
+      "removed_members": [],
+      "forbidden_matches": 0,
+      "nested_archives": 0,
+      "relative_links": 42,
+      "legacy_package_manifest_updated": true,
+      "change_reason": "ROLE_BASED_DOCUMENTATION_ONLY_NO_APPLICATION_OR_DATA_CHANGE",
+      "standalone_verifier": "NOT_APPLICABLE_LEGACY_PACKAGE_MANIFEST_CHECKED",
+      "jsonl_and_schema_preserved": true,
+      "export_manifest_preserved": null
+    }
+  ],
+  "unchanged_deployment_artifacts": [
+    {
+      "file": "backend-a.zip",
+      "category": "DEPLOYMENT_OR_RECOVERY",
+      "sha256": "f5003e46a1cf133e7a52b141fcfcde0f150284eaf1514175dc8ffec0242dae41",
+      "unchanged": true,
+      "forbidden_matches": 0,
+      "local_path": "<BACKEND_A_ROOT>/.cache/azure-backend-a/backend-a.zip"
+    },
+    {
+      "file": "recovery.zip",
+      "category": "DEPLOYMENT_OR_RECOVERY",
+      "sha256": "4de4648d934c9053de4a6aa74f0f4a31423d98206d8714c904cc77170d328a5e",
+      "unchanged": true,
+      "forbidden_matches": 0,
+      "local_path": "<BACKEND_A_ROOT>/.cache/azure-release-0110/recovery.zip"
+    },
+    {
+      "file": "release.zip",
+      "category": "DEPLOYMENT_OR_RECOVERY",
+      "sha256": "5c2bfd68dc19726ad6b0add69b39458395a7ea4ac3ef3ca00aa91135b77dc335",
+      "unchanged": true,
+      "forbidden_matches": 0,
+      "local_path": "<BACKEND_A_ROOT>/.cache/azure-release-0110/release.zip"
+    },
+    {
+      "file": "backend-a.zip",
+      "category": "DEPLOYMENT_OR_RECOVERY",
+      "sha256": "f5003e46a1cf133e7a52b141fcfcde0f150284eaf1514175dc8ffec0242dae41",
+      "unchanged": true,
+      "forbidden_matches": 0,
+      "local_path": "<BACKEND_A_ROOT>/.cache/azure-team-dev/backend-a.zip"
+    }
+  ],
+  "recursive_nested_archives_found": 0,
+  "backup_location": "<WORKSPACE_ROOT>/.cache/backend-a-original-deliveries-20261104",
+  "backup_outside_team_checkout": true,
+  "backup_git_ignored": true,
+  "application_migration_or_business_data_modified": false,
+  "external_integrations_tested": false,
+  "business_tests_run": false,
+  "history_rewritten": false,
+  "source_checks": {
+    "status": "PASS",
+    "source_name_and_chat_matches": 0,
+    "relative_links": 319,
+    "app_migration_business_tests_runtime_scripts": "BYTE_IDENTICAL",
+    "audit_jsonl_schema_manifest": "BYTE_IDENTICAL",
+    "archive_and_receipt_overwrite_guards": "PASS",
+    "business_tests_run": false
+  }
+}

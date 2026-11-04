@@ -1,12 +1,16 @@
 # Fabric 전달 자료 — Backend A 실제 DB와 데이터 계약
 
-2026-11-04 공유 검토: 이 폴더는 **0.6.1/head0006 당시의 스키마·증거 snapshot**이다. 현재 소스는0.7.1/head0007이며 추가된 DB 변경은 직원 WORKLOAD_READ 허용값이다. 보관된0.6.1 소스를 사용한 오프라인 verifier를 별도 임시 사본에서 통과했고, 아래 분석 경로·참조 schema가 현재 OpenAPI와 동일함을 확인했다. verifier의 info.version 비교는0.6.1에 고정돼 있어 현재0.7.x 앱과 그대로 실행하면 버전 차이로 실패할 수 있다. 보관 DDL을 최신0007 전체 DDL로 오해하지 않는다. 실제 Fabric/Azure 연동을 새로 검증하지 않았다.
+**2026-11-04 audit 추가 검토:** 현재 로컬 소스는 **0.11.0 / migration 파일 head0011**, Git `feature/backend-a` / `2af74b73eacb9e692e17b1ad166d35152085859d`다. DB head·Azure는 이번에 조회하지 않았다. [audit 추가 검토와 차이표](audit-export-review.md), [수정 projection 스키마](samples/export-proposal/schema_contract.json), [수정 Manifest](samples/export-proposal/manifest.json)를 우선 읽는다. 공통4개 파일·고객 참조 파일 bytes를 보존하고 audit 1행을 추가해 **6파일/6행**으로 만들었다. 첨부 전체5파일/12,008행과 첨부 validation의 작은4파일/각1행은 서로 다른 자료다. **원본 Manifest는 첨부에 없다.** 실제 Export·Silver 승인·접촉 이벤트 호환 확인은 완료되지 않았다.
+
+[데이터 계약 항목별 검토](data-contract-review.md)는 라벨 NULL·길이·불만 필수값·후속·감사 경계를 현재 소스와 대조한 자료다. [전달 README](delivery-README.md)와 [패키지 검증](delivery-verification.json)을 함께 확인한다. 문서 중립화 후의 ZIP 정본과 별도 원본 백업은 [아카이브 관리](../delivery-archives.md)에 기록한다.
+
+**이전 공유 검토(당시 0.7.1/head0007):** 이 폴더의 DDL·카탈로그는 **0.6.1/head0006 당시의 스키마·증거 snapshot**이다. 당시 추가된 DB 변경은 직원 WORKLOAD_READ 허용값이었다. 보관된0.6.1 소스를 사용한 오프라인 verifier를 별도 임시 사본에서 통과했고, 당시 분석 경로·참조 schema가 OpenAPI와 동일함을 확인했다. verifier의 info.version 비교는0.6.1에 고정돼 있어 최신 앱에서 그대로 실행하면 버전 차이로 실패할 수 있다. 보관 DDL을 최신0011 전체 DDL로 오해하지 않는다. 이번 audit 작업은 이 DDL·이전 검증 기록을 재생성하지 않았다.
 
 보관 schema.sql은 추출 당시 bytes/hash를 유지한다. pg_dump 출력의 마지막 빈 줄 때문에 최초 stage의 diff whitespace 검사에서 EOF 빈 줄1건이 표시되며, 해시가 고정된 DDL을 이 스타일 경고만으로 재작성하지 않았다.
 
 담당 폴더의 .gitattributes는 기존 text/eol 규칙을 유지하고, 해시 대상인 schema.sql과 samples의 JSONL에만 자동 줄바꿈 변환 예외를 둔다. Windows의 core.autocrlf 설정과 관계없이 DDL 및 manifest가 가리키는 JSONL bytes를 보존하기 위한 Git 공유 설정이다.
 
-2026-11-03 KST 작성. 모든 경로는 팀 저장소의 **backend/backend-a/** 기준이다. 이 자료는 로컬 파일이며 팀원 전송·commit·push는 하지 않았다.
+기본 카탈로그는 2026-11-03 KST 작성했으며 후속 audit 제안을 별도로 보완했다. 모든 경로는 팀 저장소의 **backend/backend-a/** 기준이다. 자료의 Git 공유와 실제 데이터 Export·Fabric 적재는 별개다.
 
 ## 먼저 읽을 자료
 
@@ -17,7 +21,7 @@
 5. [scope-publish-contract.md](scope-publish-contract.md), [실제 생성 OpenAPI 발췌](openapi-analytics.json): 이미 구현된 Gold 수신·게시·조회와 미합의 KPI.
 6. [samples 안내](samples/README.md), [open-questions.md](open-questions.md), [검증 결과](verification.md).
 
-## 코드 기준점과 확인 범위
+## 0006 보관 자료의 코드 기준점과 확인 범위
 
 **구현 확인:** 파일의 pyproject.toml과 app/main.py는 0.6.1이다. 실제 Alembic graph와 새 격리 로컬 PostgreSQL 적용 결과의 유일 head는 0006이다. Git feature/backend-a, 출발 commit `447c31890c243e1175b805596a84a19720058edf` 위의 기존 미커밋 Azure 변경이 포함된 작업 트리다. 문서가 해당 commit만의 내용이라고 주장하지 않는다. [source-basis.json](source-basis.json)에 실제 읽은 소스 SHA256을 남겼다. 담당 폴더와 부모에서 AGENTS.md는 발견되지 않았다.
 
@@ -35,13 +39,21 @@
 | A DB→Blob, 예약 추출·manifest 업로드·증분/CDC | 미구현 | 이번에 새 API·파이프라인을 추가하지 않음 |
 | Export serialization/HMAC/snapshot/retry | 제안 | 샘플도 제안이라고 표시. 운영 적용 전 합의 필요 |
 | 팀 귀속·episode·완전성·KPI·읽기 권한·서비스 발급 | 팀 합의 필요 | [질문](open-questions.md) 참조 |
-| 실제 Fabric Bronze/Silver 스키마와 12,008건 | 팀 합의 필요 | 실제 파일/manifest 미수신으로 비교 불가 |
+| 전달받은 합성5파일/12,008행 | 파일 검토 완료 / 의미 합의 필요 | JSONL·첨부 schema·validation은 확인. 원본 Manifest 없음. Bronze/Silver 실제 적재·승인은 미검증 |
 
-## 현재 주소를 사용할 때
+## 보관 배포 주소 — 이번 최신 상태 미확인
 
 배포 문서의 API base는 `https://csflow-backend-a.azurewebsites.net/api/v1`, Swagger는 `/docs`, DB FQDN은 `csflow-backend-a-pg.postgres.database.azure.com`이다. **Fabric용 DB 계정·읽기 view·방화벽·서비스 subject를 새로 설정하지 않았다.** 배포 증거상 ANALYTICS_SERVICE_IDS=[]라 서비스 게시 경계는 503으로 비활성이다. 문서에 키/비밀번호/토큰은 없다. 일반 관리자 토큰으로 게시할 수 없다.
 
 ## 재현 및 변경 제한
+
+이번 audit 제안 파일만 검증하려면 **앱 import·DB·네트워크가 없는** 아래 명령을 사용한다. [검증 기록](audit-export-verification.json)과 [첨부 검토](incoming-audit-review.json)는 이번 범위의 별도 기록이다.
+
+```powershell
+python docs/fabric-data-contract/tools/verify_export_proposal.py --write-report
+```
+
+아래 명령과 과거 verification 파일은 **기존 0006 자료 생성/검증 절차**다. 최신 전체 스키마·DB 검증을 뜻하지 않으며 이번 audit 작업에서는 DB 추출기나 전체 verifier를 실행하지 않았다.
 
 담당 폴더에서 고정 requirements-dev를 설치한 Python으로 실행한다. 추가 의존성 다운로드나 앱 기동 없이 샘플/OpenAPI 검증이 가능하다.
 

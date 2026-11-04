@@ -1,0 +1,115 @@
+{
+  "status": "PASS",
+  "scope": "OFFLINE_SYNTHETIC_PROPOSAL_ONLY",
+  "files_checked": 6,
+  "rows_checked": 6,
+  "files": [
+    {
+      "object_key": "export-proposal/products/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 204,
+      "sha256": "0ddafc3375ef7336f67dbbd4d20146822fead500970f2333258a850a842c2c91"
+    },
+    {
+      "object_key": "export-proposal/customers/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 102,
+      "sha256": "1db721166ab37ac36c66b751fd5e02041e5ff068e0a56fba106d63fff259aaed"
+    },
+    {
+      "object_key": "export-proposal/orders/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 393,
+      "sha256": "699490503bc365270607cebaace3d7217f43160268ed44e9f2ac1046c3d43884"
+    },
+    {
+      "object_key": "export-proposal/tickets/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 664,
+      "sha256": "80f5b90afffce6aba9e8cb82974e79f574f5a7f14ddda97a626fc745ad6030ba"
+    },
+    {
+      "object_key": "export-proposal/followup_actions/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 577,
+      "sha256": "d2e09334ef0d62970fb1f34b803ec437ede987519332b456f04e8b0a41a98a55"
+    },
+    {
+      "object_key": "export-proposal/audit_events/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 297,
+      "sha256": "423c959c78f63f211c57f8d2490875c89b14000fb7b672a263621b1e6c2be8c2"
+    }
+  ],
+  "foreign_keys": [
+    {
+      "table": "orders",
+      "column": "customer_ref",
+      "target": "customers.customer_ref",
+      "non_null_checked": 1
+    },
+    {
+      "table": "orders",
+      "column": "product_id",
+      "target": "products.product_id",
+      "non_null_checked": 1
+    },
+    {
+      "table": "tickets",
+      "column": "customer_ref",
+      "target": "customers.customer_ref",
+      "non_null_checked": 1
+    },
+    {
+      "table": "tickets",
+      "column": "order_ref",
+      "target": "orders.order_ref",
+      "non_null_checked": 1
+    },
+    {
+      "table": "tickets",
+      "column": "product_id",
+      "target": "products.product_id",
+      "non_null_checked": 1
+    },
+    {
+      "table": "followup_actions",
+      "column": "product_id",
+      "target": "products.product_id",
+      "non_null_checked": 0
+    },
+    {
+      "table": "followup_actions",
+      "column": "ticket_ref",
+      "target": "tickets.ticket_ref",
+      "non_null_checked": 1
+    },
+    {
+      "table": "audit_events",
+      "column": "ticket_ref",
+      "target": "tickets.ticket_ref",
+      "non_null_checked": 1
+    }
+  ],
+  "original_four_and_customer_reference": "BYTE_IDENTICAL_SHA256_BASELINES",
+  "hmac": "PUBLIC_SYNTHETIC_VECTOR_AND_ALL_ALIASED_IDS_CHECKED",
+  "excluded_audit_fields": "ALL_EXCEPT_THE_SEVEN_DECLARED_FIELDS",
+  "not_checked": [
+    "DATABASE",
+    "AZURE",
+    "REAL_EXPORT",
+    "SILVER_APPROVAL",
+    "TEAMS_USERS_SOURCE_FK_FILES_NOT_INCLUDED"
+  ],
+  "audit_source_column_and_null_comparison": "17_CURRENT_MODEL_COLUMNS_MATCH_HISTORICAL_CATALOG",
+  "reviewed_source_sha256": {
+    "app/models.py": "e9206df21d441f83e9dc0969a82ab426899bbce39b6a479ac86e3eeef720d61f",
+    "app/model_constraints.py": "a3cd1628922adf8b85a3e0398f710c9ef3a3e23abcb4a47e62756c6faafa85b4",
+    "app/audit.py": "dfc8578aad7c1ea7f15ede6ccc48f3bfdbbdcceb583d16455a54dde59aa39911",
+    "app/services.py": "142c3451a05acd9a9c0ad7205495d2b96dff5d59e71bf332bc9caefa9d5eacf3",
+    "app/ticket_commands.py": "34562c0424711d7059e0273cf19b7edd31f2d8c0e42c3b6e4f202ebb79f32b02",
+    "app/finalization.py": "ae913ba14346ee98dd3a2de089b0fe0e3f6b1a7d18a04d77dc3321ce0e1e0c9a",
+    "app/seed.py": "46348b66105cb60c0d5a6aac00c3dbf86a2f80d4b47842aca3b2be37f37b00d4",
+    "pyproject.toml": "a06975c2bd2b30b82f06e61ed81b020b333fec4b3cc61486ff1e7e4cc7e81407"
+  }
+}

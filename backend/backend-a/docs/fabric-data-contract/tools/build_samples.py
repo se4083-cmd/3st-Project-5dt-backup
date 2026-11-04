@@ -392,13 +392,14 @@ def main():
             "all_samples": "SYNTHETIC_DOCUMENTATION_ONLY",
             "api_responses": "Pydantic-validated examples, not live HTTP receipts",
             "gold_sample": "Independent supplied facts; NOT computed from tiny db-projections",
-            "proposal_five_jsonl": "Five rows, unrelated to a claimed 12008-row delivery",
+            "proposal_six_jsonl": "Six rows including audit and customer reference; NOT the supplied 12008-row dataset",
             "export_pipeline_implemented": False,
         },
     )
-    print(
-        "Generated synthetic projections, proposed five-file manifest and existing API examples; no DB/network access."
-    )
+    from build_audit_proposal import main as extend_audit_proposal
+
+    extend_audit_proposal()
+    print("Generated synthetic documentation only; no DB/network access.")
 
 
 if __name__ == "__main__":

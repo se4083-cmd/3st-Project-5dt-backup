@@ -1,5 +1,7 @@
 # DB → Blob → Fabric Silver 계약 초안
 
+2026-11-04 보완: [audit 상세/첨부 차이](audit-export-review.md), [projection 전용 schema](samples/export-proposal/schema_contract.json), [Manifest](samples/export-proposal/manifest.json). 현재 예시는 공통 products/orders/tickets/followup_actions + audit_events와 customers 참조 보조 파일, **6파일/6행**이다. 기존4개 계약·고객 참조 파일은 byte 그대로다. 아래 전체 원천 목록은 향후 제안이고 전부 파일로 구현한 것이 아니다. 물리 DDL의0006 보관본과 현재 소스 검토0.11.0/0011을 구분한다.
+
 ## 구현 상태와 책임
 
 **미구현:** 운영 A PostgreSQL을 읽고 Blob에 파일/manifest를 업로드하는 API·예약 추출기·CDC·인증·실패 복구 파이프라인은 없다. 이번 작업에서도 만들거나 실행하지 않았다. `scripts/export_openapi.py`는 OpenAPI 파일 생성기일 뿐 데이터 Export가 아니다. 외부 합성 fixture의 `code/export_contract.py`는 합성 JSON을 Lakehouse용 JSONL/fixture DDL로 바꾸는 오프라인 도구이며 운영 A DB→Blob Export가 아니다. 해당 파일을 실행하지 않았다.
@@ -29,7 +31,9 @@
 | shipments / returns | 배송·반품 KPI가 정해진 경우만 메타데이터 추가 | reason/eta_if_known 자유텍스트 제외 |
 | analytics_* / idempotency_keys / alembic_version | 원장 Silver 기본 제외 | 이미 계산된 Gold를 다시 원천으로 순환 입력하지 않음. receipt 전체 payload·멱등 snapshot·key는 제외. head는 manifest 메타데이터로만 전달 |
 
-**팀 합의 필요:** 처음 5개 파일만으로 모든 VOC episode·기간별 미해결·팀 재배정을 계산할 수 있는지 확인해야 한다. 현재 ticket snapshot은 과거 회차 전체 상태를 보유하지 않고 messages에 primary_issue/product/order 당시 snapshot이 없다. 파생 customer_contacts/coverage/episodes는 A의 실제 테이블이 아니다. 누락 근거를 만들거나 완전하다고 표시하지 않는다.
+**팀 합의 필요:** 현재 공통5종(+customers 보조)만으로 모든 VOC episode·기간별 미해결·팀 재배정을 계산할 수 있는지 확인해야 한다. ticket snapshot만으로 과거 회차 전체 상태를 복원하지 않는다. 0.11.0에 추가된 전향적 cycle/event 기록도 모든 과거 이력을 backfill하지 않으며 이번 Export에는 포함하지 않았다. messages에 primary_issue/product/order 당시 snapshot이 없다. 파생 customer_contacts/coverage/episodes는 이 제안의 실제 A 원천 파일이 아니다. 누락 근거를 만들거나 완전하다고 표시하지 않는다.
+
+**audit 최소 선택 제안:** target_type=TICKET, result=SUCCESS, 전달 허용 tickets에 속하는 non-NULL ticket_id만 선택한다. event_ref/ticket_ref는 HMAC, cycle_no는 원천 NULL도 그대로 유지한다. action별 reason 허용값은 새 schema의 audit_selection을 따른다. payload/event_key/actor/target_id는 전부 제외한다. CUSTOMER_CONTACT는 현재 A 업무 producer가 만들지 않아 생성·추정·다른 action 이름 변환을 하지 않는다. created_at은 감사 저장 시각이며 접촉 시각이 아니다. 고객 파일은 customer_ref FK 보조이므로 유지하며 별도 registry 방식은 추후 합의한다.
 
 ## Snapshot, batch, 기준시각
 
@@ -37,7 +41,7 @@
 
 - export_batch_id: 원천 전체 snapshot 전달 단위 UUID. 기존 Gold manifest.batch_id와는 **다른 namespace와 생명주기**다.
 - source_as_of: 동일 DB snapshot을 획득할 때 기록한 UTC 관측 기준시각. 단순 `WHERE updated_at<=source_as_of`가 아니며 commit을 모두 포함하는 완전성 보증/LSN도 아니다. 첫 snapshot 질의의 clock_timestamp와 snapshot 획득이 정확히 동시에 일어난다는 과도한 주장도 하지 않는다.
-- export_schema_version: allowlist projection/직렬화/가명화 명세의 버전. A migration head=0006, 합성 schema_contract, Gold schema_version=analytics-v1과 서로 다르다.
+- export_schema_version: allowlist projection/직렬화/가명화 명세의 버전. 수정 예시는 proposed-silver-v1-audit-v1. 과거 합성 fixture의 A migration head=0006, 현재 소스의 파일 head0011, 첨부 합성 물리 schema_contract, Gold schema_version=analytics-v1과 서로 다르다. Manifest의 source_migration_head=0006은 예시의 역사적 basis이며 실제 최신 DB 조회 결과가 아니다.
 - source_migration_head, snapshot_consistency, key_version, join_domain, scope 정의, 테이블별 inventory, extraction_started/completed_at, data_origin을 manifest에 명시한다. DB 내부 snapshot token은 서버 내부 조정용이며 공개 URL/자격정보로 취급하지 않는다.
 - Fabric은 후속 Gold manifest의 source_input_hashes를 실제 입력 bytes 해시와 대응시킨다. 현재 5필드(orders/tickets/customer_contacts/followup_actions/coverage)로는 다중 파일/많은 원천 테이블의 lineage가 부족하다. 기존 필드에 임의 새 필드를 넣으면422이므로 별도 lineage 확장 버전 합의가 필요하다.
 

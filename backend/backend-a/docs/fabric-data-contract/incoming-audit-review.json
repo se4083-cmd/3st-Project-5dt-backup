@@ -1,0 +1,133 @@
+{
+  "status": "PASS_WITH_SEMANTIC_GAPS",
+  "archive_sha256": "2e5b2b0e34bd99f76525cdaf5c74c60f980b8b12c2aaeca5ba2000b80226422a",
+  "original_manifest": "ABSENT_NOT_RECONSTRUCTED_FROM_VALIDATION",
+  "files": [
+    {
+      "file": "blob/audit_events.jsonl",
+      "row_count": 8820,
+      "byte_count": 5153505,
+      "sha256": "4c2de953afd139a9d216bbf910b372410c73f47f976949a906c8df6d04886970"
+    },
+    {
+      "file": "blob/followup_actions.jsonl",
+      "row_count": 168,
+      "byte_count": 117672,
+      "sha256": "9328391787751b946e9e77ba72e3ad7f99a7ba49c3cd08093575a3a8c192c9cf"
+    },
+    {
+      "file": "blob/orders.jsonl",
+      "row_count": 2000,
+      "byte_count": 1141214,
+      "sha256": "2554166f7121fc17434c93c1efe05f1fe6fe8be31a092f9b8abd28187fc2e234"
+    },
+    {
+      "file": "blob/products.jsonl",
+      "row_count": 20,
+      "byte_count": 6804,
+      "sha256": "2f7d120ba38da1810451abe468b6a5dbbe9a353e9f1dff7109074b0d93c08586"
+    },
+    {
+      "file": "blob/tickets.jsonl",
+      "row_count": 1000,
+      "byte_count": 956102,
+      "sha256": "b41b71affc1e06b728a8b49384756b0091654e8f77b1e7626b1bfb62abb5b57d"
+    }
+  ],
+  "total_rows": 12008,
+  "foreign_keys": [
+    {
+      "table": "orders",
+      "column": "product_id",
+      "target": "products.product_id",
+      "non_null_checked": 2000
+    },
+    {
+      "table": "tickets",
+      "column": "order_id",
+      "target": "orders.order_id",
+      "non_null_checked": 935
+    },
+    {
+      "table": "tickets",
+      "column": "product_id",
+      "target": "products.product_id",
+      "non_null_checked": 935
+    },
+    {
+      "table": "followup_actions",
+      "column": "ticket_id",
+      "target": "tickets.ticket_id",
+      "non_null_checked": 164
+    },
+    {
+      "table": "followup_actions",
+      "column": "product_id",
+      "target": "products.product_id",
+      "non_null_checked": 4
+    },
+    {
+      "table": "audit_events",
+      "column": "ticket_id",
+      "target": "tickets.ticket_id",
+      "non_null_checked": 8820
+    }
+  ],
+  "audit_action_counts": {
+    "CREATED": 1000,
+    "CUSTOMER_CONTACT": 3000,
+    "STATUS_CHANGED": 4820
+  },
+  "audit_payload_wire": "JSON_ENCODED_STRING_ALL_8820",
+  "audit_payload_keys_by_action": {
+    "CREATED": [
+      "to_status"
+    ],
+    "CUSTOMER_CONTACT": [
+      "message_id",
+      "primary_issue"
+    ],
+    "STATUS_CHANGED": [
+      "from_status",
+      "to_status"
+    ]
+  },
+  "a_model_fields_absent_from_incoming_audit": [
+    "result",
+    "reason_code"
+  ],
+  "audit_cycle_counts": {
+    "1": 8820
+  },
+  "validation_result_scope": {
+    "files_checked": 4,
+    "verified_table_counts": {
+      "products": 1,
+      "orders": 1,
+      "tickets": 1,
+      "followup_actions": 1
+    },
+    "matches": "ORIGINAL_A_ONE_ROW_FOUR_FILES_NOT_INCOMING_FULL_DATA",
+    "silver_gate": "BLOCKED",
+    "gate_reasons": [
+      "PARTIAL_SCOPE_ONLY_NO_SILVER_APPROVAL",
+      "PROPOSED_CONTRACT_ONLY",
+      "SYNTHETIC_SAMPLE_ONLY",
+      "ACTUAL_DATABASE_SNAPSHOT_NOT_VERIFIED",
+      "EXPORT_VERSION_NOT_APPROVED",
+      "SNAPSHOT_MODE_NOT_APPROVED",
+      "DATA_ORIGIN_NOT_APPROVED",
+      "COMPLETENESS_SALES_NOT_TRUE",
+      "COMPLETENESS_COMPLAINTS_NOT_TRUE",
+      "COMPLETENESS_EPISODE_STATE_NOT_TRUE",
+      "RULE_HASH_NOT_DEFINED_IN_CONTRACT"
+    ]
+  },
+  "not_checked": [
+    "CUSTOMER_USER_TEAM_MESSAGE_FK_NO_SOURCE_FILES",
+    "ORIGINAL_MANIFEST_INTEGRITY_ABSENT",
+    "ACTUAL_DATABASE",
+    "FABRIC_SILVER_ACCEPTANCE",
+    "REAL_CONTACT_EVENT_PRODUCER"
+  ]
+}

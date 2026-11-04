@@ -38,6 +38,8 @@
 
 ## audit_events: 실제 식별자와 한계
 
+2026-11-04 **0.11.0 소스 재검토:** 아래 감사 모델·공통 record의 설명은 여전히 유효하다. 첨부 합성 audit 8,820행의 CREATED/STATUS_CHANGED/CUSTOMER_CONTACT는 현재 A 업무 emitter와 다르다. [비교 및 최소 projection](audit-export-review.md)에 JSONB/문자열 차이와 접촉 시각 한계를 정리했다. 감사 시각·문구에서 접촉을 추정하지 않고, CUSTOMER_CONTACT producer나 messages Export는 이번에 구현하지 않았다. 이 문서의 다른 절은 기존0006 검토 기록이며 최신 전체 상태 전이·B 실행 계약으로 재검증한 것이 아니다.
+
 **구현 확인:** `event_id uuid` PK가 **있다**. `event_key text`는 별도 UNIQUE다. ticket_id/cycle_no/actor_user_id/actor_service/target_id는 NULL 가능하고 target_type/action은 text다. created_at=timestamptz이며 A Python utcnow 기본값이다. `event_time`, `sequence`, `LSN`, `before`, `after`, `ticket_version` 물리 컬럼은 없다. `updated_at`도 없다. result=varchar(16)의 SUCCESS/DENIED/FAILURE CHECK, reason_code=varchar(64), payload=jsonb가 있다.
 
 **구현 확인:** app/audit.py의 record는 호출마다 event_id와 event_key를 각각 새 UUID로 만든다. action/result/reason/연결 ID를 기록하고 payload는 `{}`로 고정한다. 예: TICKET_CREATED, TICKET_REOPENED, AGENT_REQUESTED, AUTOMATIC_REPLY_COMMITTED, FOLLOWUP_CREATED/UPDATED/STATE_CHANGED, ANALYTICS_RECEIVED/VALIDATED/REJECTED/PUBLISHED. 이 목록은 영구 Enum이 아니며 저장 action은 자유 text다. 접근·거부·목록·목적 조회 등의 감사도 섞여 있다. 실패 요청의 ACCESS_DENIED는 요청 rollback 뒤 독립 트랜잭션에서 저장될 수 있다.
