@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "route": "actual frontend AuthManager/P1 client -> local Vite proxy -> local FastAPI -> isolated PostgreSQL",
+  "login": 200,
+  "p1_session": 200,
+  "bearer_monitoring_request": 200,
+  "wrong_password": 401,
+  "sql_capabilities_and_team_validated": true,
+  "request_id_received": true,
+  "logout_is_local": true,
+  "external_azure_rag_calls": 0
+}

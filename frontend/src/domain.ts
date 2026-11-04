@@ -21,6 +21,7 @@ export type Session = {
   permissions: Permission[];
   allowedTeamIds: string[];
   scopeKey: string;
+  capabilities?: string[];
 };
 export const workStates = [
   "REVIEW",
@@ -78,6 +79,7 @@ export const sessionKey = (s: Session) =>
     s.scopeKey,
     [...s.permissions].sort(),
     [...s.allowedTeamIds].sort(),
+    [...(s.capabilities ?? [])].sort(),
   ]);
 export function countTotal(workload: Overview["workload"]) {
   return workStates.reduce((sum, key) => sum + workload[key], 0);

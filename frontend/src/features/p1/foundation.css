@@ -1,0 +1,8 @@
+.p1-foundation-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); font-size: 12px; }
+.p1-foundation-bar nav { display: flex; flex-wrap: wrap; gap: 14px; }
+.p1-foundation-bar nav a.active { color: var(--purple); font-weight: 700; }
+.p1-login { max-width: 480px; display: grid; gap: 18px; }
+.p1-login label { display: grid; gap: 8px; }
+.p1-login input { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.p1-login input:focus-visible { outline: 3px solid #a395f5; }
+.p1-entry { margin-bottom: 16px; }

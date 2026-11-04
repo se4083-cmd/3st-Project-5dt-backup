@@ -22,6 +22,10 @@ export function errorText(error: ApiError): {
   retry: boolean;
 } {
   const values: Record<string, [string, string, boolean]> = {
+    P1_DISABLED: ["P1 기능이 비활성화되어 있습니다", "서버의 P1 활성화 설정을 확인해 주세요.", false],
+    VOC_DISABLED: ["VOC 기능이 비활성화되어 있습니다", "서버의 VOC 활성화 설정을 확인해 주세요.", false],
+    POLICY_DISABLED: ["정책 기능이 비활성화되어 있습니다", "서버의 정책 활성화 설정을 확인해 주세요.", false],
+    SESSION_EXPIRED: ["다시 로그인해 주세요", "세션이 만료되어 보호 데이터를 제거했습니다.", false],
     CONTRACT_NOT_CONFIGURED: [
       "백엔드 연결 준비 중",
       "인증 정보와 운영 홈의 API 계약을 먼저 설정해 주세요.",
@@ -258,16 +262,16 @@ export async function requestJson(
 export function createHttpClient(config: {
   sessionPath?: string;
   overviewPath?: string;
-}): ApiClient {
+}, transport: typeof fetch = fetch): ApiClient {
   return {
     async getSession(signal) {
       return parseSession(
-        await requestJson(localPath(config.sessionPath), signal),
+        await requestJson(localPath(config.sessionPath), signal, transport),
       );
     },
     async getOverview(session, signal) {
       return parseOverview(
-        await requestJson(localPath(config.overviewPath), signal),
+        await requestJson(localPath(config.overviewPath), signal, transport),
         session,
       );
     },

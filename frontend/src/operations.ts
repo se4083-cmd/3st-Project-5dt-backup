@@ -386,7 +386,7 @@ const uuid = (value: string) => {
   return value;
 };
 
-export function createOperationsClient(mock: boolean, profile: Profile): OperationsClient {
+export function createOperationsClient(mock: boolean, profile: Profile, transport: typeof fetch = fetch): OperationsClient {
   if (mock) return {
     async getQueue(scope, reason, cursor, signal) {
       await wait(signal);
@@ -460,8 +460,8 @@ export function createOperationsClient(mock: boolean, profile: Profile): Operati
     },
     async getControl(signal) { await wait(signal); return { paused: true, revision: 3, generation: 2, reason_code: "OPERATOR_PAUSE", changed_at: at }; },
   };
-  const get = (path: string, signal: AbortSignal) => requestJson(path, signal);
-  const post = (path: string, body: object, signal: AbortSignal) => requestJson(path, signal, fetch, { method: "POST", body });
+  const get = (path: string, signal: AbortSignal) => requestJson(path, signal, transport);
+  const post = (path: string, body: object, signal: AbortSignal) => requestJson(path, signal, transport, { method: "POST", body });
   return {
     async getQueue(scope, reason, cursor, signal) {
       return parseQueue(await get(`/api/v1/staff/exception-queue${params({ queue_scope: scope, reason, cursor })}`, signal));

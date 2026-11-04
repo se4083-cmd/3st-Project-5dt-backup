@@ -1,0 +1,13 @@
+
+> cs-flow-ai-frontend@0.1.0 test
+> vitest run --reporter=dot
+
+
+ RUN  v5.1.0 /workspace/cs-flow-ai/frontend
+
+····················································
+
+ Test Files  6 passed (6)
+      Tests  52 passed (52)
+   Start at  07:20:45
+   Duration  13.24s (tests 85%, environment 12%, setup 2%, transform 1%)

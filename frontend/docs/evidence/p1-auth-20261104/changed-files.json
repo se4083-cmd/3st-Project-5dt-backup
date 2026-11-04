@@ -1,0 +1,98 @@
+[
+  {
+    "status": "M",
+    "path": "frontend/.env.example"
+  },
+  {
+    "status": "M",
+    "path": "frontend/README.md"
+  },
+  {
+    "status": "A",
+    "path": "frontend/docs/evidence/p1-auth-20261104/changed-files.json"
+  },
+  {
+    "status": "A",
+    "path": "frontend/docs/evidence/p1-auth-20261104/cleanup.json"
+  },
+  {
+    "status": "A",
+    "path": "frontend/docs/evidence/p1-auth-20261104/http-smoke.json"
+  },
+  {
+    "status": "A",
+    "path": "frontend/docs/evidence/p1-auth-20261104/react-tests.txt"
+  },
+  {
+    "status": "A",
+    "path": "frontend/docs/evidence/p1-auth-20261104/summary.json"
+  },
+  {
+    "status": "A",
+    "path": "frontend/docs/p1-auth-foundation.md"
+  },
+  {
+    "status": "A",
+    "path": "frontend/docs/p1-auth-verification.md"
+  },
+  {
+    "status": "M",
+    "path": "frontend/src/App.tsx"
+  },
+  {
+    "status": "M",
+    "path": "frontend/src/api.ts"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/auth/AuthProvider.tsx"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/auth/LoginPanel.tsx"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/auth/session.ts"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/auth/store.ts"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/auth/transport.ts"
+  },
+  {
+    "status": "M",
+    "path": "frontend/src/domain.ts"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/features/p1/Foundation.tsx"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/features/p1/client.ts"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/features/p1/foundation.css"
+  },
+  {
+    "status": "M",
+    "path": "frontend/src/operations.ts"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/test/auth-ui.test.tsx"
+  },
+  {
+    "status": "A",
+    "path": "frontend/src/test/auth.test.ts"
+  },
+  {
+    "status": "M",
+    "path": "frontend/vite.config.ts"
+  }
+]

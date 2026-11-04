@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState, type ReactNode } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { AuthProvider } from "./auth/AuthProvider";
+import { ConnectedApp } from "./features/p1/Foundation";
 import { ApiError, createHttpClient } from "./api";
 import {
   can,
@@ -46,7 +48,16 @@ function Require({
   );
 }
 export default function App() {
+  const { pathname } = useLocation();
+  const p1Route = pathname === "/p1" || pathname.startsWith("/p1/");
   const mock = (import.meta.env.VITE_DATA_MODE ?? "mock") === "mock";
+  return <AuthProvider>{mock && !p1Route ? <LegacyApp /> : <ConnectedApp p1Route={p1Route} renderLegacy={(session, transport, epoch, toolbar) => <LegacyApp key={epoch} authenticatedSession={session} transport={transport} authEpoch={epoch} extraContent={toolbar} />} />}</AuthProvider>;
+}
+
+export function LegacyApp({ authenticatedSession, transport = fetch, authEpoch = 0, extraContent }: {
+  authenticatedSession?: Session; transport?: typeof fetch; authEpoch?: number; extraContent?: ReactNode;
+} = {}) {
+  const mock = !authenticatedSession && (import.meta.env.VITE_DATA_MODE ?? "mock") === "mock";
   const [profile, setProfile] = useState<Profile>("manager");
   const [scenario, setScenario] = useState<Scenario>("normal");
   const [revision, setRevision] = useState(0);
@@ -54,21 +65,24 @@ export default function App() {
     () =>
       mock
         ? createMockClient(profile, scenario)
-        : createHttpClient({
-            sessionPath: import.meta.env.VITE_SESSION_PATH,
-            overviewPath: import.meta.env.VITE_OVERVIEW_PATH,
-          }),
-    [mock, profile, scenario],
+        : {
+            ...createHttpClient({
+              sessionPath: import.meta.env.VITE_SESSION_PATH,
+              overviewPath: import.meta.env.VITE_OVERVIEW_PATH,
+            }, transport),
+            ...(authenticatedSession ? { getSession: async () => authenticatedSession } : {}),
+          },
+    [mock, profile, scenario, authenticatedSession, transport],
   );
   const operations = useMemo(
-    () => createOperationsClient(mock, profile),
-    [mock, profile],
+    () => createOperationsClient(mock, profile, transport),
+    [mock, profile, transport],
   );
   const loadSession = useCallback(
     (signal: AbortSignal) => client.getSession(signal),
     [client],
   );
-  const resourceKey = `${profile}:${scenario}:${revision}`;
+  const resourceKey = `${profile}:${scenario}:${revision}:${authEpoch}`;
   const session = useResource(`session:${resourceKey}`, loadSession);
   const retry = () => setRevision((n) => n + 1);
   const recover = () => {
@@ -250,6 +264,7 @@ export default function App() {
         session={session.status === "ready" ? session.data : null}
         mock={mock}
       >
+        {extraContent ?? (mock ? <p className="p1-entry"><Link className="text-link" to="/p1">P1 API 로그인</Link> · 기존 합성 시연과 별도</p> : null)}
         {content}
       </AppShell>
     </>

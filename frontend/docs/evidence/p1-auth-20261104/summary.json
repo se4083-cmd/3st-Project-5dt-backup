@@ -1,0 +1,34 @@
+{
+  "baseline": "02242912ea7545a511296dc73531d4045afd8784",
+  "branch": "feature/backend-plus",
+  "recorded_at": "2026-11-04T16:25:07.336081+09:00",
+  "react_tests": {
+    "files": 6,
+    "passed": 52,
+    "failed": 0,
+    "skipped": 0,
+    "existing_tests": 29,
+    "new_tests": 23
+  },
+  "build": "PASS: tsc --noEmit + vite build",
+  "backend_contracts": {
+    "p0": "PASS:37 paths/41 operations and components/security unchanged",
+    "p1": "2 existing OpenAPI regression tests passed; full backend tree including policy schema unchanged",
+    "all_openapi_operations_unchanged": 59,
+    "handoff": "PASS",
+    "full_backend_suite_repeated": false
+  },
+  "http": "Actual frontend AuthManager/P1 client -> Vite proxy -> local FastAPI -> isolated PostgreSQL17.11; login/session/SQL scopes/Bearer/request ID/invalid login verified",
+  "storage": "Memory only; no browser storage or invented refresh/logout endpoint",
+  "limits": [
+    "No browser UI E2E",
+    "No production Azure deployment/network validation",
+    "No real Azure OpenAI/Fabric/RAG/Search/Backend B validation",
+    "No full P1 feature screens",
+    "P0 Overview and legacy VOC-improvements/quality HTTP contracts still unconnected"
+  ],
+  "git": {
+    "commit_created": false,
+    "push_performed": false
+  }
+}
