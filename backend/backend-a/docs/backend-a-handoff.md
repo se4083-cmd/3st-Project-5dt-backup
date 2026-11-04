@@ -1,4 +1,4 @@
-# Backend A 구현·팀 인수 현황
+# Backend A 구현 및 팀 연동 현황
 
 ## 현재 실제 배포 — 0.11.0 / DB0011
 
@@ -17,7 +17,7 @@
 
 2026-11-04 KST. feature/backend-a의 품질 평가 공유 기준은 `30fbfff047f1d316b73cb33b6cc2b0fb4fe167db`이며, 그 뒤 구현한 [읽기 전용 배정 추천](assignment-recommendations.md)을 이번 공유 커밋에 포함한다. 소스/파일 migration head 기준이며 Azure 배포 버전을 뜻하지 않는다. 이번 공유 검토는 기록 hash/JUnit·diff·정적 계약 검사이며, 이전 PostgreSQL 21개·350개·마지막2개를 재실행하거나 합산하지 않았다. [검증/공유 검토 기록](evidence/recommendation-local/README.md)을 따른다.
 
-### 인수님 요청 3가지의 현재 상태
+### 추가 기능 구현 및 연동 상태
 
 | 요청 | A에서 구현·로컬 검증한 것 | 완료로 볼 수 없는 부분 |
 |---|---|---|
@@ -36,9 +36,9 @@
 | 담당 | 다음 행동 | 연동 확인 기준 |
 |---|---|---|
 | Frontend 담당 + A | capabilities/팀 scope 기반 화면 연결. 품질 후보→표본/자료/평가/지표, VOC action/plan revision·멱등, workload/추천 만료·이유·문의/후속 분리 표시. 없는 실행 API 버튼을 만들지 않음 | 실제 팀 화면에서 권한 회수/403·404·409/빈 목록·null/unavailable·30초 만료 재조회 확인. 현재 실제 Frontend 연동 미검증 |
-| Backend B 준혁님 + A | 실제 확정 writer에 선택 provenance를 실제 사용 값으로 전달. 실패/HUMAN 전환/배정은 기존 검토의 미구현 제안을 확정 계약으로 오해하지 않고 별도 협의. 추천 사용 직전 현재 cycle/version/route revision·후보 자격·유효/물리 배정을 재검사하고 B 실행 경계의 lease/generation/PAUSED/CAS·멱등 적용 | 실제 B Worker와 fencing/중복·늦은 실행·실패 보존을 통합 검증. 추천을 받았다는 사실만으로 배정 권한이나 성공을 인정하지 않음. [B 인수](backend-b-handoff.md) |
+| Backend B 담당 + A | 실제 확정 writer에 선택 provenance를 실제 사용 값으로 전달. 실패/HUMAN 전환/배정은 기존 검토의 미구현 제안을 확정 계약으로 오해하지 않고 별도 협의. 추천 사용 직전 현재 cycle/version/route revision·후보 자격·유효/물리 배정을 재검사하고 B 실행 경계의 lease/generation/PAUSED/CAS·멱등 적용 | 실제 B Worker와 fencing/중복·늦은 실행·실패 보존을 통합 검증. 추천을 받았다는 사실만으로 배정 권한이나 성공을 인정하지 않음. [B 인수](backend-b-handoff.md) |
 | AI/RAG 담당 + A/운영 평가 책임자 | 당시 model/prompt·실제 suggestion/approval·질문·정책 version/hash/검증 가능한 본문·retrieval 참조 제공 계약 확정. 운영 rubric/판단 불가/비적용 기준·평가 권한·표본 편향/coverage 합의 | 실제 확정 응답과 당시 근거 연결 및 사람 검토 결과 확인. 누락은 MISSING/UNKNOWN 유지. 합성 데이터 테스트를 실제 AI 품질로 보고하지 않음 |
-| Fabric 주현님 + A | VOC 전후 동일 길이 기간·UTC/일별 경계·상품 식별·비교 scope·판매량 분모·중첩 조치/미성숙/자료 부족 표시와 별도 효과 수신 계약 합의. 기존 게시/원자 검증 재사용 우선. 기존 KPI cohort/귀속 및 새 회차 분모도 합의 | 실제 Fabric emitter→A 수신/검증/게시→조회와 결과 출처 확인. 현재 효과 연동/DB→Blob Export 미구현이며 analytics-v1 schema를 이번에 바꾸지 않음. [Fabric 인수](fabric-handoff.md) |
+| Fabric 담당 + A | VOC 전후 동일 길이 기간·UTC/일별 경계·상품 식별·비교 scope·판매량 분모·중첩 조치/미성숙/자료 부족 표시와 별도 효과 수신 계약 합의. 기존 게시/원자 검증 재사용 우선. 기존 KPI cohort/귀속 및 새 회차 분모도 합의 | 실제 Fabric emitter→A 수신/검증/게시→조회와 결과 출처 확인. 현재 효과 연동/DB→Blob Export 미구현이며 analytics-v1 schema를 이번에 바꾸지 않음. [Fabric 인수](fabric-handoff.md) |
 | 배포 담당 + A + 운영 책임자 | 별도 승인된 작업에서 배포 패키지/0010 additive migration·rollback 제한·환경 차이 검토. 새 capability는 기본 미부여이므로 역할/팀 scope에 맞는 계정 grant는 별도 승인 후 수행. 기존0.6.1/0006용 도구를 바로 실행하지 않음 | 대상 Azure 실제 버전/DB head·readiness·회귀·PAUSED/실행 경계 확인. 이번 작업은 Azure 미확인·미변경이며 배포/실제 grant/팀 메시지 발송 없음 |
 
 ## 이전 단계별 인수 기록
@@ -52,7 +52,7 @@ VOC 구현 당시 로컬은 **0.8.0 / migration0008**입니다. [VOC 상품 개�
 
 7단계 당시 로컬은 **0.6.1 / migration0006**, 최종 코드 이후 전체 PostgreSQL **368개 통과**(실패/skip0)와 실제 HTTP **33개 흐름 통과**입니다. 관련 부분PG38개·SQLite37개/1skip은 합산하지 않습니다. [독립 검토 수정](review-fixes.md)은 배정 권한/큐·lease 최종 만료·cursor422·Python HTTP 설명 차이를 다룹니다. 이전0.6.0의330개 결과와 구분하며 실제 B/AI/Fabric/발송 엔진 통합 완료를 의미하지 않습니다.
 
-공식 v4.1 DOCX를 로컬 OOXML로 읽고 코드/OpenAPI/2–4단계 설계·검증/Frontend·B·Fabric 계약과 대조했습니다. 원본 SHA256은 `a25d03e3b7ce9c35ccdfa98e8f46ebef0207e4e22fbd1b9746e3a7d429ab1f33`입니다. 문서의 실행 지시를 추가 사용자 승인으로 간주하지 않았고, 현재 사용자 지시대로 클라우드 작업은 제외했습니다.
+공식 v4.1 DOCX를 로컬 OOXML로 읽고 코드/OpenAPI/2–4단계 설계·검증/Frontend·B·Fabric 계약과 대조했습니다. 원본 SHA256은 `a25d03e3b7ce9c35ccdfa98e8f46ebef0207e4e22fbd1b9746e3a7d429ab1f33`입니다. 이 비교의 검증 범위에는 클라우드 연결·설정 변경이 포함되지 않습니다.
 
 ## 완료 범위의 구분
 

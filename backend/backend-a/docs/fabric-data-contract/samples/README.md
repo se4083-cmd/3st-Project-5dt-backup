@@ -2,7 +2,7 @@
 
 **구현 확인용 예시:** db-projections에는 실제8테이블의 allowlist 컬럼만 있는 JSONL9행이 있다. 전체 INSERT/백업 데이터가 아니다. users에는 login_name/password_hash가 없고 customers에는 이름/profile/customer_key가 없으며 두 후속 메모도 제외했다. 필드명·타입·FK 관계는 실제 migration 카탈로그와 검증했다. PostgreSQL 제약 검사에서는 빠진 필수 민감 컬럼을 **메모리의 비로그인 합성값**으로 채운 뒤 rollback했다. 디스크 예시에 그 값이나 해시는 없다. 티켓 회차2/후속 원래회차1·책임회차2 사례다.
 
-**제안:** export-proposal은 DB projection에서 가명 변환한 **5개 파일/총5행** 예시다. 주현님이 언급한5개 JSONL/12,008건의 재현 또는 전달본이 아니다. 고객/주문/티켓/후속 참조는 domain별 HMAC 가명이며 raw ID를 싣지 않는다. 제품·팀 UUID는 차원 키로 유지한다. manifest의 PROPOSED_NOT_IMPLEMENTED, EXAMPLE_ONLY_NO_SNAPSHOT_WAS_EXPORTED, completeness=unknown을 확인한다. 실제 DB snapshot 추출·Blob 업로드·Fabric 적재는 실행하지 않았다. hmac-vector의 키는 공개 합성 bytes00..1f로 운영 재사용 금지다.
+**제안:** export-proposal은 DB projection에서 가명 변환한 **5개 파일/총5행** 예시다. Fabric 담당이 언급한5개 JSONL/12,008건의 재현 또는 전달본이 아니다. 고객/주문/티켓/후속 참조는 domain별 HMAC 가명이며 raw ID를 싣지 않는다. 제품·팀 UUID는 차원 키로 유지한다. manifest의 PROPOSED_NOT_IMPLEMENTED, EXAMPLE_ONLY_NO_SNAPSHOT_WAS_EXPORTED, completeness=unknown을 확인한다. 실제 DB snapshot 추출·Blob 업로드·Fabric 적재는 실행하지 않았다. hmac-vector의 키는 공개 합성 bytes00..1f로 운영 재사용 금지다.
 
 **구현 확인용 예시:** publish-request.json은 기존 docs/examples/analytics-batch.json과 같은 완전한 Submission이다. LOCAL_SYNTHETIC이며 minimal seed 전용 팀/상품 UUID를 쓴다. 원본4팀 fixture의 T1 UUID와 다르다. 여기의 독립된 Gold 지표/점수는 db-projections의 작은 원장 예시에서 계산된 값이 아니다. A가 점수를 새 계산하지 않았다. 실제 DB FK 검증에는 별도 합성 차원을 생성해 검증 후 rollback했다.
 

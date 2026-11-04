@@ -41,7 +41,7 @@ OpenAPI와 Frontend 예시는 실제 모델/경로·bearer·닫힌 allowlist·nu
 
 ## 미검증·남은 연동
 
-실제 Azure 상태·배포/migration 적용·실제 계정 grant·Fabric 효과 결과·Export·B Worker·Frontend 화면/브라우저 연결·새 기능 SQLite runtime은 미검증이다. 문의 cohort/분모·기간·일별 집계 경계·상품 식별·고정 scope는 주현님과 합의해야 한다. 로컬 계약 통과를 분석 효과나 외부 전체 연동 성공으로 표현하지 않는다. commit/push/팀 메시지 발송도 하지 않았다.
+실제 Azure 상태·배포/migration 적용·실제 계정 grant·Fabric 효과 결과·Export·B Worker·Frontend 화면/브라우저 연결·새 기능 SQLite runtime은 미검증이다. 문의 cohort/분모·기간·일별 집계 경계·상품 식별·고정 scope는 Fabric 담당과 합의해야 한다. 로컬 계약 통과를 분석 효과나 외부 전체 연동 성공으로 표현하지 않는다. commit/push/팀 메시지 발송도 하지 않았다.
 
 완료 시 임시 test schema 잔여0개를 확인하고 소유 VOC PostgreSQL을 정지했다. [기존/이번 변경 구분](changes-from-baseline.json)과 [요약](summary.json)을 함께 보관한다.
 

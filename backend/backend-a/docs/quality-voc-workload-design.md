@@ -41,7 +41,7 @@
 
 ### 1.2 인수 내용과 대조한 결과
 
-버전/head 및 사용자가 제시한 인수 내용과 다른 구현은 발견하지 못했다. 다음은 새 요구사항과 대조해 확인한 중요한 세부 사항이다.
+해당 설계 기준 시점의 버전/head와 인수 계약을 소스와 대조했다. 다음은 새 요구사항과 대조해 확인한 중요한 세부 사항이다.
 
 1. **상품 단위 후속은 이미 지원한다.** `followup_actions`는 ticket 또는 product 중 하나를 대상으로 한다. 상품 후속은 ADMIN이 만들고, 소유자는 해당 팀의 활성 ADMIN 또는 미지정만 가능하다. 일반 AGENT를 상품 개선 담당자로 바로 지정할 수 없다. 상품 후속은 티켓 해결을 막을 수 없다.
 2. **SLA 저장값은 이미 있지만 SLA 엔진은 없다.** 접수와 재문의/사람 요청에서 `sla_due_at = now + 24시간`으로 설정한다. 새 회차에서 `first_replied_at`, `resolved_at`을 비우며 기한도 다시 설정한다. 업무시간·휴일·일시 정지·최초 응답/해결별 기한은 구현돼 있지 않다.
@@ -414,7 +414,7 @@ before/after에 같은 ticket 문의가 이어져도 최초 문의 cohort 배치
 
 | 순서 | 향후 구현 단위·완료 조건 | 팀 연동과 분리 방법 |
 |---|---|---|
-| 0 — 설계 완료 | 이 설계 검토 및 기존 dirty 기준점 확인 | 후속 사용자의 명시 구현 요청으로 1단계만 진행. 나머지는 자동 시작하지 않음 |
+| 0 — 설계 완료 | 이 설계 검토 및 기존 dirty 기준점 확인 | 단계별 구현·검증 범위를 분리하며 이후 단계의 완료를 의미하지 않음 |
 | 1 — 로컬 구현 완료 | **권한 있는 현재 업무량·미배정·기존 24h 기한 조회**. 0.7.0/0007 capability/snapshot DTO. [실제 검증](evidence/workload-local/README.md) | 새 B worker·AI·Fabric 없이 격리 PostgreSQL로 검증. 추천/실배정과 분리. 실제 계정 grant/배포 없음 |
 | 2 — 로컬 구현 완료(0.8.0/0008) | **상품 개선 profile·계획 이력**과 기존 product followup wrapper. owner/status는 재사용, 실제 시행일·비교창 저장 | Fabric 효과 연동 미구현은 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED 및 null로 표시하고 등록 업무부터 사용. 기존 후속 terminal/권한 회귀 유지 |
 | 3 — 최소 provenance 구현(0.9.0), ticket_cycles 미구현 | **확정 응답 provenance + 전향 ticket_cycles 제안**. 기존 writer transaction에 optional 확장, 과거 UNKNOWN 유지 | B에 새 필수 인자를 강제하기 전에 계약 sample으로 확인. 고정 합성 writer는 실제 AI 품질 증거가 아님 |
@@ -472,17 +472,17 @@ SQLite는 DTO/기본 정책 검증만 가능하고 SKIP LOCKED/PG partial UNIQUE
 | B 실행 경계 | 공통 helper 배포/버전 관리, ticket→job→team guard→assignment, scope writer의 guard 참여, route/job/ticket revision 동시 갱신 | A/B | 추천 읽기만 가능, 실제 배정/균형 보장 주장 금지 |
 | 정식 SLA | 시작/종료·일시 정지·재문의 reset, WAITING_CUSTOMER, 업무시간/휴일, first-response vs resolution, ACK 인정 여부 | 운영/PM/B/A/Fabric | 기존24h 저장 기한 상태만 표시, 정식 SLA 준수율 unavailable |
 
-코드로 확인한 버전·기존 API·상품 후속 지원·현재 owner 제한·24h 재설정·RBAC/큐 정책은 다시 사용자에게 질문하지 않는다. B SQLite·실제 Fabric schema·AI context는 아직 자료가 없어 공동 확인 대상으로 구분한다.
+버전·기존 API·상품 후속 지원·현재 owner 제한·24h 재설정·RBAC/큐 정책은 소스 기준으로 확인한 계약이다. B SQLite·실제 Fabric schema·AI context는 아직 자료가 없어 공동 확인 대상으로 구분한다.
 
 ### 6.2 임시 기본값으로 진행 가능한 것
 
-다음은 실제 구현 요청을 받으면 호환성을 지키며 적용할 수 있는 개발 기본 제안이다. 미합의 지표를 운영 성과로 공개한다는 뜻은 아니다.
+다음은 단계별 구현에서 기존 호환성을 지키며 적용할 수 있는 개발 기본 제안이다. 미합의 지표를 운영 성과로 공개한다는 뜻은 아니다.
 
 - 원문 복제 없이 FK/버전/hash 참조, UTC 저장·KST 표시, [start,end), 누락=null/unknown, 표본·legacy/synthetic 별도 표시.
 - 상품 개선은 기존 product followup의 ADMIN/팀 대기·상태를 재사용. 계획 L=14×24시간은 편집 가능한 기본 입력값, 실제 비교 정의는 Fabric 합의 전 unavailable.
 - 업무량은 유효 활성 티켓 단순 개수, WAITING_CUSTOMER 별도 분류, 후속 별도 개수. 임박2시간·추천 유효30초·결정론적 tie-break는 rule_version에 고정하고 변경 가능하게 설계.
 - 표본은 수동 선별부터 시작하고 selection method/coverage를 공개. 통계적 대표성·가중 추정·ML 점수는 추가하지 않음.
-- 모든 새 capability는 기본 미부여, 명시 테스트 grant만 격리 환경에서 사용. 실제 계정 권한 부여는 별도 구현/운영 요청 범위.
+- 모든 새 capability는 기본 미부여, 명시 테스트 grant만 격리 환경에서 사용. 실제 계정 권한 부여는 별도 운영 승인과 대상 검증이 필요하다.
 - 기존 v1 wire/API·최종 확정 gate·고객 DTO는 그대로 유지. 문서상의 제안 이름은 구현 시 기존 계약과 다시 대조하되, 내부 Python 함수를 HTTP endpoint로 안내하지 않음.
 
 **이미 있는 것:** 상품/티켓 후속, 팀 권한·유효 배정·예외 큐, 24시간 기한값, 자동 응답 공통 확정, Gold 수신·원자 게시.

@@ -1,4 +1,4 @@
-# 주현님과 합의할 질문과 차이 기록
+# 데이터 계약 협의 사항
 
 ## 먼저 필요한 파일 — 팀 합의 필요
 
@@ -39,7 +39,3 @@
 | 과거 Azure 구조 검증 기록 | 당시 32테이블/138제약 등 대조. 이번 배포 DB 재접속·스키마 일치 확인은 하지 않음 |
 
 **미구현:** 운영 Export·Blob 업로드·Fabric emitter·CDC/outbox·완전한 과거 팀 이벤트 ledger·서비스 발급/회전·정확한 미합의 KPI. 이번 문서 작성으로 완료 상태를 올리지 않는다.
-
-## 전달 메시지 초안 — 발송하지 않음
-
-> 주현님, 11/3 요청하신 Backend A 실제 ERD·DDL·PK/FK·타입 정의를 `backend/backend-a/docs/fabric-data-contract/`에 정리했습니다. 최신 파일은 0.6.1/head0006이며 새 로컬 PostgreSQL16.15에 migration을 적용해 추출·모델 대조했습니다. 이번에는 Azure DB를 재조회하지 않았습니다. 먼저 README→schema.md/schema.sql→fixture-differences.md를 확인 부탁드립니다. 이벤트/회차/후속과 실제 Gold 수신·검증·게시 API 및 검증된 합성 예시도 포함했습니다. 운영 DB→Blob Export는 아직 미구현이라 계약 제안으로 분리했습니다. 실제 적재하신 5개 JSONL의 schema/manifest와 팀 귀속·episode·완전성·HMAC 조인 범위·서비스 인증을 함께 맞추면 좋겠습니다. 비밀값/실데이터는 넣지 않았습니다.

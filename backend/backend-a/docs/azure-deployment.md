@@ -1,6 +1,6 @@
 # Backend A Azure 팀 개발 환경 배포
 
-2026-11-03 KST 사용자 승인으로 실제 생성·배포했다. 이전 단계의 로컬 전용 제한은 이번 A 전용 배포에만 해제됐다. 실제 B·AI/RAG·Fabric·외부 발송은 실행하지 않았다. 원본 개발 폴더/DB/.env는 보존하고 팀 clone의 feature/backend-a에서 작업했다.
+2026-11-03 KST 승인된 A 전용 배포 절차로 실제 생성·배포했다. 실제 B·AI/RAG·Fabric·외부 발송은 실행하지 않았다. 원본 개발 폴더/DB/.env는 보존하고 팀 clone의 feature/backend-a에서 작업했다.
 
 최신 이름 이전·기존 리소스 정리·복구 백업은 [실제 이전 보고](azure-migration.md)를 기준으로 한다. 아래 최초 배포 실행 결과는 당시 기록이며 최신 이전 검증과 합산하지 않는다.
 
@@ -28,7 +28,7 @@
 
 Swagger/OpenAPI는 팀 개발용으로 공개한다. 데이터 endpoint는 기존 Bearer 인증/RBAC/scope/purpose를 그대로 검사한다. Swagger에서 로그인 응답의 access_token을 자신의 브라우저 Authorize에 사용하며 키나 비밀번호를 URL에 넣지 않는다. 실제 Frontend origin 미확정으로 CORS_ORIGINS=[]이다. wildcard나 추측 origin을 등록하지 않았다. Frontend 주소가 확정되면 정확한 HTTPS origin만 A 앱 설정에 추가해야 하며 React 화면은 이번 범위가 아니다.
 
-합성 체험 계정은 demo-customer1@csflow.example.test, demo-customer2@csflow.example.test, demo-agent@csflow.example.test, demo-admin@csflow.example.test이다. 최초 배포 때 생성하고 이전에서도 보존한 각 계정의 비밀번호는 담당 폴더 안 ignored `.cache/azure-backend-a/demo-accounts.json`을 로컬 편집기로 확인한다. 콘솔 cat/로그/대화/스크린샷/커밋으로 공유하지 않는다. 비밀 state 디렉터리는 Windows 현재 사용자 SID에만 파일 권한을 부여했다. 배포 패키지에 이 파일은 없다.
+합성 체험 계정은 demo-customer1@csflow.example.test, demo-customer2@csflow.example.test, demo-agent@csflow.example.test, demo-admin@csflow.example.test이다. 최초 배포 때 생성하고 이전에서도 보존한 각 계정의 비밀번호는 담당 폴더 안 ignored `.cache/azure-backend-a/demo-accounts.json`을 로컬 편집기로 확인한다. 콘솔 출력·로그·공개 문서·스크린샷·커밋에 노출하지 않는다. 비밀 state 디렉터리는 Windows 현재 사용자 SID에만 파일 권한을 부여했다. 배포 패키지에 이 파일은 없다.
 
 고객은 로그인→orders→본인 티켓 접수/멱등 재시도→reopen/request-agent를 체험한다. 상담사 배정은 B가 없어 자동 생성되지 않는다. 검증 과정의 명시적 고정 배정/응답 데이터와 관리자 조회를 실제 B/AI 처리라고 표시하지 않는다. 기본 seed의 dev-* 계정은 production에서 여전히 인증 불가이며 원본821개 계정을 업로드·활성화하지 않았다. 전체 외부 fixture 대신 검증된 작은 SYNTHETIC seed·별도 검증 티켓만 적재했다. 자동 처리는 DB의 PAUSED 상태를 유지하며 체험 관리자에게 AUTOMATION_RESUME/UNROUTED_QUEUE_READ/RETENTION_GLOBAL_REVIEW를 부여하지 않았다.
 
@@ -82,7 +82,7 @@ bootstrap은0001–0006을 순서 적용하고 seed는 insert-missing으로 기�
 
 2026-11-03 Microsoft Retail Prices API의 Korea Central/USD/Consumption 단가: B1 Linux0.018$/시간×730=13.14$, PostgreSQL B1MS0.026$/시간×730=18.98$, 일반 storage32×0.131$/GiB월=4.192$, 합계 약 **36.31$/월**. 계약 할인/세금/환율/전송·백업 초과분은 미포함이며 확정 청구액이 아니다. 팀 전체 예산을 A 예산으로 간주하지 않았다. [App Service 가격](https://azure.microsoft.com/en-us/pricing/details/app-service/linux/) / [PostgreSQL 가격](https://azure.microsoft.com/en-us/pricing/details/postgresql/flexible-server/).
 
-현재 API/DB는 사용자가 접속하도록 실행 중으로 유지한다. 아래는 나중에 A 전용 대상만 정지할 때의 명령이며 이번에 실행하지 않았다.
+API/DB의 실행 상태를 유지한다. 아래는 나중에 A 전용 대상만 정지할 때의 명령이며 이번에 실행하지 않았다.
 
 ```powershell
 az webapp stop -g 5dt-final-team1 -n csflow-backend-a --subscription 27db5ec6-d206-4028-b5e1-6004dca5eeef

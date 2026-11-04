@@ -228,7 +228,7 @@ def main():
         "",
         "**구현 확인:** fixture의 nested_json_encoded=true는 Spark 입력 JSONL에서 JSONB를 JSON 문자열로 한 번 더 인코딩하는 기존 관례다. DB의 JSONB 저장 타입과 Gold API의 중첩 JSON object를 문자열로 오해하면 안 된다. 신규 Export 제안은 typed nested JSON이며 기존 fixture와 다른 schema_version으로 합의해야 한다.",
         "",
-        "**비교 불가 / 팀 합의 필요:** 주현님이 실제 적재한 Bronze/Silver 스키마·5개 JSONL의 필드/행 수/manifest/완전성 근거는 받지 않았다. 현재 문서의 27항목 및 배포32테이블과 동일하다고 주장하지 않는다. 해당 schema_contract.json, 파일별 counts/checksum, Bronze CREATE TABLE/printSchema 결과, 사용 Notebook 버전이 필요하다.",
+        "**비교 불가 / 팀 합의 필요:** Fabric 담당이 실제 적재한 Bronze/Silver 스키마·5개 JSONL의 필드/행 수/manifest/완전성 근거는 받지 않았다. 현재 문서의 27항목 및 배포32테이블과 동일하다고 주장하지 않는다. 해당 schema_contract.json, 파일별 counts/checksum, Bronze CREATE TABLE/printSchema 결과, 사용 Notebook 버전이 필요하다.",
     ]
     write("fixture-differences.md", "\n".join(diff) + "\n")
     write("fixture-differences.json", dump(differences))

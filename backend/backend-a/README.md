@@ -120,7 +120,7 @@ verify는 별도 임시 schema의 테스트 권한/고정 답변·배정·사람
 
 ## 2026-11-03 Azure 팀 개발 배포
 
-이번 사용자 승인으로 A 전용 Linux App Service/PostgreSQL에 실제 배포했다. 위 로컬 실행 경로·guard는 유지한다. API/Swagger는 https://csflow-backend-a.azurewebsites.net/docs 이며 live/ready200과 HTTPS18개 묶음·61건을 새로 검증했다. 실제 B/AI/Fabric/발송은 미연결이고 자동 처리는 PAUSED, 분석은 NO_PUBLISHED_BATCH이다.
+승인된 배포 절차에 따라 A 전용 Linux App Service/PostgreSQL에 실제 배포했다. 위 로컬 실행 경로·guard는 유지한다. API/Swagger는 https://csflow-backend-a.azurewebsites.net/docs 이며 live/ready200과 HTTPS18개 묶음·61건을 새로 검증했다. 실제 B/AI/Fabric/발송은 미연결이고 자동 처리는 PAUSED, 분석은 NO_PUBLISHED_BATCH이다.
 
 [배포·비용·재배포·복구 안내](docs/azure-deployment.md), [새 검증 증거](docs/evidence/azure-team-dev/)를 읽는다. 담당 폴더의 python -m scripts.azure_deploy와 scripts.azure_verify는 명시적 Azure 운영 도구이며 local_runtime이 실행하지 않는다. 체험 비밀번호는 ignored .cache/azure-backend-a/demo-accounts.json을 로컬 편집기로 확인하고 출력/공유하지 않는다. 환경변수 이름만 [예시](docs/examples/azure-settings.names.json)에 있다.
 

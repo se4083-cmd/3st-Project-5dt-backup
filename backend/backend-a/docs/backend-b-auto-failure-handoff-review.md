@@ -1,6 +1,6 @@
 # AUTO 최종 실패 → 사람 이관·배정 계약 검토
 
-2026-11-04 KST 작성. **소스 검토 결과와 미구현 보완 제안**이다. 기존 [B 계약](backend-b-contract.md)·[B 인수](backend-b-handoff.md)를 대체하지 않는다. 사용자 답변 ‘1번 방향이 좋다’는 FAILED 보존 방향의 선호이며 아래 필드 변경·새 writer가 이미 승인/구현됐다는 뜻이 아니다. 이번에는 이 문서만 작성하고 앱·migration·DB·Azure·B 코드·commit·push·팀 메시지는 변경/실행하지 않는다.
+2026-11-04 KST 작성. **소스 검토 결과와 미구현 보완 제안**이다. 기존 [B 계약](backend-b-contract.md)·[B 인수](backend-b-handoff.md)를 대체하지 않는다. FAILED를 보존하는 방향과 필요한 필드 변경·공통 writer 구현은 별개의 계약이다. 이 검토는 아래 고정 소스 확인에 한정되며 앱·migration·DB·Azure·B 실행 경계를 변경하지 않았다.
 
 ## 1. 기준점·확인 범위
 
@@ -265,12 +265,9 @@ A claim에는 상한이 없어 B의 후보 prefilter만으로 모든 consumer의
 
 이번 수행은 Git/버전/AST graph/파일·라우터·모델·migration·공통 함수·기존 테스트 **소스**와 지정 B 원격 SHA 확인뿐이다. 문서 링크/구문 및 기존 파일 보존 검사 외 업무 실행 검증은 없다. 기존 테스트 PASS 수치를 이번 결과로 재사용하지 않는다.
 
-## 11. 준혁님께 보낼 짧은 답변 — 초안, 미발송
+## 11. Backend B 연동 우선순위
 
-> 준혁님, 같은 회차의 AUTO Job을 FAILED로 남기는 방향은 DB 제약과 맞습니다. 다만 A에 최종 실패와 같은 회차 HUMAN 전환·배정을 처리하는 공통 함수는 아직 없어, 바로 연동 가능한 상태는 아닙니다.
->
-> 필드는 requested_mode=HUMAN, status=HANDOFF_PENDING, cycle 유지, ticket.version+1로 원자 전환하는 안이 적절해 보입니다. 이건 보완 제안이고, FAILED Job의 lease 3종은 NULL로 비우며 Job 종류는 AUTO 그대로 두는 방향입니다. 별도 HANDOFF Job을 같은 회차에 만들지는 않습니다.
->
-> AUTO_FAILED 큐 조회는 가능하지만 배정 실행기는 아닙니다. FAILED는 claim되지 않고, 유효 배정 후에도 실패 큐에 계속 보일 수 있어 별도 배정 명령과 중복 방지 검증이 필요합니다. 최대3회는 B 정책이고 A claim은 현재 그 상한을 강제하지 않습니다.
->
-> 확인한 d7a8dbd 코드에서는 최종 상태가 아직 HANDED_OFF라 FAILED 방향으로 맞춰야 합니다. 우선 PG 필드 매핑·3회 정책·실패/재시도 테스트를 준비해주시면, 실패 확정·HUMAN 전환·FAILED 전용 배정의 공통 transaction 경계를 먼저 맞추겠습니다. 그 전에는 고객 request-agent를 대신 호출하거나 FAILED를 재활성화하지 않는 것으로 정리하면 좋겠습니다.
+1. 검토 기준 d7a8dbd의 최종 상태 HANDED_OFF와 제안하는 FAILED 보존 계약의 차이를 먼저 확정한다. 최대3회 정책은 B 책임이며, A claim의 상한 강제로 오해하지 않는다. PG 필드 매핑과 실패/재시도 검증을 준비한다.
+2. 같은 회차에서 requested_mode=HUMAN, status=HANDOFF_PENDING, ticket.version+1을 원자 저장하는 방안은 **검토 당시 미구현 제안**이다. AUTO 종류·FAILED 이력을 유지하고 lease 3종을 NULL로 비우며 같은 회차에 별도 HANDOFF Job을 추가하지 않는 계약을 검토한다.
+3. AUTO_FAILED 조회와 배정 실행을 분리한다. FAILED는 claim 대상이 아니고 유효 배정 후에도 실패 큐에 보일 수 있으므로 별도 배정 명령·멱등·중복 방지 경계를 합의한다.
+4. 실패 확정·HUMAN 전환·FAILED 전용 배정의 transaction 계약이 구현되기 전에는 고객 request-agent를 엔진 실패 이관 대신 호출하거나 FAILED Job을 재활성화하지 않는다.

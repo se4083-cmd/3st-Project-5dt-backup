@@ -1,16 +1,16 @@
-# Frontend 인수 — 추가 기능 연결 안내 (0.11.0 / migration0011)
+# Frontend 연동 안내 (0.11.0 / migration0011)
 
 0.11.0 후속: [회차 진단·VOC 효과 API](monitoring-effects.md)를 추가했습니다. 자동 처리/이관 숫자는 전향적 AUTO 회차의 기록된 사실이며 기존 티켓 KPI와 분모가 다릅니다. safe_completion은 여전히 운영 UNAVAILABLE입니다. 효과는 별도 `/effects?origin=OPERATIONAL`(기본)에서 조회하고 SYNTHETIC을 운영과 섞지 않습니다. 기존 embedded analysis.metrics는null, reason은 VERSIONED_EFFECT_ENDPOINT_REQUIRED입니다. 아래0.10.0의 ‘효과 수신 미구현’은 당시 기록이며 후속 A 수신/게시 구현과 실제 Fabric 연동은 구분합니다. Azure의 이번 실제 검증은 [배포/로컬 증거](evidence/monitor-effects-local/README.md)를 우선합니다.
 
 2026-11-04 KST 현재 실제 배포는 **0.11.0 / DB0011**, 고정 소스 SHA는 `646023067495f3a286a51585e60d758071a8404c`다. live/readiness/Swagger200·배포 OpenAPI와 소스 기록본 전체 일치, PAUSED/기존 설정 보존을 확인했다. [배포/로컬 검증 근거](evidence/monitor-effects-local/README.md)를 따른다. 이전0.10 공유 기준은2cb07cf였으며 아래 기존 구현 기록과 구분한다. 실제 B/AI/Fabric/Frontend 통합은 미검증이고, 직원 신규 capability·운영 effect subject는 아직 미설정이다. 실제 origin을 받지 못해 CORS=[]를 유지했다. 실행 중인 API base는 https://csflow-backend-a.azurewebsites.net/api/v1 이지만 브라우저 연결/권한 있는 신규 ADMIN 조회까지 성공했다고 안내하지 않는다.
 
-## 1. 인수님 요청 3가지 상태
+## 1. 추가 기능 구현 및 연동 상태
 
 | 요청 | A 구현 완료(로컬·GitHub 소스) | 팀 연결 필요 | 추가 구현·합의 필요 |
 |---|---|---|---|
 | AI 상담 품질 평가·모니터링 | 확정 자동 응답의 전향적 근거 연결, 수동 표본·검토자 지정, 제한 자료·append-only 평가 이력, 표본 판정률/coverage 및 전향적 AUTO 회차/사유 진단 | Frontend 화면, B의 실제 확정 writer와 AI/RAG의 실제 질문·버전·근거, 운영 평가자 연결 | 실제 AI 품질 검증·운영 rubric 합의는 미완료. 전향적 AUTO 처리/이관 회차 진단 API·사유 기록 경계는 구현. B 연결·완전 수집·분모 합의는 대기하며 **운영 안전 완료율은 UNAVAILABLE** |
-| VOC 상품 개선 조치·효과 추적 | 상품 개선 등록/계획 이력·연결 및 별도 voc-effect-v1 수신·검증·게시·효과 조회 | Frontend 등록/이력 화면, Fabric 주현님과 상품/기간/판매 분모/비교 scope 합의 | A의 별도 효과 수신·검증·게시·조회는0.11에 구현. 실제 Fabric 집계/emitter/운영 데이터·단위·기간·분모 합의는 대기. DONE은 효과 입증이 아니며 문의 감소의 인과효과 확정 불가 |
-| 상담사 업무량·SLA 최적화 | 현재 업무량·미배정·기한 상태, HUMAN 대기의 읽기 전용 우선순위/적격 후보 추천 | Frontend 조회·상태 표시, B 준혁님의 최신 조건 재검사와 실제 배정 경계 연결 | B 실제 배정 통합·동시 부하 균형/운영 효과 미검증. 정식 SLA 시작/종료/재문의/일시정지·업무시간/휴일·최초 응답/해결 정의와 엔진은 별도 |
+| VOC 상품 개선 조치·효과 추적 | 상품 개선 등록/계획 이력·연결 및 별도 voc-effect-v1 수신·검증·게시·효과 조회 | Frontend 등록/이력 화면, Fabric 담당과 상품/기간/판매 분모/비교 scope 합의 | A의 별도 효과 수신·검증·게시·조회는0.11에 구현. 실제 Fabric 집계/emitter/운영 데이터·단위·기간·분모 합의는 대기. DONE은 효과 입증이 아니며 문의 감소의 인과효과 확정 불가 |
+| 상담사 업무량·SLA 최적화 | 현재 업무량·미배정·기한 상태, HUMAN 대기의 읽기 전용 우선순위/적격 후보 추천 | Frontend 조회·상태 표시, Backend B 담당의 최신 조건 재검사와 실제 배정 경계 연결 | B 실제 배정 통합·동시 부하 균형/운영 효과 미검증. 정식 SLA 시작/종료/재문의/일시정지·업무시간/휴일·최초 응답/해결 정의와 엔진은 별도 |
 
 기존 `GET /api/v1/admin/analytics/kpi`는 게시 analytics-v1의 `Σauto_closed_count/Σticket_count`, `Σhandoff_count/Σticket_count`를 제공한다(분모0→null). 이는 upstream 티켓 생성 cohort 지표이며 AUTO 시작 회차율·사후 이관/안전한 완료율이 아니다. 실제 Fabric 연결/운영 성과를 확인한 것이 아니고, 없는 과거 회차/실패 사유를 snapshot이나 문구로 추정하지 않는다. [현재 A 전체 인수 현황](backend-a-handoff.md), [Fabric 계약](fabric-contract.md)을 따른다.
 
@@ -25,7 +25,7 @@
 이번 Azure 배포에서 **0.11.0·실제 DB0011·readiness·신규 OpenAPI**를 확인했다. 다음 변경 때도 배포 담당+A가 대상 환경/백업/호환성을 확인하고 미적용 migration만 적용해야 하며, 이미 적용된0007–0011을 다시 실행하거나 초기화하지 않는다. 기존 데이터/권한을 seed로 덮어쓰거나0.6.1/0006 전용 도구를 새 버전에 바로 실행하지 않는다. 파일 head와 실제 배포 DB head는 다르다.
 
 - **권한/운영 담당+A:** 아래 capability는 ADMIN 역할만으로 자동 부여되지 않는다. 실제 사용자 활성/팀·정규화 scope, 후보 지원 category, 검토자 지정/QUALITY_REVIEW와 필요 rubric을 확인한다. 승인된 별도 작업으로 최소 grant를 설정한다. 실제 계정·비밀번호·토큰·DB 접속 정보는 이 문서에 넣지 않는다.
-- **Frontend 인수님+배포 담당:** 실제 HTTPS 화면 origin을 확정해 `CORS_ORIGINS`에 명시 허용하고 브라우저 preflight를 검증한다. 현재 코드의 허용 헤더는 Authorization/Content-Type/Idempotency-Key, 노출 헤더는 X-Request-ID/Location/Idempotency-Replayed, allow_credentials=false다. 현재 CORS 허용 origin=[] 보존을 실제 확인했으며, 확정 origin의 브라우저 양성 연결은 아직 검증하지 않았다. 임의 origin·`*`·브라우저의 DB 직접 접속/서비스 인증키 배포는 사용하지 않는다.
+- **Frontend 담당+배포 담당:** 실제 HTTPS 화면 origin을 확정해 `CORS_ORIGINS`에 명시 허용하고 브라우저 preflight를 검증한다. 현재 코드의 허용 헤더는 Authorization/Content-Type/Idempotency-Key, 노출 헤더는 X-Request-ID/Location/Idempotency-Replayed, allow_credentials=false다. 현재 CORS 허용 origin=[] 보존을 실제 확인했으며, 확정 origin의 브라우저 양성 연결은 아직 검증하지 않았다. 임의 origin·`*`·브라우저의 DB 직접 접속/서비스 인증키 배포는 사용하지 않는다.
 - Frontend의 `API_BASE`는 **연동 환경 확인 후 정한** `/api/v1`까지의 값으로 설정한다. 아래 경로에 `/api/v1`을 중복 붙이지 않는다. 실제 토큰은 기존 로그인 흐름에서 취급하고 문서·로그에 저장하지 않는다. 업무 자동 처리 재개는 화면 연동 선행 작업이 아니다.
 
 ## 3. 실제 API·역할·문서
@@ -113,22 +113,12 @@ HUMAN/HANDOFF_PENDING·현재 유효 배정 없음만 목록 대상이다. FAILE
 
 | 담당 | 받을 데이터·다음 행동 | 아직 없는 것/합의 |
 |---|---|---|
-| B 준혁님 + A | 실제 commit_automatic_reply에 사용한 질문/message·job/ticket/cycle/revision, 선택 suggestion id/revision/hash·approval·model/prompt·retrieval 참조 전달. 추천 실행 직전 최신 route revision/팀·직원 자격·유효/물리 배정/lease·generation·PAUSED/CAS·멱등 재검사 | 내부 Python writer는 HTTP가 아니다. 실제 B 실패/HUMAN 전환/배정·서비스 인증 계약은 별도 검토이며 A 추천을 실행 권한으로 사용하지 않음. 구조화 회차/실패/사유 기록은 KPI 후속 합의 필요. [B 인수](backend-b-handoff.md) |
+| Backend B 담당 + A | 실제 commit_automatic_reply에 사용한 질문/message·job/ticket/cycle/revision, 선택 suggestion id/revision/hash·approval·model/prompt·retrieval 참조 전달. 추천 실행 직전 최신 route revision/팀·직원 자격·유효/물리 배정/lease·generation·PAUSED/CAS·멱등 재검사 | 내부 Python writer는 HTTP가 아니다. 실제 B 실패/HUMAN 전환/배정·서비스 인증 계약은 별도 검토이며 A 추천을 실행 권한으로 사용하지 않음. 구조화 회차/실패/사유 기록은 KPI 후속 합의 필요. [B 인수](backend-b-handoff.md) |
 | AI/RAG + 운영 평가 책임자 | 실제 사용한 정책 문서 version/hash·검증 가능한 당시 본문/chunk·검색 snapshot, model/prompt 버전 제공. 운영 rubric·표본 추출/판정 기준 합의 | 누락은 MISSING/UNKNOWN, 과거 응답에 최신 정책을 추정 연결하지 않음. 실제 AI 품질/운영 정답률 미검증. [품질 계약](quality-review.md) |
-| Fabric 주현님 + A | 게시 analytics-v1 배치/exact scope·상품 UUID/매핑·기간·판매량 분모·팀 귀속 합의, 실제 서비스 emitter→A 수신/검증/게시 확인 | A의 voc-effect-v1 모델/수신/검증/게시/조회는 구현·배포했다. 실제 Fabric 집계/emitter/원천 확인과 DB→Blob Export는 미구현/미연결. 동일 길이 창·일별/UTC 경계·판매 없음·중첩/미성숙/자료 부족·인과 해석 별도 합의. 기존 `/analytics/batches`를 브라우저 사용자 토큰으로 호출하지 않음. [Fabric 인수](fabric-handoff.md) |
-| 인수님 + A/배포·권한 담당 | 실제 target base/CORS·DB head/권한 확인 후 위 순서로 연결. 허용 팀/상품/검토자 선택 자료 경로 합의, 403/404/409/null/unavailable/만료 확인 | Azure0.11/0011 배포는 확인했다. 실제 Frontend 화면/외부 연동·CORS 양성 연결·권한 있는 신규 ADMIN 조회는 미검증. 대상 identity별 capability 설정은 별도 명시 승인 필요 |
+| Fabric 담당 + A | 게시 analytics-v1 배치/exact scope·상품 UUID/매핑·기간·판매량 분모·팀 귀속 합의, 실제 서비스 emitter→A 수신/검증/게시 확인 | A의 voc-effect-v1 모델/수신/검증/게시/조회는 구현·배포했다. 실제 Fabric 집계/emitter/원천 확인과 DB→Blob Export는 미구현/미연결. 동일 길이 창·일별/UTC 경계·판매 없음·중첩/미성숙/자료 부족·인과 해석 별도 합의. 기존 `/analytics/batches`를 브라우저 사용자 토큰으로 호출하지 않음. [Fabric 인수](fabric-handoff.md) |
+| Frontend 담당 + A/배포·권한 담당 | 실제 target base/CORS·DB head/권한 확인 후 위 순서로 연결. 허용 팀/상품/검토자 선택 자료 경로 합의, 403/404/409/null/unavailable/만료 확인 | Azure0.11/0011 배포는 확인했다. 실제 Frontend 화면/외부 연동·CORS 양성 연결·권한 있는 신규 ADMIN 조회는 미검증. 대상 identity별 capability 설정은 별도 명시 승인 필요 |
 
-## 7. 인수님께 보낼 메시지 초안 (미발송)
-
-```text
-인수님, A의 회차 진단·VOC 효과 수신/조회와 기존 업무량·품질 평가·추천을 GitHub 및 기존 Azure0.11.0/0011에 반영했습니다.
-실제 연결 순서와 권한·예시는 backend/backend-a/docs/frontend-handoff.md에 정리했습니다.
-화면 연결에는 대상 계정의 신규 권한과 실제 Frontend CORS origin 확정이 필요합니다.
-VOC 실제 집계/결과 전송은 Fabric, 실패·이관 사실 기록과 실제 배정은 B 연결이 남아 있습니다.
-실제 AI 품질과 운영 기준·안전 완료율·정식 SLA/부하 개선 효과까지 검증된 것은 아닙니다.
-```
-
-이번 문서 점검: 실제 코드/OpenAPI의 경로·입출력 DTO·권한/CORS 설정과 예시·상대 링크·민감정보 패턴·diff를 확인했다. 업무/DB/외부 연동 테스트는 실행하지 않았고 과거 통과 수를 이번 결과로 재사용하지 않았다.
+문서 계약 검증: 실제 코드/OpenAPI의 경로·입출력 DTO·권한/CORS 설정과 예시·상대 링크·민감정보 패턴·diff를 확인했다. 업무/DB/외부 연동 테스트는 실행하지 않았고 과거 통과 수를 이번 결과로 재사용하지 않았다.
 
 ## 기존 화면 상세 계약 (이전 인수 내용 보존)
 

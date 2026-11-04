@@ -1,6 +1,6 @@
 # Backend A Azure 이름 이전 — 실제 완료
 
-2026-11-03 KST에 사용자 승인 범위의 생성·복사·전환·검증·구 리소스 정리를 완료했다. 실제 Backend A **0.6.1 / migration0006**이다. API·DB는 실행 상태로 유지한다. 새 기능/B·AI·Fabric·발송 엔진은 추가하지 않았다.
+2026-11-03 KST에 승인된 A 전용 생성·복사·전환·검증·구 리소스 정리를 완료했다. 실제 Backend A **0.6.1 / migration0006**이다. API·DB는 실행 상태로 유지한다. 새 기능/B·AI·Fabric·발송 엔진은 추가하지 않았다.
 
 ## 현재 주소와 구성
 
@@ -62,7 +62,7 @@
 
 구 Plan에 다른 앱이 없고 구 서버에 다른 업무 DB가 없는 것을 삭제 직전에 확인했다. Azure Web Apps DELETE의 기본 동작으로 마지막 앱과 빈 plan이 함께 제거됐다. 그래서 뒤의 plan 조회가404였고, 재실행 가능한 정리 검증에서 이미 삭제된 상태를 확인해 완료 처리했다. [공식 빈 plan 삭제 동작](https://learn.microsoft.com/en-us/rest/api/appservice/web-apps/delete?view=rest-appservice-2024-11-01).
 
-처음 직접 DELETE는 ScopeLocked로 거부됐다. 사용자가 이후 **공용 DO_NOT_DELETE 일시 해제→구A3개 삭제→즉시 동일 잠금 복원**을 명시 승인했다. 잠금 창은UTC03:02:49–03:04:32(약103초)였고, 동일 이름·CanNotDelete수준·notes/owners로 복원했다. 이 승인된 보안 잠금 예외 외에 그룹 설정·공용 Storage/Foundry/OpenAI/Search/Fabric을 변경/삭제하지 않았다. 실패 경로에서도finally로 보호를 복원했다. 새 API/DB는 삭제 후에도 live/ready200이며 연결은 새 PG이다.
+처음 직접 DELETE는 ScopeLocked로 거부됐다. 별도로 승인된 잠금 예외 절차는 **공용 DO_NOT_DELETE 일시 해제→구A3개 삭제→즉시 동일 잠금 복원**이었다. 잠금 창은UTC03:02:49–03:04:32(약103초)였고, 동일 이름·CanNotDelete수준·notes/owners로 복원했다. 이 승인된 보안 잠금 예외 외에 그룹 설정·공용 Storage/Foundry/OpenAI/Search/Fabric을 변경/삭제하지 않았다. 실패 경로에서도finally로 보호를 복원했다. 새 API/DB는 삭제 후에도 live/ready200이며 연결은 새 PG이다.
 
 ## 백업 위치와 복구
 

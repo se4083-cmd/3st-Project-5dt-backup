@@ -1,6 +1,6 @@
 # AUTO 회차 진단·VOC 전후 효과 계약 — 0.11.0 / 0011
 
-전향적 기록과 별도 효과 게시를 추가한다. 기존 analytics-v1/티켓 생성 cohort KPI, 수동 품질 평가, VOC 계획, 업무량·읽기 전용 추천을 유지한다. 실제 B/AI/Fabric 통합과 운영 효과를 입증한 것은 아니다. 주현님의 별도 Bronze 스키마 검토와 DB→Blob Export는 이 변경에 포함하지 않는다. 배포 결과는 [이번 증거](evidence/monitor-effects-local/README.md)에 로컬/Azure를 구분해 기록한다.
+전향적 기록과 별도 효과 게시를 추가한다. 기존 analytics-v1/티켓 생성 cohort KPI, 수동 품질 평가, VOC 계획, 업무량·읽기 전용 추천을 유지한다. 실제 B/AI/Fabric 통합과 운영 효과를 입증한 것은 아니다. Fabric 담당의 별도 Bronze 스키마 검토와 DB→Blob Export는 이 변경에 포함하지 않는다. 배포 결과는 [이번 증거](evidence/monitor-effects-local/README.md)에 로컬/Azure를 구분해 기록한다.
 
 ## 1. AUTO 회차 기록과 B 경계
 
@@ -86,4 +86,4 @@ Fabric이 계산한 값을 저장하며 A는 산술을 검산한다(Decimal 오�
 
 백업은 private `.cache/azure-release-0110/pre-release.dump.dpapi`이며 공유하지 않는다. PITR은 별도 새 리소스 복원/유료 작업 승인이 필요하므로 이번에 실행하지 않는다. 코드 복구는 검토된0.10 소스의 readiness0011/version만 패치한 recovery.zip을 사전 검증해 새 schema를 유지한 채 사용한다. 복구 중 전향적 기록 공백이 생기면 완전 수집이라고 표현하지 않는다. 운영 DB 실복구 훈련은 별도이며 로컬 호환 검증과 구분한다.
 
-Frontend 인수님은 신규 지표의 부분 수집·분모·null/UNAVAILABLE와 효과 origin/경고/plan revision을 표시한다. B 준혁님은 같은 transaction의 사실 기록 호출과 구조화 reason을 연결한다. AI/RAG는 실제 provenance·당시 근거를 제공하고 운영 rubric/관찰 규칙은 운영 책임자와 합의한다. Fabric 주현님은 별도 voc-effect-v1 emitter/단위·상품 매핑·동일 기간·scope·판매 분모·coverage·겹침 선언을 연결한다. 실제 연동/효과 확인 전에는 통합 완료라고 보고하지 않는다.
+Frontend 담당은 신규 지표의 부분 수집·분모·null/UNAVAILABLE와 효과 origin/경고/plan revision을 표시한다. Backend B 담당은 같은 transaction의 사실 기록 호출과 구조화 reason을 연결한다. AI/RAG는 실제 provenance·당시 근거를 제공하고 운영 rubric/관찰 규칙은 운영 책임자와 합의한다. Fabric 담당은 별도 voc-effect-v1 emitter/단위·상품 매핑·동일 기간·scope·판매 분모·coverage·겹침 선언을 연결한다. 실제 연동/효과 확인 전에는 통합 완료라고 보고하지 않는다.

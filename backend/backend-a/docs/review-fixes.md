@@ -28,7 +28,7 @@ decode_cursor는 JSON list 길이2 확인 뒤 두 값이 모두 문자열인지 
 
 Python3.12의413 Request Entity Too Large/422 Unprocessable Entity와3.13의 Content Too Large/Unprocessable Content 차이는 FastAPI가 http.client.responses에서 가져오는 설명 기본값 차이였다. app.main의 공통 responses에서413=Content Too Large,422=Unprocessable Content만 명시한다. schema/field/security/response를 무시하는 정규화나 비교 예외를 추가하지 않는다.
 
-scripts.check_handoff_contract는 여전히 실제 OpenAPI와 docs/openapi.json 전체를 엄격히 비교한다. Python3.12의 기본 문구 dictionary를 모사해도 전체 동일해야 하며, 필드/인증/응답/예상하지 않은 설명을 바꾼 계약은 OPENAPI_NEEDS_REGENERATION이어야 한다. canonical hash vector도 기존 그대로 비교한다. 실제 Linux/Python3.12 전체 재실행은 이 PC에서 하지 않았고 Windows/Python3.13.15에서 이 호환 조건을 검사한다. 사용자가 전달한 수정 전297 passed/33 skipped는 독립 검토자의 보고이며 이 작업의 로컬 XML 증거로 새로 생성하지 않는다.
+scripts.check_handoff_contract는 여전히 실제 OpenAPI와 docs/openapi.json 전체를 엄격히 비교한다. Python3.12의 기본 문구 dictionary를 모사해도 전체 동일해야 하며, 필드/인증/응답/예상하지 않은 설명을 바꾼 계약은 OPENAPI_NEEDS_REGENERATION이어야 한다. canonical hash vector도 기존 그대로 비교한다. 실제 Linux/Python3.12 전체 재실행은 이 PC에서 하지 않았고 Windows/Python3.13.15에서 이 호환 조건을 검사한다. 수정 전297 passed/33 skipped는 독립 검토자가 제공한 보고이며 해당 로컬 XML의 재실행 결과가 아니다.
 
 ## 변경/실행 범위
 

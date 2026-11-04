@@ -153,7 +153,7 @@ retention dry-run은 연결 티켓·상품 후속·출처 batch의 새 참조를
 1. capabilities의 VOC_IMPROVEMENT_MANAGE로 ADMIN 진입을 제어한다. 현재 허용 팀과 기존 후속 담당자 규칙으로 입력한다. 일반 상품 후속 목록과 개선 목록을 구분한다.
 2. 생성 receipt로 상세를 GET한다. followup과 plan revision을 따로 보관하고 재요청에는 같은 key/body를 유지한다. 담당/상태 변경 뒤 상세를 다시 읽는다.
 3. plan_refresh_required와 plan_access를 표시하고 숨긴 이력/문의 수를 추측하지 않는다. DONE 표시는 ‘개선 업무 완료’다. analysis는 ‘효과 분석 연동 준비 중’으로 표시한다.
-4. 주현님과 문의 단위(ticket/episode), cohort·분자/분모(주문/수량/판매 없음), 14일 등 동일 기간 및 지연/일별 경계, canonical 상품 UUID/매핑 버전, 고정 비교 팀과 역사 귀속, 전사 판매와 부분 팀 분모, coverage/저표본/중첩/인과 해석을 합의해야 한다.
+4. Fabric 담당과 문의 단위(ticket/episode), cohort·분자/분모(주문/수량/판매 없음), 14일 등 동일 기간 및 지연/일별 경계, canonical 상품 UUID/매핑 버전, 고정 비교 팀과 역사 귀속, 전사 판매와 부분 팀 분모, coverage/저표본/중첩/인과 해석을 합의해야 한다.
 5. 실제 효과 mart 수신·게시·조회 계약은 아직 없다. 기존 analytics-v1 wire에 새 효과 필드를 보내지 않는다. Export·Fabric 실행·실제 Frontend 화면 연결은 별도 작업이다.
 
 실제 실행 기록은 [로컬 검증](evidence/voc-local/README.md)을 따른다.
