@@ -1,0 +1,69 @@
+{
+  "contract_status": "PROPOSED_NOT_IMPLEMENTED",
+  "source_system": "csflow-docs-local-synthetic",
+  "export_batch_id": "55e197e8-08ac-545a-a65d-a7878e0a834b",
+  "export_schema_version": "proposed-silver-v1",
+  "source_migration_head": "0006",
+  "data_origin": "SYNTHETIC",
+  "source_as_of": "2026-11-03T03:00:00.000000Z",
+  "snapshot_consistency": "EXAMPLE_ONLY_NO_SNAPSHOT_WAS_EXPORTED",
+  "extraction_started_at": "2026-11-03T03:00:00.000000Z",
+  "extraction_completed_at": "2026-11-03T03:00:01.000000Z",
+  "scope": {
+    "type": "EXPLICIT_TEAM_SET",
+    "team_ids": [
+      "a03a0e9e-71b7-5ed0-ba1b-68311fc6b917"
+    ]
+  },
+  "join_domain": "org-demo-authorized-silver",
+  "key_version": "demo-public-v1",
+  "format": {
+    "encoding": "UTF-8",
+    "bom": false,
+    "line_ending": "LF",
+    "final_lf": true,
+    "compression": "none",
+    "numeric": "fixed-scale-string",
+    "timestamp": "UTC-six-fraction-Z"
+  },
+  "completeness": {
+    "sales": "unknown",
+    "complaints": "unknown",
+    "episode_state": "unknown",
+    "reason": "SMALL_EXAMPLE_NOT_A_COMPLETE_SOURCE"
+  },
+  "full_snapshot": true,
+  "table_coverage": "EXAMPLE_FIVE_PROJECTIONS_ONLY_NOT_ALL_SILVER_INPUTS",
+  "files": [
+    {
+      "object_key": "export-proposal/products/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 204,
+      "sha256": "0ddafc3375ef7336f67dbbd4d20146822fead500970f2333258a850a842c2c91"
+    },
+    {
+      "object_key": "export-proposal/customers/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 102,
+      "sha256": "1db721166ab37ac36c66b751fd5e02041e5ff068e0a56fba106d63fff259aaed"
+    },
+    {
+      "object_key": "export-proposal/orders/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 393,
+      "sha256": "699490503bc365270607cebaace3d7217f43160268ed44e9f2ac1046c3d43884"
+    },
+    {
+      "object_key": "export-proposal/tickets/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 664,
+      "sha256": "80f5b90afffce6aba9e8cb82974e79f574f5a7f14ddda97a626fc745ad6030ba"
+    },
+    {
+      "object_key": "export-proposal/followup_actions/part-00001.jsonl",
+      "row_count": 1,
+      "byte_count": 577,
+      "sha256": "d2e09334ef0d62970fb1f34b803ec437ede987519332b456f04e8b0a41a98a55"
+    }
+  ]
+}

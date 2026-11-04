@@ -1,0 +1,15 @@
+{
+  "batch_id": "17782183-99b8-4fec-8936-5b01a8b72e83",
+  "content_hash": "bcfa83a6fe5e9effc155982ee5a3d0fed80911be7946f91d945fc2e616448e85",
+  "is_current": true,
+  "validation_passed": true,
+  "validated_at": "2026-11-03T03:01:00Z",
+  "published_at": "2026-11-03T03:02:00Z",
+  "validation_result": {
+    "passed": true,
+    "codes": [],
+    "validator_version": "analytics-v1",
+    "origin_verified": false
+  },
+  "status": "SUCCEEDED"
+}

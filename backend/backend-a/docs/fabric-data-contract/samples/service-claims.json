@@ -1,0 +1,12 @@
+{
+  "sub": "PROPOSED_FABRIC_SUBJECT_NOT_CONFIGURED",
+  "iss": "csflow-analytics-service",
+  "aud": "csflow-analytics-ingest",
+  "iat": 1793674800,
+  "nbf": 1793674800,
+  "exp": 1793675100,
+  "permissions": [
+    "analytics:receive",
+    "analytics:publish"
+  ]
+}

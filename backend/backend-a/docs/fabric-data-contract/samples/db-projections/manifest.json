@@ -1,0 +1,65 @@
+{
+  "contract_status": "SYNTHETIC_ALLOWLIST_DB_PROJECTIONS_NOT_FULL_ROWS",
+  "source": "NO_DATABASE_READ_GENERATED_EXAMPLES",
+  "migration_head": "0006",
+  "files": [
+    {
+      "object_key": "db-projections/teams.jsonl",
+      "row_count": 1,
+      "byte_count": 239,
+      "sha256": "ae790d339dc6ef0963e84cc91ef33fb53b1ad7b0836113d6d3634a39be413756"
+    },
+    {
+      "object_key": "db-projections/users.jsonl",
+      "row_count": 2,
+      "byte_count": 499,
+      "sha256": "38ea1e23dd10f023b8f2784575f2cc9852d81db7053204855db855b097c0c4e8"
+    },
+    {
+      "object_key": "db-projections/customers.jsonl",
+      "row_count": 1,
+      "byte_count": 234,
+      "sha256": "0b985380435911e3192fb62c0e1293ea3b3a8a470dcc66a9ff14db57bc21b23c"
+    },
+    {
+      "object_key": "db-projections/products.jsonl",
+      "row_count": 1,
+      "byte_count": 260,
+      "sha256": "d31b58db4955c717b0e9eca60a32069ff07beee86a2658ca38f18a49207f05ff"
+    },
+    {
+      "object_key": "db-projections/orders.jsonl",
+      "row_count": 1,
+      "byte_count": 447,
+      "sha256": "14912be516fe634f3e33ab7ec143fa40a8d7ea9b18c7d72853ab1b006e82e3ca"
+    },
+    {
+      "object_key": "db-projections/tickets.jsonl",
+      "row_count": 1,
+      "byte_count": 705,
+      "sha256": "e153cff624ca905afceb7aff9dfdf0bd9669c155ae67847ff9f2b67bb679df43"
+    },
+    {
+      "object_key": "db-projections/audit_events.jsonl",
+      "row_count": 1,
+      "byte_count": 486,
+      "sha256": "f79399ebf5d22cfe091cc4b3098941a2970f22929767b77c4a57f2435718dc9b"
+    },
+    {
+      "object_key": "db-projections/followup_actions.jsonl",
+      "row_count": 1,
+      "byte_count": 622,
+      "sha256": "cb1c38ffe4612c5cbd3af1fe227a91fdf34fc0eb823fc42a04336d2245946a38"
+    }
+  ],
+  "omitted_sensitive_columns": [
+    "users.login_name",
+    "users.password_hash",
+    "customers.display_name",
+    "customers.profile_masked",
+    "customers.customer_key",
+    "orders.order_number",
+    "followup_actions.public_note",
+    "followup_actions.internal_note"
+  ]
+}

@@ -1,0 +1,3074 @@
+[
+  {
+    "table": "teams",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "team_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "name",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "supported_categories",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "active",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "team_id"
+    ],
+    "rows": 4,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "users",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "user_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "login_name",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "password_hash",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "role",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "team_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "allowed_team_ids",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "active",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "user_id"
+    ],
+    "rows": 821,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "customers",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "customer_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "user_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "display_name",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "verification_status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "profile_masked",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "deleted_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "customer_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "customer_id"
+    ],
+    "rows": 800,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "products",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "sku",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "name",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "category",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "active",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "product_id"
+    ],
+    "rows": 20,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "orders",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "order_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "customer_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "quantity",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "order_number",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "order_status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "payment_status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "amount",
+        "postgres_type": "numeric(12,2)",
+        "spark_type": "decimal(12,2)",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "placed_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "paid_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "order_id"
+    ],
+    "rows": 2000,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "shipments",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "shipment_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "order_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "eta_if_known",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "state_changed_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "shipment_id"
+    ],
+    "rows": 1898,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "returns",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "return_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "order_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "requested_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "reason",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "return_id"
+    ],
+    "rows": 76,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "tickets",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "customer_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "order_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "category",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "priority",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "requested_mode",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "resolution_mode",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "issue_tags",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "sla_due_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "first_replied_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "resolved_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "last_error_code",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "is_complaint",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "primary_issue",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "complaint_first_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "voc_label_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "voc_label_source",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "label_status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "human_verified",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "ticket_id"
+    ],
+    "rows": 1000,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "messages",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "message_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "role",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "direction",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "body",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "approval_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "idempotency_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "final_reply",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "message_id"
+    ],
+    "rows": 4000,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "assignments",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "assignment_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "team_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "agent_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "assigned_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ended_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "reason_code",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "assignment_id"
+    ],
+    "rows": 820,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "knowledge_documents",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "document_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "policy_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "title",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "source",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "blob_path",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "content_hash",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "allowed_topics",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "active",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "effective_from",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "effective_to",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "body",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "approval_status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "document_id"
+    ],
+    "rows": 30,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "ai_suggestions",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "suggestion_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "revision",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "category",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "draft",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "confidence",
+        "postgres_type": "numeric(4,3)",
+        "spark_type": "decimal(4,3)",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "evidence_refs",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "order_snapshot",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "gate_results",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "rule_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "rule_version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "template_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "prompt_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "model_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "content_hash",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "suggestion_id"
+    ],
+    "rows": 1000,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "approvals",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "approval_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "suggestion_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "mode",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "decision",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "reviewer_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "gate_snapshot",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "content_hash",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "reviewed_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "expires_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "approval_id"
+    ],
+    "rows": 1000,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "audit_events",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "event_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "actor_user_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "actor_service",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "action",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "target_type",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "target_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "event_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "payload",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "event_id"
+    ],
+    "rows": 8820,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "automation_rules",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "rule_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "rule_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "category",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "risk_level",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "requires_approval",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "conditions",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "active",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_by",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "rule_id"
+    ],
+    "rows": 6,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "followup_actions",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "action_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "owner_user_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "owner_team_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "kind",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "public_note",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "internal_note",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "blocks_resolution",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "due_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "completed_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "version",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "action_id"
+    ],
+    "rows": 168,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "automation_jobs",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "job_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "cycle_no",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "attempt",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "next_attempt_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "lease_token",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "lease_until",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "error_code",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scenario_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "generator_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "seed",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "job_id"
+    ],
+    "rows": 1000,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "analytics_batches",
+    "layer": "gold",
+    "fields": [
+      {
+        "name": "batch_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "source_as_of",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "published_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "row_counts",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "checksums",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "schema_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "is_current",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "manifest",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "batch_id"
+    ],
+    "rows": 1,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "analytics_daily",
+    "layer": "gold",
+    "fields": [
+      {
+        "name": "batch_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "day",
+        "postgres_type": "date",
+        "spark_type": "date",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "team_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "category",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "auto_closed_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "handoff_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "reopened_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "sla_breach_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "duration_sum_seconds",
+        "postgres_type": "double precision",
+        "spark_type": "double",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "duration_n",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "approval_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "review_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "batch_id",
+      "day",
+      "team_key",
+      "category"
+    ],
+    "rows": 96,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "analytics_product_daily",
+    "layer": "gold",
+    "fields": [
+      {
+        "name": "batch_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "day",
+        "postgres_type": "date",
+        "spark_type": "date",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "category",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "issue_tag",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "return_refund_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "auto_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "handoff_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "paid_order_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "inquiry_order_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "prior_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "batch_id",
+      "day",
+      "product_id",
+      "category",
+      "issue_tag"
+    ],
+    "rows": 368,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "analytics_product_voc_daily",
+    "layer": "gold",
+    "fields": [
+      {
+        "name": "batch_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scope_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "day",
+        "postgres_type": "date",
+        "spark_type": "date",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "primary_issue",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "episode_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "unresolved_count",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "batch_id",
+      "scope_key",
+      "product_id",
+      "day",
+      "primary_issue"
+    ],
+    "rows": 840,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "analytics_product_risk",
+    "layer": "gold",
+    "fields": [
+      {
+        "name": "batch_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scope_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "rule_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "score",
+        "postgres_type": "numeric(12,6)",
+        "spark_type": "decimal(12,6)",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "rank",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "risk_band",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "metrics",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "components",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "source_as_of",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "window_end",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [
+      "batch_id",
+      "scope_key",
+      "product_id"
+    ],
+    "rows": 300,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "customer_contacts",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "event_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "message_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "customer_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "order_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "primary_issue",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "time",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "team_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [],
+    "rows": 1380,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "coverage",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "sales_complete",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "quality_ok",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "complaints_complete",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "episode_state_complete",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "source_as_of",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "history_start",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [],
+    "rows": 20,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "silver_complaint_episodes",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "episode_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "customer_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "order_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "primary_issue",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "start_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "first_team",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "ticket_refs",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "event_ids",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "unresolved",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [],
+    "rows": 460,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "silver_voc_metrics",
+    "layer": "silver",
+    "fields": [
+      {
+        "name": "batch_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scope_id",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "source_as_of",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "window_end",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "C",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "P",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "S",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "N",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "M",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "U",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "K",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "sales_complete",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "quality_ok",
+        "postgres_type": "boolean",
+        "spark_type": "boolean",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [],
+    "rows": 300,
+    "data_origin": "SYNTHETIC"
+  },
+  {
+    "table": "gold_voc_top_n",
+    "layer": "gold",
+    "fields": [
+      {
+        "name": "batch_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "scope_key",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "product_id",
+        "postgres_type": "uuid",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "rule_version",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_status",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "score",
+        "postgres_type": "numeric(12,6)",
+        "spark_type": "decimal(12,6)",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "rank",
+        "postgres_type": "bigint",
+        "spark_type": "long",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "risk_band",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "metrics",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "components",
+        "postgres_type": "jsonb",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": true
+      },
+      {
+        "name": "source_as_of",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": true,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "window_end",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "data_origin",
+        "postgres_type": "text",
+        "spark_type": "string",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "created_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      },
+      {
+        "name": "updated_at",
+        "postgres_type": "timestamptz",
+        "spark_type": "timestamp",
+        "nullable": false,
+        "nested_json_encoded": false
+      }
+    ],
+    "primary_key": [],
+    "rows": 139,
+    "data_origin": "SYNTHETIC"
+  }
+]

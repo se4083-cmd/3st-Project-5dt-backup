@@ -1,0 +1,5377 @@
+{
+  "basis": "NEW_LOCAL_POSTGRESQL_MIGRATIONS_0001_TO_HEAD_NO_SEED",
+  "server_version": "16.15",
+  "migration_head": "0006",
+  "deployed_database_rechecked": false,
+  "columns": [
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "suggestion_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "ticket_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "cycle_no",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "revision",
+      "ordinal": 4,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "category",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "draft",
+      "ordinal": 6,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "confidence",
+      "ordinal": 7,
+      "pg_type": "numeric(4,3)",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "evidence_refs",
+      "ordinal": 8,
+      "pg_type": "jsonb",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "order_snapshot",
+      "ordinal": 9,
+      "pg_type": "jsonb",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "gate_results",
+      "ordinal": 10,
+      "pg_type": "jsonb",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "rule_id",
+      "ordinal": 11,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "rule_version",
+      "ordinal": 12,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "template_key",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "prompt_version",
+      "ordinal": 14,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "model_version",
+      "ordinal": 15,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "content_hash",
+      "ordinal": 16,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "created_at",
+      "ordinal": 17,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "updated_at",
+      "ordinal": 18,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "data_origin",
+      "ordinal": 19,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "scenario_id",
+      "ordinal": 20,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "generator_version",
+      "ordinal": 21,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "ai_suggestions",
+      "column_name": "seed",
+      "ordinal": 22,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "alembic_version",
+      "column_name": "version_num",
+      "ordinal": 1,
+      "pg_type": "character varying(32)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "batch_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "status",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "source_as_of",
+      "ordinal": 3,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "published_at",
+      "ordinal": 4,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "row_counts",
+      "ordinal": 5,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "checksums",
+      "ordinal": 6,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "schema_version",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "is_current",
+      "ordinal": 8,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "manifest",
+      "ordinal": 9,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "data_origin",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "created_at",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "updated_at",
+      "ordinal": 12,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "validation_passed",
+      "ordinal": 13,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": "false"
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "validated_at",
+      "ordinal": 14,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_batches",
+      "column_name": "content_hash",
+      "ordinal": 15,
+      "pg_type": "character varying(64)",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "batch_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "day",
+      "ordinal": 2,
+      "pg_type": "date",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "team_key",
+      "ordinal": 3,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "category",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "ticket_count",
+      "ordinal": 5,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "auto_closed_count",
+      "ordinal": 6,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "handoff_count",
+      "ordinal": 7,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "reopened_count",
+      "ordinal": 8,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "sla_breach_count",
+      "ordinal": 9,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "duration_sum_seconds",
+      "ordinal": 10,
+      "pg_type": "double precision",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "duration_n",
+      "ordinal": 11,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "approval_count",
+      "ordinal": 12,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "review_count",
+      "ordinal": 13,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "data_origin",
+      "ordinal": 14,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "created_at",
+      "ordinal": 15,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_daily",
+      "column_name": "updated_at",
+      "ordinal": 16,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "batch_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "day",
+      "ordinal": 2,
+      "pg_type": "date",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "product_id",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "category",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "issue_tag",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "ticket_count",
+      "ordinal": 6,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "return_refund_count",
+      "ordinal": 7,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "auto_count",
+      "ordinal": 8,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "handoff_count",
+      "ordinal": 9,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "paid_order_count",
+      "ordinal": 10,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "inquiry_order_count",
+      "ordinal": 11,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "prior_count",
+      "ordinal": 12,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "data_origin",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "created_at",
+      "ordinal": 14,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "column_name": "updated_at",
+      "ordinal": 15,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "batch_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "scope_key",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "product_id",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "rule_version",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "data_status",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "score",
+      "ordinal": 6,
+      "pg_type": "numeric(12,6)",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "rank",
+      "ordinal": 7,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "risk_band",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "metrics",
+      "ordinal": 9,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "components",
+      "ordinal": 10,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "source_as_of",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "window_end",
+      "ordinal": 12,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "data_origin",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "created_at",
+      "ordinal": 14,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "column_name": "updated_at",
+      "ordinal": 15,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "batch_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "scope_key",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "product_id",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "day",
+      "ordinal": 4,
+      "pg_type": "date",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "primary_issue",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "episode_count",
+      "ordinal": 6,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "unresolved_count",
+      "ordinal": 7,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "data_origin",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "created_at",
+      "ordinal": 9,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "column_name": "updated_at",
+      "ordinal": 10,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_publication",
+      "column_name": "singleton_id",
+      "ordinal": 1,
+      "pg_type": "integer",
+      "nullable": false,
+      "server_default": "nextval('analytics_publication_singleton_id_seq'::regclass)"
+    },
+    {
+      "table_name": "analytics_publication",
+      "column_name": "batch_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_receipts",
+      "column_name": "batch_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_receipts",
+      "column_name": "content_hash",
+      "ordinal": 2,
+      "pg_type": "character varying(64)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_receipts",
+      "column_name": "payload",
+      "ordinal": 3,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_receipts",
+      "column_name": "validation_result",
+      "ordinal": 4,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "analytics_receipts",
+      "column_name": "received_at",
+      "ordinal": 5,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "approval_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "ticket_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "suggestion_id",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "cycle_no",
+      "ordinal": 4,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "ticket_version",
+      "ordinal": 5,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "mode",
+      "ordinal": 6,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "decision",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "reviewer_id",
+      "ordinal": 8,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "gate_snapshot",
+      "ordinal": 9,
+      "pg_type": "jsonb",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "content_hash",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "reviewed_at",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "expires_at",
+      "ordinal": 12,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "created_at",
+      "ordinal": 13,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "updated_at",
+      "ordinal": 14,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "data_origin",
+      "ordinal": 15,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "scenario_id",
+      "ordinal": 16,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "generator_version",
+      "ordinal": 17,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "approvals",
+      "column_name": "seed",
+      "ordinal": 18,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "assignment_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "ticket_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "cycle_no",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "team_id",
+      "ordinal": 4,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "agent_id",
+      "ordinal": 5,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "assigned_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "ended_at",
+      "ordinal": 7,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "reason_code",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "created_at",
+      "ordinal": 9,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "updated_at",
+      "ordinal": 10,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "data_origin",
+      "ordinal": 11,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "scenario_id",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "generator_version",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "assignments",
+      "column_name": "seed",
+      "ordinal": 14,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "event_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "ticket_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "cycle_no",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "actor_user_id",
+      "ordinal": 4,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "actor_service",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "action",
+      "ordinal": 6,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "target_type",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "target_id",
+      "ordinal": 8,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "event_key",
+      "ordinal": 9,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "payload",
+      "ordinal": 10,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "created_at",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "data_origin",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "scenario_id",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "generator_version",
+      "ordinal": 14,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "seed",
+      "ordinal": 15,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "result",
+      "ordinal": 16,
+      "pg_type": "character varying(16)",
+      "nullable": false,
+      "server_default": "'SUCCESS'::character varying"
+    },
+    {
+      "table_name": "audit_events",
+      "column_name": "reason_code",
+      "ordinal": 17,
+      "pg_type": "character varying(64)",
+      "nullable": false,
+      "server_default": "'FIXTURE_HISTORY'::character varying"
+    },
+    {
+      "table_name": "automation_control",
+      "column_name": "singleton_id",
+      "ordinal": 1,
+      "pg_type": "integer",
+      "nullable": false,
+      "server_default": "nextval('automation_control_singleton_id_seq'::regclass)"
+    },
+    {
+      "table_name": "automation_control",
+      "column_name": "paused",
+      "ordinal": 2,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": "false"
+    },
+    {
+      "table_name": "automation_control",
+      "column_name": "revision",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control",
+      "column_name": "generation",
+      "ordinal": 4,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control",
+      "column_name": "reason_code",
+      "ordinal": 5,
+      "pg_type": "character varying(64)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control",
+      "column_name": "changed_by",
+      "ordinal": 6,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control",
+      "column_name": "changed_at",
+      "ordinal": 7,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control_history",
+      "column_name": "revision",
+      "ordinal": 1,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": "nextval('automation_control_history_revision_seq'::regclass)"
+    },
+    {
+      "table_name": "automation_control_history",
+      "column_name": "generation",
+      "ordinal": 2,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control_history",
+      "column_name": "paused",
+      "ordinal": 3,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control_history",
+      "column_name": "reason_code",
+      "ordinal": 4,
+      "pg_type": "character varying(64)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control_history",
+      "column_name": "changed_by",
+      "ordinal": 5,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_control_history",
+      "column_name": "changed_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "job_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "ticket_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "cycle_no",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "status",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "attempt",
+      "ordinal": 5,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "next_attempt_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "lease_token",
+      "ordinal": 7,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "lease_until",
+      "ordinal": 8,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "error_code",
+      "ordinal": 9,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "created_at",
+      "ordinal": 10,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "updated_at",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "data_origin",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "scenario_id",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "generator_version",
+      "ordinal": 14,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "seed",
+      "ordinal": 15,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "expected_ticket_version",
+      "ordinal": 16,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "lease_owner",
+      "ordinal": 17,
+      "pg_type": "character varying(128)",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "job_kind",
+      "ordinal": 18,
+      "pg_type": "character varying(16)",
+      "nullable": false,
+      "server_default": "'AUTO'::character varying"
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "source_message_id",
+      "ordinal": 19,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "reason_code",
+      "ordinal": 20,
+      "pg_type": "character varying(64)",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_jobs",
+      "column_name": "automation_generation",
+      "ordinal": 21,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": "1"
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "rule_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "rule_key",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "version",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "category",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "risk_level",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "requires_approval",
+      "ordinal": 6,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "conditions",
+      "ordinal": 7,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "active",
+      "ordinal": 8,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "updated_by",
+      "ordinal": 9,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "created_at",
+      "ordinal": 10,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "updated_at",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "data_origin",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "scenario_id",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "generator_version",
+      "ordinal": 14,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "automation_rules",
+      "column_name": "seed",
+      "ordinal": 15,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "customer_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "user_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "display_name",
+      "ordinal": 3,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "verification_status",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "profile_masked",
+      "ordinal": 5,
+      "pg_type": "jsonb",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "deleted_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "customer_key",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "created_at",
+      "ordinal": 8,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "updated_at",
+      "ordinal": 9,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "data_origin",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "scenario_id",
+      "ordinal": 11,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "generator_version",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "customers",
+      "column_name": "seed",
+      "ordinal": 13,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "action_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "ticket_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "cycle_no",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "product_id",
+      "ordinal": 4,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "owner_user_id",
+      "ordinal": 5,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "owner_team_id",
+      "ordinal": 6,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "kind",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "status",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "public_note",
+      "ordinal": 9,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "internal_note",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "blocks_resolution",
+      "ordinal": 11,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "due_at",
+      "ordinal": 12,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "completed_at",
+      "ordinal": 13,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "version",
+      "ordinal": 14,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "created_at",
+      "ordinal": 15,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "updated_at",
+      "ordinal": 16,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "data_origin",
+      "ordinal": 17,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "scenario_id",
+      "ordinal": 18,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "generator_version",
+      "ordinal": 19,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "seed",
+      "ordinal": 20,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "origin_team_id",
+      "ordinal": 21,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "responsibility_cycle_no",
+      "ordinal": 22,
+      "pg_type": "bigint",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "cancelled_at",
+      "ordinal": 23,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "followup_actions",
+      "column_name": "cancellation_reason",
+      "ordinal": 24,
+      "pg_type": "character varying(64)",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "user_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "key",
+      "ordinal": 2,
+      "pg_type": "character varying(128)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "request_hash",
+      "ordinal": 3,
+      "pg_type": "character varying(64)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "ticket_id",
+      "ordinal": 4,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "created_at",
+      "ordinal": 5,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "operation",
+      "ordinal": 6,
+      "pg_type": "character varying(32)",
+      "nullable": false,
+      "server_default": "'CREATE_TICKET'::character varying"
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "response_snapshot",
+      "ordinal": 7,
+      "pg_type": "jsonb",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "idempotency_keys",
+      "column_name": "followup_id",
+      "ordinal": 8,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "document_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "policy_key",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "title",
+      "ordinal": 3,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "version",
+      "ordinal": 4,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "source",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "blob_path",
+      "ordinal": 6,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "content_hash",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "allowed_topics",
+      "ordinal": 8,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "active",
+      "ordinal": 9,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "effective_from",
+      "ordinal": 10,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "effective_to",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "body",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "approval_status",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "created_at",
+      "ordinal": 14,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "updated_at",
+      "ordinal": 15,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "data_origin",
+      "ordinal": 16,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "scenario_id",
+      "ordinal": 17,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "generator_version",
+      "ordinal": 18,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "knowledge_documents",
+      "column_name": "seed",
+      "ordinal": 19,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "message_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "ticket_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "cycle_no",
+      "ordinal": 3,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "role",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "direction",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "body",
+      "ordinal": 6,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "approval_id",
+      "ordinal": 7,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "idempotency_key",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "final_reply",
+      "ordinal": 9,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "created_at",
+      "ordinal": 10,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "updated_at",
+      "ordinal": 11,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "data_origin",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "scenario_id",
+      "ordinal": 13,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "generator_version",
+      "ordinal": 14,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "seed",
+      "ordinal": 15,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "messages",
+      "column_name": "visibility",
+      "ordinal": 16,
+      "pg_type": "character varying(16)",
+      "nullable": false,
+      "server_default": "'INTERNAL'::character varying"
+    },
+    {
+      "table_name": "orders",
+      "column_name": "order_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "customer_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "product_id",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "quantity",
+      "ordinal": 4,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "order_number",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "order_status",
+      "ordinal": 6,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "payment_status",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "amount",
+      "ordinal": 8,
+      "pg_type": "numeric(12,2)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "placed_at",
+      "ordinal": 9,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "paid_at",
+      "ordinal": 10,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "version",
+      "ordinal": 11,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "created_at",
+      "ordinal": 12,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "updated_at",
+      "ordinal": 13,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "data_origin",
+      "ordinal": 14,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "scenario_id",
+      "ordinal": 15,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "generator_version",
+      "ordinal": 16,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "orders",
+      "column_name": "seed",
+      "ordinal": 17,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "product_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "sku",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "name",
+      "ordinal": 3,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "category",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "active",
+      "ordinal": 5,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "created_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "updated_at",
+      "ordinal": 7,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "data_origin",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "scenario_id",
+      "ordinal": 9,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "generator_version",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "products",
+      "column_name": "seed",
+      "ordinal": 11,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "queue_routes",
+      "column_name": "ticket_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "queue_routes",
+      "column_name": "cycle_no",
+      "ordinal": 2,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "queue_routes",
+      "column_name": "team_id",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "queue_routes",
+      "column_name": "revision",
+      "ordinal": 4,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "queue_routes",
+      "column_name": "recorded_by_service",
+      "ordinal": 5,
+      "pg_type": "character varying(64)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "queue_routes",
+      "column_name": "recorded_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "return_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "order_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "status",
+      "ordinal": 3,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "requested_at",
+      "ordinal": 4,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "reason",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "created_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "updated_at",
+      "ordinal": 7,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "data_origin",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "scenario_id",
+      "ordinal": 9,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "generator_version",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "returns",
+      "column_name": "seed",
+      "ordinal": 11,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "shipment_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "order_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "status",
+      "ordinal": 3,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "eta_if_known",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "state_changed_at",
+      "ordinal": 5,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "version",
+      "ordinal": 6,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "created_at",
+      "ordinal": 7,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "updated_at",
+      "ordinal": 8,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "data_origin",
+      "ordinal": 9,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "scenario_id",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "generator_version",
+      "ordinal": 11,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "shipments",
+      "column_name": "seed",
+      "ordinal": 12,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "staff_permissions",
+      "column_name": "user_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "staff_permissions",
+      "column_name": "permission",
+      "ordinal": 2,
+      "pg_type": "character varying(64)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "staff_permissions",
+      "column_name": "granted_by",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "staff_permissions",
+      "column_name": "granted_at",
+      "ordinal": 4,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "team_categories",
+      "column_name": "team_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "team_categories",
+      "column_name": "category",
+      "ordinal": 2,
+      "pg_type": "character varying(32)",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "team_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "name",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "supported_categories",
+      "ordinal": 3,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "active",
+      "ordinal": 4,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "created_at",
+      "ordinal": 5,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "updated_at",
+      "ordinal": 6,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "data_origin",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "scenario_id",
+      "ordinal": 8,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "generator_version",
+      "ordinal": 9,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "teams",
+      "column_name": "seed",
+      "ordinal": 10,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "ticket_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "customer_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "order_id",
+      "ordinal": 3,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "product_id",
+      "ordinal": 4,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "category",
+      "ordinal": 5,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "priority",
+      "ordinal": 6,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "status",
+      "ordinal": 7,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "version",
+      "ordinal": 8,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "cycle_no",
+      "ordinal": 9,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "requested_mode",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "resolution_mode",
+      "ordinal": 11,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "issue_tags",
+      "ordinal": 12,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "sla_due_at",
+      "ordinal": 13,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "first_replied_at",
+      "ordinal": 14,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "resolved_at",
+      "ordinal": 15,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "last_error_code",
+      "ordinal": 16,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "is_complaint",
+      "ordinal": 17,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "primary_issue",
+      "ordinal": 18,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "complaint_first_at",
+      "ordinal": 19,
+      "pg_type": "timestamp with time zone",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "voc_label_version",
+      "ordinal": 20,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "voc_label_source",
+      "ordinal": 21,
+      "pg_type": "text",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "label_status",
+      "ordinal": 22,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "human_verified",
+      "ordinal": 23,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "created_at",
+      "ordinal": 24,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "updated_at",
+      "ordinal": 25,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "data_origin",
+      "ordinal": 26,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "scenario_id",
+      "ordinal": 27,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "generator_version",
+      "ordinal": 28,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "seed",
+      "ordinal": 29,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "tickets",
+      "column_name": "team_id",
+      "ordinal": 30,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "user_team_scopes",
+      "column_name": "user_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "user_team_scopes",
+      "column_name": "team_id",
+      "ordinal": 2,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "user_id",
+      "ordinal": 1,
+      "pg_type": "uuid",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "login_name",
+      "ordinal": 2,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "password_hash",
+      "ordinal": 3,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "role",
+      "ordinal": 4,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "team_id",
+      "ordinal": 5,
+      "pg_type": "uuid",
+      "nullable": true,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "allowed_team_ids",
+      "ordinal": 6,
+      "pg_type": "jsonb",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "active",
+      "ordinal": 7,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "created_at",
+      "ordinal": 8,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "updated_at",
+      "ordinal": 9,
+      "pg_type": "timestamp with time zone",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "data_origin",
+      "ordinal": 10,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "scenario_id",
+      "ordinal": 11,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "generator_version",
+      "ordinal": 12,
+      "pg_type": "text",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "seed",
+      "ordinal": 13,
+      "pg_type": "bigint",
+      "nullable": false,
+      "server_default": null
+    },
+    {
+      "table_name": "users",
+      "column_name": "is_dev_account",
+      "ordinal": 14,
+      "pg_type": "boolean",
+      "nullable": false,
+      "server_default": "false"
+    }
+  ],
+  "constraints": [
+    {
+      "table_name": "ai_suggestions",
+      "name": "fk_ai_suggestions_rule_id_automation_rules",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (rule_id) REFERENCES automation_rules(rule_id)",
+      "columns": [
+        "rule_id"
+      ],
+      "referenced_table": "automation_rules",
+      "referenced_columns": [
+        "rule_id"
+      ]
+    },
+    {
+      "table_name": "ai_suggestions",
+      "name": "fk_ai_suggestions_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "ai_suggestions",
+      "name": "pk_ai_suggestions",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (suggestion_id)",
+      "columns": [
+        "suggestion_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "ai_suggestions",
+      "name": "uq_ai_suggestions_ticket_id_cycle_no_revision",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (ticket_id, cycle_no, revision)",
+      "columns": [
+        "ticket_id",
+        "cycle_no",
+        "revision"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "alembic_version",
+      "name": "alembic_version_pkc",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (version_num)",
+      "columns": [
+        "version_num"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_batches",
+      "name": "ck_analytics_batches_current_success",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (NOT is_current OR status = 'SUCCEEDED'::text AND published_at IS NOT NULL AND validation_passed AND validated_at IS NOT NULL AND content_hash IS NOT NULL)",
+      "columns": [
+        "is_current",
+        "status",
+        "published_at",
+        "validation_passed",
+        "validated_at",
+        "content_hash"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_batches",
+      "name": "pk_analytics_batches",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_daily",
+      "name": "fk_analytics_daily_batch_id_analytics_batches",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (batch_id) REFERENCES analytics_batches(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": "analytics_batches",
+      "referenced_columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table_name": "analytics_daily",
+      "name": "pk_analytics_daily",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (batch_id, day, team_key, category)",
+      "columns": [
+        "batch_id",
+        "day",
+        "team_key",
+        "category"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "name": "fk_analytics_product_daily_batch_id_analytics_batches",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (batch_id) REFERENCES analytics_batches(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": "analytics_batches",
+      "referenced_columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "name": "fk_analytics_product_daily_product_id_products",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (product_id) REFERENCES products(product_id)",
+      "columns": [
+        "product_id"
+      ],
+      "referenced_table": "products",
+      "referenced_columns": [
+        "product_id"
+      ]
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "name": "pk_analytics_product_daily",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (batch_id, day, product_id, category, issue_tag)",
+      "columns": [
+        "batch_id",
+        "day",
+        "product_id",
+        "category",
+        "issue_tag"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "name": "ck_analytics_product_risk_eligible_values",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (data_status = 'ELIGIBLE'::text AND score IS NOT NULL AND rank IS NOT NULL AND risk_band IS NOT NULL AND score >= 0::numeric AND score <= 100::numeric AND rank > 0 AND (risk_band = ANY (ARRAY['NORMAL'::text, 'WATCH'::text, 'HIGH'::text])) OR (data_status = ANY (ARRAY['LOW_SAMPLE'::text, 'DATA_MISSING'::text, 'QUALITY_BLOCKED'::text])) AND score IS NULL AND rank IS NULL AND risk_band IS NULL)",
+      "columns": [
+        "data_status",
+        "score",
+        "rank",
+        "risk_band"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "name": "fk_analytics_product_risk_batch_id_analytics_batches",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (batch_id) REFERENCES analytics_batches(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": "analytics_batches",
+      "referenced_columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "name": "fk_analytics_product_risk_product_id_products",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (product_id) REFERENCES products(product_id)",
+      "columns": [
+        "product_id"
+      ],
+      "referenced_table": "products",
+      "referenced_columns": [
+        "product_id"
+      ]
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "name": "pk_analytics_product_risk",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (batch_id, scope_key, product_id)",
+      "columns": [
+        "batch_id",
+        "scope_key",
+        "product_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "name": "fk_analytics_product_voc_daily_batch_id_analytics_batches",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (batch_id) REFERENCES analytics_batches(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": "analytics_batches",
+      "referenced_columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "name": "fk_analytics_product_voc_daily_product_id_products",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (product_id) REFERENCES products(product_id)",
+      "columns": [
+        "product_id"
+      ],
+      "referenced_table": "products",
+      "referenced_columns": [
+        "product_id"
+      ]
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "name": "pk_analytics_product_voc_daily",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (batch_id, scope_key, product_id, day, primary_issue)",
+      "columns": [
+        "batch_id",
+        "scope_key",
+        "product_id",
+        "day",
+        "primary_issue"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_publication",
+      "name": "ck_analytics_publication_singleton",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (singleton_id = 1)",
+      "columns": [
+        "singleton_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_publication",
+      "name": "fk_analytics_publication_batch_id_analytics_receipts",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (batch_id) REFERENCES analytics_receipts(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": "analytics_receipts",
+      "referenced_columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table_name": "analytics_publication",
+      "name": "pk_analytics_publication",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (singleton_id)",
+      "columns": [
+        "singleton_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "analytics_receipts",
+      "name": "fk_analytics_receipts_batch_id_analytics_batches",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (batch_id) REFERENCES analytics_batches(batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": "analytics_batches",
+      "referenced_columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table_name": "analytics_receipts",
+      "name": "pk_analytics_receipts",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (batch_id)",
+      "columns": [
+        "batch_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "approvals",
+      "name": "fk_approvals_reviewer_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(user_id)",
+      "columns": [
+        "reviewer_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "approvals",
+      "name": "fk_approvals_suggestion_id_ai_suggestions",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (suggestion_id) REFERENCES ai_suggestions(suggestion_id)",
+      "columns": [
+        "suggestion_id"
+      ],
+      "referenced_table": "ai_suggestions",
+      "referenced_columns": [
+        "suggestion_id"
+      ]
+    },
+    {
+      "table_name": "approvals",
+      "name": "fk_approvals_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "approvals",
+      "name": "pk_approvals",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (approval_id)",
+      "columns": [
+        "approval_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "assignments",
+      "name": "ck_assignments_cycle_time",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (cycle_no >= 1 AND (ended_at IS NULL OR ended_at >= assigned_at))",
+      "columns": [
+        "cycle_no",
+        "ended_at",
+        "assigned_at"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "assignments",
+      "name": "fk_assignments_agent_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (agent_id) REFERENCES users(user_id)",
+      "columns": [
+        "agent_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "assignments",
+      "name": "fk_assignments_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "assignments",
+      "name": "fk_assignments_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "assignments",
+      "name": "pk_assignments",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (assignment_id)",
+      "columns": [
+        "assignment_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "audit_events",
+      "name": "ck_audit_events_result",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (result::text = ANY (ARRAY['SUCCESS'::character varying, 'DENIED'::character varying, 'FAILURE'::character varying]::text[]))",
+      "columns": [
+        "result"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "audit_events",
+      "name": "fk_audit_events_actor_user_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (actor_user_id) REFERENCES users(user_id)",
+      "columns": [
+        "actor_user_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "audit_events",
+      "name": "fk_audit_events_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "audit_events",
+      "name": "pk_audit_events",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (event_id)",
+      "columns": [
+        "event_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "audit_events",
+      "name": "uq_audit_events_event_key",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (event_key)",
+      "columns": [
+        "event_key"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_control",
+      "name": "ck_automation_control_reason",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (reason_code::text = ANY (ARRAY['INITIAL_STATE'::character varying, 'SAFETY_INCIDENT'::character varying, 'OPERATOR_PAUSE'::character varying, 'VERIFICATION_COMPLETE'::character varying, 'INCIDENT_RESOLVED'::character varying]::text[]))",
+      "columns": [
+        "reason_code"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_control",
+      "name": "ck_automation_control_singleton",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (singleton_id = 1 AND revision >= 1 AND generation >= 1)",
+      "columns": [
+        "singleton_id",
+        "revision",
+        "generation"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_control",
+      "name": "fk_automation_control_changed_by_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (changed_by) REFERENCES users(user_id)",
+      "columns": [
+        "changed_by"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "automation_control",
+      "name": "pk_automation_control",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (singleton_id)",
+      "columns": [
+        "singleton_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_control_history",
+      "name": "ck_automation_control_history_reason",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (reason_code::text = ANY (ARRAY['INITIAL_STATE'::character varying, 'SAFETY_INCIDENT'::character varying, 'OPERATOR_PAUSE'::character varying, 'VERIFICATION_COMPLETE'::character varying, 'INCIDENT_RESOLVED'::character varying]::text[]))",
+      "columns": [
+        "reason_code"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_control_history",
+      "name": "ck_automation_control_history_revision",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (revision >= 1 AND generation >= 1)",
+      "columns": [
+        "revision",
+        "generation"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_control_history",
+      "name": "fk_automation_control_history_changed_by_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (changed_by) REFERENCES users(user_id)",
+      "columns": [
+        "changed_by"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "automation_control_history",
+      "name": "pk_automation_control_history",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (revision)",
+      "columns": [
+        "revision"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "ck_automation_jobs_counters",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (cycle_no >= 1 AND attempt >= 0 AND expected_ticket_version >= 1)",
+      "columns": [
+        "cycle_no",
+        "attempt",
+        "expected_ticket_version"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "ck_automation_jobs_handoff_request",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (job_kind::text = 'AUTO'::text AND reason_code IS NULL OR job_kind::text = 'HANDOFF'::text AND source_message_id IS NOT NULL AND reason_code IS NOT NULL AND (reason_code::text = ANY (ARRAY['CUSTOMER_REQUEST'::character varying, 'DISSATISFIED'::character varying, 'COMPLEX_ISSUE'::character varying, 'OTHER'::character varying, 'HUMAN_CONTINUATION'::character varying]::text[])))",
+      "columns": [
+        "job_kind",
+        "reason_code",
+        "source_message_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "ck_automation_jobs_kind",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (job_kind::text = ANY (ARRAY['AUTO'::character varying, 'HANDOFF'::character varying]::text[]))",
+      "columns": [
+        "job_kind"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "ck_automation_jobs_lease",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (status = 'RUNNING'::text AND lease_token IS NOT NULL AND lease_until IS NOT NULL AND lease_owner IS NOT NULL OR status <> 'RUNNING'::text AND lease_token IS NULL AND lease_until IS NULL AND lease_owner IS NULL)",
+      "columns": [
+        "status",
+        "lease_token",
+        "lease_until",
+        "lease_owner"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "ck_automation_jobs_state",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (status = ANY (ARRAY['PENDING'::text, 'RUNNING'::text, 'RETRY'::text, 'SUCCEEDED'::text, 'FAILED'::text, 'HANDED_OFF'::text, 'CANCELLED'::text]))",
+      "columns": [
+        "status"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "fk_automation_jobs_source_message_id_messages",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (source_message_id) REFERENCES messages(message_id)",
+      "columns": [
+        "source_message_id"
+      ],
+      "referenced_table": "messages",
+      "referenced_columns": [
+        "message_id"
+      ]
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "fk_automation_jobs_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "pk_automation_jobs",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (job_id)",
+      "columns": [
+        "job_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "uq_automation_jobs_ticket_id_cycle_no",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (ticket_id, cycle_no)",
+      "columns": [
+        "ticket_id",
+        "cycle_no"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_rules",
+      "name": "fk_automation_rules_updated_by_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (updated_by) REFERENCES users(user_id)",
+      "columns": [
+        "updated_by"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "automation_rules",
+      "name": "pk_automation_rules",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (rule_id)",
+      "columns": [
+        "rule_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "automation_rules",
+      "name": "uq_automation_rules_rule_key_version",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (rule_key, version)",
+      "columns": [
+        "rule_key",
+        "version"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "customers",
+      "name": "fk_customers_user_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(user_id)",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "customers",
+      "name": "pk_customers",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (customer_id)",
+      "columns": [
+        "customer_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "customers",
+      "name": "uq_customers_customer_key",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (customer_key)",
+      "columns": [
+        "customer_key"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "customers",
+      "name": "uq_customers_user_id",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (user_id)",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_cancelled",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (status = 'CANCELLED'::text AND cancelled_at IS NOT NULL AND cancellation_reason IS NOT NULL AND (cancellation_reason::text = ANY (ARRAY['CUSTOMER_WITHDREW'::character varying, 'NO_LONGER_NEEDED'::character varying, 'DUPLICATE'::character varying, 'OTHER'::character varying]::text[])) OR status <> 'CANCELLED'::text AND cancelled_at IS NULL AND cancellation_reason IS NULL)",
+      "columns": [
+        "status",
+        "cancelled_at",
+        "cancellation_reason"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_completed",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (status = 'DONE'::text AND completed_at IS NOT NULL OR status <> 'DONE'::text AND completed_at IS NULL)",
+      "columns": [
+        "status",
+        "completed_at"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_cycle",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (ticket_id IS NOT NULL AND cycle_no IS NOT NULL AND cycle_no >= 1 AND responsibility_cycle_no IS NOT NULL AND responsibility_cycle_no >= cycle_no OR product_id IS NOT NULL AND cycle_no IS NULL AND responsibility_cycle_no IS NULL)",
+      "columns": [
+        "ticket_id",
+        "cycle_no",
+        "responsibility_cycle_no",
+        "product_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_due",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (due_at IS NULL OR due_at >= created_at)",
+      "columns": [
+        "due_at",
+        "created_at"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_notes",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK ((public_note IS NULL OR length(public_note) <= 4000) AND (internal_note IS NULL OR length(internal_note) <= 10000))",
+      "columns": [
+        "public_note",
+        "internal_note"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_product_block",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (product_id IS NULL OR NOT blocks_resolution)",
+      "columns": [
+        "product_id",
+        "blocks_resolution"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_state",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (status = ANY (ARRAY['OPEN'::text, 'IN_PROGRESS'::text, 'DONE'::text, 'CANCELLED'::text]))",
+      "columns": [
+        "status"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_target",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (ticket_id IS NULL AND product_id IS NOT NULL OR ticket_id IS NOT NULL AND product_id IS NULL)",
+      "columns": [
+        "ticket_id",
+        "product_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ck_followup_actions_version",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (version >= 1)",
+      "columns": [
+        "version"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "fk_followup_actions_origin_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (origin_team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "origin_team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "fk_followup_actions_owner_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (owner_team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "owner_team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "fk_followup_actions_owner_user_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (owner_user_id) REFERENCES users(user_id)",
+      "columns": [
+        "owner_user_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "fk_followup_actions_product_id_products",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (product_id) REFERENCES products(product_id)",
+      "columns": [
+        "product_id"
+      ],
+      "referenced_table": "products",
+      "referenced_columns": [
+        "product_id"
+      ]
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "fk_followup_actions_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "pk_followup_actions",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (action_id)",
+      "columns": [
+        "action_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "ck_idempotency_keys_operation",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (operation::text = ANY (ARRAY['CREATE_TICKET'::character varying, 'REOPEN'::character varying, 'REQUEST_AGENT'::character varying, 'FOLLOWUP_CREATE'::character varying]::text[]))",
+      "columns": [
+        "operation"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "ck_idempotency_keys_snapshot",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (operation::text = 'CREATE_TICKET'::text OR response_snapshot IS NOT NULL)",
+      "columns": [
+        "operation",
+        "response_snapshot"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "ck_idempotency_keys_target",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (operation::text = 'FOLLOWUP_CREATE'::text AND followup_id IS NOT NULL AND ticket_id IS NULL OR operation::text <> 'FOLLOWUP_CREATE'::text AND followup_id IS NULL AND ticket_id IS NOT NULL)",
+      "columns": [
+        "operation",
+        "followup_id",
+        "ticket_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "fk_idempotency_keys_followup_id_followup_actions",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (followup_id) REFERENCES followup_actions(action_id)",
+      "columns": [
+        "followup_id"
+      ],
+      "referenced_table": "followup_actions",
+      "referenced_columns": [
+        "action_id"
+      ]
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "fk_idempotency_keys_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "fk_idempotency_keys_user_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(user_id)",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "pk_idempotency_keys",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (user_id, key)",
+      "columns": [
+        "user_id",
+        "key"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "knowledge_documents",
+      "name": "pk_knowledge_documents",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (document_id)",
+      "columns": [
+        "document_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "knowledge_documents",
+      "name": "uq_knowledge_documents_policy_key_version",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (policy_key, version)",
+      "columns": [
+        "policy_key",
+        "version"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "messages",
+      "name": "ck_messages_body",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (length(TRIM(BOTH FROM body)) >= 1 AND length(TRIM(BOTH FROM body)) <= 10000)",
+      "columns": [
+        "body"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "messages",
+      "name": "ck_messages_cycle",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (cycle_no >= 1)",
+      "columns": [
+        "cycle_no"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "messages",
+      "name": "ck_messages_direction",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (direction = ANY (ARRAY['IN'::text, 'OUT'::text, 'INTERNAL'::text]))",
+      "columns": [
+        "direction"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "messages",
+      "name": "ck_messages_public_shape",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (visibility::text <> 'PUBLIC'::text OR role = 'CUSTOMER'::text AND direction = 'IN'::text OR (role = ANY (ARRAY['AGENT'::text, 'ASSISTANT'::text, 'SYSTEM'::text])) AND direction = 'OUT'::text)",
+      "columns": [
+        "visibility",
+        "role",
+        "direction"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "messages",
+      "name": "ck_messages_role",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (role = ANY (ARRAY['CUSTOMER'::text, 'AGENT'::text, 'ASSISTANT'::text, 'SYSTEM'::text]))",
+      "columns": [
+        "role"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "messages",
+      "name": "ck_messages_visibility",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (visibility::text = ANY (ARRAY['PUBLIC'::character varying, 'INTERNAL'::character varying]::text[]))",
+      "columns": [
+        "visibility"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "messages",
+      "name": "fk_messages_approval_id_approvals",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (approval_id) REFERENCES approvals(approval_id)",
+      "columns": [
+        "approval_id"
+      ],
+      "referenced_table": "approvals",
+      "referenced_columns": [
+        "approval_id"
+      ]
+    },
+    {
+      "table_name": "messages",
+      "name": "fk_messages_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "messages",
+      "name": "pk_messages",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (message_id)",
+      "columns": [
+        "message_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "orders",
+      "name": "ck_orders_quantity_amount",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (quantity > 0 AND amount >= 0::numeric AND version >= 1)",
+      "columns": [
+        "quantity",
+        "amount",
+        "version"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "orders",
+      "name": "fk_orders_customer_id_customers",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (customer_id) REFERENCES customers(customer_id)",
+      "columns": [
+        "customer_id"
+      ],
+      "referenced_table": "customers",
+      "referenced_columns": [
+        "customer_id"
+      ]
+    },
+    {
+      "table_name": "orders",
+      "name": "fk_orders_product_id_products",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (product_id) REFERENCES products(product_id)",
+      "columns": [
+        "product_id"
+      ],
+      "referenced_table": "products",
+      "referenced_columns": [
+        "product_id"
+      ]
+    },
+    {
+      "table_name": "orders",
+      "name": "pk_orders",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (order_id)",
+      "columns": [
+        "order_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "orders",
+      "name": "uq_orders_order_id_customer_id_product_id",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (order_id, customer_id, product_id)",
+      "columns": [
+        "order_id",
+        "customer_id",
+        "product_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "orders",
+      "name": "uq_orders_order_number",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (order_number)",
+      "columns": [
+        "order_number"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "products",
+      "name": "pk_products",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (product_id)",
+      "columns": [
+        "product_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "products",
+      "name": "uq_products_sku",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (sku)",
+      "columns": [
+        "sku"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "queue_routes",
+      "name": "ck_queue_routes_revision",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (cycle_no >= 1 AND revision >= 1)",
+      "columns": [
+        "cycle_no",
+        "revision"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "queue_routes",
+      "name": "fk_queue_routes_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "queue_routes",
+      "name": "fk_queue_routes_ticket_id_tickets",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": "tickets",
+      "referenced_columns": [
+        "ticket_id"
+      ]
+    },
+    {
+      "table_name": "queue_routes",
+      "name": "pk_queue_routes",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (ticket_id, cycle_no)",
+      "columns": [
+        "ticket_id",
+        "cycle_no"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "returns",
+      "name": "fk_returns_order_id_orders",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (order_id) REFERENCES orders(order_id)",
+      "columns": [
+        "order_id"
+      ],
+      "referenced_table": "orders",
+      "referenced_columns": [
+        "order_id"
+      ]
+    },
+    {
+      "table_name": "returns",
+      "name": "pk_returns",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (return_id)",
+      "columns": [
+        "return_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "returns",
+      "name": "uq_returns_order_id",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (order_id)",
+      "columns": [
+        "order_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "shipments",
+      "name": "fk_shipments_order_id_orders",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (order_id) REFERENCES orders(order_id)",
+      "columns": [
+        "order_id"
+      ],
+      "referenced_table": "orders",
+      "referenced_columns": [
+        "order_id"
+      ]
+    },
+    {
+      "table_name": "shipments",
+      "name": "pk_shipments",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (shipment_id)",
+      "columns": [
+        "shipment_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "shipments",
+      "name": "uq_shipments_order_id",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (order_id)",
+      "columns": [
+        "order_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "staff_permissions",
+      "name": "ck_staff_permissions_permission",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (permission::text = ANY (ARRAY['EXCEPTION_QUEUE_READ'::character varying, 'UNROUTED_QUEUE_READ'::character varying, 'AUTOMATION_READ'::character varying, 'AUTOMATION_STOP'::character varying, 'AUTOMATION_RESUME'::character varying, 'RETENTION_TEAM_REVIEW'::character varying, 'RETENTION_GLOBAL_REVIEW'::character varying]::text[]))",
+      "columns": [
+        "permission"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "staff_permissions",
+      "name": "fk_staff_permissions_granted_by_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (granted_by) REFERENCES users(user_id)",
+      "columns": [
+        "granted_by"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "staff_permissions",
+      "name": "fk_staff_permissions_user_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(user_id)",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "staff_permissions",
+      "name": "pk_staff_permissions",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (user_id, permission)",
+      "columns": [
+        "user_id",
+        "permission"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "team_categories",
+      "name": "fk_team_categories_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "team_categories",
+      "name": "pk_team_categories",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (team_id, category)",
+      "columns": [
+        "team_id",
+        "category"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "teams",
+      "name": "pk_teams",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (team_id)",
+      "columns": [
+        "team_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "tickets",
+      "name": "ck_tickets_order_product",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (order_id IS NULL OR product_id IS NOT NULL)",
+      "columns": [
+        "order_id",
+        "product_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "tickets",
+      "name": "ck_tickets_requested_mode",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (requested_mode = ANY (ARRAY['AUTO'::text, 'HUMAN'::text]))",
+      "columns": [
+        "requested_mode"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "tickets",
+      "name": "ck_tickets_resolution_mode",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (resolution_mode IS NULL OR (resolution_mode = ANY (ARRAY['AUTO'::text, 'HUMAN'::text])))",
+      "columns": [
+        "resolution_mode"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "tickets",
+      "name": "ck_tickets_resolved_at",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (status <> 'RESOLVED'::text OR resolved_at IS NOT NULL AND resolution_mode IS NOT NULL)",
+      "columns": [
+        "status",
+        "resolved_at",
+        "resolution_mode"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "tickets",
+      "name": "ck_tickets_status",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (status = ANY (ARRAY['OPEN'::text, 'PROCESSING'::text, 'WAITING_CUSTOMER'::text, 'HANDOFF_PENDING'::text, 'ASSIGNED'::text, 'IN_PROGRESS'::text, 'FOLLOWUP_PENDING'::text, 'RESOLVED'::text, 'CANCELLED'::text]))",
+      "columns": [
+        "status"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "tickets",
+      "name": "ck_tickets_version_cycle",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (version >= 1 AND cycle_no >= 1)",
+      "columns": [
+        "version",
+        "cycle_no"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "tickets",
+      "name": "fk_tickets_customer_id_customers",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (customer_id) REFERENCES customers(customer_id)",
+      "columns": [
+        "customer_id"
+      ],
+      "referenced_table": "customers",
+      "referenced_columns": [
+        "customer_id"
+      ]
+    },
+    {
+      "table_name": "tickets",
+      "name": "fk_tickets_owned_order_product",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (order_id, customer_id, product_id) REFERENCES orders(order_id, customer_id, product_id)",
+      "columns": [
+        "order_id",
+        "customer_id",
+        "product_id"
+      ],
+      "referenced_table": "orders",
+      "referenced_columns": [
+        "order_id",
+        "customer_id",
+        "product_id"
+      ]
+    },
+    {
+      "table_name": "tickets",
+      "name": "fk_tickets_product_id_products",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (product_id) REFERENCES products(product_id)",
+      "columns": [
+        "product_id"
+      ],
+      "referenced_table": "products",
+      "referenced_columns": [
+        "product_id"
+      ]
+    },
+    {
+      "table_name": "tickets",
+      "name": "fk_tickets_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "tickets",
+      "name": "pk_tickets",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (ticket_id)",
+      "columns": [
+        "ticket_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "user_team_scopes",
+      "name": "fk_user_team_scopes_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "user_team_scopes",
+      "name": "fk_user_team_scopes_user_id_users",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(user_id)",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_table": "users",
+      "referenced_columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table_name": "user_team_scopes",
+      "name": "pk_user_team_scopes",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (user_id, team_id)",
+      "columns": [
+        "user_id",
+        "team_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "users",
+      "name": "ck_users_role",
+      "kind": "c",
+      "validated": true,
+      "definition": "CHECK (role = ANY (ARRAY['CUSTOMER'::text, 'AGENT'::text, 'ADMIN'::text]))",
+      "columns": [
+        "role"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "users",
+      "name": "fk_users_team_id_teams",
+      "kind": "f",
+      "validated": true,
+      "definition": "FOREIGN KEY (team_id) REFERENCES teams(team_id)",
+      "columns": [
+        "team_id"
+      ],
+      "referenced_table": "teams",
+      "referenced_columns": [
+        "team_id"
+      ]
+    },
+    {
+      "table_name": "users",
+      "name": "pk_users",
+      "kind": "p",
+      "validated": true,
+      "definition": "PRIMARY KEY (user_id)",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    },
+    {
+      "table_name": "users",
+      "name": "uq_users_login_name",
+      "kind": "u",
+      "validated": true,
+      "definition": "UNIQUE (login_name)",
+      "columns": [
+        "login_name"
+      ],
+      "referenced_table": null,
+      "referenced_columns": []
+    }
+  ],
+  "indexes": [
+    {
+      "table_name": "ai_suggestions",
+      "name": "pk_ai_suggestions",
+      "definition": "CREATE UNIQUE INDEX pk_ai_suggestions ON public.ai_suggestions USING btree (suggestion_id)"
+    },
+    {
+      "table_name": "ai_suggestions",
+      "name": "uq_ai_suggestions_ticket_id_cycle_no_revision",
+      "definition": "CREATE UNIQUE INDEX uq_ai_suggestions_ticket_id_cycle_no_revision ON public.ai_suggestions USING btree (ticket_id, cycle_no, revision)"
+    },
+    {
+      "table_name": "alembic_version",
+      "name": "alembic_version_pkc",
+      "definition": "CREATE UNIQUE INDEX alembic_version_pkc ON public.alembic_version USING btree (version_num)"
+    },
+    {
+      "table_name": "analytics_batches",
+      "name": "pk_analytics_batches",
+      "definition": "CREATE UNIQUE INDEX pk_analytics_batches ON public.analytics_batches USING btree (batch_id)"
+    },
+    {
+      "table_name": "analytics_batches",
+      "name": "uq_analytics_current",
+      "definition": "CREATE UNIQUE INDEX uq_analytics_current ON public.analytics_batches USING btree (is_current) WHERE is_current"
+    },
+    {
+      "table_name": "analytics_daily",
+      "name": "pk_analytics_daily",
+      "definition": "CREATE UNIQUE INDEX pk_analytics_daily ON public.analytics_daily USING btree (batch_id, day, team_key, category)"
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "name": "pk_analytics_product_daily",
+      "definition": "CREATE UNIQUE INDEX pk_analytics_product_daily ON public.analytics_product_daily USING btree (batch_id, day, product_id, category, issue_tag)"
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "name": "pk_analytics_product_risk",
+      "definition": "CREATE UNIQUE INDEX pk_analytics_product_risk ON public.analytics_product_risk USING btree (batch_id, scope_key, product_id)"
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "name": "uq_risk_rank",
+      "definition": "CREATE UNIQUE INDEX uq_risk_rank ON public.analytics_product_risk USING btree (batch_id, scope_key, rank) WHERE (rank IS NOT NULL)"
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "name": "pk_analytics_product_voc_daily",
+      "definition": "CREATE UNIQUE INDEX pk_analytics_product_voc_daily ON public.analytics_product_voc_daily USING btree (batch_id, scope_key, product_id, day, primary_issue)"
+    },
+    {
+      "table_name": "analytics_publication",
+      "name": "pk_analytics_publication",
+      "definition": "CREATE UNIQUE INDEX pk_analytics_publication ON public.analytics_publication USING btree (singleton_id)"
+    },
+    {
+      "table_name": "analytics_receipts",
+      "name": "pk_analytics_receipts",
+      "definition": "CREATE UNIQUE INDEX pk_analytics_receipts ON public.analytics_receipts USING btree (batch_id)"
+    },
+    {
+      "table_name": "approvals",
+      "name": "pk_approvals",
+      "definition": "CREATE UNIQUE INDEX pk_approvals ON public.approvals USING btree (approval_id)"
+    },
+    {
+      "table_name": "assignments",
+      "name": "ix_assignments_agent",
+      "definition": "CREATE INDEX ix_assignments_agent ON public.assignments USING btree (agent_id, ticket_id, ended_at)"
+    },
+    {
+      "table_name": "assignments",
+      "name": "pk_assignments",
+      "definition": "CREATE UNIQUE INDEX pk_assignments ON public.assignments USING btree (assignment_id)"
+    },
+    {
+      "table_name": "assignments",
+      "name": "uq_assignments_current",
+      "definition": "CREATE UNIQUE INDEX uq_assignments_current ON public.assignments USING btree (ticket_id) WHERE (ended_at IS NULL)"
+    },
+    {
+      "table_name": "audit_events",
+      "name": "pk_audit_events",
+      "definition": "CREATE UNIQUE INDEX pk_audit_events ON public.audit_events USING btree (event_id)"
+    },
+    {
+      "table_name": "audit_events",
+      "name": "uq_audit_events_event_key",
+      "definition": "CREATE UNIQUE INDEX uq_audit_events_event_key ON public.audit_events USING btree (event_key)"
+    },
+    {
+      "table_name": "automation_control",
+      "name": "pk_automation_control",
+      "definition": "CREATE UNIQUE INDEX pk_automation_control ON public.automation_control USING btree (singleton_id)"
+    },
+    {
+      "table_name": "automation_control_history",
+      "name": "pk_automation_control_history",
+      "definition": "CREATE UNIQUE INDEX pk_automation_control_history ON public.automation_control_history USING btree (revision)"
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "ix_jobs_recovery",
+      "definition": "CREATE INDEX ix_jobs_recovery ON public.automation_jobs USING btree (status, next_attempt_at, job_id)"
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "pk_automation_jobs",
+      "definition": "CREATE UNIQUE INDEX pk_automation_jobs ON public.automation_jobs USING btree (job_id)"
+    },
+    {
+      "table_name": "automation_jobs",
+      "name": "uq_automation_jobs_ticket_id_cycle_no",
+      "definition": "CREATE UNIQUE INDEX uq_automation_jobs_ticket_id_cycle_no ON public.automation_jobs USING btree (ticket_id, cycle_no)"
+    },
+    {
+      "table_name": "automation_rules",
+      "name": "pk_automation_rules",
+      "definition": "CREATE UNIQUE INDEX pk_automation_rules ON public.automation_rules USING btree (rule_id)"
+    },
+    {
+      "table_name": "automation_rules",
+      "name": "uq_automation_rules_rule_key_version",
+      "definition": "CREATE UNIQUE INDEX uq_automation_rules_rule_key_version ON public.automation_rules USING btree (rule_key, version)"
+    },
+    {
+      "table_name": "customers",
+      "name": "pk_customers",
+      "definition": "CREATE UNIQUE INDEX pk_customers ON public.customers USING btree (customer_id)"
+    },
+    {
+      "table_name": "customers",
+      "name": "uq_customers_customer_key",
+      "definition": "CREATE UNIQUE INDEX uq_customers_customer_key ON public.customers USING btree (customer_key)"
+    },
+    {
+      "table_name": "customers",
+      "name": "uq_customers_user_id",
+      "definition": "CREATE UNIQUE INDEX uq_customers_user_id ON public.customers USING btree (user_id)"
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ix_followups_team_page",
+      "definition": "CREATE INDEX ix_followups_team_page ON public.followup_actions USING btree (owner_team_id, created_at, action_id)"
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "ix_followups_ticket",
+      "definition": "CREATE INDEX ix_followups_ticket ON public.followup_actions USING btree (ticket_id, status, blocks_resolution)"
+    },
+    {
+      "table_name": "followup_actions",
+      "name": "pk_followup_actions",
+      "definition": "CREATE UNIQUE INDEX pk_followup_actions ON public.followup_actions USING btree (action_id)"
+    },
+    {
+      "table_name": "idempotency_keys",
+      "name": "pk_idempotency_keys",
+      "definition": "CREATE UNIQUE INDEX pk_idempotency_keys ON public.idempotency_keys USING btree (user_id, key)"
+    },
+    {
+      "table_name": "knowledge_documents",
+      "name": "pk_knowledge_documents",
+      "definition": "CREATE UNIQUE INDEX pk_knowledge_documents ON public.knowledge_documents USING btree (document_id)"
+    },
+    {
+      "table_name": "knowledge_documents",
+      "name": "uq_knowledge_documents_policy_key_version",
+      "definition": "CREATE UNIQUE INDEX uq_knowledge_documents_policy_key_version ON public.knowledge_documents USING btree (policy_key, version)"
+    },
+    {
+      "table_name": "messages",
+      "name": "ix_messages_ticket_page",
+      "definition": "CREATE INDEX ix_messages_ticket_page ON public.messages USING btree (ticket_id, created_at, message_id)"
+    },
+    {
+      "table_name": "messages",
+      "name": "pk_messages",
+      "definition": "CREATE UNIQUE INDEX pk_messages ON public.messages USING btree (message_id)"
+    },
+    {
+      "table_name": "messages",
+      "name": "uq_messages_final_cycle",
+      "definition": "CREATE UNIQUE INDEX uq_messages_final_cycle ON public.messages USING btree (ticket_id, cycle_no) WHERE (final_reply AND (direction = 'OUT'::text))"
+    },
+    {
+      "table_name": "orders",
+      "name": "ix_orders_customer_page",
+      "definition": "CREATE INDEX ix_orders_customer_page ON public.orders USING btree (customer_id, placed_at, order_id)"
+    },
+    {
+      "table_name": "orders",
+      "name": "pk_orders",
+      "definition": "CREATE UNIQUE INDEX pk_orders ON public.orders USING btree (order_id)"
+    },
+    {
+      "table_name": "orders",
+      "name": "uq_orders_order_id_customer_id_product_id",
+      "definition": "CREATE UNIQUE INDEX uq_orders_order_id_customer_id_product_id ON public.orders USING btree (order_id, customer_id, product_id)"
+    },
+    {
+      "table_name": "orders",
+      "name": "uq_orders_order_number",
+      "definition": "CREATE UNIQUE INDEX uq_orders_order_number ON public.orders USING btree (order_number)"
+    },
+    {
+      "table_name": "products",
+      "name": "pk_products",
+      "definition": "CREATE UNIQUE INDEX pk_products ON public.products USING btree (product_id)"
+    },
+    {
+      "table_name": "products",
+      "name": "uq_products_sku",
+      "definition": "CREATE UNIQUE INDEX uq_products_sku ON public.products USING btree (sku)"
+    },
+    {
+      "table_name": "queue_routes",
+      "name": "pk_queue_routes",
+      "definition": "CREATE UNIQUE INDEX pk_queue_routes ON public.queue_routes USING btree (ticket_id, cycle_no)"
+    },
+    {
+      "table_name": "returns",
+      "name": "pk_returns",
+      "definition": "CREATE UNIQUE INDEX pk_returns ON public.returns USING btree (return_id)"
+    },
+    {
+      "table_name": "returns",
+      "name": "uq_returns_order_id",
+      "definition": "CREATE UNIQUE INDEX uq_returns_order_id ON public.returns USING btree (order_id)"
+    },
+    {
+      "table_name": "shipments",
+      "name": "pk_shipments",
+      "definition": "CREATE UNIQUE INDEX pk_shipments ON public.shipments USING btree (shipment_id)"
+    },
+    {
+      "table_name": "shipments",
+      "name": "uq_shipments_order_id",
+      "definition": "CREATE UNIQUE INDEX uq_shipments_order_id ON public.shipments USING btree (order_id)"
+    },
+    {
+      "table_name": "staff_permissions",
+      "name": "pk_staff_permissions",
+      "definition": "CREATE UNIQUE INDEX pk_staff_permissions ON public.staff_permissions USING btree (user_id, permission)"
+    },
+    {
+      "table_name": "team_categories",
+      "name": "pk_team_categories",
+      "definition": "CREATE UNIQUE INDEX pk_team_categories ON public.team_categories USING btree (team_id, category)"
+    },
+    {
+      "table_name": "teams",
+      "name": "pk_teams",
+      "definition": "CREATE UNIQUE INDEX pk_teams ON public.teams USING btree (team_id)"
+    },
+    {
+      "table_name": "tickets",
+      "name": "ix_tickets_customer_page",
+      "definition": "CREATE INDEX ix_tickets_customer_page ON public.tickets USING btree (customer_id, created_at, ticket_id)"
+    },
+    {
+      "table_name": "tickets",
+      "name": "ix_tickets_team",
+      "definition": "CREATE INDEX ix_tickets_team ON public.tickets USING btree (team_id, created_at, ticket_id)"
+    },
+    {
+      "table_name": "tickets",
+      "name": "pk_tickets",
+      "definition": "CREATE UNIQUE INDEX pk_tickets ON public.tickets USING btree (ticket_id)"
+    },
+    {
+      "table_name": "user_team_scopes",
+      "name": "pk_user_team_scopes",
+      "definition": "CREATE UNIQUE INDEX pk_user_team_scopes ON public.user_team_scopes USING btree (user_id, team_id)"
+    },
+    {
+      "table_name": "users",
+      "name": "pk_users",
+      "definition": "CREATE UNIQUE INDEX pk_users ON public.users USING btree (user_id)"
+    },
+    {
+      "table_name": "users",
+      "name": "uq_users_login_name",
+      "definition": "CREATE UNIQUE INDEX uq_users_login_name ON public.users USING btree (login_name)"
+    }
+  ],
+  "triggers": [
+    {
+      "table_name": "analytics_batches",
+      "name": "immutable_published",
+      "definition": "CREATE TRIGGER immutable_published BEFORE DELETE OR UPDATE ON analytics_batches FOR EACH ROW EXECUTE FUNCTION csflow_analytics_head_immutable()"
+    },
+    {
+      "table_name": "analytics_daily",
+      "name": "immutable_published",
+      "definition": "CREATE TRIGGER immutable_published BEFORE INSERT OR DELETE OR UPDATE ON analytics_daily FOR EACH ROW EXECUTE FUNCTION csflow_analytics_mart_immutable()"
+    },
+    {
+      "table_name": "analytics_product_daily",
+      "name": "immutable_published",
+      "definition": "CREATE TRIGGER immutable_published BEFORE INSERT OR DELETE OR UPDATE ON analytics_product_daily FOR EACH ROW EXECUTE FUNCTION csflow_analytics_mart_immutable()"
+    },
+    {
+      "table_name": "analytics_product_risk",
+      "name": "immutable_published",
+      "definition": "CREATE TRIGGER immutable_published BEFORE INSERT OR DELETE OR UPDATE ON analytics_product_risk FOR EACH ROW EXECUTE FUNCTION csflow_analytics_mart_immutable()"
+    },
+    {
+      "table_name": "analytics_product_voc_daily",
+      "name": "immutable_published",
+      "definition": "CREATE TRIGGER immutable_published BEFORE INSERT OR DELETE OR UPDATE ON analytics_product_voc_daily FOR EACH ROW EXECUTE FUNCTION csflow_analytics_mart_immutable()"
+    },
+    {
+      "table_name": "analytics_receipts",
+      "name": "immutable_receipt",
+      "definition": "CREATE TRIGGER immutable_receipt BEFORE DELETE OR UPDATE ON analytics_receipts FOR EACH ROW EXECUTE FUNCTION csflow_analytics_receipt_immutable()"
+    },
+    {
+      "table_name": "automation_control_history",
+      "name": "immutable_history",
+      "definition": "CREATE TRIGGER immutable_history BEFORE DELETE OR UPDATE ON automation_control_history FOR EACH ROW EXECUTE FUNCTION csflow_control_history_immutable()"
+    }
+  ],
+  "functions": [
+    {
+      "name": "csflow_analytics_head_immutable",
+      "definition": "CREATE OR REPLACE FUNCTION public.csflow_analytics_head_immutable()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\n        BEGIN\n          IF OLD.status='SUCCEEDED' THEN\n            IF TG_OP='DELETE' THEN RAISE EXCEPTION 'PUBLISHED_ANALYTICS_IMMUTABLE'; END IF;\n            IF (to_jsonb(NEW)-'is_current') IS DISTINCT FROM (to_jsonb(OLD)-'is_current') THEN\n              RAISE EXCEPTION 'PUBLISHED_ANALYTICS_IMMUTABLE';\n            END IF;\n          END IF;\n          IF TG_OP='DELETE' THEN RETURN OLD; ELSE RETURN NEW; END IF;\n        END $function$\n"
+    },
+    {
+      "name": "csflow_analytics_mart_immutable",
+      "definition": "CREATE OR REPLACE FUNCTION public.csflow_analytics_mart_immutable()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\n        DECLARE batch_status text;\n        BEGIN\n          IF TG_OP <> 'INSERT' THEN\n            SELECT status INTO batch_status FROM analytics_batches WHERE batch_id=OLD.batch_id FOR SHARE;\n            IF batch_status='SUCCEEDED' THEN RAISE EXCEPTION 'PUBLISHED_ANALYTICS_IMMUTABLE'; END IF;\n          END IF;\n          IF TG_OP <> 'DELETE' THEN\n            SELECT status INTO batch_status FROM analytics_batches WHERE batch_id=NEW.batch_id FOR SHARE;\n            IF batch_status='SUCCEEDED' THEN RAISE EXCEPTION 'PUBLISHED_ANALYTICS_IMMUTABLE'; END IF;\n          END IF;\n          IF TG_OP='DELETE' THEN RETURN OLD; ELSE RETURN NEW; END IF;\n        END $function$\n"
+    },
+    {
+      "name": "csflow_analytics_receipt_immutable",
+      "definition": "CREATE OR REPLACE FUNCTION public.csflow_analytics_receipt_immutable()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\n        BEGIN\n          PERFORM 1 FROM analytics_batches WHERE batch_id=OLD.batch_id FOR SHARE;\n          IF TG_OP='DELETE' THEN RAISE EXCEPTION 'ANALYTICS_RECEIPT_IMMUTABLE'; END IF;\n          IF NEW.payload IS DISTINCT FROM OLD.payload OR NEW.content_hash IS DISTINCT FROM OLD.content_hash OR\n             NEW.batch_id IS DISTINCT FROM OLD.batch_id OR EXISTS(SELECT 1 FROM analytics_batches\n             WHERE batch_id=OLD.batch_id AND status='SUCCEEDED') THEN\n            RAISE EXCEPTION 'ANALYTICS_RECEIPT_IMMUTABLE';\n          END IF;\n          RETURN NEW;\n        END $function$\n"
+    },
+    {
+      "name": "csflow_control_history_immutable",
+      "definition": "CREATE OR REPLACE FUNCTION public.csflow_control_history_immutable()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\n        BEGIN RAISE EXCEPTION 'CONTROL_HISTORY_IMMUTABLE'; END $function$\n"
+    }
+  ],
+  "native_enums": [],
+  "sequences": [
+    {
+      "sequencename": "analytics_publication_singleton_id_seq"
+    },
+    {
+      "sequencename": "automation_control_history_revision_seq"
+    },
+    {
+      "sequencename": "automation_control_singleton_id_seq"
+    }
+  ]
+}

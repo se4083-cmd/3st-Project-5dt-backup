@@ -1,0 +1,10 @@
+{
+  "contract_status": "PROPOSED_NOT_IMPLEMENTED",
+  "warning": "PUBLIC_SYNTHETIC_EXAMPLE_KEY_NEVER_USE_IN_DEPLOYMENT",
+  "example_key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "join_domain": "org-demo-authorized-silver",
+  "key_version": "demo-public-v1",
+  "input_customer_uuid": "0abdf2ce-df2a-5302-89cb-59025fbcac20",
+  "input_utf8": "csflow|customer|v1|org-demo-authorized-silver|0abdf2ce-df2a-5302-89cb-59025fbcac20",
+  "customer_ref": "77a54b1ef491dd7dbaedd79edaf918a3755053de3120bcc3432396b0f0c77c97"
+}

@@ -1,0 +1,233 @@
+erDiagram
+    ai_suggestions {
+        uuid suggestion_id PK
+        uuid ticket_id FK,UK
+        bigint cycle_no UK
+        bigint revision UK
+        uuid rule_id FK
+    }
+    alembic_version {
+        character_varying_32_ version_num PK
+    }
+    analytics_batches {
+        uuid batch_id PK
+        text status
+    }
+    analytics_daily {
+        uuid batch_id FK,PK
+        date day PK
+        text team_key PK
+        text category PK
+    }
+    analytics_product_daily {
+        uuid batch_id FK,PK
+        date day PK
+        uuid product_id FK,PK
+        text category PK
+        text issue_tag PK
+    }
+    analytics_product_risk {
+        uuid batch_id FK,PK
+        text scope_key PK
+        uuid product_id FK,PK
+    }
+    analytics_product_voc_daily {
+        uuid batch_id FK,PK
+        text scope_key PK
+        uuid product_id FK,PK
+        date day PK
+        text primary_issue PK
+    }
+    analytics_publication {
+        integer singleton_id PK
+        uuid batch_id FK
+    }
+    analytics_receipts {
+        uuid batch_id FK,PK
+    }
+    approvals {
+        uuid approval_id PK
+        uuid ticket_id FK
+        uuid suggestion_id FK
+        bigint cycle_no
+        uuid reviewer_id FK
+    }
+    assignments {
+        uuid assignment_id PK
+        uuid ticket_id FK
+        bigint cycle_no
+        uuid team_id FK
+        uuid agent_id FK
+    }
+    audit_events {
+        uuid event_id PK
+        uuid ticket_id FK
+        bigint cycle_no
+        uuid actor_user_id FK
+        text event_key UK
+    }
+    automation_control {
+        integer singleton_id PK
+        bigint revision
+        uuid changed_by FK
+    }
+    automation_control_history {
+        bigint revision PK
+        uuid changed_by FK
+    }
+    automation_jobs {
+        uuid job_id PK
+        uuid ticket_id FK,UK
+        bigint cycle_no UK
+        text status
+        uuid source_message_id FK
+    }
+    automation_rules {
+        uuid rule_id PK
+        text rule_key UK
+        bigint version UK
+        uuid updated_by FK
+    }
+    customers {
+        uuid customer_id PK
+        uuid user_id FK,UK
+        text customer_key UK
+    }
+    followup_actions {
+        uuid action_id PK
+        uuid ticket_id FK
+        bigint cycle_no
+        uuid product_id FK
+        uuid owner_user_id FK
+        uuid owner_team_id FK
+        text status
+        bigint version
+        uuid origin_team_id FK
+    }
+    idempotency_keys {
+        uuid user_id FK,PK
+        character_varying_128_ key PK
+        uuid ticket_id FK
+        uuid followup_id FK
+    }
+    knowledge_documents {
+        uuid document_id PK
+        text policy_key UK
+        bigint version UK
+    }
+    messages {
+        uuid message_id PK
+        uuid ticket_id FK
+        bigint cycle_no
+        uuid approval_id FK
+    }
+    orders {
+        uuid order_id PK,UK
+        uuid customer_id FK,UK
+        uuid product_id FK,UK
+        text order_number UK
+        bigint version
+    }
+    products {
+        uuid product_id PK
+        text sku UK
+    }
+    queue_routes {
+        uuid ticket_id FK,PK
+        bigint cycle_no PK
+        uuid team_id FK
+        bigint revision
+    }
+    returns {
+        uuid return_id PK
+        uuid order_id FK,UK
+        text status
+    }
+    shipments {
+        uuid shipment_id PK
+        uuid order_id FK,UK
+        text status
+        bigint version
+    }
+    staff_permissions {
+        uuid user_id FK,PK
+        character_varying_64_ permission PK
+        uuid granted_by FK
+    }
+    team_categories {
+        uuid team_id FK,PK
+        character_varying_32_ category PK
+    }
+    teams {
+        uuid team_id PK
+    }
+    tickets {
+        uuid ticket_id PK
+        uuid customer_id FK
+        uuid order_id FK
+        uuid product_id FK
+        text status
+        bigint version
+        bigint cycle_no
+        uuid team_id FK
+    }
+    user_team_scopes {
+        uuid user_id FK,PK
+        uuid team_id FK,PK
+    }
+    users {
+        uuid user_id PK
+        text login_name UK
+        uuid team_id FK
+    }
+    automation_rules ||--o{ ai_suggestions : "rule_id"
+    tickets |o--o{ ai_suggestions : "ticket_id"
+    analytics_batches ||--o{ analytics_daily : "batch_id"
+    analytics_batches ||--o{ analytics_product_daily : "batch_id"
+    products ||--o{ analytics_product_daily : "product_id"
+    analytics_batches ||--o{ analytics_product_risk : "batch_id"
+    products ||--o{ analytics_product_risk : "product_id"
+    analytics_batches ||--o{ analytics_product_voc_daily : "batch_id"
+    products ||--o{ analytics_product_voc_daily : "product_id"
+    analytics_receipts |o--o{ analytics_publication : "batch_id"
+    analytics_batches ||--o| analytics_receipts : "batch_id"
+    users |o--o{ approvals : "reviewer_id"
+    ai_suggestions ||--o{ approvals : "suggestion_id"
+    tickets |o--o{ approvals : "ticket_id"
+    users |o--o{ assignments : "agent_id"
+    teams |o--o{ assignments : "team_id"
+    tickets ||--o{ assignments : "ticket_id"
+    users |o--o{ audit_events : "actor_user_id"
+    tickets |o--o{ audit_events : "ticket_id"
+    users |o--o{ automation_control : "changed_by"
+    users |o--o{ automation_control_history : "changed_by"
+    messages |o--o{ automation_jobs : "source_message_id"
+    tickets ||--o{ automation_jobs : "ticket_id"
+    users |o--o{ automation_rules : "updated_by"
+    users ||--o| customers : "user_id"
+    teams ||--o{ followup_actions : "origin_team_id"
+    teams ||--o{ followup_actions : "owner_team_id"
+    users |o--o{ followup_actions : "owner_user_id"
+    products |o--o{ followup_actions : "product_id"
+    tickets |o--o{ followup_actions : "ticket_id"
+    followup_actions |o--o{ idempotency_keys : "followup_id"
+    tickets |o--o{ idempotency_keys : "ticket_id"
+    users ||--o{ idempotency_keys : "user_id"
+    approvals |o--o{ messages : "approval_id"
+    tickets ||--o{ messages : "ticket_id"
+    customers ||--o{ orders : "customer_id"
+    products |o--o{ orders : "product_id"
+    teams |o--o{ queue_routes : "team_id"
+    tickets ||--o{ queue_routes : "ticket_id"
+    orders |o--o| returns : "order_id"
+    orders |o--o| shipments : "order_id"
+    users |o--o{ staff_permissions : "granted_by"
+    users ||--o{ staff_permissions : "user_id"
+    teams ||--o{ team_categories : "team_id"
+    customers ||--o{ tickets : "customer_id"
+    orders |o--o{ tickets : "order_id,customer_id,product_id"
+    products |o--o{ tickets : "product_id"
+    teams |o--o{ tickets : "team_id"
+    teams ||--o{ user_team_scopes : "team_id"
+    users ||--o{ user_team_scopes : "user_id"
+    teams |o--o{ users : "team_id"

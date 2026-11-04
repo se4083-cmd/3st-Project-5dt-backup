@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "server_version": "16.15",
+  "migration_head": "0006",
+  "alembic_model_check": "PASS",
+  "tables": 32,
+  "constraints": 138,
+  "indexes": 57,
+  "triggers": 7,
+  "native_enum_types": 0,
+  "schema_sha256": "dd4fa5d0f5ba6eae28893fd582e245ea91c85a96c3153627eb11e3b1b3eeeea5",
+  "existing_services_changed": false,
+  "azure_accessed": false
+}

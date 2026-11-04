@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "db_projection_tables": 8,
+  "synthetic_projection_rows": 9,
+  "proposed_export_files": 5,
+  "proposed_export_rows": 5,
+  "jsonl_bytes_counts_sha256": "PASS",
+  "projection_types_fk_pk": "PASS",
+  "hmac_public_vector": "PASS",
+  "api_schema_canonical_hashes": "PASS",
+  "actual_generated_openapi_paths": 8,
+  "postgresql_sample_constraints_and_semantic_gold_validation": "NOT_RUN_OFFLINE_ONLY",
+  "azure_accessed": false,
+  "live_http_executed": false,
+  "actual_fabric_executed": false,
+  "full_business_test_suite_executed": false
+}

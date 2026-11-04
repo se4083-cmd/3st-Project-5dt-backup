@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "markdown_links": "PASS",
+  "catalog_columns": 398,
+  "constraints_documented": 138,
+  "indexes_documented": 57,
+  "private_values_checked": 10,
+  "findings": [],
+  "azure_requeried": false,
+  "app_or_migrations_changed_in_this_task": false
+}

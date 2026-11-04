@@ -1,0 +1,170 @@
+[
+  {
+    "table": "teams",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "users",
+    "a_only": [
+      "is_dev_account"
+    ],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "customers",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "products",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "orders",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "shipments",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "returns",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "tickets",
+    "a_only": [
+      "team_id"
+    ],
+    "fixture_only": [],
+    "changed": [
+      "cycle_no: bigint/NULL=True → bigint/NULL=False"
+    ]
+  },
+  {
+    "table": "messages",
+    "a_only": [
+      "visibility"
+    ],
+    "fixture_only": [],
+    "changed": [
+      "ticket_id: uuid/NULL=True → uuid/NULL=False",
+      "cycle_no: bigint/NULL=True → bigint/NULL=False"
+    ]
+  },
+  {
+    "table": "assignments",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": [
+      "ticket_id: uuid/NULL=True → uuid/NULL=False",
+      "cycle_no: bigint/NULL=True → bigint/NULL=False"
+    ]
+  },
+  {
+    "table": "knowledge_documents",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "ai_suggestions",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "approvals",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "audit_events",
+    "a_only": [
+      "reason_code",
+      "result"
+    ],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "automation_rules",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "followup_actions",
+    "a_only": [
+      "cancellation_reason",
+      "cancelled_at",
+      "origin_team_id",
+      "responsibility_cycle_no"
+    ],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "automation_jobs",
+    "a_only": [
+      "automation_generation",
+      "expected_ticket_version",
+      "job_kind",
+      "lease_owner",
+      "reason_code",
+      "source_message_id"
+    ],
+    "fixture_only": [],
+    "changed": [
+      "ticket_id: uuid/NULL=True → uuid/NULL=False",
+      "cycle_no: bigint/NULL=True → bigint/NULL=False"
+    ]
+  },
+  {
+    "table": "analytics_batches",
+    "a_only": [
+      "content_hash",
+      "validated_at",
+      "validation_passed"
+    ],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "analytics_daily",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "analytics_product_daily",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "analytics_product_voc_daily",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  },
+  {
+    "table": "analytics_product_risk",
+    "a_only": [],
+    "fixture_only": [],
+    "changed": []
+  }
+]

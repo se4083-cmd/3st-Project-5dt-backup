@@ -1,0 +1,2796 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CS Flow AI Backend A",
+    "version": "0.6.1"
+  },
+  "paths": {
+    "/api/v1/analytics/batches": {
+      "post": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Receive Batch",
+        "operationId": "receive_batch_api_v1_analytics_batches_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Submission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/analytics/batches/{batch_id}": {
+      "get": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Get Batch",
+        "operationId": "get_batch_api_v1_analytics_batches__batch_id__get",
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/analytics/batches/{batch_id}/validate": {
+      "post": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Validate Batch",
+        "operationId": "validate_batch_api_v1_analytics_batches__batch_id__validate_post",
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/analytics/batches/{batch_id}/publish": {
+      "post": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Publish Batch",
+        "operationId": "publish_batch_api_v1_analytics_batches__batch_id__publish_post",
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/analytics/voc/top": {
+      "get": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Voc Top",
+        "operationId": "voc_top_api_v1_admin_analytics_voc_top_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 8
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "batch_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VocList"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/analytics/voc/unavailable": {
+      "get": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Voc Unavailable",
+        "operationId": "voc_unavailable_api_v1_admin_analytics_voc_unavailable_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 8
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "batch_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VocList"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/analytics/products/{product_id}": {
+      "get": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Detail",
+        "operationId": "detail_api_v1_admin_analytics_products__product_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Product Id"
+            }
+          },
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 8
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "batch_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/analytics/kpi": {
+      "get": {
+        "tags": [
+          "analytics"
+        ],
+        "summary": "Kpi",
+        "operationId": "kpi_api_v1_admin_analytics_kpi_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 8
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "batch_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BatchStatus": {
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "content_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Hash"
+          },
+          "is_current": {
+            "type": "boolean",
+            "title": "Is Current"
+          },
+          "validation_passed": {
+            "type": "boolean",
+            "title": "Validation Passed"
+          },
+          "validated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validated At"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "validation_result": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validation Result"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "batch_id",
+          "status",
+          "content_hash",
+          "is_current",
+          "validation_passed",
+          "validated_at",
+          "published_at",
+          "validation_result"
+        ],
+        "title": "BatchStatus"
+      },
+      "Component": {
+        "properties": {
+          "normalized": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Normalized"
+          },
+          "weight": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Weight"
+          },
+          "contribution": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Contribution"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "normalized",
+          "weight",
+          "contribution"
+        ],
+        "title": "Component"
+      },
+      "Components": {
+        "properties": {
+          "volume": {
+            "$ref": "#/components/schemas/Component"
+          },
+          "rate": {
+            "$ref": "#/components/schemas/Component"
+          },
+          "growth": {
+            "$ref": "#/components/schemas/Component"
+          },
+          "repeat": {
+            "$ref": "#/components/schemas/Component"
+          },
+          "unresolved": {
+            "$ref": "#/components/schemas/Component"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "volume",
+          "rate",
+          "growth",
+          "repeat",
+          "unresolved"
+        ],
+        "title": "Components"
+      },
+      "Daily": {
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date",
+            "title": "Day"
+          },
+          "team_key": {
+            "type": "string",
+            "maxLength": 36,
+            "minLength": 1,
+            "title": "Team Key"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "ACCOUNT",
+              "DELIVERY",
+              "PAYMENT",
+              "PRODUCT",
+              "REFUND",
+              "RETURN",
+              "FAQ",
+              "UNCLASSIFIED"
+            ],
+            "title": "Category"
+          },
+          "ticket_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Ticket Count"
+          },
+          "auto_closed_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Auto Closed Count"
+          },
+          "handoff_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Handoff Count"
+          },
+          "reopened_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Reopened Count"
+          },
+          "sla_breach_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Sla Breach Count"
+          },
+          "duration_sum_seconds": {
+            "type": "number",
+            "maximum": 1000000000000000.0,
+            "minimum": 0.0,
+            "title": "Duration Sum Seconds"
+          },
+          "duration_n": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Duration N"
+          },
+          "approval_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Approval Count"
+          },
+          "review_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Review Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "day",
+          "team_key",
+          "category",
+          "ticket_count",
+          "auto_closed_count",
+          "handoff_count",
+          "reopened_count",
+          "sla_breach_count",
+          "duration_sum_seconds",
+          "duration_n",
+          "approval_count",
+          "review_count"
+        ],
+        "title": "Daily"
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "request_id"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorEnvelope": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorEnvelope"
+      },
+      "KpiMetrics": {
+        "properties": {
+          "ticket_count": {
+            "type": "integer",
+            "title": "Ticket Count"
+          },
+          "category_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Category Counts"
+          },
+          "auto_closed_count": {
+            "type": "integer",
+            "title": "Auto Closed Count"
+          },
+          "handoff_count": {
+            "type": "integer",
+            "title": "Handoff Count"
+          },
+          "auto_closed_ratio": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auto Closed Ratio"
+          },
+          "handoff_ratio": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Handoff Ratio"
+          },
+          "ratio_denominator": {
+            "type": "integer",
+            "title": "Ratio Denominator"
+          },
+          "duration_sum_seconds": {
+            "type": "number",
+            "title": "Duration Sum Seconds"
+          },
+          "duration_n": {
+            "type": "integer",
+            "title": "Duration N"
+          },
+          "mean_duration_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Duration Seconds"
+          },
+          "reopened": {
+            "$ref": "#/components/schemas/UnavailableMetric"
+          },
+          "approval": {
+            "$ref": "#/components/schemas/UnavailableMetric"
+          },
+          "review": {
+            "$ref": "#/components/schemas/UnavailableMetric"
+          },
+          "sla": {
+            "$ref": "#/components/schemas/UnavailableMetric"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ticket_count",
+          "category_counts",
+          "auto_closed_count",
+          "handoff_count",
+          "auto_closed_ratio",
+          "handoff_ratio",
+          "ratio_denominator",
+          "duration_sum_seconds",
+          "duration_n",
+          "mean_duration_seconds",
+          "reopened",
+          "approval",
+          "review",
+          "sla"
+        ],
+        "title": "KpiMetrics"
+      },
+      "KpiResponse": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Availability"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SnapshotMeta"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "metrics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KpiMetrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "definition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Definition"
+          },
+          "quality": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quality"
+          },
+          "coverage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coverage"
+          },
+          "grain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grain"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/Daily"
+            },
+            "type": "array",
+            "title": "Rows",
+            "default": []
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason",
+          "meta",
+          "metrics"
+        ],
+        "title": "KpiResponse"
+      },
+      "Manifest": {
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "schema_version": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "title": "Schema Version"
+          },
+          "rule_version": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "title": "Rule Version"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "LOCAL_SYNTHETIC",
+              "FABRIC"
+            ],
+            "title": "Source"
+          },
+          "source_as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Source As Of"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "windows": {
+            "$ref": "#/components/schemas/Windows"
+          },
+          "calendar_timezone": {
+            "type": "string",
+            "const": "Asia/Seoul",
+            "title": "Calendar Timezone",
+            "default": "Asia/Seoul"
+          },
+          "team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 8,
+            "minItems": 1,
+            "title": "Team Ids"
+          },
+          "product_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Product Ids"
+          },
+          "scopes": {
+            "items": {
+              "$ref": "#/components/schemas/Scope"
+            },
+            "type": "array",
+            "maxItems": 255,
+            "minItems": 1,
+            "title": "Scopes"
+          },
+          "row_counts": {
+            "$ref": "#/components/schemas/RowCounts"
+          },
+          "payload_checksums": {
+            "$ref": "#/components/schemas/PayloadHashes"
+          },
+          "source_input_hashes": {
+            "$ref": "#/components/schemas/SourceHashes"
+          },
+          "kpi_definition": {
+            "type": "string",
+            "enum": [
+              "fixture-ticket-v1",
+              "ticket-cohort-v1"
+            ],
+            "title": "Kpi Definition"
+          },
+          "product_kpi_definition": {
+            "type": "string",
+            "const": "issue-tag-grain-v1",
+            "title": "Product Kpi Definition"
+          },
+          "sales_denominator_scope": {
+            "type": "string",
+            "const": "GLOBAL_PRODUCT_PAID_28D",
+            "title": "Sales Denominator Scope"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "batch_id",
+          "schema_version",
+          "rule_version",
+          "source",
+          "source_as_of",
+          "generated_at",
+          "windows",
+          "team_ids",
+          "product_ids",
+          "scopes",
+          "row_counts",
+          "payload_checksums",
+          "source_input_hashes",
+          "kpi_definition",
+          "product_kpi_definition",
+          "sales_denominator_scope"
+        ],
+        "title": "Manifest"
+      },
+      "Metrics": {
+        "properties": {
+          "C": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "C"
+          },
+          "P": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "P"
+          },
+          "S": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "S"
+          },
+          "N": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "N"
+          },
+          "M": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "M"
+          },
+          "U": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "U"
+          },
+          "K": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "K"
+          },
+          "raw_rate": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Rate"
+          },
+          "smoothed_rate": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Smoothed Rate"
+          },
+          "growth": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000000.0,
+                "minimum": -1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Growth"
+          },
+          "top_issue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "DELIVERY_DELAY",
+                  "RETURN_PROCESS",
+                  "REFUND_DELAY",
+                  "DAMAGED",
+                  "PAYMENT_ERROR",
+                  "ACCOUNT_ERROR"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top Issue"
+          },
+          "outside_cohort": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Outside Cohort"
+          },
+          "excluded_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Excluded Count"
+          },
+          "sales_complete": {
+            "type": "boolean",
+            "title": "Sales Complete"
+          },
+          "quality_ok": {
+            "type": "boolean",
+            "title": "Quality Ok"
+          },
+          "complaints_complete": {
+            "type": "boolean",
+            "title": "Complaints Complete"
+          },
+          "episode_state_complete": {
+            "type": "boolean",
+            "title": "Episode State Complete"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "C",
+          "P",
+          "S",
+          "N",
+          "M",
+          "U",
+          "K",
+          "raw_rate",
+          "smoothed_rate",
+          "growth",
+          "top_issue",
+          "outside_cohort",
+          "excluded_count",
+          "sales_complete",
+          "quality_ok",
+          "complaints_complete",
+          "episode_state_complete"
+        ],
+        "title": "Metrics"
+      },
+      "Payload": {
+        "properties": {
+          "analytics_daily": {
+            "items": {
+              "$ref": "#/components/schemas/Daily"
+            },
+            "type": "array",
+            "maxItems": 20000,
+            "title": "Analytics Daily"
+          },
+          "analytics_product_daily": {
+            "items": {
+              "$ref": "#/components/schemas/ProductDaily"
+            },
+            "type": "array",
+            "maxItems": 20000,
+            "title": "Analytics Product Daily"
+          },
+          "analytics_product_voc_daily": {
+            "items": {
+              "$ref": "#/components/schemas/VocDaily"
+            },
+            "type": "array",
+            "maxItems": 20000,
+            "title": "Analytics Product Voc Daily"
+          },
+          "analytics_product_risk": {
+            "items": {
+              "$ref": "#/components/schemas/Risk-Input"
+            },
+            "type": "array",
+            "maxItems": 20000,
+            "minItems": 1,
+            "title": "Analytics Product Risk"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "analytics_daily",
+          "analytics_product_daily",
+          "analytics_product_voc_daily",
+          "analytics_product_risk"
+        ],
+        "title": "Payload"
+      },
+      "PayloadHashes": {
+        "properties": {
+          "analytics_daily": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Analytics Daily"
+          },
+          "analytics_product_daily": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Analytics Product Daily"
+          },
+          "analytics_product_voc_daily": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Analytics Product Voc Daily"
+          },
+          "analytics_product_risk": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Analytics Product Risk"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "analytics_daily",
+          "analytics_product_daily",
+          "analytics_product_voc_daily",
+          "analytics_product_risk"
+        ],
+        "title": "PayloadHashes"
+      },
+      "ProductDaily": {
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date",
+            "title": "Day"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "ACCOUNT",
+              "DELIVERY",
+              "PAYMENT",
+              "PRODUCT",
+              "REFUND",
+              "RETURN",
+              "FAQ",
+              "UNCLASSIFIED"
+            ],
+            "title": "Category"
+          },
+          "issue_tag": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "DELIVERY_DELAY",
+                  "RETURN_PROCESS",
+                  "REFUND_DELAY",
+                  "DAMAGED",
+                  "PAYMENT_ERROR",
+                  "ACCOUNT_ERROR"
+                ]
+              },
+              {
+                "type": "string",
+                "const": "NONE"
+              }
+            ],
+            "title": "Issue Tag"
+          },
+          "ticket_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Ticket Count"
+          },
+          "return_refund_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Return Refund Count"
+          },
+          "auto_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Auto Count"
+          },
+          "handoff_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Handoff Count"
+          },
+          "paid_order_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paid Order Count"
+          },
+          "inquiry_order_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inquiry Order Count"
+          },
+          "prior_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prior Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "day",
+          "product_id",
+          "category",
+          "issue_tag",
+          "ticket_count",
+          "return_refund_count",
+          "auto_count",
+          "handoff_count",
+          "paid_order_count",
+          "inquiry_order_count",
+          "prior_count"
+        ],
+        "title": "ProductDaily"
+      },
+      "ProductDetail": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Availability"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SnapshotMeta"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "product": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Risk-Output"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "trend": {
+            "items": {
+              "$ref": "#/components/schemas/VocDaily"
+            },
+            "type": "array",
+            "title": "Trend",
+            "default": []
+          },
+          "product_kpi": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProductKpi"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "score_meaning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Meaning"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason",
+          "meta",
+          "product"
+        ],
+        "title": "ProductDetail"
+      },
+      "ProductKpi": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Availability"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "grain": {
+            "type": "string",
+            "title": "Grain"
+          },
+          "unique_ticket_totals": {
+            "type": "string",
+            "title": "Unique Ticket Totals"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ProductDaily"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason",
+          "grain",
+          "unique_ticket_totals",
+          "items"
+        ],
+        "title": "ProductKpi"
+      },
+      "Risk-Input": {
+        "properties": {
+          "scope_key": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Z][A-Z0-9_+\\-]*$",
+            "title": "Scope Key"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "rule_version": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Rule Version"
+          },
+          "data_status": {
+            "type": "string",
+            "enum": [
+              "ELIGIBLE",
+              "LOW_SAMPLE",
+              "DATA_MISSING",
+              "QUALITY_BLOCKED"
+            ],
+            "title": "Data Status"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "risk_band": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "NORMAL",
+                  "WATCH",
+                  "HIGH"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Band"
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/Metrics"
+          },
+          "components": {
+            "$ref": "#/components/schemas/Components"
+          },
+          "source_as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Source As Of"
+          },
+          "window_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Window End"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scope_key",
+          "product_id",
+          "rule_version",
+          "data_status",
+          "score",
+          "rank",
+          "risk_band",
+          "metrics",
+          "components",
+          "source_as_of",
+          "window_end"
+        ],
+        "title": "Risk"
+      },
+      "Risk-Output": {
+        "properties": {
+          "scope_key": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Z][A-Z0-9_+\\-]*$",
+            "title": "Scope Key"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "rule_version": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Rule Version"
+          },
+          "data_status": {
+            "type": "string",
+            "enum": [
+              "ELIGIBLE",
+              "LOW_SAMPLE",
+              "DATA_MISSING",
+              "QUALITY_BLOCKED"
+            ],
+            "title": "Data Status"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "risk_band": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "NORMAL",
+                  "WATCH",
+                  "HIGH"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Band"
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/Metrics"
+          },
+          "components": {
+            "$ref": "#/components/schemas/Components"
+          },
+          "source_as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Source As Of"
+          },
+          "window_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Window End"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scope_key",
+          "product_id",
+          "rule_version",
+          "data_status",
+          "score",
+          "rank",
+          "risk_band",
+          "metrics",
+          "components",
+          "source_as_of",
+          "window_end"
+        ],
+        "title": "Risk"
+      },
+      "RowCounts": {
+        "properties": {
+          "analytics_daily": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Analytics Daily"
+          },
+          "analytics_product_daily": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Analytics Product Daily"
+          },
+          "analytics_product_voc_daily": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Analytics Product Voc Daily"
+          },
+          "analytics_product_risk": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Analytics Product Risk"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "analytics_daily",
+          "analytics_product_daily",
+          "analytics_product_voc_daily",
+          "analytics_product_risk"
+        ],
+        "title": "RowCounts"
+      },
+      "Scope": {
+        "properties": {
+          "scope_key": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_+\\-]{0,63}$",
+            "title": "Scope Key"
+          },
+          "team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 8,
+            "minItems": 1,
+            "title": "Team Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scope_key",
+          "team_ids"
+        ],
+        "title": "Scope"
+      },
+      "SnapshotMeta": {
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "schema_version": {
+            "type": "string",
+            "title": "Schema Version"
+          },
+          "rule_version": {
+            "type": "string",
+            "title": "Rule Version"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "LOCAL_SYNTHETIC",
+              "FABRIC"
+            ],
+            "title": "Source"
+          },
+          "source_as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Source As Of"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "window_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Window End"
+          },
+          "windows": {
+            "$ref": "#/components/schemas/Windows"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Published At"
+          },
+          "is_current": {
+            "type": "boolean",
+            "title": "Is Current"
+          },
+          "scope_key": {
+            "type": "string",
+            "title": "Scope Key"
+          },
+          "team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Team Ids"
+          },
+          "stale": {
+            "type": "boolean",
+            "title": "Stale"
+          },
+          "origin_verification": {
+            "type": "string",
+            "const": "SERVICE_DECLARED_NOT_INDEPENDENTLY_VERIFIED",
+            "title": "Origin Verification"
+          },
+          "cache_fingerprint": {
+            "type": "string",
+            "title": "Cache Fingerprint"
+          },
+          "sales_denominator_scope": {
+            "type": "string",
+            "const": "GLOBAL_PRODUCT_PAID_28D",
+            "title": "Sales Denominator Scope"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "batch_id",
+          "schema_version",
+          "rule_version",
+          "source",
+          "source_as_of",
+          "generated_at",
+          "window_end",
+          "windows",
+          "published_at",
+          "is_current",
+          "scope_key",
+          "team_ids",
+          "stale",
+          "origin_verification",
+          "cache_fingerprint",
+          "sales_denominator_scope"
+        ],
+        "title": "SnapshotMeta"
+      },
+      "SourceHashes": {
+        "properties": {
+          "orders": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Orders"
+          },
+          "tickets": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tickets"
+          },
+          "customer_contacts": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Contacts"
+          },
+          "followup_actions": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Followup Actions"
+          },
+          "coverage": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coverage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "SourceHashes"
+      },
+      "Submission": {
+        "properties": {
+          "manifest": {
+            "$ref": "#/components/schemas/Manifest"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/Payload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "manifest",
+          "payload"
+        ],
+        "title": "Submission"
+      },
+      "UnavailableMetric": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "const": "UNAVAILABLE",
+            "title": "Availability"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason"
+        ],
+        "title": "UnavailableMetric"
+      },
+      "VocDaily": {
+        "properties": {
+          "scope_key": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Z][A-Z0-9_+\\-]*$",
+            "title": "Scope Key"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "day": {
+            "type": "string",
+            "format": "date",
+            "title": "Day"
+          },
+          "primary_issue": {
+            "type": "string",
+            "enum": [
+              "DELIVERY_DELAY",
+              "RETURN_PROCESS",
+              "REFUND_DELAY",
+              "DAMAGED",
+              "PAYMENT_ERROR",
+              "ACCOUNT_ERROR"
+            ],
+            "title": "Primary Issue"
+          },
+          "episode_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Episode Count"
+          },
+          "unresolved_count": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Unresolved Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scope_key",
+          "product_id",
+          "day",
+          "primary_issue",
+          "episode_count",
+          "unresolved_count"
+        ],
+        "title": "VocDaily"
+      },
+      "VocList": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Availability"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SnapshotMeta"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Risk-Output"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason",
+          "meta",
+          "items"
+        ],
+        "title": "VocList"
+      },
+      "Windows": {
+        "properties": {
+          "history_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "History Start"
+          },
+          "operational_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Operational Start"
+          },
+          "sales_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Sales Start"
+          },
+          "prior_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Prior Start"
+          },
+          "recent_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recent Start"
+          },
+          "window_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Window End"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "history_start",
+          "operational_start",
+          "sales_start",
+          "prior_start",
+          "recent_start",
+          "window_end"
+        ],
+        "title": "Windows"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "AnalyticsServiceBearer": {
+        "type": "http",
+        "description": "Separate service JWT/key/issuer/audience; allowlisted subject and analytics permissions. User/admin login JWT is rejected.",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

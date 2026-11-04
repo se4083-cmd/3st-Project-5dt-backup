@@ -1,0 +1,118 @@
+{
+  "status": "IMPLEMENTED_FIXTURE_ADAPTER_ONLY_NOT_DEPLOYED_TEAM_INVENTORY",
+  "teams": {
+    "T1": "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2",
+    "T2": "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+    "T3": "6efbae37-4e53-59e9-b68c-9711bef485b1",
+    "T4": "6f797bdd-ec8f-5973-bb70-03d5a284d300"
+  },
+  "scopes": [
+    {
+      "scope_key": "T1",
+      "team_ids": [
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    },
+    {
+      "scope_key": "T2",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70"
+      ]
+    },
+    {
+      "scope_key": "T3",
+      "team_ids": [
+        "6efbae37-4e53-59e9-b68c-9711bef485b1"
+      ]
+    },
+    {
+      "scope_key": "T4",
+      "team_ids": [
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300"
+      ]
+    },
+    {
+      "scope_key": "T1+T2",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    },
+    {
+      "scope_key": "T1+T3",
+      "team_ids": [
+        "6efbae37-4e53-59e9-b68c-9711bef485b1",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    },
+    {
+      "scope_key": "T1+T4",
+      "team_ids": [
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    },
+    {
+      "scope_key": "T2+T3",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "6efbae37-4e53-59e9-b68c-9711bef485b1"
+      ]
+    },
+    {
+      "scope_key": "T2+T4",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300"
+      ]
+    },
+    {
+      "scope_key": "T3+T4",
+      "team_ids": [
+        "6efbae37-4e53-59e9-b68c-9711bef485b1",
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300"
+      ]
+    },
+    {
+      "scope_key": "T1+T2+T3",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "6efbae37-4e53-59e9-b68c-9711bef485b1",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    },
+    {
+      "scope_key": "T1+T2+T4",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    },
+    {
+      "scope_key": "T1+T3+T4",
+      "team_ids": [
+        "6efbae37-4e53-59e9-b68c-9711bef485b1",
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    },
+    {
+      "scope_key": "T2+T3+T4",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "6efbae37-4e53-59e9-b68c-9711bef485b1",
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300"
+      ]
+    },
+    {
+      "scope_key": "ALL4",
+      "team_ids": [
+        "4a10ff03-d933-58aa-bfa2-e6c736275b70",
+        "6efbae37-4e53-59e9-b68c-9711bef485b1",
+        "6f797bdd-ec8f-5973-bb70-03d5a284d300",
+        "863e9dc3-6c9f-5e86-b3b7-f639a91dbdd2"
+      ]
+    }
+  ]
+}

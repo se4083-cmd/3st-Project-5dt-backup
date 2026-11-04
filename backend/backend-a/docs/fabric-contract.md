@@ -1,5 +1,7 @@
 # Fabric 담당자에게 전달할 계약 — 4단계
 
+2026-11-03 실제 DB/DDL·fixture 차이·이벤트·미구현 Export·현재 게시 경계는 [fabric-data-contract/README.md](fabric-data-contract/README.md)에 보완했다. 아래 짧은 passed/codes 예시는 BatchStatus.validation_result fragment이며 전체 HTTP 응답 예시는 새 전달 자료를 따른다.
+
 현재 구현은 [4단계 설계](phase4-analytics.md)와 [OpenAPI](openapi.json)를 따릅니다. 아래 이전 단계 계획의 ‘게시/조회 미구현’ 설명을 대체합니다. Fabric은 계산, A는 네 mart 수신·검증·원자 게시와 권한 조회를 담당합니다. 실제 Fabric emitter/인증/파이프라인은 미검증이며 로컬 성공 출처는 LOCAL_SYNTHETIC입니다.
 
 일반 로그인 토큰/관리자 역할은 서비스 권한이 아닙니다. 별도 ANALYTICS_SERVICE_SECRET(독립 무작위48자 이상), ANALYTICS_SERVICE_IDS allowlist를 설정해야 합니다. 미설정은503입니다. HS256 issuer=csflow-analytics-service, audience=csflow-analytics-ingest, sub=allowlist의 서비스ID, 필수 exp/iat/nbf와 permissions 배열을 검증합니다. 예: `{"sub":"fabric-publisher","iss":"csflow-analytics-service","aud":"csflow-analytics-ingest","iat":1793588400,"nbf":1793588400,"exp":1793588700,"permissions":["analytics:receive","analytics:publish"]}`. 시각은 발급 시 실제 NumericDate로 정하고 비밀을 브라우저·Git·로그로 보내지 않습니다. 실제 발급기/회전·Managed Identity 통합은 팀 제안이며 아직 구현하지 않았습니다.
@@ -25,3 +27,8 @@ fabric-handoff.md와 examples/canonical-hashes.json에 Decimal/UTC 시각/PK 정
 ## 7단계 보관 미리보기
 
 [보관 계약](phase7-retention-preview.md)과 fabric-handoff.md의 receipt/batch/mart 보관 단위·시계·불변성 합의 항목을 따른다. A의 DEV_RETENTION_V1은 로컬 집계 미리보기이며 원천/Blob/Fabric/백업을 검사하거나 정리하지 않는다. receipt에 제출 payload가 중복 저장되고 실패 receipt도 불변 trigger가 있으므로 미게시만으로 삭제 가능 판정을 내리지 않는다. 원천 시각과 저장 시각을 구분하고 실제 emitter·외부 추출/Gold/backup 보존·정정/재게시/hold 정책을 공동 확정한다. 삭제/예약/삭제 SQL·외부 호출은 이번 구현에 없다.
+
+
+## 2026-11-03 Azure 이름 이전 후 현재 환경
+
+API base는 https://csflow-backend-a.azurewebsites.net/api/v1, PG는 csflow-backend-a-pg.postgres.database.azure.com/backend_a, Plan은csflow-backend-a-plan이다. source0.6.1/head0006과 기존 모든행/계정/권한·자동중지를 보존했다. 구3개 삭제·공용잠금 복원과 실제검증/백업은[azure-migration.md](azure-migration.md)를 따른다. B·AI·Fabric·발송은미연결/미검증이고 실제 Frontend origin은추측해등록하지 않았다. 서비스 인증 비밀값이나 DBpassword는이문서에없다.

@@ -1,0 +1,19 @@
+{
+  "seed": 20261031,
+  "generator_version": "synthetic_v2.0",
+  "scenario_id": "CSFLOW_DEMO_20261031",
+  "source_as_of": "2026-10-31T03:00:00Z",
+  "window_end": "2026-10-30T15:00:00Z",
+  "history_start": "2026-10-02T15:00:00Z",
+  "primary_issue_allowlist": [
+    "DELIVERY_DELAY",
+    "RETURN_PROCESS",
+    "REFUND_DELAY",
+    "DAMAGED",
+    "PAYMENT_ERROR",
+    "ACCOUNT_ERROR"
+  ],
+  "primary_issue_origin": "PROJECT_PROPOSED_ENUM_NOT_COUPANG",
+  "data_origin": "SYNTHETIC",
+  "status": "ORIGINAL_SYNTHETIC_FIXTURE_REFERENCE_NOT_LIVE_WATERMARK"
+}
