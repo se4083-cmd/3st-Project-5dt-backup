@@ -30,9 +30,9 @@ it("uses real login/session, shows only granted menus and guards direct P1 URLs"
   await screen.findByRole("form", { name: "백엔드 로그인" });
   expect(screen.queryByRole("navigation", { name: "P1 기능 메뉴" })).not.toBeInTheDocument();
 });
-it("renders capability-guarded preparation pages without implementing monitoring", async () => {
-  vi.stubGlobal("fetch", vi.fn<typeof fetch>(async input => String(input).endsWith("/auth/login") ? json({ access_token: "ui-memory-token", expires_in: 60 }) : json(data())));
-  render(<MemoryRouter initialEntries={["/p1/monitoring"]}><App /></MemoryRouter>);
+it("keeps the capability-guarded VOC preparation page while monitoring develops independently", async () => {
+  vi.stubGlobal("fetch", vi.fn<typeof fetch>(async input => String(input).endsWith("/auth/login") ? json({ access_token: "ui-memory-token", expires_in: 60 }) : json(data(["P1_VOC_READ"]))));
+  render(<MemoryRouter initialEntries={["/p1/voc"]}><App /></MemoryRouter>);
   login();
   await screen.findByText("이 단계에서는 기능별 본 화면을 구현하지 않았습니다.");
   expect(screen.queryByText("검토 대기 4건 목록")).not.toBeInTheDocument();

@@ -1,0 +1,30 @@
+.monitoring-page { display: grid; gap: 20px; }
+.monitoring-page .page-heading { margin-bottom: 0; }
+.monitoring-filters { display: flex; flex-wrap: wrap; gap: 16px; }
+.monitoring-filters label { display: grid; gap: 8px; min-width: 140px; max-width: 100%; font-size: 12px; font-weight: 600; }
+.monitoring-filters select { max-width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: white; }
+.monitoring-filters p { flex-basis: 100%; margin: 0; }
+.monitoring-panel > h2 { margin-top: 0; }
+.monitoring-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 12px; }
+.monitoring-metric { border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.monitoring-metric dt { font-size: 13px; color: var(--muted); }
+.monitoring-metric dd { margin: 12px 0; font-size: 30px; font-weight: 700; }
+.monitoring-metric dd small { font-size: 13px; margin-left: 4px; }
+.monitoring-metric p { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 0; }
+.monitoring-danger { color: #b42318; }
+.monitoring-panel details { margin-top: 20px; }
+.monitoring-panel summary { cursor: pointer; padding: 8px 0; }
+.monitoring-panel h3 { margin-top: 28px; }
+.monitoring-timestamps, .monitoring-ai-values { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.monitoring-timestamps dt, .monitoring-ai-values dt { font-size: 12px; color: var(--muted); }
+.monitoring-timestamps dd, .monitoring-ai-values dd { margin: 8px 0; }
+.monitoring-id { overflow-wrap: anywhere; }
+.monitoring-panel td small { display: block; margin-top: 8px; }
+.monitoring-panel td .timestamp { white-space: nowrap; }
+.monitoring-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+@media (max-width: 600px) {
+  .monitoring-filters label { width: 100%; }
+  .monitoring-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .monitoring-metric { padding: 12px; }
+  .monitoring-panel .notice { overflow-wrap: anywhere; }
+}
