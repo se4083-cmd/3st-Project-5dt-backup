@@ -1,6 +1,9 @@
 # CS Flow AI Backend A
 
-**0.7.1 / migration0007 (로컬 소스)**. 기존 Backend A 기능에 [현재 상담사 업무량 조회](docs/workload.md)를 추가했다. 0.7.1에서는 ‘유효 상담사 배정 없음’을 자동 경로/사람 배정 대기/판별 불가로 나눠 표시한다. AGENT 본인/명시 권한 ADMIN의 업무량·미배정·기한·후속 집계를 제공한다. 자동 배정/추천·새 SLA 엔진은 없다. Azure 배포는 이번에 변경하지 않았으며 기존 0.6.1/0006 기록과 구분한다. Backend B의 worker·배정/사람 응답 엔진이나 AI/RAG/Fabric 계산·외부 발송기는 포함하지 않는다.
+**0.8.0 / migration0008 (로컬 소스)**: [VOC 상품 개선 조치·계획 이력](docs/voc-improvements.md)을 구현했습니다. 기존 상품 후속의 담당/상태/기한을 재사용하며 효과 분석은 미구현/null입니다. ADMIN+VOC_IMPROVEMENT_MANAGE와 현재 팀 scope가 필요합니다. 실제 권한 부여·Azure·commit/push는 수행하지 않았습니다.
+
+
+**이전 공유 기준 0.7.1 / migration0007**. 기존 Backend A 기능에 [현재 상담사 업무량 조회](docs/workload.md)를 추가했다. 0.7.1에서는 ‘유효 상담사 배정 없음’을 자동 경로/사람 배정 대기/판별 불가로 나눠 표시한다. AGENT 본인/명시 권한 ADMIN의 업무량·미배정·기한·후속 집계를 제공한다. 자동 배정/추천·새 SLA 엔진은 없다. Azure 배포는 이번에 변경하지 않았으며 기존 0.6.1/0006 기록과 구분한다. Backend B의 worker·배정/사람 응답 엔진이나 AI/RAG/Fabric 계산·외부 발송기는 포함하지 않는다.
 
 이 구현은 `backend/backend-a/` 안에 독립적으로 둔다. 기존 `backend/README.md`, 팀 루트/공유 설정과 Backend B·Frontend·AI·Fabric 코드는 변경하지 않는다. 실제 비밀값/개발 DB/검토 ZIP/다운로드 원천·전체 fixture/배포 workflow는 올리지 않는다.
 

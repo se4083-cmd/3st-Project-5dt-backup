@@ -1,5 +1,8 @@
 # API와 Frontend 계약
 
+0.8.0/head0008: [VOC 상품 개선 조치 등록·계획 이력](voc-improvements.md)을 추가했습니다. `/staff/voc-improvements`와 상세/plans/tickets는 ADMIN+명시 VOC_IMPROVEMENT_MANAGE+현재 팀 scope가 필요합니다. 담당·상태는 기존 followup API가 정본이며 Fabric 효과 availability는 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED, metrics=null입니다. 기존 analytics-v1 wire는 변경하지 않았습니다.
+
+
 0.7.1/head0007: workload의 unassigned는 ‘유효 상담사 배정 없음’이며 자동 경로도 포함합니다. 기존 필드를 유지하고 `by_handling_path={automatic_path,human_assignment_waiting,unknown}`를 추가했습니다. 세 분류 합은 total이며 실제 AI 실행 여부를 뜻하지 않습니다. [근거·표시명·권한 계약](workload.md)을 따릅니다. 이번 보완에 새 migration은 없습니다.
 
 기본 경로 `/api/v1`, bearer JWT, JSON 요청/응답, UTC ISO 8601 시각입니다. JWT role/customer_id claim을 신뢰하지 않고 매 요청 사용자 활성·역할·DB scope를 다시 조회합니다. Refresh/logout/password reset은 이번 범위가 아니며 만료 기본값은 30분입니다. 브라우저 토큰은 가능하면 메모리에 보관하고 저장 전략은 Frontend와 별도 합의합니다.

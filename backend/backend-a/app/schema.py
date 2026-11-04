@@ -4,3 +4,4 @@ from app.analytics_models import analytics_publication, analytics_receipts  # no
 from app.model_constraints import idempotency_keys, team_categories, user_team_scopes  # noqa: F401
 from app.models import metadata  # noqa: F401
 from app.staff_models import automation_control, automation_control_history, queue_routes, staff_permissions  # noqa: F401
+from app.voc_models import plan_teams, plans, profiles, receipts, ticket_links  # noqa: F401

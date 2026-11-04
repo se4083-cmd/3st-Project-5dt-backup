@@ -16,6 +16,11 @@ from app.errors import APIError
 from app.model_constraints import idempotency_keys, user_team_scopes
 from app.schemas import Input
 from app.staff_models import queue_routes
+from app.voc_models import plan_teams as voc_teams
+from app.voc_models import plans as voc_plans
+from app.voc_models import profiles as voc_profiles
+from app.voc_models import receipts as voc_receipts
+from app.voc_models import ticket_links as voc_links
 
 
 class ReviewPolicy(Input):
@@ -136,6 +141,35 @@ def scope_for(session, user, body):
         ~outside(
             m.followup_actions, [m.followup_actions.c.origin_team_id, m.followup_actions.c.owner_team_id]
         ),
+        ~exists(
+            select(1)
+            .select_from(
+                voc_links.join(m.followup_actions, voc_links.c.action_id == m.followup_actions.c.action_id)
+            )
+            .where(
+                voc_links.c.ticket_id == m.tickets.c.ticket_id,
+                or_(
+                    m.followup_actions.c.owner_team_id.not_in(selected),
+                    m.followup_actions.c.origin_team_id.not_in(selected),
+                ),
+            )
+        ).correlate(m.tickets),
+        ~exists(
+            select(1)
+            .select_from(voc_links.join(voc_plans, voc_links.c.action_id == voc_plans.c.action_id))
+            .where(
+                voc_links.c.ticket_id == m.tickets.c.ticket_id,
+                voc_plans.c.owner_team_id_snapshot.not_in(selected),
+            )
+        ).correlate(m.tickets),
+        ~exists(
+            select(1)
+            .select_from(voc_links.join(voc_teams, voc_links.c.action_id == voc_teams.c.action_id))
+            .where(
+                voc_links.c.ticket_id == m.tickets.c.ticket_id,
+                voc_teams.c.team_id.not_in(selected),
+            )
+        ).correlate(m.tickets),
         # Missing old-cycle attribution is not inferred from category/team now.
         or_(
             m.tickets.c.cycle_no == 1,
@@ -189,6 +223,8 @@ def ticket_guards(as_of):
         ),
         "APPROVAL_REFERENCE": linked(m.approvals),
         "AUDIT_REFERENCE": linked(m.audit_events),
+        "VOC_IMPROVEMENT_TICKET_REFERENCE": linked(voc_links),
+        "VOC_COMMAND_RECEIPT_REFERENCE": linked(voc_receipts),
     }
 
 
@@ -348,6 +384,13 @@ def build_report(session, user, body: RetentionRequest):
                 cutoff=raw_cut,
                 scoped=table.c.ticket_id.is_(None),
                 old=table.c.created_at < raw_cut,
+                guards={
+                    "VOC_IMPROVEMENT_PROFILE_REFERENCE": exists(
+                        select(1).where(voc_profiles.c.action_id == m.followup_actions.c.action_id)
+                    ).correlate(m.followup_actions)
+                }
+                if table is m.followup_actions
+                else {},
                 unknown={"NO_TICKET_CUSTODY_OR_POLICY": true()},
             )
             item.target += ":without_ticket"
@@ -403,12 +446,42 @@ def build_report(session, user, body: RetentionRequest):
                 cutoff=cutoff,
                 join=table if table is b else table.join(b),
                 old=clock < cutoff,
-                guards={"CURRENT_ANALYTICS_BATCH": is_current},
+                guards={
+                    "CURRENT_ANALYTICS_BATCH": is_current,
+                    "VOC_PLAN_SOURCE_BATCH_REFERENCE": exists(
+                        select(1).where(voc_plans.c.source_batch_id == b.c.batch_id)
+                    ).correlate(b),
+                },
                 design={
                     "PUBLISHED_IMMUTABILITY_TRIGGER": published,
                     "RECEIPT_IMMUTABILITY_TRIGGER": true() if table is analytics_receipts else false(),
                     "BATCH_RECEIPT_FK_AND_REPUBLICATION_DESIGN": true(),
                 },
+                supported=body.scope == "GLOBAL",
+            )
+        )
+    for table, fields, clock in [
+        (voc_profiles, ["product_id", "current_plan_revision"], voc_profiles.c.created_at),
+        (
+            voc_plans,
+            ["improvement_text", "change_reason", "source_batch_id", "source_scope_key"],
+            voc_plans.c.created_at,
+        ),
+        (voc_teams, ["team_id"], None),
+        (voc_links, ["ticket_id"], voc_links.c.linked_at),
+        (voc_receipts, ["response_snapshot", "request_hash"], voc_receipts.c.created_at),
+    ]:
+        targets.append(
+            inspect(
+                session,
+                table=table,
+                fields=fields,
+                data_class="RAW_OR_EXTRACT",
+                age_basis=str(clock) if clock is not None else "NO_APPROVED_RETENTION_CLOCK",
+                cutoff=raw_cut if clock is not None else None,
+                old=clock < raw_cut if clock is not None else false(),
+                guards={"VOC_WORKFLOW_HISTORY_REFERENCE": true()},
+                design={"VOC_RETENTION_POLICY_NOT_DEFINED": true()},
                 supported=body.scope == "GLOBAL",
             )
         )

@@ -45,6 +45,7 @@ class StaffCapabilities(BaseModel):
             "RETENTION_TEAM_REVIEW",
             "RETENTION_GLOBAL_REVIEW",
             "WORKLOAD_READ",
+            "VOC_IMPROVEMENT_MANAGE",
         ]
     ]
 
@@ -65,6 +66,7 @@ def capabilities(session: SnapshotDB, user: SnapshotUser):
             "RETENTION_TEAM_REVIEW",
             "RETENTION_GLOBAL_REVIEW",
             "WORKLOAD_READ",
+            "VOC_IMPROVEMENT_MANAGE",
         }
     )
     granted = session.scalars(

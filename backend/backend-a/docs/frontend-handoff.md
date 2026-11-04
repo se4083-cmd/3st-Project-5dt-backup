@@ -1,5 +1,8 @@
 # Frontend 로컬 인수
 
+0.8.0: [VOC 상품 개선 API 계약·요청/응답](voc-improvements.md). capabilities의 VOC_IMPROVEMENT_MANAGE를 확인하고 상품 후속 신규 생성 또는 existing_action_id 등록을 연결합니다. 상세의 action/plan revision을 따로 보관하고 POST의 Idempotency-Key를 유지하세요. 담당/상태는 기존 followup API로 변경합니다. plan_refresh_required와 숨겨진 과거 scope, 효과 분석 미구현/null을 표시합니다. 화면은 이번에 구현하지 않았습니다.
+
+
 0.7.1 미배정 표시: `team_queue.unassigned.total`은 **‘유효 상담사 배정 없음’**으로 표시합니다. 전체를 ‘사람 배정 대기’라고 부르지 마세요. 새 `by_handling_path.automatic_path`는 ‘자동 처리 경로’, `human_assignment_waiting`은 ‘사람 배정 대기’, `unknown`은 ‘기타·판별 불가’입니다. 세 값의 합이 total이며 invalid_assignment_count는 별도 부분집합입니다. 전역 unrouted에도 같은 분류가 있습니다. FAILED/RETRY/PAUSED만 보고 사람 대기로 바꾸거나 자동 경로를 ‘AI 실행 중’으로 표시하지 않습니다. 기존 권한·snapshot·scope/page 합계 계약은 유지합니다.
 
 규범 계약은 api-contract.md와 실제 코드에서 생성한 openapi.json입니다. 요청 모양은 examples/frontend-requests.json이며 `python -m scripts.check_handoff_contract`로 모델/endpoint/공개 DTO를 검사합니다. 예시 UUID는 실제 서버 상태가 아니므로 실행 중 응답 ID를 사용합니다. 토큰/비밀번호는 예시 파일에 넣지 않습니다.

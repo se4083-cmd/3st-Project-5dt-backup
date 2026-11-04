@@ -158,6 +158,11 @@ def seed_fixture(session, fixture_dir: Path):
         "queue_routes",
         "automation_control",
         "automation_control_history",
+        "voc_improvement_profiles",
+        "voc_improvement_plan_revisions",
+        "voc_improvement_plan_teams",
+        "voc_improvement_ticket_links",
+        "voc_improvement_receipts",
     }:
         raise ValueError("Fixture official table set differs from the reviewed 22-table contract")
     data = {

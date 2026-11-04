@@ -1,5 +1,9 @@
 # Backend A 구현 검증 결과
 
+## 2026-11-04 VOC 개선 조치 — 로컬0.8.0/0008
+
+[실제 검증 기록](evidence/voc-local/README.md): 최신 VOC31개 PASS, 환경/seed 호환 보완 후 분석·fixture54개 PASS. 관련 최초 회귀248 PASS/1 FAIL/4 SKIP에서 실패·skip 원인을 수정하고 해당 사례를 재검증했다. 실행은 서로 겹치므로 합산하지 않는다. 기존 migration/미커밋 B 검토 문서를 보존했으며 Azure·실제 계정·Fabric·B Worker·Frontend 화면·commit/push는 변경/검증하지 않았다.
+
 아래 기존 단계 결과는2026-11-02 KST의 원본 작업 폴더 실행 기록입니다. 원본 ZIP에 들어 있던 과거 70개 검증과 이번 서비스 검증을 합산하지 않습니다.
 
 ## 2026-11-03 지정 이름 이전 — 새 실행 결과

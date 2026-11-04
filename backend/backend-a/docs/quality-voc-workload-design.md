@@ -1,8 +1,10 @@
 # AI 품질·VOC 개선·업무량/SLA 확장 설계안
 
+후속 0.8.0/0008: **2단계 상품 개선 profile·append-only 계획·문의 연결을 로컬 구현**했습니다. [실제 계약](voc-improvements.md)을 우선합니다. 효과 분석 수신/계산/조회는 아직 미구현이며 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED, metrics=null입니다. 아래 설계 당시/과거 검증 기록과 구분합니다.
+
 공유본에서는 개인 PC의 절대 경로를 `<PROJECT_ROOT>`로 표시한다. 후속0.7.1은 업무량의 미배정 의미와 경로별 분류를 보완했으며 [현재 계약](workload.md)을 따른다. 나머지 기능의 제안 범위는 그대로다.
 
-작성일: 2026-11-04 KST. 후속 갱신: **첫 단계인 현재 업무량 조회를 로컬0.7.0/head0007에 구현**했다. 실제 API·권한·응답·검증은 [업무량 계약](workload.md)을 따른다. 아래 1절·5.3절은 설계 당시0.6.1/0006 확인 기록이다. 품질 평가·VOC 개선 profile·추천·새 SLA/analytics-v2/Export는 여전히 제안이며 미구현이다. Azure·실제 계정 권한·commit/push는 변경하지 않았다.
+작성일: 2026-11-04 KST. 후속 갱신: **첫 단계인 현재 업무량 조회를 로컬0.7.0/head0007에 구현**했다. 실제 API·권한·응답·검증은 [업무량 계약](workload.md)을 따른다. 아래 1절·5.3절은 설계 당시0.6.1/0006 확인 기록이다. 품질 평가·추천·새 SLA/analytics-v2/Export는 여전히 제안이며 미구현이다. VOC profile/계획의 현재 구현은 위0.8.0 계약을 따른다. Azure·실제 계정 권한·commit/push는 변경하지 않았다.
 
 ## 1. 설계 당시 구현 확인 (0.6.1 / 0006)
 
@@ -406,7 +408,7 @@ before/after에 같은 ticket 문의가 이어져도 최초 문의 cohort 배치
 |---|---|---|
 | 0 — 설계 완료 | 이 설계 검토 및 기존 dirty 기준점 확인 | 후속 사용자의 명시 구현 요청으로 1단계만 진행. 나머지는 자동 시작하지 않음 |
 | 1 — 로컬 구현 완료 | **권한 있는 현재 업무량·미배정·기존 24h 기한 조회**. 0.7.0/0007 capability/snapshot DTO. [실제 검증](evidence/workload-local/README.md) | 새 B worker·AI·Fabric 없이 격리 PostgreSQL로 검증. 추천/실배정과 분리. 실제 계정 grant/배포 없음 |
-| 2 | **상품 개선 profile·계획 이력**과 기존 product followup wrapper. owner/status는 재사용, 실제 시행일·비교창 저장 | Fabric 미연결이면 RESULT_NOT_AVAILABLE로 등록 업무부터 사용. 기존 후속 terminal/권한 회귀 유지 |
+| 2 — 로컬 구현 완료(0.8.0/0008) | **상품 개선 profile·계획 이력**과 기존 product followup wrapper. owner/status는 재사용, 실제 시행일·비교창 저장 | Fabric 효과 연동 미구현은 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED 및 null로 표시하고 등록 업무부터 사용. 기존 후속 terminal/권한 회귀 유지 |
 | 3 | **확정 응답 provenance + 전향 ticket_cycles**. 기존 writer transaction에 optional 확장, 과거 UNKNOWN 유지 | B에 새 필수 인자를 강제하기 전에 계약 sample으로 확인. 고정 합성 writer는 실제 AI 품질 증거가 아님 |
 | 4 | **품질 표본·사람 평가**. 좁은 검토 권한/자료 조회·불변 revision·표본 내 지표 | AI 없이 합성 provenance와 수동 평가로 API 계약 검증. 사람 rubric 검증은 실제 상담/정책 담당 참여 필요 |
 | 5 | **규칙 추천 읽기** 및 B의 재검증·공통 guard 배정 연동 | A 단독 추천은 가능, 실제 실행·동시배정 보장은 B 공동 PG 회귀 뒤에만 보고 |
@@ -477,8 +479,8 @@ SQLite는 DTO/기본 정책 검증만 가능하고 SKIP LOCKED/PG partial UNIQUE
 
 **이미 있는 것:** 상품/티켓 후속, 팀 권한·유효 배정·예외 큐, 24시간 기한값, 자동 응답 공통 확정, Gold 수신·원자 게시.
 
-**새로 만들 것:** 답변-근거 연결과 사람 평가 이력, 상품 개선 계획·전후 결과, 업무량 조회와 설명 가능한 추천.
+**남은 것:** 답변-근거 연결과 사람 평가 이력, 상품 개선 전후 결과 연동, 설명 가능한 추천. 현재 업무량과 상품 개선 계획 등록·이력은 로컬 구현했다.
 
 **팀에 확인할 것:** 사람 평가 기준·표본 권한, 비교 기간/분모·Fabric v2, B 배정 충돌 계약, SLA와 ‘안전한 완료’ 정의.
 
-**첫 구현 단계:** 현재 업무량·미배정·초과/임박 조회는 후속 요청에 따라 로컬0.7.0/0007에 구현했다. [실제 API 계약](workload.md)과 [검증 기록](evidence/workload-local/README.md)을 확인한다. 나머지 제안 기능은 구현하지 않았다.
+**첫 구현 단계:** 현재 업무량·미배정·초과/임박 조회는 후속 요청에 따라 로컬0.7.0/0007에 구현했다. [실제 API 계약](workload.md)과 [검증 기록](evidence/workload-local/README.md)을 확인한다. 후속0.8.0/0008에서는 상품 개선 profile·계획 이력도 구현했다. 효과 연동과 나머지 제안 기능은 미구현이다.

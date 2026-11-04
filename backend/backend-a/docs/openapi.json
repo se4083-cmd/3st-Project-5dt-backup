@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "CS Flow AI Backend A",
-    "version": "0.7.1"
+    "version": "0.8.0"
   },
   "paths": {
     "/health/live": {
@@ -5491,6 +5491,801 @@
           }
         ]
       }
+    },
+    "/api/v1/staff/voc-improvements": {
+      "post": {
+        "tags": [
+          "VOC improvements"
+        ],
+        "summary": "Create",
+        "description": "ADMIN + VOC_IMPROVEMENT_MANAGE + current team scope. Atomic product\nfollowup/profile/initial plan; Idempotency-Key replay rechecks authorization.",
+        "operationId": "create_api_v1_staff_voc_improvements_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9._:-]+$",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImprovementCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImprovementReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "200": {
+            "description": "Idempotent replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImprovementReceipt"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VOC improvements"
+        ],
+        "summary": "Listing",
+        "description": "ADMIN + VOC_IMPROVEMENT_MANAGE. Current authorized owner teams only;\nstable bounded pages, historical comparison scopes independently checked.",
+        "operationId": "listing_api_v1_staff_voc_improvements_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Product Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "OPEN",
+                    "IN_PROGRESS",
+                    "DONE",
+                    "CANCELLED"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_ImprovementView_"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/voc-improvements/{action_id}": {
+      "get": {
+        "tags": [
+          "VOC improvements"
+        ],
+        "summary": "Detail",
+        "description": "ADMIN + VOC_IMPROVEMENT_MANAGE + current owner team scope. Separate\nbounded plan/ticket pages; hidden links are not counted. Fabric effect\nintegration is not implemented: UNAVAILABLE, metrics=null even after DONE.",
+        "operationId": "detail_api_v1_staff_voc_improvements__action_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Action Id"
+            }
+          },
+          {
+            "name": "plan_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Plan Limit"
+            }
+          },
+          {
+            "name": "plan_before_revision",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Plan Before Revision"
+            }
+          },
+          {
+            "name": "ticket_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Ticket Limit"
+            }
+          },
+          {
+            "name": "ticket_cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ticket Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImprovementDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/voc-improvements/{action_id}/plans": {
+      "post": {
+        "tags": [
+          "VOC improvements"
+        ],
+        "summary": "Plans",
+        "description": "ADMIN + VOC_IMPROVEMENT_MANAGE. Append a full plan snapshot using both\nexpected revisions. Terminal actions require correction=true and a reason;\nonly implementation time/windows can be corrected without reopening work.",
+        "operationId": "plans_api_v1_staff_voc_improvements__action_id__plans_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Action Id"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9._:-]+$",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImprovementReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "200": {
+            "description": "Idempotent replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImprovementReceipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/staff/voc-improvements/{action_id}/tickets": {
+      "post": {
+        "tags": [
+          "VOC improvements"
+        ],
+        "summary": "Tickets",
+        "description": "ADMIN + VOC_IMPROVEMENT_MANAGE. Check current action AND ticket scope,\nknown matching product, both revisions and Idempotency-Key on every command.",
+        "operationId": "tickets_api_v1_staff_voc_improvements__action_id__tickets_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Action Id"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9._:-]+$",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketLink"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImprovementReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "200": {
+            "description": "Idempotent replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImprovementReceipt"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -6153,6 +6948,29 @@
           "purpose_code"
         ],
         "title": "DetailPurpose"
+      },
+      "EffectAvailability": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "const": "UNAVAILABLE",
+            "title": "Availability",
+            "default": "UNAVAILABLE"
+          },
+          "reason": {
+            "type": "string",
+            "const": "EFFECT_INTEGRATION_NOT_IMPLEMENTED",
+            "title": "Reason",
+            "default": "EFFECT_INTEGRATION_NOT_IMPLEMENTED"
+          },
+          "metrics": {
+            "type": "null",
+            "title": "Metrics"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "EffectAvailability"
       },
       "ErrorBody": {
         "properties": {
@@ -7000,6 +7818,246 @@
         ],
         "title": "HistoryTicket"
       },
+      "ImprovementCreate": {
+        "properties": {
+          "followup": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FollowupCreate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "existing_action_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Existing Action Id"
+          },
+          "expected_action_revision": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Action Revision"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanValues"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "plan"
+        ],
+        "title": "ImprovementCreate"
+      },
+      "ImprovementDetail": {
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Action Id"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "followup": {
+            "$ref": "#/components/schemas/FollowupStaff"
+          },
+          "current_plan_revision": {
+            "type": "integer",
+            "title": "Current Plan Revision"
+          },
+          "current_plan": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "plan_access": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "COMPARISON_SCOPE_DENIED"
+            ],
+            "title": "Plan Access"
+          },
+          "plan_refresh_required": {
+            "type": "boolean",
+            "title": "Plan Refresh Required"
+          },
+          "analysis": {
+            "$ref": "#/components/schemas/EffectAvailability"
+          },
+          "plans": {
+            "items": {
+              "$ref": "#/components/schemas/PlanView"
+            },
+            "type": "array",
+            "title": "Plans"
+          },
+          "next_plan_before_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Plan Before Revision"
+          },
+          "tickets": {
+            "items": {
+              "$ref": "#/components/schemas/LinkView"
+            },
+            "type": "array",
+            "title": "Tickets"
+          },
+          "next_ticket_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Ticket Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action_id",
+          "product_id",
+          "followup",
+          "current_plan_revision",
+          "current_plan",
+          "plan_access",
+          "plan_refresh_required",
+          "plans",
+          "next_plan_before_revision",
+          "tickets",
+          "next_ticket_cursor"
+        ],
+        "title": "ImprovementDetail"
+      },
+      "ImprovementReceipt": {
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Action Id"
+          },
+          "action_revision": {
+            "type": "integer",
+            "title": "Action Revision"
+          },
+          "plan_revision": {
+            "type": "integer",
+            "title": "Plan Revision"
+          },
+          "ticket_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ticket Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action_id",
+          "action_revision",
+          "plan_revision"
+        ],
+        "title": "ImprovementReceipt"
+      },
+      "ImprovementView": {
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Action Id"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "followup": {
+            "$ref": "#/components/schemas/FollowupStaff"
+          },
+          "current_plan_revision": {
+            "type": "integer",
+            "title": "Current Plan Revision"
+          },
+          "current_plan": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "plan_access": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "COMPARISON_SCOPE_DENIED"
+            ],
+            "title": "Plan Access"
+          },
+          "plan_refresh_required": {
+            "type": "boolean",
+            "title": "Plan Refresh Required"
+          },
+          "analysis": {
+            "$ref": "#/components/schemas/EffectAvailability"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action_id",
+          "product_id",
+          "followup",
+          "current_plan_revision",
+          "current_plan",
+          "plan_access",
+          "plan_refresh_required"
+        ],
+        "title": "ImprovementView"
+      },
       "KpiMetrics": {
         "properties": {
           "ticket_count": {
@@ -7202,6 +8260,27 @@
           "metrics"
         ],
         "title": "KpiResponse"
+      },
+      "LinkView": {
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ticket Id"
+          },
+          "linked_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Linked At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ticket_id",
+          "linked_at"
+        ],
+        "title": "LinkView"
       },
       "Login": {
         "properties": {
@@ -7749,6 +8828,34 @@
         ],
         "title": "Page[HistoryTicket]"
       },
+      "Page_ImprovementView_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ImprovementView"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "title": "Page[ImprovementView]"
+      },
       "Page_MessagePublic_": {
         "properties": {
           "items": {
@@ -7911,6 +9018,449 @@
           "analytics_product_risk"
         ],
         "title": "PayloadHashes"
+      },
+      "PlanCreate": {
+        "properties": {
+          "issue_code": {
+            "type": "string",
+            "enum": [
+              "DELIVERY_DELAY",
+              "RETURN_PROCESS",
+              "REFUND_DELAY",
+              "DAMAGED",
+              "PAYMENT_ERROR",
+              "ACCOUNT_ERROR"
+            ],
+            "title": "Issue Code"
+          },
+          "improvement_text": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Improvement Text"
+          },
+          "implemented_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Implemented At"
+          },
+          "before_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before Start"
+          },
+          "before_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before End"
+          },
+          "after_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After Start"
+          },
+          "after_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After End"
+          },
+          "comparison_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Comparison Team Ids"
+          },
+          "source_batch_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Batch Id"
+          },
+          "source_scope_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_+\\-]{0,63}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Scope Key"
+          },
+          "change_reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Change Reason"
+          },
+          "expected_action_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Action Revision"
+          },
+          "expected_plan_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Plan Revision"
+          },
+          "correction": {
+            "type": "boolean",
+            "title": "Correction",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "issue_code",
+          "improvement_text",
+          "comparison_team_ids",
+          "change_reason",
+          "expected_action_revision",
+          "expected_plan_revision"
+        ],
+        "title": "PlanCreate"
+      },
+      "PlanValues": {
+        "properties": {
+          "issue_code": {
+            "type": "string",
+            "enum": [
+              "DELIVERY_DELAY",
+              "RETURN_PROCESS",
+              "REFUND_DELAY",
+              "DAMAGED",
+              "PAYMENT_ERROR",
+              "ACCOUNT_ERROR"
+            ],
+            "title": "Issue Code"
+          },
+          "improvement_text": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Improvement Text"
+          },
+          "implemented_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Implemented At"
+          },
+          "before_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before Start"
+          },
+          "before_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before End"
+          },
+          "after_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After Start"
+          },
+          "after_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After End"
+          },
+          "comparison_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Comparison Team Ids"
+          },
+          "source_batch_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Batch Id"
+          },
+          "source_scope_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_+\\-]{0,63}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Scope Key"
+          },
+          "change_reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Change Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "issue_code",
+          "improvement_text",
+          "comparison_team_ids",
+          "change_reason"
+        ],
+        "title": "PlanValues"
+      },
+      "PlanView": {
+        "properties": {
+          "issue_code": {
+            "type": "string",
+            "enum": [
+              "DELIVERY_DELAY",
+              "RETURN_PROCESS",
+              "REFUND_DELAY",
+              "DAMAGED",
+              "PAYMENT_ERROR",
+              "ACCOUNT_ERROR"
+            ],
+            "title": "Issue Code"
+          },
+          "improvement_text": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Improvement Text"
+          },
+          "implemented_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Implemented At"
+          },
+          "before_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before Start"
+          },
+          "before_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before End"
+          },
+          "after_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After Start"
+          },
+          "after_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After End"
+          },
+          "comparison_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Comparison Team Ids"
+          },
+          "source_batch_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Batch Id"
+          },
+          "source_scope_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_+\\-]{0,63}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Scope Key"
+          },
+          "change_reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Change Reason"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "owner_team_id_snapshot": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Owner Team Id Snapshot"
+          },
+          "change_kind": {
+            "type": "string",
+            "enum": [
+              "INITIAL",
+              "PLAN",
+              "CORRECTION"
+            ],
+            "title": "Change Kind"
+          },
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Created By"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "issue_code",
+          "improvement_text",
+          "comparison_team_ids",
+          "change_reason",
+          "revision",
+          "owner_team_id_snapshot",
+          "change_kind",
+          "created_by",
+          "created_at"
+        ],
+        "title": "PlanView"
       },
       "PolicyEvidence": {
         "properties": {
@@ -9339,7 +10889,8 @@
                 "AUTOMATION_RESUME",
                 "RETENTION_TEAM_REVIEW",
                 "RETENTION_GLOBAL_REVIEW",
-                "WORKLOAD_READ"
+                "WORKLOAD_READ",
+                "VOC_IMPROVEMENT_MANAGE"
               ]
             },
             "type": "array",
@@ -9878,6 +11429,33 @@
           "messages_has_more"
         ],
         "title": "TicketDetail"
+      },
+      "TicketLink": {
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ticket Id"
+          },
+          "expected_action_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Action Revision"
+          },
+          "expected_plan_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Plan Revision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ticket_id",
+          "expected_action_revision",
+          "expected_plan_revision"
+        ],
+        "title": "TicketLink"
       },
       "TicketPublic": {
         "properties": {

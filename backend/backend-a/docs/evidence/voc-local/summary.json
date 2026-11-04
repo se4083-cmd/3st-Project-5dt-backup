@@ -1,0 +1,69 @@
+{
+  "version": "0.8.0",
+  "migration_head": "0008",
+  "basis_branch": "feature/backend-a",
+  "basis_head": "25e4aad720198ea2a3a0287ccf6f58f69c92d228",
+  "runs": {
+    "related-initial.xml": {
+      "tests": "253",
+      "failures": "1",
+      "errors": "0",
+      "skipped": "4",
+      "time": "335.146"
+    },
+    "voc-final.xml": {
+      "tests": "31",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "44.527"
+    },
+    "fixture-final.xml": {
+      "tests": "54",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "87.632"
+    }
+  },
+  "runs_overlap_not_summed": true,
+  "previous_pass_counts_reused": false,
+  "all_initial_failures_resolved_in_related_reruns": true,
+  "postgres": "16.15; owned loopback cluster; unique disposable schemas",
+  "migration": "0007->0008 preserves existing followup/grants; empty downgrade/reapply and Alembic check passed",
+  "initial_test_environment_issues": [
+    "sandbox loopback restriction corrected using authorized local host execution",
+    "inherited analytics service key removed for disabled-auth test",
+    "external synthetic fixture path explicitly supplied"
+  ],
+  "fixture_compatibility_fix": "exclude only five new auxiliary VOC tables from original 22-table fixture set comparison; original fixture unchanged",
+  "not_verified": [
+    "Azure/deployment",
+    "actual account grants",
+    "actual Fabric effects or transfer",
+    "actual Frontend UI",
+    "Backend B worker/assignment",
+    "SQLite runtime for this feature"
+  ],
+  "commit_push": false,
+  "existing_review_preserved": true,
+  "original_0001_0007_preserved": true,
+  "temporary_cluster_stopped": true,
+  "remaining_temporary_schemas": 0,
+  "ruff": "PASS",
+  "actual_openapi_and_handoff_checker": "PASS",
+  "git_diff_check": "PASS",
+  "record_scope": "implementation and local validation before sharing",
+  "pre_share_review": {
+    "current_version": "0.8.0",
+    "migration_file_head": "0008",
+    "ruff": "PASS",
+    "actual_openapi_and_examples": "PASS",
+    "git_diff_check": "PASS",
+    "junit_summary_consistency": "PASS",
+    "old_migrations_and_B_analytics_v1_source_unchanged": true,
+    "business_tests_rerun": false,
+    "new_database_or_external_integration_validation": false,
+    "junit_personal_machine_prefix_removed": true
+  }
+}

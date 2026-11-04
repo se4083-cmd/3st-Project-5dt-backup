@@ -16,6 +16,7 @@ from app.main import create_app
 from app.retention import RetentionRequest
 from app.schemas import AgentRequest, ReopenRequest, TicketCreate
 from app.staff_detail import DetailPurpose
+from app.voc_schemas import ImprovementCreate, PlanCreate, TicketLink
 from app.workload_schemas import WorkloadPage
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -96,6 +97,9 @@ def main():
         "StopCommand": StopCommand,
         "ResumeCommand": ResumeCommand,
         "RetentionRequest": RetentionRequest,
+        "ImprovementCreate": ImprovementCreate,
+        "PlanCreate": PlanCreate,
+        "TicketLink": TicketLink,
     }
     for item in examples["requests"]:
         if item["path"] not in actual["paths"] or item["method"].lower() not in actual["paths"][item["path"]]:
@@ -110,6 +114,30 @@ def main():
     if schemas["StaffTicketDetail"].get("additionalProperties") is not False:
         raise RuntimeError("STAFF_DETAIL_ALLOWLIST_NOT_CLOSED")
     workload = actual["paths"]["/api/v1/staff/workload"]["get"]
+    voc_root = "/api/v1/staff/voc-improvements"
+    for path, methods in {
+        voc_root: {"get", "post"},
+        voc_root + "/{action_id}": {"get"},
+        voc_root + "/{action_id}/plans": {"post"},
+        voc_root + "/{action_id}/tickets": {"post"},
+    }.items():
+        if set(actual["paths"][path]) != methods or any(
+            actual["paths"][path][m]["security"] != [{"HTTPBearer": []}] for m in methods
+        ):
+            raise RuntimeError("VOC_ENDPOINT_AUTH_CONTRACT_CHANGED")
+    for name in (
+        "ImprovementCreate",
+        "PlanCreate",
+        "TicketLink",
+        "ImprovementReceipt",
+        "ImprovementView",
+        "ImprovementDetail",
+        "EffectAvailability",
+    ):
+        if schemas[name].get("additionalProperties") is not False:
+            raise RuntimeError("VOC_ALLOWLIST_NOT_CLOSED")
+    if schemas["EffectAvailability"]["properties"]["metrics"].get("type") != "null":
+        raise RuntimeError("VOC_EFFECT_IS_NOT_IMPLEMENTED")
     if workload["security"] != [{"HTTPBearer": []}]:
         raise RuntimeError("WORKLOAD_AUTH_CONTRACT_MISMATCH")
     if set(schemas["AgentWorkload"]["properties"]) != {"agent_id", "team_id", "tickets", "followups"}:

@@ -1,0 +1,49 @@
+{
+  "initial_uncommitted": [
+    "backend/backend-a/docs/backend-b-auto-failure-handoff-review.md"
+  ],
+  "initial_file_preserved": true,
+  "changed": [
+    "backend/backend-a/README.md",
+    "backend/backend-a/app/followups.py",
+    "backend/backend-a/app/main.py",
+    "backend/backend-a/app/retention.py",
+    "backend/backend-a/app/schema.py",
+    "backend/backend-a/app/seed.py",
+    "backend/backend-a/app/staff_models.py",
+    "backend/backend-a/app/staff_router.py",
+    "backend/backend-a/docs/api-contract.md",
+    "backend/backend-a/docs/backend-a-handoff.md",
+    "backend/backend-a/docs/examples/frontend-requests.json",
+    "backend/backend-a/docs/frontend-handoff.md",
+    "backend/backend-a/docs/openapi.json",
+    "backend/backend-a/docs/quality-voc-workload-design.md",
+    "backend/backend-a/docs/verification.md",
+    "backend/backend-a/pyproject.toml",
+    "backend/backend-a/scripts/check_handoff_contract.py",
+    "backend/backend-a/tests/test_analytics_database.py",
+    "backend/backend-a/tests/test_phase3_database.py",
+    "backend/backend-a/tests/test_repository_layout.py",
+    "backend/backend-a/tests/test_workload_postgres.py"
+  ],
+  "added": [
+    "backend/backend-a/app/voc_improvements.py",
+    "backend/backend-a/app/voc_models.py",
+    "backend/backend-a/app/voc_router.py",
+    "backend/backend-a/app/voc_schemas.py",
+    "backend/backend-a/docs/evidence/voc-local/README.md",
+    "backend/backend-a/docs/evidence/voc-local/changes-from-baseline.json",
+    "backend/backend-a/docs/evidence/voc-local/fixture-final.xml",
+    "backend/backend-a/docs/evidence/voc-local/related-initial.xml",
+    "backend/backend-a/docs/evidence/voc-local/summary.json",
+    "backend/backend-a/docs/evidence/voc-local/voc-final.xml",
+    "backend/backend-a/docs/voc-improvements.md",
+    "backend/backend-a/migrations/versions/0008_voc_improvements.py",
+    "backend/backend-a/tests/test_voc_improvements.py",
+    "backend/backend-a/tests/test_voc_postgres.py"
+  ],
+  "original_migrations_unchanged": true,
+  "outside_backend_a_changes": [],
+  "branch": "feature/backend-a",
+  "head": "25e4aad720198ea2a3a0287ccf6f58f69c92d228"
+}

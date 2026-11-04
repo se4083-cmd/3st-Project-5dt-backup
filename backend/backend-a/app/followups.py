@@ -177,7 +177,8 @@ def validate_values(session, user, values, ticket):
         raise APIError(409, "PRODUCT_CANNOT_BLOCK_RESOLUTION")
 
 
-def create(session, user, body, key):
+def prepare_create(session, user, body):
+    """Authorize/lock the target; usable by atomic wrappers without HTTP/receipt."""
     require_staff(user)
     session.execute(
         select(users.c.user_id).where(users.c.user_id == user["user_id"]).with_for_update(key_share=True)
@@ -197,6 +198,11 @@ def create(session, user, body, key):
     elif user["role"] != "ADMIN":
         raise APIError(403, "ADMIN_ROLE_REQUIRED", user["user_id"], "PRODUCT", product_id)
     check_team(session, user, str(body.owner_team_id))
+    return parent, ticket_id, product_id
+
+
+def create(session, user, body, key):
+    parent, ticket_id, product_id = prepare_create(session, user, body)
     digest = hashlib.sha256(
         json.dumps(
             {"operation": "FOLLOWUP_CREATE", "body": body.model_dump(mode="json")},
@@ -215,6 +221,24 @@ def create(session, user, body, key):
         if old["operation"] != "FOLLOWUP_CREATE" or old["request_hash"] != digest:
             raise APIError(409, "IDEMPOTENCY_CONFLICT")
         return old["response_snapshot"], True
+    with session.begin_nested():
+        result = persist_create(session, user, body, parent, ticket_id, product_id)
+        session.execute(
+            idempotency_keys.insert().values(
+                user_id=user["user_id"],
+                key=key,
+                operation="FOLLOWUP_CREATE",
+                request_hash=digest,
+                followup_id=result["action_id"],
+                response_snapshot=result,
+                created_at=utcnow(),
+            )
+        )
+    return result, False
+
+
+def persist_create(session, user, body, parent, ticket_id, product_id):
+    """Validate and persist one action+audit. Caller owns transaction and receipt."""
     now = utcnow()
     if body.due_at is not None and body.due_at <= now:
         raise APIError(422, "FOLLOWUP_DUE_IN_PAST")
@@ -246,17 +270,6 @@ def create(session, user, body, key):
                 updated_at=now,
             )
         )
-        session.execute(
-            idempotency_keys.insert().values(
-                user_id=user["user_id"],
-                key=key,
-                operation="FOLLOWUP_CREATE",
-                request_hash=digest,
-                followup_id=action_id,
-                response_snapshot=result,
-                created_at=now,
-            )
-        )
         audit.record(
             session,
             user["user_id"],
@@ -266,7 +279,7 @@ def create(session, user, body, key):
             ticket=ticket_id,
             cycle=parent["cycle_no"] if ticket_id else None,
         )
-    return result, False
+    return result
 
 
 def mutate(session, user, action_id, body, *, state=False):

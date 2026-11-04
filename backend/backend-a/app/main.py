@@ -22,6 +22,7 @@ from app.public_limits import PublicLimits
 from app.routers import router
 from app.schemas import ErrorEnvelope
 from app.staff_router import router as staff_router
+from app.voc_router import router as voc_router
 
 logger = logging.getLogger("csflow.api")
 
@@ -37,7 +38,7 @@ def create_app(settings: Settings | None = None):
 
     app = FastAPI(
         title="CS Flow AI Backend A",
-        version="0.7.1",
+        version="0.8.0",
         debug=False,
         lifespan=lifespan,
         # Python3.12/3.13 use different HTTPStatus phrases for413/422.
@@ -125,7 +126,7 @@ def create_app(settings: Settings | None = None):
     def ready(request: Request):
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
-            if connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one() != "0007":
+            if connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one() != "0008":
                 return error_response(request, 503, "MIGRATIONS_REQUIRED")
         return {"status": "ready"}
 
@@ -133,4 +134,5 @@ def create_app(settings: Settings | None = None):
     app.include_router(operations_router)
     app.include_router(analytics_router)
     app.include_router(staff_router)
+    app.include_router(voc_router)
     return app
