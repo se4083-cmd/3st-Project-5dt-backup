@@ -1,0 +1,58 @@
+{
+  "baseline": "77cba3a4892160eb2f8a1afc8f51b28a0f1282bb",
+  "branch": "feature/backend-plus",
+  "recorded_at": "2026-11-04T14:51:28.013266+09:00",
+  "python": "3.12.14",
+  "postgres": "17.11 (isolated local cluster)",
+  "tests": {
+    "sqlite": {
+      "collected": 501,
+      "passed": 449,
+      "skipped": 52,
+      "failures": 0,
+      "errors": 0,
+      "voc_collected": 44,
+      "voc_passed": 42,
+      "voc_skipped": 2
+    },
+    "postgres": {
+      "collected": 501,
+      "passed": 491,
+      "skipped": 10,
+      "failures": 0,
+      "errors": 0,
+      "voc_collected": 44,
+      "voc_passed": 44,
+      "voc_skipped": 0
+    }
+  },
+  "checks": {
+    "p0_contract": "PASS: 37 paths / 41 operations and existing components/security unchanged",
+    "p1_monitoring_contract": "PASS: all 4 existing GET operations and referenced schema/security definitions unchanged",
+    "handoff_contract": "PASS",
+    "ruff_check": "PASS",
+    "ruff_format": "PASS: 130 files",
+    "alembic_metadata_check": "PASS on SQLite and PostgreSQL",
+    "http_smoke": "PASS: synthetic publish, Mock generation/replay/approval/conflict/history, old monitoring",
+    "git_diff_check": "PASS"
+  },
+  "external_integrations": {
+    "actual_azure_openai_called": false,
+    "fabric_connection_verified": false,
+    "policy_impact_analysis_implemented": false,
+    "frontend_changed": false
+  },
+  "git": {
+    "commit_created": false,
+    "push_performed": false
+  },
+  "limitations": [
+    "9 full external synthetic fixture tests skipped",
+    "1 Windows DPAPI test skipped",
+    "No real Azure auth/deployment/API/network verification",
+    "No real Fabric probe or source reconciliation",
+    "Synchronous requests only; no background task/lease/AI-attempt writer",
+    "Generated prose requires human assessment; citation validation is not semantic proof"
+  ],
+  "evidence_sanitization": "JUnit hostnames removed only; outcomes preserved"
+}

@@ -118,4 +118,8 @@ verify는 별도 임시 schema의 테스트 권한/고정 답변·배정·사람
 
 ## P1 monitoring integration
 
-Read-only P1 monitoring is integrated on top of Backend A 0.7.1. Required schema head: **0008** (existing workload migration 0007 is preserved). See [runbook](docs/p1-runbook.md), [API contract](docs/p1-api-contract.md), and [integration report](docs/p1-integration-20261104.md). P1 is disabled by default; enabling it requires explicit ADMIN/team/capability grants. VOC and policy workflows are not implemented.
+Read-only P1 monitoring is integrated on top of Backend A 0.7.1. Required schema head: **0008** (existing workload migration 0007 is preserved). See [runbook](docs/p1-runbook.md), [API contract](docs/p1-api-contract.md), and [integration report](docs/p1-integration-20261104.md). P1 is disabled by default; enabling it requires explicit ADMIN/team/capability grants. Background task/worker workflows and policy comparison are not implemented; synchronous VOC drafts are described below.
+
+## P1 VOC improvement proposals
+
+Synchronous, evidence-bound VOC drafts and explicit administrator review are available behind `P1_ENABLED=true` and `P1_VOC_ENABLED=true`. Default provider is visibly `MOCK`; Azure requires `P1_VOC_PROVIDER=AZURE_OPENAI` plus `P1_VOC_AZURE_ENABLED=true` and server-side credentials/deployment configuration. Existing published product VOC analytics and SQL permissions are reused. Required schema head is **0009**; migrations 0001–0008 are preserved. See [VOC API/runbook](docs/p1-voc-api.md) and [implementation and verification report](docs/p1-voc-implementation-20261104.md). Approval records a decision only; it never changes policy, operational knowledge, customer messages or worker behavior.

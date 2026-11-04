@@ -1,0 +1,1353 @@
+{
+  "paths": {
+    "/api/v1/admin/p1/session": {
+      "get": {
+        "tags": [
+          "P1 monitoring"
+        ],
+        "summary": "Session Bridge",
+        "operationId": "session_bridge_api_v1_admin_p1_session_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/P1Session"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/p1/monitoring/summary": {
+      "get": {
+        "tags": [
+          "P1 monitoring"
+        ],
+        "summary": "Summary",
+        "operationId": "summary_api_v1_admin_p1_monitoring_summary_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "job_kind",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "AUTO",
+                    "HANDOFF"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Job Kind"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitorSummary"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/p1/monitoring/jobs": {
+      "get": {
+        "tags": [
+          "P1 monitoring"
+        ],
+        "summary": "Jobs",
+        "operationId": "jobs_api_v1_admin_p1_monitoring_jobs_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "job_kind",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "AUTO",
+                    "HANDOFF"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Job Kind"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "PENDING",
+                    "RUNNING",
+                    "RETRY",
+                    "SUCCEEDED",
+                    "FAILED",
+                    "HANDED_OFF",
+                    "CANCELLED"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/p1/monitoring/ai-calls": {
+      "get": {
+        "tags": [
+          "P1 monitoring"
+        ],
+        "summary": "Ai Calls",
+        "operationId": "ai_calls_api_v1_admin_p1_monitoring_ai_calls_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "From"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "To"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiCallSummary"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MonitorSummary": {
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "selected_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Selected Team Ids"
+          },
+          "coverage": {
+            "type": "string",
+            "const": "ROUTED_CURRENT_CYCLE_VERSION",
+            "title": "Coverage",
+            "default": "ROUTED_CURRENT_CYCLE_VERSION"
+          },
+          "excluded_definition": {
+            "type": "string",
+            "title": "Excluded Definition"
+          },
+          "automation": {
+            "$ref": "#/components/schemas/Automation"
+          },
+          "jobs": {
+            "$ref": "#/components/schemas/JobCounts"
+          },
+          "p1_tasks": {
+            "$ref": "#/components/schemas/TaskCounts"
+          },
+          "analytics": {
+            "$ref": "#/components/schemas/Analytics"
+          },
+          "ai": {
+            "$ref": "#/components/schemas/Unobserved"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "as_of",
+          "selected_team_ids",
+          "excluded_definition",
+          "automation",
+          "jobs",
+          "p1_tasks",
+          "analytics",
+          "ai"
+        ],
+        "title": "MonitorSummary"
+      },
+      "JobPage": {
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "selected_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Selected Team Ids"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/JobView"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "as_of",
+          "selected_team_ids",
+          "items",
+          "next_cursor"
+        ],
+        "title": "JobPage"
+      },
+      "Automation": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Availability"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ControlState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "state",
+          "reason"
+        ],
+        "title": "Automation"
+      },
+      "P1Session": {
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Userid"
+          },
+          "displayName": {
+            "type": "string",
+            "title": "Displayname"
+          },
+          "role": {
+            "type": "string",
+            "const": "ADMIN",
+            "title": "Role"
+          },
+          "active": {
+            "type": "boolean",
+            "const": true,
+            "title": "Active"
+          },
+          "permissions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Permissions"
+          },
+          "allowedTeamIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Allowedteamids"
+          },
+          "scopeKey": {
+            "type": "string",
+            "title": "Scopekey"
+          },
+          "capabilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Capabilities"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "userId",
+          "displayName",
+          "role",
+          "active",
+          "permissions",
+          "allowedTeamIds",
+          "scopeKey",
+          "capabilities"
+        ],
+        "title": "P1Session"
+      },
+      "ErrorEnvelope": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorEnvelope"
+      },
+      "Analytics": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Availability"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "connection_status": {
+            "type": "string",
+            "const": "UNOBSERVED",
+            "title": "Connection Status",
+            "default": "UNOBSERVED"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason",
+          "meta"
+        ],
+        "title": "Analytics"
+      },
+      "TaskCounts": {
+        "properties": {
+          "unit": {
+            "type": "string",
+            "const": "task",
+            "title": "Unit",
+            "default": "task"
+          },
+          "availability": {
+            "type": "string",
+            "const": "UNAVAILABLE",
+            "title": "Availability",
+            "default": "UNAVAILABLE"
+          },
+          "counts": {
+            "type": "null",
+            "title": "Counts"
+          },
+          "coverage": {
+            "type": "string",
+            "const": "NO_TASK_PRODUCER",
+            "title": "Coverage",
+            "default": "NO_TASK_PRODUCER"
+          },
+          "reason": {
+            "type": "string",
+            "const": "VOC_AND_POLICY_NOT_IMPLEMENTED",
+            "title": "Reason",
+            "default": "VOC_AND_POLICY_NOT_IMPLEMENTED"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TaskCounts"
+      },
+      "JobView": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Job Id"
+          },
+          "ticket_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ticket Id"
+          },
+          "job_kind": {
+            "type": "string",
+            "enum": [
+              "AUTO",
+              "HANDOFF"
+            ],
+            "title": "Job Kind"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "attempt": {
+            "type": "integer",
+            "title": "Attempt"
+          },
+          "next_attempt_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Next Attempt At"
+          },
+          "lease_expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lease Expires At"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "cycle_no": {
+            "type": "integer",
+            "title": "Cycle No"
+          },
+          "expected_ticket_version": {
+            "type": "integer",
+            "title": "Expected Ticket Version"
+          },
+          "scope_status": {
+            "type": "string",
+            "enum": [
+              "CURRENT",
+              "SUPERSEDED"
+            ],
+            "title": "Scope Status"
+          },
+          "data_origin": {
+            "type": "string",
+            "title": "Data Origin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "job_id",
+          "ticket_id",
+          "job_kind",
+          "status",
+          "attempt",
+          "next_attempt_at",
+          "lease_expires_at",
+          "error_code",
+          "updated_at",
+          "cycle_no",
+          "expected_ticket_version",
+          "scope_status",
+          "data_origin"
+        ],
+        "title": "JobView"
+      },
+      "AiCallSummary": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "const": "UNOBSERVED",
+            "title": "Availability",
+            "default": "UNOBSERVED"
+          },
+          "coverage": {
+            "type": "string",
+            "const": "NONE",
+            "title": "Coverage",
+            "default": "NONE"
+          },
+          "observation_started_at": {
+            "type": "null",
+            "title": "Observation Started At"
+          },
+          "attempts": {
+            "type": "null",
+            "title": "Attempts"
+          },
+          "errors": {
+            "type": "null",
+            "title": "Errors"
+          },
+          "retries": {
+            "type": "null",
+            "title": "Retries"
+          },
+          "reason": {
+            "type": "string",
+            "const": "NO_INSTRUMENTED_PROVIDER",
+            "title": "Reason",
+            "default": "NO_INSTRUMENTED_PROVIDER"
+          },
+          "unobserved_components": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unobserved Components",
+            "default": [
+              "BACKEND_B",
+              "P1_VOC",
+              "AZURE_OPENAI",
+              "AZURE_SEARCH",
+              "FABRIC_CONNECTION"
+            ]
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time",
+            "title": "From"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time",
+            "title": "To"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "selected_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Selected Team Ids"
+          },
+          "attempt_count": {
+            "type": "null",
+            "title": "Attempt Count"
+          },
+          "failed_attempt_count": {
+            "type": "null",
+            "title": "Failed Attempt Count"
+          },
+          "retry_attempt_count": {
+            "type": "null",
+            "title": "Retry Attempt Count"
+          },
+          "error_rate": {
+            "type": "null",
+            "title": "Error Rate"
+          },
+          "counts_by_code": {
+            "type": "null",
+            "title": "Counts By Code"
+          },
+          "started_count": {
+            "type": "null",
+            "title": "Started Count"
+          },
+          "unknown_count": {
+            "type": "null",
+            "title": "Unknown Count"
+          },
+          "sources": {
+            "additionalProperties": {
+              "type": "null"
+            },
+            "propertyNames": {
+              "enum": [
+                "MOCK",
+                "AZURE_OPENAI"
+              ]
+            },
+            "type": "object",
+            "title": "Sources"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "as_of",
+          "selected_team_ids",
+          "sources"
+        ],
+        "title": "AiCallSummary"
+      },
+      "Unobserved": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "const": "UNOBSERVED",
+            "title": "Availability",
+            "default": "UNOBSERVED"
+          },
+          "coverage": {
+            "type": "string",
+            "const": "NONE",
+            "title": "Coverage",
+            "default": "NONE"
+          },
+          "observation_started_at": {
+            "type": "null",
+            "title": "Observation Started At"
+          },
+          "attempts": {
+            "type": "null",
+            "title": "Attempts"
+          },
+          "errors": {
+            "type": "null",
+            "title": "Errors"
+          },
+          "retries": {
+            "type": "null",
+            "title": "Retries"
+          },
+          "reason": {
+            "type": "string",
+            "const": "NO_INSTRUMENTED_PROVIDER",
+            "title": "Reason",
+            "default": "NO_INSTRUMENTED_PROVIDER"
+          },
+          "unobserved_components": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unobserved Components",
+            "default": [
+              "BACKEND_B",
+              "P1_VOC",
+              "AZURE_OPENAI",
+              "AZURE_SEARCH",
+              "FABRIC_CONNECTION"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Unobserved"
+      },
+      "JobCounts": {
+        "properties": {
+          "unit": {
+            "type": "string",
+            "const": "job",
+            "title": "Unit",
+            "default": "job"
+          },
+          "raw_counts": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Raw Counts"
+          },
+          "eligible_pending": {
+            "type": "integer",
+            "title": "Eligible Pending"
+          },
+          "active_running": {
+            "type": "integer",
+            "title": "Active Running"
+          },
+          "retry_wait": {
+            "type": "integer",
+            "title": "Retry Wait"
+          },
+          "expired_running": {
+            "type": "integer",
+            "title": "Expired Running"
+          },
+          "generation_mismatch": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generation Mismatch"
+          },
+          "superseded": {
+            "type": "integer",
+            "title": "Superseded"
+          },
+          "current_failed": {
+            "type": "integer",
+            "title": "Current Failed"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "raw_counts",
+          "eligible_pending",
+          "active_running",
+          "retry_wait",
+          "expired_running",
+          "generation_mismatch",
+          "superseded",
+          "current_failed"
+        ],
+        "title": "JobCounts"
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "request_id"
+        ],
+        "title": "ErrorBody"
+      },
+      "ControlState": {
+        "properties": {
+          "paused": {
+            "type": "boolean",
+            "title": "Paused"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "generation": {
+            "type": "integer",
+            "title": "Generation"
+          },
+          "reason_code": {
+            "type": "string",
+            "title": "Reason Code"
+          },
+          "changed_by": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Changed By"
+          },
+          "changed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Changed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "paused",
+          "revision",
+          "generation",
+          "reason_code",
+          "changed_by",
+          "changed_at"
+        ],
+        "title": "ControlState"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "AnalyticsServiceBearer": {
+        "type": "http",
+        "description": "Separate service JWT/key/issuer/audience; allowlisted subject and analytics permissions. User/admin login JWT is rejected.",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

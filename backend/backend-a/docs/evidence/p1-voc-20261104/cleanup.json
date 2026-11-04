@@ -1,0 +1,8 @@
+{
+  "remaining_test_schemas": 0,
+  "public_tables": 0,
+  "http_server_stopped": true,
+  "azure_resources_created": false,
+  "azure_deployment_performed": false,
+  "postgres_server_stopped": true
+}

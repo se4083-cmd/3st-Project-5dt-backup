@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "postgres": "17.11",
+  "migration": "0009; alembic check PASS",
+  "health_ready": 200,
+  "published_synthetic_analytics": true,
+  "generation": 201,
+  "idempotent_replay": 200,
+  "approval": 200,
+  "stale_revision": 409,
+  "history_and_detail": 200,
+  "missing_bearer": 401,
+  "existing_monitoring": 200,
+  "provider": "MOCK",
+  "source": "LOCAL_SYNTHETIC",
+  "azure_network_calls": 0,
+  "no_store_and_request_id": true
+}

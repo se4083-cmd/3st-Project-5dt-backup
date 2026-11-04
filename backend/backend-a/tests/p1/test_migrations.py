@@ -148,4 +148,4 @@ def test_downgrade_refuses_data_or_permission_loss(app, record):
     with pytest.raises(RuntimeError, match="lose P1"):
         command.downgrade(Config(str(ROOT / "alembic.ini")), "0007")
     with app.state.engine.connect() as c:
-        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0008"
+        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0009"

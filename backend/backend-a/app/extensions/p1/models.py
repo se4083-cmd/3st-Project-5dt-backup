@@ -1,6 +1,7 @@
 """Storage foundation only. Future target FKs arrive with VOC/policy migrations.
 
-No task creation/worker endpoints are exposed at this stage.
+No task creation/worker endpoints are exposed. The synchronous VOC request API
+uses separate evidence/review storage and does not create these tasks.
 """
 
 import sqlalchemy as sa
