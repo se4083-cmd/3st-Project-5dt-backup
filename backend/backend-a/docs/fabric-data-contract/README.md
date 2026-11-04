@@ -4,7 +4,7 @@
 
 보관 schema.sql은 추출 당시 bytes/hash를 유지한다. pg_dump 출력의 마지막 빈 줄 때문에 최초 stage의 diff whitespace 검사에서 EOF 빈 줄1건이 표시되며, 해시가 고정된 DDL을 이 스타일 경고만으로 재작성하지 않았다.
 
-담당 폴더의 .gitattributes는 이 보관 폴더의 자동 줄바꿈 변환을 끈다. Windows의 core.autocrlf 설정과 관계없이 JSONL/DDL·manifest의 bytes를 보존하기 위한 Git 공유 설정이다.
+담당 폴더의 .gitattributes는 기존 text/eol 규칙을 유지하고, 해시 대상인 schema.sql과 samples의 JSONL에만 자동 줄바꿈 변환 예외를 둔다. Windows의 core.autocrlf 설정과 관계없이 DDL 및 manifest가 가리키는 JSONL bytes를 보존하기 위한 Git 공유 설정이다.
 
 2026-11-03 KST 작성. 모든 경로는 팀 저장소의 **backend/backend-a/** 기준이다. 이 자료는 로컬 파일이며 팀원 전송·commit·push는 하지 않았다.
 

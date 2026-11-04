@@ -1,2 +1,9 @@
-# Preserve archived schema/sample bytes and manifest checksums on Windows too.
-docs/fabric-data-contract/** -text
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+# Preserve hashed Fabric DDL/JSONL bytes on Windows.
+docs/fabric-data-contract/schema.sql -text
+docs/fabric-data-contract/samples/**/*.jsonl -text
