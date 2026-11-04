@@ -1,15 +1,15 @@
-# Frontend 인수 — 추가 기능 연결 안내 (0.10.0 / migration0010)
+# Frontend 인수 — 추가 기능 연결 안내 (0.11.0 / migration0011)
 
 0.11.0 후속: [회차 진단·VOC 효과 API](monitoring-effects.md)를 추가했습니다. 자동 처리/이관 숫자는 전향적 AUTO 회차의 기록된 사실이며 기존 티켓 KPI와 분모가 다릅니다. safe_completion은 여전히 운영 UNAVAILABLE입니다. 효과는 별도 `/effects?origin=OPERATIONAL`(기본)에서 조회하고 SYNTHETIC을 운영과 섞지 않습니다. 기존 embedded analysis.metrics는null, reason은 VERSIONED_EFFECT_ENDPOINT_REQUIRED입니다. 아래0.10.0의 ‘효과 수신 미구현’은 당시 기록이며 후속 A 수신/게시 구현과 실제 Fabric 연동은 구분합니다. Azure의 이번 실제 검증은 [배포/로컬 증거](evidence/monitor-effects-local/README.md)를 우선합니다.
 
-2026-11-04 KST 문서 정리·공유 검토. 실제 체크아웃은 `<PROJECT_ROOT>/.cache/team-cs-flow-ai`(요청 경로의 `.cache` 앞 구분자 누락 보정), branch `feature/backend-a`, **구현 공유 기준 HEAD**는 `2cb07cfc0bcbf1a203b6d54c5ebb1bb905a7be93`다. 이번 문서 공유 전 원격 HEAD도 같은 기준임을 확인했고, 시작 변경은 이 문서 한 개뿐이었다. 적용 경로의 AGENTS.md는 발견되지 않았다. 앞선 초안 작성은 로컬 문서 작업이었으며, 이번에는 이 문서만 commit·일반 push 대상으로 검토한다. 앱·migration·업무 테스트·DB·Azure·실제 권한·다른 팀 코드·메시지 발송은 이번 범위 밖이다. **현재 Azure 상태는 조회하지 않았으며**, 아래 과거 배포 기록과 현재 소스 구현 상태를 구분한다.
+2026-11-04 KST 현재 실제 배포는 **0.11.0 / DB0011**, 고정 소스 SHA는 `646023067495f3a286a51585e60d758071a8404c`다. live/readiness/Swagger200·배포 OpenAPI와 소스 기록본 전체 일치, PAUSED/기존 설정 보존을 확인했다. [배포/로컬 검증 근거](evidence/monitor-effects-local/README.md)를 따른다. 이전0.10 공유 기준은2cb07cf였으며 아래 기존 구현 기록과 구분한다. 실제 B/AI/Fabric/Frontend 통합은 미검증이고, 직원 신규 capability·운영 effect subject는 아직 미설정이다. 실제 origin을 받지 못해 CORS=[]를 유지했다. 실행 중인 API base는 https://csflow-backend-a.azurewebsites.net/api/v1 이지만 브라우저 연결/권한 있는 신규 ADMIN 조회까지 성공했다고 안내하지 않는다.
 
 ## 1. 인수님 요청 3가지 상태
 
 | 요청 | A 구현 완료(로컬·GitHub 소스) | 팀 연결 필요 | 추가 구현·합의 필요 |
 |---|---|---|---|
-| AI 상담 품질 평가·모니터링 | 확정 자동 응답의 전향적 근거 연결, 수동 표본·검토자 지정, 제한 자료·append-only 평가 이력, 표본 판정률/coverage | Frontend 화면, B의 실제 확정 writer와 AI/RAG의 실제 질문·버전·근거, 운영 평가자 연결 | 실제 AI 품질 검증·운영 rubric 합의는 미완료. 자동 처리율·이관율의 새 회차 분모/사유 이력과 **안전한 자동 완료율**은 별도 구현·관찰 기간/기준 합의 필요 |
-| VOC 상품 개선 조치·효과 추적 | 상품 개선 등록, 기존 후속 등록, 계획/시행 사실 정정 이력, 관련 문의·발견 배치/scope 참조 | Frontend 등록/이력 화면, Fabric 주현님과 상품/기간/판매 분모/비교 scope 합의 | 실제 Fabric **전후 효과 수신·저장·조회/계산은 미구현**. DONE은 업무 완료이며 효과 입증 아님. 문의 감소만으로 인과효과 확정 불가 |
+| AI 상담 품질 평가·모니터링 | 확정 자동 응답의 전향적 근거 연결, 수동 표본·검토자 지정, 제한 자료·append-only 평가 이력, 표본 판정률/coverage 및 전향적 AUTO 회차/사유 진단 | Frontend 화면, B의 실제 확정 writer와 AI/RAG의 실제 질문·버전·근거, 운영 평가자 연결 | 실제 AI 품질 검증·운영 rubric 합의는 미완료. 전향적 AUTO 처리/이관 회차 진단 API·사유 기록 경계는 구현. B 연결·완전 수집·분모 합의는 대기하며 **운영 안전 완료율은 UNAVAILABLE** |
+| VOC 상품 개선 조치·효과 추적 | 상품 개선 등록/계획 이력·연결 및 별도 voc-effect-v1 수신·검증·게시·효과 조회 | Frontend 등록/이력 화면, Fabric 주현님과 상품/기간/판매 분모/비교 scope 합의 | A의 별도 효과 수신·검증·게시·조회는0.11에 구현. 실제 Fabric 집계/emitter/운영 데이터·단위·기간·분모 합의는 대기. DONE은 효과 입증이 아니며 문의 감소의 인과효과 확정 불가 |
 | 상담사 업무량·SLA 최적화 | 현재 업무량·미배정·기한 상태, HUMAN 대기의 읽기 전용 우선순위/적격 후보 추천 | Frontend 조회·상태 표시, B 준혁님의 최신 조건 재검사와 실제 배정 경계 연결 | B 실제 배정 통합·동시 부하 균형/운영 효과 미검증. 정식 SLA 시작/종료/재문의/일시정지·업무시간/휴일·최초 응답/해결 정의와 엔진은 별도 |
 
 기존 `GET /api/v1/admin/analytics/kpi`는 게시 analytics-v1의 `Σauto_closed_count/Σticket_count`, `Σhandoff_count/Σticket_count`를 제공한다(분모0→null). 이는 upstream 티켓 생성 cohort 지표이며 AUTO 시작 회차율·사후 이관/안전한 완료율이 아니다. 실제 Fabric 연결/운영 성과를 확인한 것이 아니고, 없는 과거 회차/실패 사유를 snapshot이나 문구로 추정하지 않는다. [현재 A 전체 인수 현황](backend-a-handoff.md), [Fabric 계약](fabric-contract.md)을 따른다.
@@ -18,14 +18,14 @@
 
 | 구분 | 확인된 기준 | 화면 연결 시 의미 |
 |---|---|---|
-| 로컬/GitHub | 소스0.10.0, migration 파일 head0010, 위 공유 커밋. 과거 로컬 PG 검증 기록 있음 | 현재 코드/OpenAPI 기준으로 연동 준비 가능. 실행 중인 로컬 API/DB 최신 head는 별도 확인 필요 |
-| Azure 마지막 배포 기록 | [2026-11-03 이름 이전 보고](azure-migration.md): **0.6.1 / DB0006**, 당시 CORS 허용 origin=[] | **현재 최신 Azure 상태는 이번 미확인**. 기존 Azure 주소에 아래 신규 API가 있다고 안내하지 않는다 |
+| 로컬/GitHub | 소스0.11.0, migration 파일 head0011, 위 고정 소스 커밋. 과거 로컬 PG 검증 기록 있음 | 현재 코드/OpenAPI 기준으로 연동 준비 가능. 실행 중인 로컬 API/DB 최신 head는 별도 확인 필요 |
+| Azure 실제 확인 | 2026-11-04 **0.11.0 / DB0011**, 이전0.6.1/0006에서 적용·검증. live/ready/docs200 | 신규 경로 존재 확인. ADMIN 기능은 capability 미설정403, 효과 서비스는 subject 미설정503. CORS=[]이며 실제 브라우저 연결 미검증 |
 | 실제 화면/B/AI/Fabric | 실제 통합 미검증 | 합성 예시·로컬 PASS·Git push를 통합/배포 성공으로 표시하지 않는다 |
 
-화면 연결 전에 **배포 담당+A**가 선택 환경의 빌드0.10.0·readiness·실제 DB head0010·대상 `/openapi.json` 경로를 확인해야 한다. Azure는 별도 승인 후 현재 DB head와 백업/호환성을 확인하고0007→0008→0009→0010 중 미적용 migration만 순서대로 처리하며, 새 테이블/trigger·권한 허용값까지 적용·검증해야 한다. 기존 데이터/권한을 seed로 덮어쓰거나0.6.1/0006 전용 도구를 새 버전에 바로 실행하지 않는다. 파일 head와 실제 배포 DB head는 다르다.
+이번 Azure 배포에서 **0.11.0·실제 DB0011·readiness·신규 OpenAPI**를 확인했다. 다음 변경 때도 배포 담당+A가 대상 환경/백업/호환성을 확인하고 미적용 migration만 적용해야 하며, 이미 적용된0007–0011을 다시 실행하거나 초기화하지 않는다. 기존 데이터/권한을 seed로 덮어쓰거나0.6.1/0006 전용 도구를 새 버전에 바로 실행하지 않는다. 파일 head와 실제 배포 DB head는 다르다.
 
 - **권한/운영 담당+A:** 아래 capability는 ADMIN 역할만으로 자동 부여되지 않는다. 실제 사용자 활성/팀·정규화 scope, 후보 지원 category, 검토자 지정/QUALITY_REVIEW와 필요 rubric을 확인한다. 승인된 별도 작업으로 최소 grant를 설정한다. 실제 계정·비밀번호·토큰·DB 접속 정보는 이 문서에 넣지 않는다.
-- **Frontend 인수님+배포 담당:** 실제 HTTPS 화면 origin을 확정해 `CORS_ORIGINS`에 명시 허용하고 브라우저 preflight를 검증한다. 현재 코드의 허용 헤더는 Authorization/Content-Type/Idempotency-Key, 노출 헤더는 X-Request-ID/Location/Idempotency-Replayed, allow_credentials=false다. 이 설정이 실제 배포됐는지는 별도 확인한다. 임의 origin·`*`·브라우저의 DB 직접 접속/서비스 인증키 배포는 사용하지 않는다.
+- **Frontend 인수님+배포 담당:** 실제 HTTPS 화면 origin을 확정해 `CORS_ORIGINS`에 명시 허용하고 브라우저 preflight를 검증한다. 현재 코드의 허용 헤더는 Authorization/Content-Type/Idempotency-Key, 노출 헤더는 X-Request-ID/Location/Idempotency-Replayed, allow_credentials=false다. 현재 CORS 허용 origin=[] 보존을 실제 확인했으며, 확정 origin의 브라우저 양성 연결은 아직 검증하지 않았다. 임의 origin·`*`·브라우저의 DB 직접 접속/서비스 인증키 배포는 사용하지 않는다.
 - Frontend의 `API_BASE`는 **연동 환경 확인 후 정한** `/api/v1`까지의 값으로 설정한다. 아래 경로에 `/api/v1`을 중복 붙이지 않는다. 실제 토큰은 기존 로그인 흐름에서 취급하고 문서·로그에 저장하지 않는다. 업무 자동 처리 재개는 화면 연동 선행 작업이 아니다.
 
 ## 3. 실제 API·역할·문서
@@ -35,9 +35,10 @@
 | 기능 | 실제 HTTP 경로(prefix 제외) | 역할·capability·현재 scope | 상세/전체 예시 |
 |---|---|---|---|
 | 업무량 | GET `/staff/workload` | AGENT는 별도 grant 없이 본인/활성 소속 팀 scope만. ADMIN은 WORKLOAD_READ+허용 활성 팀. 전역 미라우팅 포함은 ADMIN+UNROUTED_QUEUE_READ 추가 | [workload.md](workload.md), [전체 응답](examples/workload-response.json) |
-| VOC 개선 | GET/POST `/staff/voc-improvements`; GET `/staff/voc-improvements/{action_id}`; POST `/staff/voc-improvements/{action_id}/plans`, `/staff/voc-improvements/{action_id}/tickets` | ADMIN+VOC_IMPROVEMENT_MANAGE+현재 후속 담당 팀 scope. 과거 계획은 비교 팀 전부/과거 담당 팀 권한, 문의 연결은 양쪽 권한+상품 일치 | [voc-improvements.md](voc-improvements.md): 신규/기존 등록·계획·연결 요청/receipt |
+| VOC 개선 | GET/POST `/staff/voc-improvements`; GET `/staff/voc-improvements/{action_id}`; POST `/staff/voc-improvements/{action_id}/plans`, `/staff/voc-improvements/{action_id}/tickets`; GET `/staff/voc-improvements/{action_id}/effects` | ADMIN+VOC_IMPROVEMENT_MANAGE+현재 후속 담당 팀 scope. 과거 계획은 비교 팀 전부/과거 담당 팀 권한, 문의 연결은 양쪽 권한+상품 일치 | [voc-improvements.md](voc-improvements.md): 신규/기존 등록·계획·연결 요청/receipt |
 | 품질 표본 관리 | GET `/staff/quality/rubrics`, `/staff/quality/candidates`, `/staff/quality/samples`; POST `/staff/quality/samples`, `/staff/quality/samples/{sample_id}/assignment`, `/staff/quality/samples/{sample_id}/void` | ADMIN+QUALITY_SAMPLE_MANAGE+현재 검토 팀. 미귀속 후보/표본 관리에는 QUALITY_UNATTRIBUTED_MANAGE 추가. 귀속된 응답의 검토 팀은 확정 시 귀속 팀과 일치 | [quality-review.md](quality-review.md) |
 | 품질 검토/이력 | POST `/staff/quality/samples/{sample_id}/material`, `/staff/quality/samples/{sample_id}/reviews`; GET `/staff/quality/samples/{sample_id}/history` | 자료/평가는 AGENT/ADMIN 모두 QUALITY_REVIEW+**본인 지정**+현재 검토 팀 scope. ADMIN 관리 권한만으로 자료 열람 불가. 목록/이력은 관리 범위 또는 본인 지정 범위 | 같은 문서, [요청 모음](examples/frontend-requests.json) |
+| AUTO 회차 진단(0.11) | GET `/staff/quality/automation-metrics` | ADMIN+QUALITY_METRICS_READ+현재 귀속 팀. include_unattributed는 QUALITY_UNATTRIBUTED_MANAGE 추가. response_start/end는 **회차 진입 기간**, origin별 부분 기록/불명 표시 | [회차 분모·기록 경계·안전 관찰](monitoring-effects.md) |
 | 품질 지표 | GET `/staff/quality/metrics` | ADMIN+QUALITY_METRICS_READ+선택 팀 scope. 미귀속/legacy 불명 전역 건수는 추가 QUALITY_UNATTRIBUTED_MANAGE와 include_unattributed=true | [100건 합성 지표](examples/quality-metrics.json) |
 | 배정 추천 | GET `/staff/assignment-recommendations` | ADMIN+ASSIGNMENT_RECOMMEND+현재 활성 route 팀 scope. 미라우팅 티켓 지정은 UNROUTED_QUEUE_READ 추가, 후보 없이 불추천 사유만 반환 | [assignment-recommendations.md](assignment-recommendations.md), [전체 응답](examples/assignment-recommendations.json) |
 
@@ -70,10 +71,10 @@
 {"action_id":"33333333-3333-4333-8333-333333333333","action_revision":1,"plan_revision":1,"ticket_id":null}
 ```
 
-GET 목록/상세로 이어가고, 기존 후속 등록은 followup 대신 existing_action_id+expected_action_revision을 보내고 plan은 함께 보낸다. 계획/문의 연결에는 expected_action_revision과 expected_plan_revision 둘 다 필요하다. 계획은 PATCH가 아닌 **full snapshot** POST이며 생략 optional은null이므로 이전 값을 임의로 누락하지 않는다. 시행일/비교창은 미정이면 비울 수 있다. 창이 있으면 시행일+네 경계 모두, UTC aware `[start,end)`, 동일 길이/비중첩 검증이 필요하다. 14일은 편집 가능한 제안이다. DONE/CANCELLED 이후 사실 정정은 correction=true+사유의 제한 경로다. 상세 analysis는 현재 항상 아래와 같으며 기간이 지나도0/효과 성공으로 바꾸지 않는다.
+GET 목록/상세로 이어가고, 기존 후속 등록은 followup 대신 existing_action_id+expected_action_revision을 보내고 plan은 함께 보낸다. 계획/문의 연결에는 expected_action_revision과 expected_plan_revision 둘 다 필요하다. 계획은 PATCH가 아닌 **full snapshot** POST이며 생략 optional은null이므로 이전 값을 임의로 누락하지 않는다. 시행일/비교창은 미정이면 비울 수 있다. 창이 있으면 시행일+네 경계 모두, UTC aware `[start,end)`, 동일 길이/비중첩 검증이 필요하다. 14일은 편집 가능한 제안이다. DONE/CANCELLED 이후 사실 정정은 correction=true+사유의 제한 경로다. 기존 embedded analysis는 아래 형식을 유지한다. 실제 지표는 별도 GET `/staff/voc-improvements/{action_id}/effects`에서 읽는다(origin 기본OPERATIONAL, SYNTHETIC 별도). 게시 결과 없으면 payload=null/NO_PUBLISHED_EFFECT_BATCH이며 기간이 지나도0/효과 성공으로 바꾸지 않는다.
 
 ```json
-{"availability":"UNAVAILABLE","reason":"EFFECT_INTEGRATION_NOT_IMPLEMENTED","metrics":null}
+{"availability":"UNAVAILABLE","reason":"VERSIONED_EFFECT_ENDPOINT_REQUIRED","metrics":null}
 ```
 
 4. **품질:** 관리자 rubrics→`candidates?origin=APPLICATION&limit=20`→POST `/staff/quality/samples`(key `ui-quality-select-001`):
@@ -114,16 +115,17 @@ HUMAN/HANDOFF_PENDING·현재 유효 배정 없음만 목록 대상이다. FAILE
 |---|---|---|
 | B 준혁님 + A | 실제 commit_automatic_reply에 사용한 질문/message·job/ticket/cycle/revision, 선택 suggestion id/revision/hash·approval·model/prompt·retrieval 참조 전달. 추천 실행 직전 최신 route revision/팀·직원 자격·유효/물리 배정/lease·generation·PAUSED/CAS·멱등 재검사 | 내부 Python writer는 HTTP가 아니다. 실제 B 실패/HUMAN 전환/배정·서비스 인증 계약은 별도 검토이며 A 추천을 실행 권한으로 사용하지 않음. 구조화 회차/실패/사유 기록은 KPI 후속 합의 필요. [B 인수](backend-b-handoff.md) |
 | AI/RAG + 운영 평가 책임자 | 실제 사용한 정책 문서 version/hash·검증 가능한 당시 본문/chunk·검색 snapshot, model/prompt 버전 제공. 운영 rubric·표본 추출/판정 기준 합의 | 누락은 MISSING/UNKNOWN, 과거 응답에 최신 정책을 추정 연결하지 않음. 실제 AI 품질/운영 정답률 미검증. [품질 계약](quality-review.md) |
-| Fabric 주현님 + A | 게시 analytics-v1 배치/exact scope·상품 UUID/매핑·기간·판매량 분모·팀 귀속 합의, 실제 서비스 emitter→A 수신/검증/게시 확인 | 실제 VOC 전후 효과 모델/수신·조회·효과 계산·DB→Blob Export 미구현. 동일 길이 창·일별/UTC 경계·판매 없음·중첩/미성숙/자료 부족·인과 해석 별도 합의. 기존 `/analytics/batches`를 브라우저 사용자 토큰으로 호출하지 않음. [Fabric 인수](fabric-handoff.md) |
-| 인수님 + A/배포·권한 담당 | 실제 target base/CORS·DB head/권한 확인 후 위 순서로 연결. 허용 팀/상품/검토자 선택 자료 경로 합의, 403/404/409/null/unavailable/만료 확인 | 실제 Frontend 화면/외부 연동·Azure 최신 배포 상태 미검증. 실제 배포·권한 부여는 별도 승인 작업 |
+| Fabric 주현님 + A | 게시 analytics-v1 배치/exact scope·상품 UUID/매핑·기간·판매량 분모·팀 귀속 합의, 실제 서비스 emitter→A 수신/검증/게시 확인 | A의 voc-effect-v1 모델/수신/검증/게시/조회는 구현·배포했다. 실제 Fabric 집계/emitter/원천 확인과 DB→Blob Export는 미구현/미연결. 동일 길이 창·일별/UTC 경계·판매 없음·중첩/미성숙/자료 부족·인과 해석 별도 합의. 기존 `/analytics/batches`를 브라우저 사용자 토큰으로 호출하지 않음. [Fabric 인수](fabric-handoff.md) |
+| 인수님 + A/배포·권한 담당 | 실제 target base/CORS·DB head/권한 확인 후 위 순서로 연결. 허용 팀/상품/검토자 선택 자료 경로 합의, 403/404/409/null/unavailable/만료 확인 | Azure0.11/0011 배포는 확인했다. 실제 Frontend 화면/외부 연동·CORS 양성 연결·권한 있는 신규 ADMIN 조회는 미검증. 대상 identity별 capability 설정은 별도 명시 승인 필요 |
 
 ## 7. 인수님께 보낼 메시지 초안 (미발송)
 
 ```text
-인수님, 요청하신 기능 중 A 쪽 업무량 조회·배정 추천, VOC 개선 등록/이력, AI 수동 평가 API를 구현하고 GitHub에 올렸습니다.
-연결 방법과 권한·예시는 Frontend 인수 문서에 정리했습니다: https://github.com/InSSOOO/cs-flow-ai/blob/feature/backend-a/backend/backend-a/docs/frontend-handoff.md
-새 API의 Azure 반영은 아직 확인되지 않았으며, 화면 연결 환경을 맞춰야 합니다.
-VOC 전후 효과는 Fabric 연결, 실제 배정은 B 연결이 남아 있습니다.
+인수님, A의 회차 진단·VOC 효과 수신/조회와 기존 업무량·품질 평가·추천을 GitHub 및 기존 Azure0.11.0/0011에 반영했습니다.
+실제 연결 순서와 권한·예시는 backend/backend-a/docs/frontend-handoff.md에 정리했습니다.
+화면 연결에는 대상 계정의 신규 권한과 실제 Frontend CORS origin 확정이 필요합니다.
+VOC 실제 집계/결과 전송은 Fabric, 실패·이관 사실 기록과 실제 배정은 B 연결이 남아 있습니다.
+실제 AI 품질과 운영 기준·안전 완료율·정식 SLA/부하 개선 효과까지 검증된 것은 아닙니다.
 ```
 
 이번 문서 점검: 실제 코드/OpenAPI의 경로·입출력 DTO·권한/CORS 설정과 예시·상대 링크·민감정보 패턴·diff를 확인했다. 업무/DB/외부 연동 테스트는 실행하지 않았고 과거 통과 수를 이번 결과로 재사용하지 않았다.
@@ -179,4 +181,4 @@ scope/category/팀·배정 변경으로 상담사가 티켓에404를 받는 경�
 
 ## 과거 Azure 기록 (새 API 주소 안내 아님)
 
-2026-11-03 배포/지정 이름 이전 기록은 [azure-deployment.md](azure-deployment.md)와 [azure-migration.md](azure-migration.md)에 보존돼 있다. 마지막 기록은0.6.1/0006이며 당시 CORS origin=[]·자동 처리 PAUSED·분석 NO_PUBLISHED_BATCH였다. 이 문서 작업에서는 실제 현재 값을 조회하지 않았다. 과거 주소/health/HTTPS 통과 수를0.10.0 신규 API 제공 증거로 사용하지 않는다. 계정·토큰·DB 접속 정보는 Frontend 인수 문서에 추가하지 않는다.
+2026-11-03 배포/지정 이름 이전 기록은 [azure-deployment.md](azure-deployment.md)와 [azure-migration.md](azure-migration.md)에 보존돼 있다. 마지막 기록은0.6.1/0006이며 당시 CORS origin=[]·자동 처리 PAUSED·분석 NO_PUBLISHED_BATCH였다. 당시 문서 정리에서는 실제 값을 조회하지 않았다.0.11의 이번 실제 확인은 상단 및 배포 증거를 따른다. 과거 통과 수를 이번 결과로 재사용하지 않는다. 계정·토큰·DB 접속 정보는 Frontend 인수 문서에 추가하지 않는다.

@@ -1,0 +1,234 @@
+{
+  "deployment_source_sha": "646023067495f3a286a51585e60d758071a8404c",
+  "app_version": "0.11.0",
+  "database_revision": "0011",
+  "deployment_id": "600f9130-a3ce-447b-93fe-84b4402bf029",
+  "region": "Korea Central",
+  "existing_resources_only": true,
+  "new_paid_resources_created": false,
+  "sku_change": false,
+  "package_sha256": "5c2bfd68dc19726ad6b0add69b39458395a7ea4ac3ef3ca00aa91135b77dc335",
+  "package_file_count": 79,
+  "backup": {
+    "format": "PG_CUSTOM",
+    "encrypted": "WINDOWS_CURRENT_USER_DPAPI",
+    "bytes": 142598,
+    "sha256": "335c0bff9fe0d976bb6b1a21c07c5168f8102068cd41685a5807006fcc6dc7a3",
+    "toc_sha256": "943935a5ef092d31183eba0329088170c819d7f7aaf34d7ed87358c16d9afafb",
+    "decrypt_roundtrip": true
+  },
+  "migration": {
+    "before": "0006",
+    "after": "0011",
+    "old_table_counts_preserved": {
+      "ai_suggestions": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "analytics_batches": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "analytics_daily": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "analytics_product_daily": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "analytics_product_risk": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "analytics_product_voc_daily": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "analytics_publication": {
+        "count": 1,
+        "rowset_md5": "1247ea3b497cec8769dd631921473af2"
+      },
+      "analytics_receipts": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "approvals": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "assignments": {
+        "count": 4,
+        "rowset_md5": "b577bcfd50767482436df8dba0872351"
+      },
+      "audit_events": {
+        "count": 182,
+        "rowset_md5": "912dd31d50783c8c9670ebfe1f0d0733"
+      },
+      "automation_control": {
+        "count": 1,
+        "rowset_md5": "8e22a0ede8dcb4de430eeb422fc301fc"
+      },
+      "automation_control_history": {
+        "count": 2,
+        "rowset_md5": "a0313976d4c40584aa19b1834cb7d3fc"
+      },
+      "automation_jobs": {
+        "count": 12,
+        "rowset_md5": "ae0e997e95b662987a8ce849c6d50f53"
+      },
+      "automation_rules": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "customers": {
+        "count": 4,
+        "rowset_md5": "508d8392db75e36fb2b6ad3e0fc64925"
+      },
+      "followup_actions": {
+        "count": 3,
+        "rowset_md5": "32c2ed9255a815a74d9ceb1aa4596711"
+      },
+      "idempotency_keys": {
+        "count": 15,
+        "rowset_md5": "c18bff1b15449dd788d555d5ea01b47e"
+      },
+      "knowledge_documents": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "messages": {
+        "count": 15,
+        "rowset_md5": "afbee7c24470c771b4aa54ec1230eac1"
+      },
+      "orders": {
+        "count": 12,
+        "rowset_md5": "8064c190fae1da9d6c1247ed80dbb53c"
+      },
+      "products": {
+        "count": 1,
+        "rowset_md5": "aa79d7673973f11b98c15bd0e70b392f"
+      },
+      "queue_routes": {
+        "count": 7,
+        "rowset_md5": "38c0d375a5e41ec8de10207ccc003e99"
+      },
+      "returns": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "shipments": {
+        "count": 0,
+        "rowset_md5": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      "staff_permissions": {
+        "count": 4,
+        "rowset_md5": "b7c0595ea5a63d53be8eb1bece21704a"
+      },
+      "team_categories": {
+        "count": 4,
+        "rowset_md5": "34bf45964158c9f18189d9b456b246cc"
+      },
+      "teams": {
+        "count": 4,
+        "rowset_md5": "fc5e756270a7d9b633dda85ecd7b3dcd"
+      },
+      "tickets": {
+        "count": 7,
+        "rowset_md5": "5f72b65837307e95133d16cafd6c0bbc"
+      },
+      "user_team_scopes": {
+        "count": 4,
+        "rowset_md5": "5ae1f519ce29a4d13cda97f85a3cb0a2"
+      },
+      "users": {
+        "count": 8,
+        "rowset_md5": "44f07396279d0d9e11ab2e405ff5e50d"
+      }
+    },
+    "paused": true,
+    "seed_run": false,
+    "staff_grants_added": false,
+    "runtime_identity_new_table_DML": true,
+    "lock_timeout_ms": 5000
+  },
+  "https": {
+    "version": "0.11.0",
+    "db_head": "0011",
+    "https": {
+      "/health/live": 200,
+      "/health/ready": 200,
+      "/docs": 200,
+      "/openapi.json": 200
+    },
+    "unauthenticated": {
+      "/api/v1/staff/workload": 401,
+      "/api/v1/staff/assignment-recommendations": 401,
+      "/api/v1/staff/voc-improvements": 401,
+      "/api/v1/staff/quality/samples": 401,
+      "/api/v1/staff/quality/automation-metrics?response_start=2026-11-01T00:00:00Z&response_end=2026-11-05T00:00:00Z": 401
+    },
+    "paused": true,
+    "existing_settings_preserved": true,
+    "actual_B_AI_Fabric_Frontend_verified": false,
+    "shared_db_test_suite_run": false
+  },
+  "signed_read_checks": {
+    "timestamp_utc": "2026-11-04T09:16:14.387707+00:00",
+    "source_sha": "646023067495f3a286a51585e60d758071a8404c",
+    "version": "0.11.0",
+    "results": {
+      "login_admin": 200,
+      "login_agent": 200,
+      "login_customer1": 200,
+      "admin:/api/v1/staff/capabilities": 200,
+      "admin:/api/v1/auth/me": 200,
+      "customer1:/api/v1/orders": 200,
+      "customer1:/api/v1/tickets": 200,
+      "agent:/api/v1/staff/workload": 200,
+      "admin:/api/v1/staff/workload": 403,
+      "admin:/api/v1/staff/assignment-recommendations": 403,
+      "admin:/api/v1/staff/voc-improvements": 403,
+      "admin:/api/v1/staff/quality/samples": 403,
+      "admin:/api/v1/staff/quality/metrics?response_start=2026-11-03T09:16:14.387707Z&response_end=2026-11-04T09:16:14.387707Z": 403,
+      "admin:/api/v1/staff/quality/automation-metrics?response_start=2026-11-03T09:16:14.387707Z&response_end=2026-11-04T09:16:14.387707Z": 403,
+      "admin:/api/v1/admin/analytics/kpi": 200,
+      "customer1:/api/v1/staff/workload": 403,
+      "agent:/api/v1/staff/assignment-recommendations": 403,
+      "admin:/api/v1/staff/voc-improvements/11111111-1111-4111-8111-111111111111/effects": 403,
+      "effect_service_unconfigured_rejected": 503
+    },
+    "new_staff_grants_added": false,
+    "grant_attempt_rejected_before_execution": true,
+    "grant_block_reason": "Automatic approval review: insufficient specific identity grant authorization; read-only alternative used",
+    "operating_employee_grants_added": false,
+    "ticket_job_assignment_or_analysis_writes": false,
+    "normal_login_read_audit_added": true,
+    "agent_self_workload_items": 1,
+    "agent_self_team_queue_null": true,
+    "analytics_v1_unavailable": true,
+    "deployed_openapi_exact_match": true,
+    "privileged_new_ADMIN_queries": "NOT_EXECUTED_WITH_AUTHORIZATION_MISSING_CAPABILITY",
+    "actual_B_Fabric_AI_Frontend_integrations_verified": false
+  },
+  "identity_compatibility": {
+    "other_login_roles": [
+      {
+        "can_update_tickets": false,
+        "can_update_jobs": false
+      }
+    ],
+    "known_synthetic_demo_admin_and_team_verified": true,
+    "active_other_sessions": 0
+  },
+  "temporary_operator_rules": "REMOVED_AFTER_EACH_ACCESS",
+  "cors_origins": [],
+  "service_subject_allowlist_count": 0,
+  "operational_effect_subject_allowlist": "EMPTY_DEFAULT",
+  "actual_staff_grants_added": false,
+  "runtime_DB_identity_new_tables_minimum_DML_granted": true,
+  "rollback_executed": false,
+  "rollback_reason": "No deployment failure; local schema-compatible recovery app verified, real PITR/restore not run",
+  "actual_model_B_Fabric_emitter_Frontend_integration_verified": false,
+  "shared_db_test_suite_run": false
+}

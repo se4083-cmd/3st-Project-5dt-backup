@@ -38,6 +38,21 @@
 
 신규 이력 후 downgrade는 거부될 수 있으므로 DB downgrade를 복구로 가정하지 않는다. recovery.zip은2cb07cf의0.10 코드에서 version/readiness0011만 패치한 별도 산출물이다. **실제 격리 PG0011에 복구 앱을 기동해 ready200·미인증401**을 확인했다. Azure 장애가 발생하지 않은 상태에서 실제 복구/PITR 성공으로 주장하지 않는다.
 
-## 배포 결과
+## 실제 Azure 배포 결과 (2026-11-04)
 
-이 문단은 소스 공유 커밋 시점에는 **배포 전**이다. 실제 적용 후 배포 source SHA·암호화 backup hash·DB head·HTTPS/OpenAPI·PAUSED·설정 보존·권한/조회 검증을 추가 evidence commit으로 기록한다. 실제 Fabric emitter/운영 원천·B Worker·AI/RAG·Frontend/CORS 양성 연동·운영 효과는 미검증으로 남는다.
+- 고정 배포 소스: **646023067495f3a286a51585e60d758071a8404c**. 79개 Git 바이트 패키지 SHA256=`5c2bfd68dc19726ad6b0add69b39458395a7ea4ac3ef3ca00aa91135b77dc335`. Kudu 배포600f9130-a3ce-447b-93fe-84b4402bf029 complete/status4. 배포 후 OpenAPI는 고정 소스의 기록본과 전체 일치했다. 개별 remote main.py 경로는 압축 배포라404였으므로 원격 파일별 hash 검증 성공이라고 표현하지 않는다.
+- 실제 DB **0006→0011**. 기존30여 업무 테이블의 행 수와 rowset hash가 전부 같고 PAUSED=true를 유지했다. 정확한 테이블/검산 결과와 암호화 backup hash/TOC·decrypt roundtrip은 [azure-summary.json](azure-summary.json)에 있다. 원본 backup은 operator 전용 private cache에만 있으며 공유하지 않는다.
+- 새 테이블에 대한 기존 앱 DB identity의 SELECT/INSERT/UPDATE만 적용했다. seed/DB 초기화/기존 행 변경·다른 역할 grant·PAUSED 재개·다른 Worker 중지는 하지 않았다.
+- 실제 HTTPS live/ready/docs/openapi 모두200, 버전0.11.0/DB0011 확인. 신규 직원 API 미인증5경로401. 기존 합성 ADMIN/AGENT/CUSTOMER 로그인200, 기존 고객 읽기200, **AGENT 본인 workload200**, capabilities200, 기존 analytics-v1은200 UNAVAILABLE/metrics=null이었다.
+- 신규 ADMIN capability가 없으므로 업무량 팀/추천/VOC/품질/새 회차 진단·효과 조회403을 확인했다. CUSTOMER 차단/AGENT 추천403도 확인했다. 권한 있는 신규 ADMIN의 자료/지표 조회는 **Azure 미검증**이며 로컬 격리 증거와 구분한다. 허용 subject가 없어 효과 수신은503 ANALYTICS_SERVICE_AUTH_NOT_CONFIGURED였다(임의 서비스 JWT 발급/운영 게시 없음).
+- 특정 기존 합성 ADMIN의 신규6 capability 영구 추가 요청은 **자동 승인 검토가 특정 identity grant의 명시 승인 근거 부족·읽기 대안 존재를 이유로 거부**했다. 해당 exec는 시작 전에 거부됐고 실제 staff grant0이다. 우회하지 않고 기존 권한의 HTTPS 읽기/차단만 검증했다. 실제 직원/테스트 identity의 추가 권한은 대상·허용 팀·capability를 명시한 별도 승인 후 필요하다.
+- CORS=[]·서비스 subject0 및 기존 비밀/환경 설정 일치, PAUSED 유지. 실제 Frontend origin 불명으로 기존 설정을 보존했고 CORS 양성 연결은 미검증이다. 새 유료 리소스·요금제·공용 잠금/다른 팀 코드 변경 없음. 모든 이번 임시 DB 접근 규칙은 제거했다.
+- 배포 실패가 없었으므로 실제 recovery/PITR는 실행하지 않았다.0.10+readiness0011 recovery 앱의 실제 격리 PG 호환 통과를 Azure 복구 성공으로 표현하지 않는다. 운영 통계에 섞일 자료 쓰기·공유 DB suite는 생략했다. 정상 로그인/조회/거부 감사만 추가됐다.
+
+API base: https://csflow-backend-a.azurewebsites.net/api/v1
+Swagger: https://csflow-backend-a.azurewebsites.net/docs
+Readiness: https://csflow-backend-a.azurewebsites.net/health/ready
+
+실제 Fabric emitter/운영 원천·B Worker·AI/RAG·Frontend/CORS 양성 연동·운영 품질/개선/부하 균형 효과는 미검증이다. 전향적 이력의 부분 수집과 안전 완료 운영 UNAVAILABLE를 유지한다. 수신/게시 코드와 합성 end-to-end만으로 외부 통합 완료라고 하지 않는다.
+
+이번 소유 로컬 PostgreSQL은 테스트 schema0을 확인한 후 종료했다. 기존 다른 로컬 DB/cache/백업은 보존했다.

@@ -89,8 +89,8 @@
     "allowed_service_subject_count": 0,
     "pitr_retention_days": 7
   },
-  "azure_release_status": "NOT_YET_DEPLOYED_AT_SOURCE_COMMIT",
-  "account_grants": "Local fixtures only at this point; no automatic real grants",
+  "azure_release_status": "DEPLOYED_SOURCE_6460230_HTTPS_AND_DB_VERIFIED_NOT_EXTERNAL_INTEGRATION",
+  "account_grants": "No staff grants; specific demo grant was rejected before execution by automatic approval review. Existing app DB identity new-table DML only.",
   "original_migrations_0001_0010_unchanged": true,
   "backward_compatibility": "All existing HTTP paths unchanged; legacy EffectAvailability reason enum gains VERSIONED_EFFECT_ENDPOINT_REQUIRED with metrics still null. analytics-v1 unchanged.",
   "static_checks": [
@@ -106,5 +106,8 @@
     "Actual external integration and production-scale effects unverified",
     "CORS remains unchanged if Frontend origin not confirmed"
   ],
-  "source_hash_basis": "CRLF normalized to LF, matches Git package bytes"
+  "source_hash_basis": "CRLF normalized to LF, matches Git package bytes",
+  "deployment_source_sha": "646023067495f3a286a51585e60d758071a8404c",
+  "owned_local_postgres_stopped": true,
+  "remaining_test_schemas": 0
 }
