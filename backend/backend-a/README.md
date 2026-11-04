@@ -1,5 +1,7 @@
 # CS Flow AI Backend A
 
+0.11.0 / migration0011: [AUTO 회차 진단과 VOC 효과 수신/검증/게시/조회](docs/monitoring-effects.md)를 추가했습니다. 기존 업무량/추천은 조회 전용으로 유지합니다. 새 회차는 전향적 부분 기록이며 운영 안전 완료율은 UNAVAILABLE, 실제 B/Fabric 연동·운영 효과는 별도 검증 대상입니다. 이번 배포 결과는 담당 증거 문서에 기록합니다.
+
 **0.10.0 / migration0010 (공유 대상, Azure 이번 미확인·미변경)**: [읽기 전용 배정 우선순위 추천](docs/assignment-recommendations.md)을 추가했습니다. 먼저 품질0.9.0은30fbfff로 공유했습니다. 추천은 현재 업무량 힌트이며 실제 배정·예약·B 실행 변경은 없습니다.
 
 

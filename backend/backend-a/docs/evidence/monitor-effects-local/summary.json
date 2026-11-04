@@ -1,0 +1,110 @@
+{
+  "version": "0.11.0",
+  "migration_file_head": "0011",
+  "basis_head": "bd6727af8db1357cccf3126fbddccc46cc833adb",
+  "branch": "feature/backend-a",
+  "initial_worktree": "clean",
+  "runs": {
+    "additional.xml": {
+      "tests": 5,
+      "errors": 0,
+      "failures": 2,
+      "skipped": 0,
+      "time_seconds": 15.49
+    },
+    "command-contracts.xml": {
+      "tests": 78,
+      "errors": 0,
+      "failures": 6,
+      "skipped": 0,
+      "time_seconds": 130.258
+    },
+    "corrected.xml": {
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 1.999
+    },
+    "final-new.xml": {
+      "tests": 37,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 50.806
+    },
+    "fixes.xml": {
+      "tests": 73,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 143.671
+    },
+    "initial.xml": {
+      "tests": 28,
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "time_seconds": 35.12
+    },
+    "regression-corrections.xml": {
+      "tests": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 22.764
+    },
+    "regression.xml": {
+      "tests": 409,
+      "errors": 0,
+      "failures": 5,
+      "skipped": 0,
+      "time_seconds": 730.984
+    },
+    "release-guards.xml": {
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 12.143
+    }
+  },
+  "runs_overlap_not_summed": true,
+  "previous_0_10_results_not_reused": true,
+  "failure_resolution": {
+    "initial_retention_fixture": "27 passed/1 failed; empty/recent history not expected to report aged protection. Time-shifted synthetic history fixed; corrected1 passed.",
+    "broad_regression": "404 passed/5 failed. Four HUMAN_CONTINUATION failures fixed by not inventing a new transfer; rerun matched cases in regression-corrections10 passed. New cycle history now blocks downgrade before old followup guard; expected earliest guard corrected.",
+    "command_contracts": "72 passed/6 failed. Five same HUMAN path failures fixed; all affected customer commands passed in fixes73. Package Git cwd/prefix fixed; package and actual isolated recovery readiness passed.",
+    "additional": "3 passed/2 failed. Unrouted new HUMAN not visible without explicit permission; test expectation corrected. Nonexistent fixture owner timestamp removed. fixes73 passed.",
+    "final": "final-new37 passed, release-guards5 passed. Overlap, never sum."
+  },
+  "validation_scope": "Owned loopback PostgreSQL16.15, one new temporary schema per test; fixtures and worker transitions synthetic; no actual B/Fabric/AI/emitter or source truth verified",
+  "azure_before": {
+    "version": "0.6.1",
+    "db_head": "0006",
+    "paused": true,
+    "region": "Korea Central",
+    "active_other_sessions_at_read": 0,
+    "cors_origins": [],
+    "allowed_service_subject_count": 0,
+    "pitr_retention_days": 7
+  },
+  "azure_release_status": "NOT_YET_DEPLOYED_AT_SOURCE_COMMIT",
+  "account_grants": "Local fixtures only at this point; no automatic real grants",
+  "original_migrations_0001_0010_unchanged": true,
+  "backward_compatibility": "All existing HTTP paths unchanged; legacy EffectAvailability reason enum gains VERSIONED_EFFECT_ENDPOINT_REQUIRED with metrics still null. analytics-v1 unchanged.",
+  "static_checks": [
+    "Ruff app/scripts/tests/migrations",
+    "OpenAPI export and contracts including closed DTO and effect example hash",
+    "File head0011",
+    "Explicit changed path and secret-pattern review before stage"
+  ],
+  "limitations": [
+    "B must add shared recorder call inside its transition transaction",
+    "Operational safe-completion rate unavailable; DEV_SAFE_V1/operating rubric not agreed",
+    "Operational effect subject allowlist defaults empty; synthetic pointer isolated",
+    "Actual external integration and production-scale effects unverified",
+    "CORS remains unchanged if Frontend origin not confirmed"
+  ],
+  "source_hash_basis": "CRLF normalized to LF, matches Git package bytes"
+}

@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "CS Flow AI Backend A",
-    "version": "0.10.0"
+    "version": "0.11.0"
   },
   "paths": {
     "/health/live": {
@@ -7931,6 +7931,799 @@
           }
         }
       }
+    },
+    "/api/v1/staff/quality/automation-metrics": {
+      "get": {
+        "tags": [
+          "prospective monitoring / versioned VOC effects"
+        ],
+        "summary": "Diagnostics",
+        "operationId": "diagnostics_api_v1_staff_quality_automation_metrics_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "response_start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Response Start"
+            }
+          },
+          {
+            "name": "response_end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Response End"
+            }
+          },
+          {
+            "name": "team_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Ids"
+            }
+          },
+          {
+            "name": "include_unattributed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Unattributed"
+            }
+          },
+          {
+            "name": "origin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "APPLICATION",
+                "SYNTHETIC",
+                "UNKNOWN"
+              ],
+              "type": "string",
+              "default": "APPLICATION",
+              "title": "Origin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationMetrics"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/analytics/voc-effects/batches": {
+      "post": {
+        "tags": [
+          "prospective monitoring / versioned VOC effects"
+        ],
+        "summary": "Receive",
+        "operationId": "receive_api_v1_analytics_voc_effects_batches_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EffectSubmission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/analytics/voc-effects/batches/{batch_id}": {
+      "get": {
+        "tags": [
+          "prospective monitoring / versioned VOC effects"
+        ],
+        "summary": "Status",
+        "operationId": "status_api_v1_analytics_voc_effects_batches__batch_id__get",
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/analytics/voc-effects/batches/{batch_id}/validate": {
+      "post": {
+        "tags": [
+          "prospective monitoring / versioned VOC effects"
+        ],
+        "summary": "Validate",
+        "operationId": "validate_api_v1_analytics_voc_effects_batches__batch_id__validate_post",
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/analytics/voc-effects/batches/{batch_id}/publish": {
+      "post": {
+        "tags": [
+          "prospective monitoring / versioned VOC effects"
+        ],
+        "summary": "Publish",
+        "operationId": "publish_api_v1_analytics_voc_effects_batches__batch_id__publish_post",
+        "security": [
+          {
+            "AnalyticsServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "batch_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Batch Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/voc-improvements/{action_id}/effects": {
+      "get": {
+        "tags": [
+          "prospective monitoring / versioned VOC effects"
+        ],
+        "summary": "Effect View",
+        "operationId": "effect_view_api_v1_staff_voc_improvements__action_id__effects_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Action Id"
+            }
+          },
+          {
+            "name": "plan_revision",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Plan Revision"
+            }
+          },
+          {
+            "name": "origin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "OPERATIONAL",
+                "SYNTHETIC"
+              ],
+              "type": "string",
+              "default": "OPERATIONAL",
+              "title": "Origin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -8128,6 +8921,196 @@
           "assigned_at"
         ],
         "title": "AssignmentFact"
+      },
+      "AutomationMetrics": {
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "recording_since": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recording Since"
+          },
+          "response_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Response Start"
+          },
+          "response_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Response End"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "APPLICATION",
+              "SYNTHETIC",
+              "UNKNOWN"
+            ],
+            "title": "Origin"
+          },
+          "team_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Team Ids"
+          },
+          "period_basis": {
+            "type": "string",
+            "const": "PROSPECTIVE_AUTO_CYCLE_STARTED_AT_[START,END)_CURRENT_SNAPSHOT",
+            "title": "Period Basis"
+          },
+          "attribution_basis": {
+            "type": "string",
+            "const": "FIRST_EXPLICIT_NON_NULL_TEAM_FACT_CURRENT_SCOPE",
+            "title": "Attribution Basis"
+          },
+          "auto_cycle_count": {
+            "type": "integer",
+            "title": "Auto Cycle Count"
+          },
+          "human_entry_count_excluded": {
+            "type": "integer",
+            "title": "Human Entry Count Excluded"
+          },
+          "automatic_completed_count": {
+            "type": "integer",
+            "title": "Automatic Completed Count"
+          },
+          "automatic_completed_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Automatic Completed Rate"
+          },
+          "automatic_reply_committed_count": {
+            "type": "integer",
+            "title": "Automatic Reply Committed Count"
+          },
+          "transferred_count": {
+            "type": "integer",
+            "title": "Transferred Count"
+          },
+          "transferred_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transferred Rate"
+          },
+          "failed_fact_count": {
+            "type": "integer",
+            "title": "Failed Fact Count"
+          },
+          "statuses": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Statuses"
+          },
+          "transfer_reasons": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Transfer Reasons"
+          },
+          "safe_observation_states": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Safe Observation States"
+          },
+          "legacy_current_auto_mode_untracked_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legacy Current Auto Mode Untracked Count"
+          },
+          "legacy_count_basis": {
+            "type": "string",
+            "const": "CURRENT_MODE_SNAPSHOT_NOT_A_HISTORICAL_COHORT",
+            "title": "Legacy Count Basis"
+          },
+          "recording_completeness": {
+            "type": "string",
+            "const": "PARTIAL_OBSERVED_FACTS_B_REPORTING_NOT_ATTESTED",
+            "title": "Recording Completeness"
+          },
+          "unreported_current_terminal_state_count": {
+            "type": "integer",
+            "title": "Unreported Current Terminal State Count"
+          },
+          "unreported_current_human_state_count": {
+            "type": "integer",
+            "title": "Unreported Current Human State Count"
+          },
+          "excluded_unattributed_count": {
+            "type": "null",
+            "title": "Excluded Unattributed Count"
+          },
+          "excluded_count_reason": {
+            "type": "string",
+            "const": "NOT_EXPOSED_OUTSIDE_SELECTED_SCOPE; HUMAN_ENTRIES_EXPLICITLY_SEPARATED",
+            "title": "Excluded Count Reason"
+          },
+          "safe_completion": {
+            "$ref": "#/components/schemas/SafeAvailability"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "as_of",
+          "recording_since",
+          "response_start",
+          "response_end",
+          "origin",
+          "team_ids",
+          "period_basis",
+          "attribution_basis",
+          "auto_cycle_count",
+          "human_entry_count_excluded",
+          "automatic_completed_count",
+          "automatic_completed_rate",
+          "automatic_reply_committed_count",
+          "transferred_count",
+          "transferred_rate",
+          "failed_fact_count",
+          "statuses",
+          "transfer_reasons",
+          "safe_observation_states",
+          "legacy_current_auto_mode_untracked_count",
+          "legacy_count_basis",
+          "recording_completeness",
+          "unreported_current_terminal_state_count",
+          "unreported_current_human_state_count",
+          "excluded_unattributed_count",
+          "excluded_count_reason",
+          "safe_completion"
+        ],
+        "title": "AutomationMetrics"
       },
       "BatchStatus": {
         "properties": {
@@ -8679,9 +9662,12 @@
           },
           "reason": {
             "type": "string",
-            "const": "EFFECT_INTEGRATION_NOT_IMPLEMENTED",
+            "enum": [
+              "EFFECT_INTEGRATION_NOT_IMPLEMENTED",
+              "VERSIONED_EFFECT_ENDPOINT_REQUIRED"
+            ],
             "title": "Reason",
-            "default": "EFFECT_INTEGRATION_NOT_IMPLEMENTED"
+            "default": "VERSIONED_EFFECT_ENDPOINT_REQUIRED"
           },
           "metrics": {
             "type": "null",
@@ -8691,6 +9677,524 @@
         "additionalProperties": false,
         "type": "object",
         "title": "EffectAvailability"
+      },
+      "EffectPayload-Input": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "voc-effect-v1",
+            "title": "Schema Version",
+            "default": "voc-effect-v1"
+          },
+          "action_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Action Id"
+          },
+          "plan_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Plan Revision"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "issue_code": {
+            "type": "string",
+            "pattern": "^[A-Z_]{1,32}$",
+            "title": "Issue Code"
+          },
+          "scope_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Scope Team Ids"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "OPERATIONAL",
+              "SYNTHETIC"
+            ],
+            "title": "Origin"
+          },
+          "implemented_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Implemented At"
+          },
+          "before_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Before Start"
+          },
+          "before_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Before End"
+          },
+          "after_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "After Start"
+          },
+          "after_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "After End"
+          },
+          "source_as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Source As Of"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "before_definition": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}$",
+            "title": "Before Definition"
+          },
+          "after_definition": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}$",
+            "title": "After Definition"
+          },
+          "overlap": {
+            "type": "string",
+            "enum": [
+              "NONE_REPORTED",
+              "POSSIBLE",
+              "UNKNOWN"
+            ],
+            "title": "Overlap"
+          },
+          "before": {
+            "$ref": "#/components/schemas/Period-Input"
+          },
+          "after": {
+            "$ref": "#/components/schemas/Period-Input"
+          },
+          "count_absolute_change": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": -1000000000000.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count Absolute Change"
+          },
+          "count_relative_change": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000000.0,
+                "minimum": -1000000000000.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count Relative Change"
+          },
+          "rate_absolute_change": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000000.0,
+                "minimum": -1000000000000.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate Absolute Change"
+          },
+          "rate_relative_change": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000000.0,
+                "minimum": -1000000000000.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate Relative Change"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action_id",
+          "plan_revision",
+          "product_id",
+          "issue_code",
+          "scope_team_ids",
+          "origin",
+          "implemented_at",
+          "before_start",
+          "before_end",
+          "after_start",
+          "after_end",
+          "source_as_of",
+          "generated_at",
+          "before_definition",
+          "after_definition",
+          "overlap",
+          "before",
+          "after",
+          "count_absolute_change",
+          "count_relative_change",
+          "rate_absolute_change",
+          "rate_relative_change"
+        ],
+        "title": "EffectPayload"
+      },
+      "EffectPayload-Output": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "voc-effect-v1",
+            "title": "Schema Version",
+            "default": "voc-effect-v1"
+          },
+          "action_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Action Id"
+          },
+          "plan_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Plan Revision"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "issue_code": {
+            "type": "string",
+            "pattern": "^[A-Z_]{1,32}$",
+            "title": "Issue Code"
+          },
+          "scope_team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Scope Team Ids"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "OPERATIONAL",
+              "SYNTHETIC"
+            ],
+            "title": "Origin"
+          },
+          "implemented_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Implemented At"
+          },
+          "before_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Before Start"
+          },
+          "before_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Before End"
+          },
+          "after_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "After Start"
+          },
+          "after_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "After End"
+          },
+          "source_as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Source As Of"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "before_definition": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}$",
+            "title": "Before Definition"
+          },
+          "after_definition": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,95}$",
+            "title": "After Definition"
+          },
+          "overlap": {
+            "type": "string",
+            "enum": [
+              "NONE_REPORTED",
+              "POSSIBLE",
+              "UNKNOWN"
+            ],
+            "title": "Overlap"
+          },
+          "before": {
+            "$ref": "#/components/schemas/Period-Output"
+          },
+          "after": {
+            "$ref": "#/components/schemas/Period-Output"
+          },
+          "count_absolute_change": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": -1000000000000.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count Absolute Change"
+          },
+          "count_relative_change": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count Relative Change"
+          },
+          "rate_absolute_change": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate Absolute Change"
+          },
+          "rate_relative_change": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate Relative Change"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action_id",
+          "plan_revision",
+          "product_id",
+          "issue_code",
+          "scope_team_ids",
+          "origin",
+          "implemented_at",
+          "before_start",
+          "before_end",
+          "after_start",
+          "after_end",
+          "source_as_of",
+          "generated_at",
+          "before_definition",
+          "after_definition",
+          "overlap",
+          "before",
+          "after",
+          "count_absolute_change",
+          "count_relative_change",
+          "rate_absolute_change",
+          "rate_relative_change"
+        ],
+        "title": "EffectPayload"
+      },
+      "EffectResult": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Availability"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "batch_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Batch Id"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "OPERATIONAL",
+              "SYNTHETIC"
+            ],
+            "title": "Origin"
+          },
+          "plan_is_current": {
+            "type": "boolean",
+            "title": "Plan Is Current"
+          },
+          "status_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Status Codes"
+          },
+          "payload": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EffectPayload-Output"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "causal_effect": {
+            "type": "string",
+            "const": "NOT_ESTABLISHED",
+            "title": "Causal Effect",
+            "default": "NOT_ESTABLISHED"
+          },
+          "validation_scope": {
+            "type": "string",
+            "const": "STRUCTURE_HASH_ARITHMETIC_NOT_SOURCE_TRUTH",
+            "title": "Validation Scope",
+            "default": "STRUCTURE_HASH_ARITHMETIC_NOT_SOURCE_TRUTH"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason",
+          "as_of",
+          "origin",
+          "plan_is_current"
+        ],
+        "title": "EffectResult"
+      },
+      "EffectStatus": {
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "VALIDATED",
+              "FAILED",
+              "SUCCEEDED"
+            ],
+            "title": "Status"
+          },
+          "validation": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "batch_id",
+          "status",
+          "validation"
+        ],
+        "title": "EffectStatus"
+      },
+      "EffectSubmission": {
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Batch Id"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/EffectPayload-Input"
+          },
+          "payload_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Payload Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "batch_id",
+          "payload",
+          "payload_sha256"
+        ],
+        "title": "EffectSubmission"
       },
       "ErrorBody": {
         "properties": {
@@ -11107,6 +12611,147 @@
           "analytics_product_risk"
         ],
         "title": "PayloadHashes"
+      },
+      "Period-Input": {
+        "properties": {
+          "inquiry_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inquiry Count"
+          },
+          "inquiry_coverage": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Inquiry Coverage"
+          },
+          "sales_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sales Count"
+          },
+          "sales_coverage": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Sales Coverage"
+          },
+          "inquiries_per_sale": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inquiries Per Sale"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "inquiry_count",
+          "inquiry_coverage",
+          "sales_count",
+          "sales_coverage",
+          "inquiries_per_sale"
+        ],
+        "title": "Period"
+      },
+      "Period-Output": {
+        "properties": {
+          "inquiry_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inquiry Count"
+          },
+          "inquiry_coverage": {
+            "type": "string",
+            "title": "Inquiry Coverage"
+          },
+          "sales_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sales Count"
+          },
+          "sales_coverage": {
+            "type": "string",
+            "title": "Sales Coverage"
+          },
+          "inquiries_per_sale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inquiries Per Sale"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "inquiry_count",
+          "inquiry_coverage",
+          "sales_count",
+          "sales_coverage",
+          "inquiries_per_sale"
+        ],
+        "title": "Period"
       },
       "PlanCreate": {
         "properties": {
@@ -13529,6 +15174,62 @@
           "criteria"
         ],
         "title": "RubricView"
+      },
+      "SafeAvailability": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "const": "UNAVAILABLE",
+            "title": "Availability"
+          },
+          "reason": {
+            "type": "string",
+            "const": "OPERATIONAL_RULE_AND_B_OBSERVATION_NOT_AGREED",
+            "title": "Reason"
+          },
+          "rate": {
+            "type": "null",
+            "title": "Rate"
+          },
+          "rule_version": {
+            "type": "string",
+            "const": "DEV_SAFE_V1",
+            "title": "Rule Version"
+          },
+          "rubric_version": {
+            "type": "string",
+            "const": "DEV_QUALITY_V1",
+            "title": "Rubric Version"
+          },
+          "observation_seconds": {
+            "type": "integer",
+            "const": 604800,
+            "title": "Observation Seconds"
+          },
+          "rule_status": {
+            "type": "string",
+            "const": "DEVELOPMENT_PROPOSAL",
+            "title": "Rule Status"
+          },
+          "coverage": {
+            "type": "string",
+            "const": "A_COMMANDS_RECORDED_B_REPORTING_COMPLETENESS_UNKNOWN",
+            "title": "Coverage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "availability",
+          "reason",
+          "rate",
+          "rule_version",
+          "rubric_version",
+          "observation_seconds",
+          "rule_status",
+          "coverage"
+        ],
+        "title": "SafeAvailability"
       },
       "SafeSummaryInput": {
         "properties": {

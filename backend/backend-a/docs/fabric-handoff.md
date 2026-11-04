@@ -1,5 +1,7 @@
 # Fabric 로컬 인수
 
+0.11.0: [voc-effect-v1 별도 배치 계약](monitoring-effects.md)과 [합성 요청](examples/voc-effect-batch.json)을 추가했습니다. 기존 analytics-v1을 바꾸지 않습니다. 서비스 subject+voc-effects:receive/publish와 OPERATIONAL 별도 allowlist가 필요합니다. SYNTHETIC은 운영 pointer와 격리합니다. A는 정합성만 검산하며 실제 emitter·원천 정확성은 미검증입니다. Bronze 스키마 별도 검토/Export 전체는 이번에 변경하지 않았습니다.
+
 2026-11-03 실제 ERD·DDL·PK/FK·타입과 Export 미구현/계약 제안은 [fabric-data-contract/README.md](fabric-data-contract/README.md)를 먼저 읽는다. 최신 파일0.6.1/head0006을 새 로컬 PostgreSQL에 적용해 확인했으며 이번 배포 DB 재조회·실제 Fabric 연동을 수행한 것은 아니다.
 
 규범은 fabric-contract.md, phase4-analytics.md와 OpenAPI Submission입니다. examples/analytics-batch.json은 완전한 최소 합성 제출이며 examples/canonical-hashes.json은 실제 canonical 구현에서 생성한 재현 가능한 해시 벡터입니다. `python -m scripts.check_handoff_contract`로 확인합니다. 이는 오프라인 파일 검증이며 실제 Fabric emitter 실행이 아닙니다.

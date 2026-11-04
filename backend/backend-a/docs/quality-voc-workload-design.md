@@ -1,5 +1,7 @@
 # AI 품질·VOC 개선·업무량/SLA 확장 설계안
 
+후속0.11.0/0011: [실제 AUTO 회차 진단·VOC 효과 수신/게시 구현](monitoring-effects.md)을 우선합니다. 아래 미구현 서술은 설계/이전 단계 시점의 기록입니다. B의 실행 경계 연결·운영 rubric/관찰 정책·실제 Fabric emitter/원천 검증·Frontend 통합은 별도이며 안전 완료 운영 비율은 UNAVAILABLE입니다.
+
 후속0.10.0/0010 로컬: **읽기 전용 업무량 기반 배정 추천**을 구현했습니다. [실제 계약](assignment-recommendations.md)을 우선합니다. B의 배정 실행/실패·HUMAN 전환, 팀 잠금·용량 엔진·Fabric/Export는 여전히 미구현/별도 담당입니다. 품질0.9.0은 먼저30fbfff로 공유했으며 이번 추천0.10.0은 후속 공유 대상입니다. Azure 배포는 포함하지 않습니다.
 
 

@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     jwt_audience: str = "cs-flow-api"
     token_minutes: int = Field(default=30, ge=1, le=120)
     cors_origins: list[str] = []
+    voc_effect_operational_ids: list[str] = []
     allowed_hosts: list[str] = ["localhost", "127.0.0.1", "testserver"]
     pool_size: int = Field(default=5, ge=1, le=30)
     max_overflow: int = Field(default=5, ge=0, le=30)

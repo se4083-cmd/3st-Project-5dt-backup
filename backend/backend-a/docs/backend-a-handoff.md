@@ -1,5 +1,7 @@
 # Backend A 구현·팀 인수 현황
 
+후속0.11.0/0011: [남은 A 경계 구현과 외부 연동 구분](monitoring-effects.md)을 추가했습니다. AUTO 회차는 전향적 부분 기록, VOC 효과는 버전 분리 수신/정합성 검증/게시·조회입니다. 기존 업무량/추천은 유지합니다. 아래0.10.0의 A 효과 미구현 표는 당시 기록이며 실제 B/Fabric/운영 효과 완료로 확대하지 않습니다. [이번 배포 증거](evidence/monitor-effects-local/README.md)의 실제 확인 범위를 우선합니다.
+
 ## 현재 공유 대상 — 0.10.0 / migration0010
 
 2026-11-04 KST. feature/backend-a의 품질 평가 공유 기준은 `30fbfff047f1d316b73cb33b6cc2b0fb4fe167db`이며, 그 뒤 구현한 [읽기 전용 배정 추천](assignment-recommendations.md)을 이번 공유 커밋에 포함한다. 소스/파일 migration head 기준이며 Azure 배포 버전을 뜻하지 않는다. 이번 공유 검토는 기록 hash/JUnit·diff·정적 계약 검사이며, 이전 PostgreSQL 21개·350개·마지막2개를 재실행하거나 합산하지 않았다. [검증/공유 검토 기록](evidence/recommendation-local/README.md)을 따른다.

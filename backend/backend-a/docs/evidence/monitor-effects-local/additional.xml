@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="5" time="15.490" timestamp="2026-11-04T17:45:22.742893+09:00" hostname="모니"><testcase classname="tests.test_monitor_effects" name="test_worker_facts_require_same_transaction_transition_and_replay" time="2.787"><failure message="assert 0 == 1">tests\test_monitor_effects.py:350: in test_worker_facts_require_same_transaction_transition_and_replay
+    assert again["human_entry_count_excluded"] == 1
+E   assert 0 == 1</failure></testcase><testcase classname="tests.test_monitor_effects" name="test_unreported_B_snapshot_is_not_an_invented_transfer" time="3.323" /><testcase classname="tests.test_monitor_effects" name="test_retry_facts_do_not_create_new_cohort_and_unknown_reason" time="2.389" /><testcase classname="tests.test_monitor_effects" name="test_manual_review_observation_is_separate_from_safe_rate" time="2.862" /><testcase classname="tests.test_monitor_effects" name="test_effect_owner_change_and_scope_recheck" time="2.622"><failure message="sqlalchemy.exc.CompileError: Unconsumed column names: owner_assumed_at">tests\test_monitor_effects.py:522: in test_effect_owner_change_and_scope_recheck
+    s.execute(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\orm\session.py:2373: in execute
+    return self._execute_internal(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\orm\session.py:2280: in _execute_internal
+    result = conn.execute(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\engine\base.py:1642: in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\elements.py:715: in _compile_w_cache
+    compiled_sql = self._compiler(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\elements.py:323: in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\compiler.py:1472: in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\compiler.py:902: in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\compiler.py:948: in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\visitors.py:138: in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\compiler.py:6455: in visit_update
+    crud_params_struct = crud._get_crud_params(
+..\..\..\..\.venv-phase5\Lib\site-packages\sqlalchemy\sql\crud.py:382: in _get_crud_params
+    raise exc.CompileError(
+E   sqlalchemy.exc.CompileError: Unconsumed column names: owner_assumed_at</failure></testcase></testsuite></testsuites>

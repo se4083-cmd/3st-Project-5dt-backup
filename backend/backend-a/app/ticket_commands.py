@@ -200,4 +200,7 @@ def change_cycle(session, user, ticket_id, body, key, *, operation):
             ticket=ticket_id,
             cycle=cycle,
         )
+        from app.automation_monitor import customer_cycle
+
+        customer_cycle(session, ticket, cycle, "HUMAN" if human else "AUTO", revision, now, reason)
     return result, False

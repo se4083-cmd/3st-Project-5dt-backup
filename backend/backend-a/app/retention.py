@@ -12,8 +12,12 @@ from app import models as m
 from app.analytics_canonical import digest
 from app.analytics_models import analytics_publication, analytics_receipts
 from app.automation_control import capability
+from app.effect_models import effect_batches, effect_current
 from app.errors import APIError
 from app.model_constraints import idempotency_keys, user_team_scopes
+from app.monitor_models import cycles as monitor_cycles
+from app.monitor_models import events as monitor_events
+from app.monitor_models import monitor_epoch
 from app.quality_models import evidence as qa_evidence
 from app.quality_models import receipts as qa_receipts
 from app.quality_models import reply_records as qa_replies
@@ -250,6 +254,7 @@ def ticket_guards(as_of):
         "VOC_IMPROVEMENT_TICKET_REFERENCE": linked(voc_links),
         "QUALITY_CONFIRMED_REPLY_REFERENCE": linked(qa_replies),
         "VOC_COMMAND_RECEIPT_REFERENCE": linked(voc_receipts),
+        "PROSPECTIVE_AUTOMATION_HISTORY_REFERENCE": linked(monitor_cycles),
     }
 
 
@@ -485,6 +490,27 @@ def build_report(session, user, body: RetentionRequest):
                     "RECEIPT_IMMUTABILITY_TRIGGER": true() if table is analytics_receipts else false(),
                     "BATCH_RECEIPT_FK_AND_REPUBLICATION_DESIGN": true(),
                 },
+                supported=body.scope == "GLOBAL",
+            )
+        )
+    for table, fields, clock in [
+        (monitor_cycles, ["entry_mode", "origin_auto_cycle_no"], monitor_cycles.c.started_at),
+        (monitor_events, ["reason_code", "message_id", "job_id"], monitor_events.c.recorded_at),
+        (effect_batches, ["payload", "content_hash", "validation"], effect_batches.c.received_at),
+        (effect_current, ["batch_id", "plan_revision"], None),
+        (monitor_epoch, ["recording_since"], monitor_epoch.c.recording_since),
+    ]:
+        targets.append(
+            inspect(
+                session,
+                table=table,
+                fields=fields,
+                data_class="RAW_OR_EXTRACT",
+                age_basis=str(clock) if clock is not None else "NO_APPROVED_RETENTION_CLOCK",
+                cutoff=raw_cut if clock is not None else None,
+                old=clock < raw_cut if clock is not None else false(),
+                guards={"PROSPECTIVE_MONITOR_EFFECT_HISTORY_REFERENCE": true()},
+                design={"MONITOR_EFFECT_RETENTION_POLICY_NOT_DEFINED": true()},
                 supported=body.scope == "GLOBAL",
             )
         )

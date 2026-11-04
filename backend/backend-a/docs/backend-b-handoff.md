@@ -1,5 +1,7 @@
 # Backend B 로컬 인수
 
+0.11.0: 최신 B 48283f3의 PostgreSQL 실패→HUMAN 전환을 읽기 확인했습니다. B 코드는 변경하지 않았습니다. `app.automation_monitor.record_worker_outcome`를 lease 해제/상태 전환 전, 기존 B와 같은 transaction으로 호출하는 [새 사실 기록 계약](monitoring-effects.md)을 제공합니다. deferred guard·expected version/cycle·lease/generation/PAUSED·replay 책임을 따릅니다. 이 연결이 아직 없으면 실패/이관 보고는 부분 기록이며 실제 B 통합 성공으로 표시하지 않습니다.
+
 추천 연결(로컬0.10.0): [읽기 전용 Python/HTTP 계약](assignment-recommendations.md)을 따릅니다. 새 B 서비스 HTTP·실제 배정·팀 잠금 실행기는 없습니다. 서비스 identity를 ADMIN으로 위장해 호출하지 않습니다. Frontend의 힌트 payload는 B의 최신 CAS/lease/권한/중복 배정 검사를 대체하지 않습니다.
 
 

@@ -130,6 +130,18 @@ def commit_automatic_reply(session, command: AutomaticReply):
             )
         )
         quality_provenance.persist(session, message_id, ticket, job, command, prepared, now)
+        from app.automation_monitor import record
+
+        record(
+            session,
+            ticket_id,
+            command.cycle_no,
+            "AUTO_COMMITTED",
+            ticket["version"] + 1,
+            job_id=job["job_id"],
+            message_id=message_id,
+            team_id=ticket["team_id"],
+        )
         session.execute(
             automation_jobs.update()
             .where(automation_jobs.c.job_id == str(command.job_id))

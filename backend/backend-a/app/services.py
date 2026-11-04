@@ -212,6 +212,9 @@ def submit_ticket(session, user, body, key):
                 reason="CUSTOMER_SUBMITTED",
                 ticket=ticket_id,
             )
+            from app.automation_monitor import start_cycle
+
+            start_cycle(session, ticket_id, 1, "AUTO", 1, now)
     except IntegrityError:
         receipt = _existing_receipt(session, user["user_id"], key, request_hash)
         if receipt:

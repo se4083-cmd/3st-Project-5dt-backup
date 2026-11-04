@@ -1,5 +1,7 @@
 # VOC 상품 개선 조치·계획 이력 (0.8.0 / 0008)
 
+후속0.11.0: [별도 효과 배치와 `/effects` 조회](monitoring-effects.md)를 구현했습니다. 아래0.8.0의 효과 미구현 서술은 당시 embedded analysis 기준입니다. 현재 embedded metrics는null/ VERSIONED_EFFECT_ENDPOINT_REQUIRED이며 새 결과는 별도 API에서만 읽습니다. 실제 Fabric 연결과 인과효과는 미검증입니다.
+
 로컬 구현 계약이다. 개선 업무 완료와 효과 입증을 구분한다. 실제 Fabric 효과 수신·저장·조회, 계산, Export, 화면, 스케줄러는 구현하지 않았다. 기존 analytics-v1 wire·게시 및 Backend B 실행 계약은 변경하지 않았다.
 
 ## 저장 경계

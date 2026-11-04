@@ -1,5 +1,7 @@
 # Frontend 인수 — 추가 기능 연결 안내 (0.10.0 / migration0010)
 
+0.11.0 후속: [회차 진단·VOC 효과 API](monitoring-effects.md)를 추가했습니다. 자동 처리/이관 숫자는 전향적 AUTO 회차의 기록된 사실이며 기존 티켓 KPI와 분모가 다릅니다. safe_completion은 여전히 운영 UNAVAILABLE입니다. 효과는 별도 `/effects?origin=OPERATIONAL`(기본)에서 조회하고 SYNTHETIC을 운영과 섞지 않습니다. 기존 embedded analysis.metrics는null, reason은 VERSIONED_EFFECT_ENDPOINT_REQUIRED입니다. 아래0.10.0의 ‘효과 수신 미구현’은 당시 기록이며 후속 A 수신/게시 구현과 실제 Fabric 연동은 구분합니다. Azure의 이번 실제 검증은 [배포/로컬 증거](evidence/monitor-effects-local/README.md)를 우선합니다.
+
 2026-11-04 KST 문서 정리·공유 검토. 실제 체크아웃은 `<PROJECT_ROOT>/.cache/team-cs-flow-ai`(요청 경로의 `.cache` 앞 구분자 누락 보정), branch `feature/backend-a`, **구현 공유 기준 HEAD**는 `2cb07cfc0bcbf1a203b6d54c5ebb1bb905a7be93`다. 이번 문서 공유 전 원격 HEAD도 같은 기준임을 확인했고, 시작 변경은 이 문서 한 개뿐이었다. 적용 경로의 AGENTS.md는 발견되지 않았다. 앞선 초안 작성은 로컬 문서 작업이었으며, 이번에는 이 문서만 commit·일반 push 대상으로 검토한다. 앱·migration·업무 테스트·DB·Azure·실제 권한·다른 팀 코드·메시지 발송은 이번 범위 밖이다. **현재 Azure 상태는 조회하지 않았으며**, 아래 과거 배포 기록과 현재 소스 구현 상태를 구분한다.
 
 ## 1. 인수님 요청 3가지 상태

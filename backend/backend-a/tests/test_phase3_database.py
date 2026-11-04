@@ -103,13 +103,14 @@ def test_phase2_followup_upgrade_preserves_origin_and_legacy_fields(settings, mo
         assert row["cycle_no"] == row["responsibility_cycle_no"] == 1
         assert row["origin_team_id"] == row["owner_team_id"]
         assert row["cancelled_at"] is None and row["cancellation_reason"] is None
-        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == "0010"
+        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == "0011"
     engine.dispose()
 
 
 def test_phase3_downgrade_refuses_history_loss(client, headers, app):
     tid = make_ticket(client, headers, app)
     assert create_followup(client, login_as(client, "agent"), tid).status_code == 201
-    with pytest.raises(RuntimeError, match="lose followup history"):
+    # The new prospective cycle history now blocks downgrade before revision0003.
+    with pytest.raises(RuntimeError, match="retain 0011"):
         command.downgrade(Config(str(ROOT / "alembic.ini")), "0002")
     assert client.get("/health/ready").status_code == 200

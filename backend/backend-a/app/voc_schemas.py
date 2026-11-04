@@ -105,7 +105,9 @@ class PlanView(PlanValues):
 
 class EffectAvailability(Output):
     availability: Literal["UNAVAILABLE"] = "UNAVAILABLE"
-    reason: Literal["EFFECT_INTEGRATION_NOT_IMPLEMENTED"] = "EFFECT_INTEGRATION_NOT_IMPLEMENTED"
+    reason: Literal["EFFECT_INTEGRATION_NOT_IMPLEMENTED", "VERSIONED_EFFECT_ENDPOINT_REQUIRED"] = (
+        "VERSIONED_EFFECT_ENDPOINT_REQUIRED"
+    )
     metrics: None = None
 
 

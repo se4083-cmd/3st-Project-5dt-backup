@@ -105,6 +105,17 @@ def record_queue_route(session, ticket_id, body: RouteCommand, *, service_id):
             cycle=body.cycle_no,
             service=service_id,
         )
+        from app.automation_monitor import record
+
+        record(
+            session,
+            ticket_id,
+            body.cycle_no,
+            "ROUTED",
+            ticket["version"],
+            key=f"ROUTE_{values['revision']}",
+            team_id=team_id,
+        )
     return {"ticket_id": ticket_id, "cycle_no": body.cycle_no, **values}
 
 

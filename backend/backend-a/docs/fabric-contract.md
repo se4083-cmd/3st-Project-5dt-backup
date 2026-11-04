@@ -1,5 +1,7 @@
 # Fabric 담당자에게 전달할 계약 — 4단계
 
+후속0.11.0의 [VOC 효과 별도 버전 wire/수신·검증·원자 게시](monitoring-effects.md)는 기존 analytics-v1 계약과 분리됩니다. 이 문서의 기존 Gold wire는 그대로이며 effect source 정의/판매 분모·scope·상품 식별은 별도 합의가 필요합니다.
+
 2026-11-03 실제 DB/DDL·fixture 차이·이벤트·미구현 Export·현재 게시 경계는 [fabric-data-contract/README.md](fabric-data-contract/README.md)에 보완했다. 아래 짧은 passed/codes 예시는 BatchStatus.validation_result fragment이며 전체 HTTP 응답 예시는 새 전달 자료를 따른다.
 
 현재 구현은 [4단계 설계](phase4-analytics.md)와 [OpenAPI](openapi.json)를 따릅니다. 아래 이전 단계 계획의 ‘게시/조회 미구현’ 설명을 대체합니다. Fabric은 계산, A는 네 mart 수신·검증·원자 게시와 권한 조회를 담당합니다. 실제 Fabric emitter/인증/파이프라인은 미검증이며 로컬 성공 출처는 LOCAL_SYNTHETIC입니다.

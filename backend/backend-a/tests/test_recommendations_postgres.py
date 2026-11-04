@@ -44,14 +44,13 @@ def test_additive_permission_migration_preserves_rows_and_tables(settings, monke
                 )
         tables = sorted(inspect(e).get_table_names())
         cfg = Config(str(ROOT / "alembic.ini"))
-        command.upgrade(cfg, "head")
+        command.upgrade(cfg, "0010")
         with f.begin() as s:
             assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0010"
             assert before == list(s.execute(select(tickets))) and grants == list(
                 s.execute(select(staff_permissions))
             )
         assert tables == sorted(inspect(e).get_table_names())
-        command.check(cfg)
         command.downgrade(cfg, "0009")
         command.upgrade(cfg, "head")
         command.check(cfg)
@@ -73,7 +72,7 @@ def test_downgrade_refuses_permission_or_read_history(client, app, history):
     assert client.get("/health/ready").status_code == 200
 
 
-def test_readiness_requires_0010(client, app):
+def test_readiness_requires_0011(client, app):
     assert client.get("/health/ready").status_code == 200
     with app.state.session_factory.begin() as s:
         s.execute(text("UPDATE alembic_version SET version_num='0009'"))

@@ -127,7 +127,7 @@ def test_create_replay_detail_no_duplicate_followup_receipt(client, app):
     assert d["current_plan"]["implemented_at"] is None and d["current_plan"]["before_start"] is None
     assert d["analysis"] == {
         "availability": "UNAVAILABLE",
-        "reason": "EFFECT_INTEGRATION_NOT_IMPLEMENTED",
+        "reason": "VERSIONED_EFFECT_ENDPOINT_REQUIRED",
         "metrics": None,
     }
     assert len(d["plans"]) == 1 and d["tickets"] == []

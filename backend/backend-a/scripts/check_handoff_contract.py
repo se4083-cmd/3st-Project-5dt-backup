@@ -11,6 +11,7 @@ from app.analytics_canonical import canonical_submission, digest, normalize, tab
 from app.analytics_schemas import Submission
 from app.automation_control import ResumeCommand, StopCommand
 from app.config import Settings
+from app.effect_schemas import EffectSubmission
 from app.followup_schemas import FollowupCreate, FollowupPatch, FollowupState
 from app.main import create_app
 from app.quality_schemas import (
@@ -84,6 +85,26 @@ def main():
     if actual != recorded:
         raise RuntimeError("OPENAPI_NEEDS_REGENERATION")
     schemas = actual["components"]["schemas"]
+    effect_example = EffectSubmission.model_validate_json(
+        (ROOT / "docs/examples/voc-effect-batch.json").read_text(encoding="utf-8")
+    )
+    if digest(effect_example.payload) != effect_example.payload_sha256:
+        raise RuntimeError("EFFECT_EXAMPLE_HASH_MISMATCH")
+    for name in (
+        "AutomationMetrics",
+        "SafeAvailability",
+        "EffectPayload",
+        "EffectSubmission",
+        "EffectResult",
+        "Period",
+    ):
+        variants = [k for k in schemas if k == name or k in {name + "-Input", name + "-Output"}]
+        if not variants or any(schemas[k].get("additionalProperties") is not False for k in variants):
+            raise RuntimeError("MONITOR_EFFECT_ALLOWLIST_NOT_CLOSED")
+    for path, methods in actual["paths"].items():
+        if path.startswith("/api/v1/analytics/voc-effects/"):
+            if any(op["security"] != [{"AnalyticsServiceBearer": []}] for op in methods.values()):
+                raise RuntimeError("EFFECT_SERVICE_AUTH_MISMATCH")
     public = set(schemas["FollowupPublic"]["properties"])
     if public & {"internal_note", "owner_user_id", "owner_team_id", "blocks_resolution", "revision"}:
         raise RuntimeError("PUBLIC_FOLLOWUP_CONTRACT_LEAK")

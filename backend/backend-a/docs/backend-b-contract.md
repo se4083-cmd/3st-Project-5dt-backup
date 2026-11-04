@@ -1,5 +1,7 @@
 # Backend B와 내구 작업 계약
 
+0.11.0의 전향적 기록은 [monitoring-effects.md](monitoring-effects.md)의 내부 Python 경계를 따릅니다. B의 재시도/HUMAN 전환/배정 엔진을 A에 추가하지 않았으며, 기존 성공 writer와 route/고객 명령의 같은 transaction에 사실만 연결했습니다. 최신 B 소스 검토와 실제 Worker 검증은 별개입니다.
+
 0.10.0 로컬의 [배정 추천](assignment-recommendations.md)은 조회 전용입니다. 실제 `app.recommendations.view` 및 `repository.agent_eligibility`/`workload.ticket_facts`의 입력·인증·snapshot 책임은 해당 문서에 적었습니다. 후보/유효기간은 실행 허가가 아니며 B가 최신 ticket/cycle/route/직원 자격·부하·유효/물리 배정을 다시 검증해야 합니다. FAILED AUTO 보존 HUMAN 조회는 가능하지만 기존 미구현 실패/이관/배정 writer를 구현한 것은 아닙니다.
 
 

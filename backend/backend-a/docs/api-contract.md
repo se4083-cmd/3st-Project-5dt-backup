@@ -1,5 +1,7 @@
 # API와 Frontend 계약
 
+0.11.0/0011: GET `/staff/quality/automation-metrics`는 ADMIN+QUALITY_METRICS_READ와 현재 scope의 전향적 AUTO 회차 진단입니다. `/analytics/voc-effects/batches` 및 validate/publish는 별도 voc-effects 서비스 권한, GET `/staff/voc-improvements/{action_id}/effects`는 기존 VOC 관리 권한입니다. [정확한 wire/분모/상태/멱등/부분 기록 계약](monitoring-effects.md)을 따릅니다. 기존 analytics-v1 wire/게시 pointer는 변경하지 않았습니다.
+
 0.10.0/0010 로컬: GET `/staff/assignment-recommendations`는 ADMIN+ASSIGNMENT_RECOMMEND+현재 route 팀 scope의 읽기 전용 힌트입니다. 팀/티켓 필터·페이지/후보 제한·버전/만료·불추천 사유는 [실제 계약](assignment-recommendations.md)을 따릅니다. 기존 workload·품질·VOC·analytics-v1 API는 유지합니다.
 
 

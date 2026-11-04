@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="1.999" timestamp="2026-11-04T17:37:44.566695+09:00" hostname="모니"><testcase classname="tests.test_monitor_effects_database" name="test_monitor_retention_history_protected_and_readiness" time="1.953" /></testsuite></testsuites>
