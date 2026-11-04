@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "deleted": [
+    "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/sites/csflow-a-dev-api-6004dca5",
+    "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.DBforPostgreSQL/flexibleServers/csflow-a-dev-pg-6004dca5",
+    "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/serverfarms/csflow-a-dev-plan"
+  ],
+  "old_resources_absent": true,
+  "new_health": {
+    "/health/live": 200,
+    "/health/ready": 200
+  },
+  "exact_old_ids": {
+    "app": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/sites/csflow-a-dev-api-6004dca5",
+    "postgres": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.DBforPostgreSQL/flexibleServers/csflow-a-dev-pg-6004dca5",
+    "plan": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/serverfarms/csflow-a-dev-plan"
+  },
+  "already_absent": [
+    "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/sites/csflow-a-dev-api-6004dca5",
+    "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.DBforPostgreSQL/flexibleServers/csflow-a-dev-pg-6004dca5",
+    "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/serverfarms/csflow-a-dev-plan"
+  ],
+  "old_plan_has_no_other_apps": true,
+  "old_server_has_no_other_application_database": true,
+  "backup_decryption_verified": true,
+  "new_ready": true,
+  "locks": [
+    {
+      "id": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Authorization/locks/DO_NOT_DELETE",
+      "level": "CanNotDelete"
+    }
+  ]
+}

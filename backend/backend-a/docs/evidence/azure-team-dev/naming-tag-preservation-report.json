@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-11-03T02:09:59.004735+00:00",
+  "resources": [
+    {
+      "kind": "api",
+      "name": "csflow-a-dev-api-6004dca5",
+      "tags": {
+        "project": "cs-flow-ai",
+        "owner": "backend-a",
+        "environment": "team-dev",
+        "component": "backend-a"
+      },
+      "state": "Running"
+    },
+    {
+      "kind": "postgres",
+      "name": "csflow-a-dev-pg-6004dca5",
+      "tags": {
+        "project": "cs-flow-ai",
+        "owner": "backend-a",
+        "environment": "team-dev",
+        "component": "backend-a"
+      },
+      "state": "Ready"
+    },
+    {
+      "kind": "plan",
+      "name": "csflow-a-dev-plan",
+      "tags": {
+        "project": "cs-flow-ai",
+        "owner": "backend-a",
+        "environment": "team-dev",
+        "component": "backend-a"
+      },
+      "state": "Ready"
+    }
+  ],
+  "resource_names_changed": false,
+  "created_deleted_restarted_redeployed": false,
+  "database_commands_executed": false,
+  "health_after": {
+    "/health/live": 200,
+    "/health/ready": 200
+  }
+}

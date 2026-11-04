@@ -1,0 +1,22 @@
+{
+  "backend_a": "0.6.1",
+  "migration": "0006",
+  "postgres_related": {
+    "tests": "92",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "50.592"
+  },
+  "historical_full368_not_rerun": true,
+  "historical_local_http33_not_rerun": true,
+  "new_https": {
+    "check_groups": 18,
+    "asserted_requests": 61
+  },
+  "linux_runtime": "Python3.13.18 App Service B1",
+  "actual_B_AI_Fabric": false,
+  "source_base_commit": "447c31890c243e1175b805596a84a19720058edf",
+  "worktree_changed": true,
+  "remote_push_actions": false
+}

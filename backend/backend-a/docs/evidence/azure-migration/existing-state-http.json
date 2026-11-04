@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "asserted_http_requests": 16,
+  "checks": [
+    "four_existing_accounts_and_roles_preserved",
+    "existing_ticket_messages_and_cross_customer_denial",
+    "existing_active_assignment_and_admin_team_scope",
+    "existing_resolved_ticket_does_not_revive_agent_access",
+    "existing_followup_public_and_staff_boundary"
+  ]
+}

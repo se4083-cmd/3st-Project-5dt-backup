@@ -1,0 +1,9 @@
+{
+  "file": "backups/final-frozen-20261103T025255.dump.dpapi",
+  "plaintext_sha256": "93430651b53d53c7ca4f14c2d2c4b3ff2414d106ef5ed927fcdcc05ff39c602a",
+  "encrypted_sha256": "cfc1d7e4fe7dc7b71f7eb9474c61ba914b02293f0c4c7beae525ee650298bf7e",
+  "bytes": 137254,
+  "encryption": "Windows current-user DPAPI",
+  "decrypt_roundtrip": true,
+  "toc_sha256": "79beeecb4c40adf75e0c17e4d3793f1655d6b77d0c7f09914fef785077d55197"
+}

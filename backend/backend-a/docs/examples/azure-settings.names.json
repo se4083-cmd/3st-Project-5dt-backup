@@ -1,0 +1,27 @@
+{
+  "secret_setting_names": [
+    "DATABASE_URL",
+    "JWT_SECRET",
+    "ANALYTICS_SERVICE_SECRET"
+  ],
+  "nonsecret_setting_names": [
+    "APP_ENV",
+    "JWT_ISSUER",
+    "JWT_AUDIENCE",
+    "TOKEN_MINUTES",
+    "ENABLE_DEV_SEED",
+    "ANALYTICS_SERVICE_IDS",
+    "CORS_ORIGINS",
+    "ALLOWED_HOSTS",
+    "POOL_SIZE",
+    "MAX_OVERFLOW",
+    "POOL_TIMEOUT",
+    "DB_CONNECT_TIMEOUT",
+    "DB_STATEMENT_TIMEOUT_MS",
+    "WEB_CONCURRENCY",
+    "HTTP_CONCURRENCY",
+    "PORT",
+    "FORWARDED_ALLOW_IPS",
+    "SCM_DO_BUILD_DURING_DEPLOYMENT"
+  ]
+}

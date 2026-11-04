@@ -1,0 +1,184 @@
+{
+  "result": "PASS",
+  "source_equals_target": true,
+  "all_table_counts_and_hashes": true,
+  "owners_privileges_constraints_indexes_triggers_functions_sequences": true,
+  "tables": {
+    "public.ai_suggestions": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.alembic_version": {
+      "count": 1,
+      "hash": "4b10f3396ce5f868d2fe696889d63e17"
+    },
+    "public.analytics_batches": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.analytics_daily": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.analytics_product_daily": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.analytics_product_risk": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.analytics_product_voc_daily": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.analytics_publication": {
+      "count": 1,
+      "hash": "1247ea3b497cec8769dd631921473af2"
+    },
+    "public.analytics_receipts": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.approvals": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.assignments": {
+      "count": 3,
+      "hash": "e92f19d91740b4cd8eb908ca90a8cd20"
+    },
+    "public.audit_events": {
+      "count": 114,
+      "hash": "714c4c364820f1f68df2ffd35e2f874f"
+    },
+    "public.automation_control": {
+      "count": 1,
+      "hash": "8e22a0ede8dcb4de430eeb422fc301fc"
+    },
+    "public.automation_control_history": {
+      "count": 2,
+      "hash": "a0313976d4c40584aa19b1834cb7d3fc"
+    },
+    "public.automation_jobs": {
+      "count": 9,
+      "hash": "58dbd4ccf6e8e622e37c76b1bf6a6352"
+    },
+    "public.automation_rules": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.customers": {
+      "count": 4,
+      "hash": "508d8392db75e36fb2b6ad3e0fc64925"
+    },
+    "public.followup_actions": {
+      "count": 2,
+      "hash": "cf007e85cdbf489e12c186674da841c9"
+    },
+    "public.idempotency_keys": {
+      "count": 11,
+      "hash": "b1fc70f32565135bc51094ed91a31fc6"
+    },
+    "public.knowledge_documents": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.messages": {
+      "count": 11,
+      "hash": "a1b3b993ece24bbe4ffe393e23918558"
+    },
+    "public.orders": {
+      "count": 12,
+      "hash": "8064c190fae1da9d6c1247ed80dbb53c"
+    },
+    "public.products": {
+      "count": 1,
+      "hash": "aa79d7673973f11b98c15bd0e70b392f"
+    },
+    "public.queue_routes": {
+      "count": 5,
+      "hash": "7af5ab8f2da38b1d25e7dac3795bf1dd"
+    },
+    "public.returns": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.shipments": {
+      "count": 0,
+      "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public.staff_permissions": {
+      "count": 4,
+      "hash": "b7c0595ea5a63d53be8eb1bece21704a"
+    },
+    "public.team_categories": {
+      "count": 3,
+      "hash": "9dbada7501fe644abf4d0e861c3df49e"
+    },
+    "public.teams": {
+      "count": 3,
+      "hash": "a74d3f111971697cd95a395467c389d3"
+    },
+    "public.tickets": {
+      "count": 5,
+      "hash": "5b99a61b1fe2e6286cf724515b1775f6"
+    },
+    "public.user_team_scopes": {
+      "count": 4,
+      "hash": "5ae1f519ce29a4d13cda97f85a3cb0a2"
+    },
+    "public.users": {
+      "count": 8,
+      "hash": "44f07396279d0d9e11ab2e405ff5e50d"
+    }
+  },
+  "sequences": {
+    "public.analytics_publication_singleton_id_seq": {
+      "last_value": 1,
+      "is_called": false
+    },
+    "public.automation_control_history_revision_seq": {
+      "last_value": 1,
+      "is_called": false
+    },
+    "public.automation_control_singleton_id_seq": {
+      "last_value": 1,
+      "is_called": false
+    }
+  },
+  "catalogs": {
+    "constraints": {
+      "count": 138,
+      "hash": "1443aeff68dc48d5dc52d3944bbc0e46de14b05e3ab55d44249cbdddf54229a9"
+    },
+    "indexes": {
+      "count": 57,
+      "hash": "dec0974b7a569bf94e6d3f6f927919ed1aa55431c79c0e63bed852e071334d57"
+    },
+    "triggers": {
+      "count": 7,
+      "hash": "d25062c018c6b18590d836b92d6f2c8d85aca00704ae4f2e97f615df68beac64"
+    },
+    "owners_acl": {
+      "count": 35,
+      "hash": "2b60b9c1b3b647dd76908c4754563a7fffd254a09e0a118322b2aa6aacdc852e"
+    },
+    "table_grants": {
+      "count": 320,
+      "hash": "5d030b077b8a5476e7083a2c135bc90abf8a97ab316fee8ce637dcd51cb4351e"
+    },
+    "functions": {
+      "count": 4,
+      "hash": "3a829d9225e604a7b536ffa67e1646afe1facd0b0eaddea9b0b50bbadfecbc24"
+    },
+    "schemas": {
+      "count": 1,
+      "hash": "9d664468c2dd45b37bd218b25a3296afbc48005a67db1e484e774d8703995a10"
+    }
+  },
+  "migration": "0006",
+  "automation_control_preserved": true,
+  "seed_or_migration_executed": false,
+  "target_app_not_started_yet": true
+}

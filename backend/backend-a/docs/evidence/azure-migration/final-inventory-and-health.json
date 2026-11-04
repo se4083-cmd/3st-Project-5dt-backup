@@ -1,0 +1,82 @@
+{
+  "result": "PASS",
+  "active_backend_a_resources": [
+    {
+      "id": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/serverFarms/csflow-backend-a-plan",
+      "name": "csflow-backend-a-plan",
+      "type": "Microsoft.Web/serverFarms",
+      "location": "koreacentral"
+    },
+    {
+      "id": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Web/sites/csflow-backend-a",
+      "name": "csflow-backend-a",
+      "type": "Microsoft.Web/sites",
+      "location": "koreacentral"
+    },
+    {
+      "id": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.DBforPostgreSQL/flexibleServers/csflow-backend-a-pg",
+      "name": "csflow-backend-a-pg",
+      "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+      "location": "koreacentral"
+    }
+  ],
+  "app_state": "Running",
+  "plan_sku": {
+    "name": "B1",
+    "tier": "Basic",
+    "size": "B1",
+    "family": "B",
+    "capacity": 1
+  },
+  "postgres_sku": {
+    "name": "Standard_B1ms",
+    "tier": "Burstable"
+  },
+  "storage_gib": 32,
+  "postgres_state": "Ready",
+  "shared_lock_restored": true,
+  "database": {
+    "migration": "0006",
+    "server_version": "16.15",
+    "control": {
+      "paused": true,
+      "revision": 2,
+      "generation": 2
+    },
+    "schema_owner": "azure_pg_admin",
+    "runtime_create_schema": false,
+    "runtime_delete_tickets": false,
+    "tls": {
+      "ssl": true,
+      "version": "TLSv1.3"
+    },
+    "table_counts": {
+      "users": 8,
+      "customers": 4,
+      "tickets": 7,
+      "messages": 15,
+      "followup_actions": 3,
+      "audit_events": 182,
+      "automation_jobs": 12,
+      "idempotency_keys": 15
+    }
+  },
+  "https": {
+    "/health/live": 200,
+    "/health/ready": 200,
+    "/docs": 200
+  },
+  "other_resource_names": [
+    "csflow-openai",
+    "csflow",
+    "csflowfabric",
+    "csflow-foundry",
+    "csflow-foundry/proj-default",
+    "csflow-search",
+    "csflow-ai-project-resource-logs",
+    "csflow-ai-project-resource",
+    "csflow-ai-project-resource-appinsights",
+    "csflow-ai-project-resource/csflow-ai-project",
+    "Failure Anomalies - csflow-ai-project-resource-appinsights"
+  ]
+}

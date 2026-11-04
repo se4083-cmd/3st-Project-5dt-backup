@@ -1,0 +1,14 @@
+{
+  "app": {
+    "exists": false,
+    "azure_code": "ResourceNotFound"
+  },
+  "postgres": {
+    "exists": false,
+    "azure_code": "ResourceNotFound"
+  },
+  "plan": {
+    "exists": false,
+    "azure_code": "ResourceNotFound"
+  }
+}

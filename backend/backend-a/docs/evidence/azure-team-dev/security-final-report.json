@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "https_only": true,
+  "tls_minimum": "1.2",
+  "cors_empty": true,
+  "dev_seed_disabled": true,
+  "runtime_workers": 1,
+  "app_outbound_exact_ip_rules": 25,
+  "temporary_operator_rules": "LOOPBACK_ONLY_SHARED_DELETE_LOCK",
+  "no_all_internet_or_all_azure_rule": true,
+  "package_matches_final_runtime_source": true,
+  "package_secret_scan": "PASS",
+  "http_redirect": 301,
+  "external_AI_Fabric_configured": false
+}

@@ -1,0 +1,9 @@
+{
+  "file": "backups/target-post-verification.dump.dpapi",
+  "plaintext_sha256": "74ec7de02e6ed5a540cda09ff8248f220b16482c0dabb05f14dfd9e2a8892472",
+  "encrypted_sha256": "ee0dd96ec0625ef228c346b579c30fd6d28e3ace8def097f1454a7c76795ea43",
+  "bytes": 142598,
+  "encryption": "Windows current-user DPAPI",
+  "decrypt_roundtrip": true,
+  "toc_sha256": "21b8e71a1f9baa2535140827261947a99f90b5f5b2830e35272c26318264492c"
+}

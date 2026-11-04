@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "source_artifact_sha256": "f5003e46a1cf133e7a52b141fcfcde0f150284eaf1514175dc8ffec0242dae41",
+  "same_deployed_source": true,
+  "version": "0.6.1",
+  "migration": "0006",
+  "tables": 32,
+  "constraints": 138,
+  "deparse_only_constraint_normalizations": 9,
+  "sequences": 3,
+  "existing_state_http_requests": 16,
+  "core_https_groups": 18,
+  "core_https_requests": 61,
+  "migration_tool_tests": 6,
+  "old_three_absent": true,
+  "original_shared_lock_restored": true,
+  "actual_B_AI_Fabric": false,
+  "full_postgres368_rerun": false
+}

@@ -1,0 +1,38 @@
+{
+  "api": {
+    "requested_name": "csflow-backend-a",
+    "http_status": 200,
+    "response": {
+      "nameAvailable": true,
+      "reason": "",
+      "message": ""
+    }
+  },
+  "postgres": {
+    "requested_name": "csflow-backend-a-pg",
+    "http_status": 403,
+    "code": "AuthorizationFailed",
+    "required_actions": [
+      "Microsoft.DBforPostgreSQL/locations/checkNameAvailability/action"
+    ],
+    "availability": "AVAILABLE",
+    "global_check": {
+      "http_status": 200,
+      "response": {
+        "name": "csflow-backend-a-pg",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "nameAvailable": true,
+        "message": ""
+      }
+    }
+  },
+  "plan": {
+    "requested_name": "csflow-backend-a-plan",
+    "scope": "5dt-final-team1",
+    "exists": false,
+    "name_syntax_valid": true
+  },
+  "resources_created_deleted_or_renamed": false,
+  "checked_at": "2026-11-03T02:10:58.280920+00:00",
+  "names_reserved": false
+}

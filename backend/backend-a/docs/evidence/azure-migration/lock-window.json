@@ -1,0 +1,9 @@
+{
+  "user_explicitly_approved": true,
+  "lock_id": "/subscriptions/27db5ec6-d206-4028-b5e1-6004dca5eeef/resourceGroups/5dt-final-team1/providers/Microsoft.Authorization/locks/DO_NOT_DELETE",
+  "started_at": "2026-11-03T03:02:49.694681+00:00",
+  "restored": true,
+  "restored_at": "2026-11-03T03:04:32.477794+00:00",
+  "same_name_level_notes_owners": true,
+  "shared_resources_not_modified": true
+}

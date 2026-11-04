@@ -1,0 +1,29 @@
+{
+  "source_version": "0.6.1",
+  "source_commit": "447c31890c243e1175b805596a84a19720058edf",
+  "source_worktree_changed": true,
+  "original_package_sha256": "f5003e46a1cf133e7a52b141fcfcde0f150284eaf1514175dc8ffec0242dae41",
+  "package_files": 55,
+  "local_deployed_file_differences": [],
+  "remote_deployment_id": "93bf2e08-8a17-40c4-a36e-fad14e412d17",
+  "remote_deployment_complete": true,
+  "name_checks": {
+    "api": {
+      "nameAvailable": true,
+      "reason": "",
+      "message": ""
+    },
+    "postgres": {
+      "name": "csflow-backend-a-pg",
+      "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+      "nameAvailable": true,
+      "message": ""
+    }
+  },
+  "target_plan_absent": true,
+  "source_state": {
+    "app": "Running",
+    "plan": "Ready",
+    "postgres": "Ready"
+  }
+}

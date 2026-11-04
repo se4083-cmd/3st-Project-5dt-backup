@@ -18,6 +18,7 @@ from app.config import Settings, get_settings
 from app.db import build_engine, session_factory
 from app.errors import APIError
 from app.operations_router import router as operations_router
+from app.public_limits import PublicLimits
 from app.routers import router
 from app.schemas import ErrorEnvelope
 from app.staff_router import router as staff_router
@@ -51,7 +52,7 @@ def create_app(settings: Settings | None = None):
                     else {}
                 ),
             }
-            for s in (401, 403, 404, 409, 413, 422, 503)
+            for s in (401, 403, 404, 409, 413, 422, 429, 503)
         },
     )
     app.state.settings = settings
@@ -59,6 +60,8 @@ def create_app(settings: Settings | None = None):
     app.state.session_factory = session_factory(engine)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
     app.add_middleware(AnalyticsBodyLimit, max_bytes=settings.analytics_max_bytes)
+    if settings.app_env == "production":
+        app.add_middleware(PublicLimits, analytics_bytes=settings.analytics_max_bytes)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,
@@ -75,6 +78,8 @@ def create_app(settings: Settings | None = None):
         response.headers["X-Request-ID"] = request.state.request_id
         response.headers["Cache-Control"] = "no-store"
         response.headers["X-Content-Type-Options"] = "nosniff"
+        if settings.app_env == "production":
+            response.headers["Strict-Transport-Security"] = "max-age=31536000"
         # No access log of raw URL/query/body/headers. Fixed code + correlation only.
         logger.info("request_completed id=%s status=%s", request.state.request_id, response.status_code)
         return response

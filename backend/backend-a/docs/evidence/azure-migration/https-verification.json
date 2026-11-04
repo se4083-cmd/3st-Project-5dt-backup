@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "transport": "real public HTTPS",
+  "database": "Azure PostgreSQL16 dedicated backend_a",
+  "checks": [
+    "https_live_ready_migration0006_tls",
+    "swagger_openapi_and_no_retention_delete",
+    "four_roles_login_invalid_and_anonymous_denied",
+    "orders_ticket_ownership",
+    "ticket_create_idempotent_retry_and_conflict",
+    "unassigned_staff_internal_denied",
+    "reopen_revision_conflict_and_human_request",
+    "routed_queue_minimum_scope_and_no_access_expansion",
+    "cross_team_internal_queue_customer360_aggregate_scope",
+    "fixed_assignment_staff_internal_missing_material",
+    "followup_public_private_separation",
+    "common_human_gate_blocks_then_explicit_test_resolution",
+    "persistent_pause_explicit_control_and_revision_denial",
+    "retention_team_preview_audit_no_business_change_global_denied",
+    "analytics_unpublished_customer_denied_no_fabric_call",
+    "public_login_throttling",
+    "public_request_body_limit",
+    "app_restart_data_and_pause_preserved"
+  ],
+  "check_groups": 18,
+  "asserted_http_requests": 61,
+  "migration": "0006",
+  "data_source": "SYNTHETIC",
+  "actual_B_AI_Fabric_integration": false,
+  "temporary_operator_firewall_closed": true,
+  "completed_at": "2026-11-03T02:56:06.783458+00:00"
+}

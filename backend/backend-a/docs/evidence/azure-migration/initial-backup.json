@@ -1,0 +1,48 @@
+{
+  "files": [
+    {
+      "file": "backups/initial.dump.dpapi",
+      "plaintext_sha256": "de2c39d507722b2c52af9301f48679a6cd9f22ca257da8867d23d7f18428a26d",
+      "encrypted_sha256": "17039008f427440694bb62344300a9d294063d7722616429351cc37df2fe2d4d",
+      "bytes": 136998,
+      "encryption": "Windows current-user DPAPI",
+      "decrypt_roundtrip": true,
+      "toc_sha256": "7ad3e10fcbd8a749c881f62ead2d6b3cfeff25047fe4c2cd21511249d42e5e57"
+    },
+    {
+      "file": "backups/source-appsettings.private.json.dpapi",
+      "plaintext_sha256": "ab5cd55938e6dfaa59afd632d8e2bf33080a3f98897868a62f6892b5e0444d02",
+      "encrypted_sha256": "ef34ca4a0411965211769db2fae01c44d1a3a95aaf8c589596d6ef21c1687794",
+      "bytes": 1478,
+      "encryption": "Windows current-user DPAPI",
+      "decrypt_roundtrip": true
+    },
+    {
+      "file": "backups/source-web-config.private.json.dpapi",
+      "plaintext_sha256": "e1921f28b194e6a5f2a4ed2421a1376bcb6d2163a5e5a43a238f9740e0c43995",
+      "encrypted_sha256": "f4572b8e09bd5da46d396151a0a61d00829b7a6ad8a1a3c2247b0842a6a8c422",
+      "bytes": 4838,
+      "encryption": "Windows current-user DPAPI",
+      "decrypt_roundtrip": true
+    },
+    {
+      "file": "backups/source-resources.private.json.dpapi",
+      "plaintext_sha256": "41570ef466538b8dc982c094fdc2b05f5086ce6223cc680418d41ec1fd4abcd7",
+      "encrypted_sha256": "9e6b03a1258fe15ee63c14dbc0f6b5d76e258a6f862361fbc1003b766b3e89e5",
+      "bytes": 14438,
+      "encryption": "Windows current-user DPAPI",
+      "decrypt_roundtrip": true
+    },
+    {
+      "file": "backups/database-roles.private.json.dpapi",
+      "plaintext_sha256": "71ff32fc7244dfed8e5a6107ceac2933f6e8c6a0d447c5bf88f9de4c73d88e0a",
+      "encrypted_sha256": "b6465b1f24b46d0c165d834a5d1b95c074c3921f4158a18a0585764cfd10cf89",
+      "bytes": 1062,
+      "encryption": "Windows current-user DPAPI",
+      "decrypt_roundtrip": true
+    }
+  ],
+  "source_table_count": 32,
+  "source_clients": 2,
+  "created_at": "2026-11-03T02:21:08.545228+00:00"
+}
