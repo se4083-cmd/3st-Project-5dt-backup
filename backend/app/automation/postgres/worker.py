@@ -20,6 +20,7 @@ def process_auto_jobs(
     worker_id: str,
     generate_reply: Callable[[dict], str],
     limit: int = 10,
+    mock_mode: bool = False,
 ):
     """Claim jobs and process them individually."""
 
@@ -46,6 +47,14 @@ def process_auto_jobs(
 
             if not isinstance(approved_reply, str) or not approved_reply.strip():
                 raise ValueError("EMPTY_AI_REPLY")
+
+            if not mock_mode:
+                raise AIResultRejected("PRODUCTION_GATE_NOT_CONFIGURED")
+
+            from .mock_ai_provider import verify_mock_reply
+
+            if not verify_mock_reply(job, approved_reply):
+                raise AIResultRejected("AUTOMATION_GATE_DENIED")
 
         except AIResultRejected as exc:
             logger.warning(
@@ -137,3 +146,4 @@ def process_auto_jobs(
             )
 
     return results
+

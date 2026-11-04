@@ -25,11 +25,13 @@ def test_worker_success(job):
         patch.object(worker, "claim_auto_jobs", return_value=[job]),
         patch.object(worker, "finalize_auto_job") as finalize,
         patch.object(worker, "retry_auto_job") as retry,
+        patch("backend.app.automation.postgres.mock_ai_provider.verify_mock_reply", return_value=True),
     ):
         results = worker.process_auto_jobs(
             session_factory,
             worker_id="worker-1",
             generate_reply=lambda _: "승인된 답변입니다.",
+            mock_mode=True,
         )
 
         assert results == [{"job_id": "job-1", "status": "SUCCEEDED"}]
@@ -105,11 +107,13 @@ def test_worker_finalize_failure(job):
             side_effect=RuntimeError("DB failure"),
         ),
         patch.object(worker, "retry_auto_job") as retry,
+        patch("backend.app.automation.postgres.mock_ai_provider.verify_mock_reply", return_value=True),
     ):
         results = worker.process_auto_jobs(
             session_factory,
             worker_id="worker-1",
             generate_reply=lambda _: "답변",
+            mock_mode=True,
         )
 
         assert results == [{"job_id": "job-1", "status": "FINALIZATION_FAILED"}]
