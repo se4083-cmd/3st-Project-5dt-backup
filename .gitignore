@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Backend B local synthetic test data (not tracked by Git)
+/data/local/
+
+.env.*
+*.db
