@@ -10,6 +10,7 @@ from collections.abc import Callable
 from .job_claim import claim_auto_jobs
 from .job_finalize import finalize_auto_job
 from .job_retry import retry_auto_job
+from .ai_adapter import AIResultRejected
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +46,37 @@ def process_auto_jobs(
 
             if not isinstance(approved_reply, str) or not approved_reply.strip():
                 raise ValueError("EMPTY_AI_REPLY")
+
+        except AIResultRejected as exc:
+            logger.warning(
+                "AI result rejected for job %s: %s",
+                job["job_id"],
+                exc.code,
+            )
+
+            try:
+                retry_result = retry_auto_job(
+                    session_factory,
+                    job,
+                    worker_id=worker_id,
+                    error_code=exc.code,
+                    force_handoff=not exc.retryable,
+                )
+                results.append(retry_result)
+
+            except Exception:
+                logger.exception(
+                    "AI rejection handling failed for job %s",
+                    job["job_id"],
+                )
+                results.append(
+                    {
+                        "job_id": job["job_id"],
+                        "status": "REJECTION_HANDLING_FAILED",
+                    }
+                )
+
+            continue
 
         except Exception:
             logger.exception(

@@ -7,7 +7,7 @@ import pytest
 from backend.app.automation.postgres import job_retry
 
 
-def run_retry(attempt):
+def run_retry(attempt, force_handoff=False):
     """Run retry logic with a mocked database session."""
     now = datetime(2026, 11, 4, tzinfo=timezone.utc)
 
@@ -74,15 +74,17 @@ def run_retry(attempt):
             job,
             worker_id="worker-1",
             error_code="MOCK_ERROR",
+            force_handoff=force_handoff,
         )
 
-    expected_calls = 5 if attempt >= job_retry.MAX_ATTEMPTS else 3
+    is_terminal = force_handoff or attempt >= job_retry.MAX_ATTEMPTS
+    expected_calls = 5 if is_terminal else 3
     assert session.execute.call_count == expected_calls
 
     update_statement = session.execute.call_args_list[2].args[0]
     params = update_statement.compile().params
 
-    if attempt >= job_retry.MAX_ATTEMPTS:
+    if is_terminal:
         ticket_statement = session.execute.call_args_list[3].args[0]
         ticket_params = ticket_statement.compile().params
 
@@ -142,6 +144,23 @@ def test_third_failure_is_terminal():
     assert result["delay_seconds"] is None
 
     assert params["status"] == "FAILED"
+    assert params["lease_token"] is None
+    assert params["lease_owner"] is None
+    assert params["lease_until"] is None
+
+
+def test_force_handoff_on_first_attempt():
+    result, params = run_retry(
+        attempt=1,
+        force_handoff=True,
+    )
+
+    assert result["status"] == "FAILED"
+    assert result["attempt"] == 1
+    assert result["delay_seconds"] is None
+
+    assert params["status"] == "FAILED"
+    assert params["error_code"] == "MOCK_ERROR"
     assert params["lease_token"] is None
     assert params["lease_owner"] is None
     assert params["lease_until"] is None

@@ -20,6 +20,7 @@ def retry_auto_job(
     job: dict,
     worker_id: str,
     error_code: str,
+    force_handoff: bool = False,
 ):
     """Record a retry or terminal failure for a leased AUTO job."""
 
@@ -77,7 +78,7 @@ def retry_auto_job(
         attempt = current_job["attempt"]
         now = utcnow()
 
-        if attempt >= MAX_ATTEMPTS:
+        if force_handoff or attempt >= MAX_ATTEMPTS:
             new_status = "FAILED"
             next_attempt_at = now
             delay = None
