@@ -74,7 +74,7 @@ def test_quality_migration_preserves_legacy_and_grants_no_backfill(settings, mon
             assert list(s.execute(select(messages))) == oldmessages
             assert list(s.execute(select(staff_permissions))) == oldgrants
             assert s.scalar(select(func.count()).select_from(reply_records)) == 0
-            assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0009"
+            assert s.scalar(text("SELECT version_num FROM alembic_version")) == "0010"
         alembic_command.check(cfg)
         for table in (rubrics, reply_records, evidence, samples, revisions, receipts):
             assert {c.name for c in table.constraints if isinstance(c, CheckConstraint)} == {

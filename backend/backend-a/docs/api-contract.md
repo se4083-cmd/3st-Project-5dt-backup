@@ -1,5 +1,8 @@
 # API와 Frontend 계약
 
+0.10.0/0010 로컬: GET `/staff/assignment-recommendations`는 ADMIN+ASSIGNMENT_RECOMMEND+현재 route 팀 scope의 읽기 전용 힌트입니다. 팀/티켓 필터·페이지/후보 제한·버전/만료·불추천 사유는 [실제 계약](assignment-recommendations.md)을 따릅니다. 기존 workload·품질·VOC·analytics-v1 API는 유지합니다.
+
+
 0.9.0/0009: `/staff/quality`의 후보·표본·목적별 자료·수동 평가/담당/VOID·이력·지표를 추가했습니다. [권한·정확한 요청/응답·집계 계약](quality-review.md)을 따릅니다. QUALITY_SAMPLE_MANAGE/REVIEW/METRICS_READ/UNATTRIBUTED_MANAGE는 역할과 현재 팀/지정 조건을 함께 적용하며 기본 미부여입니다. 과거 as_of·전체 AI 정답률·자동 처리율/안전한 완료율을 제공하지 않습니다.
 
 

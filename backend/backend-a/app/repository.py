@@ -28,6 +28,28 @@ def customer_for(session, user):
     return customer
 
 
+def agent_eligibility(agent, team_id, category=None):
+    """Candidate qualifications independent of an existing ticket assignment."""
+    grant, team = user_team_scopes.alias(), teams.alias()
+    conditions = [
+        agent.c.role == "AGENT",
+        agent.c.active.is_(True),
+        agent.c.team_id == team_id,
+        exists(select(1).where(team.c.team_id == team_id, team.c.active.is_(True))).correlate_except(team),
+        exists(
+            select(1).where(grant.c.user_id == agent.c.user_id, grant.c.team_id == team_id)
+        ).correlate_except(grant),
+    ]
+    if category is not None:
+        supported = team_categories.alias()
+        conditions.append(
+            exists(
+                select(1).where(supported.c.team_id == team_id, supported.c.category == category)
+            ).correlate_except(supported)
+        )
+    return and_(*conditions)
+
+
 def agent_assignment_exists(agent_id=None, *, as_of=None):
     """A current assignment that its active agent can actually use.
 
@@ -36,32 +58,20 @@ def agent_assignment_exists(agent_id=None, *, as_of=None):
     Queue visibility still requires its own explicit capability and route scope.
     """
     assignment, agent = assignments.alias(), users.alias()
-    grant, team, category = user_team_scopes.alias(), teams.alias(), team_categories.alias()
     conditions = [
         assignment.c.ticket_id == tickets.c.ticket_id,
         assignment.c.cycle_no == tickets.c.cycle_no,
         assignment.c.team_id == tickets.c.team_id,
         assignment.c.ended_at.is_(None),
         assignment.c.assigned_at <= (as_of if as_of is not None else utcnow()),
-        agent.c.active.is_(True),
-        agent.c.role == "AGENT",
-        agent.c.team_id == assignment.c.team_id,
-        team.c.active.is_(True),
+        agent_eligibility(agent, assignment.c.team_id, tickets.c.category),
         tickets.c.status.in_(["ASSIGNED", "IN_PROGRESS", "FOLLOWUP_PENDING", "WAITING_CUSTOMER"]),
     ]
     if agent_id is not None:
         conditions.append(agent.c.user_id == agent_id)
     return exists(
         select(1)
-        .select_from(
-            assignment.join(agent, assignment.c.agent_id == agent.c.user_id)
-            .join(grant, and_(grant.c.user_id == agent.c.user_id, grant.c.team_id == assignment.c.team_id))
-            .join(team, team.c.team_id == assignment.c.team_id)
-            .join(
-                category,
-                and_(category.c.team_id == assignment.c.team_id, category.c.category == tickets.c.category),
-            )
-        )
+        .select_from(assignment.join(agent, assignment.c.agent_id == agent.c.user_id))
         .where(*conditions)
     ).correlate(tickets)
 

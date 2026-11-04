@@ -1,0 +1,23 @@
+{
+  "app/main.py": "03a3acb516a7dae18ac504203bfffbb1f5f193217fc027a085ad9f565aad54c1",
+  "app/recommendation_schemas.py": "ff563876cc136d87de0b5cea54eac595567da62d5633bd0771a34d28c7ed1aa2",
+  "app/recommendations.py": "d8787d67654f34ade53dd7f531bcac60d7c387cd3b39d2922928470a7e09d9ac",
+  "app/repository.py": "49da7d90334cc04a4eb3f55defd2e329f5eec256f8308075b228f26f0033dacf",
+  "app/staff_models.py": "6829e455c2bd1108a362ab9a9a40ff3d9be6f7427dac5a9f8abdb931be9803d7",
+  "app/staff_router.py": "ca25ef7e57dad557e896834b6f614e47ef2160f9da2b6b813f8d6019216718d1",
+  "app/workload.py": "94d89611e7f2a0b9d3def32275f490e8e8080a14c0a76887b8daec1a550b3803",
+  "docs/examples/assignment-recommendations.json": "c13510df1d921bc9960236556349da3231260e3a78c78e76901f6a7ac33889fc",
+  "docs/examples/frontend-requests.json": "d3c6ade2869370c421e7c454d80cee39f51d6b8da1b1c0dd30ac7fb68ab734cb",
+  "docs/openapi.json": "ba363841c0d89e5407293c3fa401572ddb48556555667b6fcf651f0d3fef5d19",
+  "migrations/versions/0010_assignment_recommend_permission.py": "4e41bc5f0db4d74a16d553ad4431dafe06b23be592958989d90af3a21bc7fc1a",
+  "pyproject.toml": "9e6e2c65ab2383b83c60bc05eda74f3480e19ac6e7ebbdfd6b7a6a23a821c366",
+  "scripts/check_handoff_contract.py": "a2f5aac24639e1a31c2890ab26d89a2333b047623e8b16a32bfadb3cd69aacbd",
+  "tests/test_analytics_database.py": "c0b60cf9ee64911f9857289cc731b338483008892a33e6419c4ca8128fb942c6",
+  "tests/test_phase3_database.py": "0a24cee830be8341c8935e1297b2477c2d45c3b283d4dd2f1202811605d72182",
+  "tests/test_quality_contract.py": "5830052a46e049a96450ebc95e18c647c93bfc8cd3c858072a027f06f874911d",
+  "tests/test_recommendations.py": "f76386a6eed2980fe9010e46294481833c63e3f7dcb3b4840b4a11a28cc4a98f",
+  "tests/test_recommendations_postgres.py": "f9866549cd0df1154cc6051a323a977b405348ff807b858fa4fef08aafab7ee0",
+  "tests/test_repository_layout.py": "3ad7eacd9e15b06565e72836856d68e8b20ba9e93f86f8bf80ed1a3eec43a73c",
+  "tests/test_voc_postgres.py": "43d69ef8804f54f8cfee7cbaf0bc1c6c18c402067f05caeead12a5129635fc01",
+  "tests/test_workload_postgres.py": "188c7ce6f0e4e955581c56ffb671d9539ae0060096962d3a545cb80dd990b56b"
+}

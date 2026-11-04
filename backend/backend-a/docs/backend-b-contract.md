@@ -1,5 +1,8 @@
 # Backend B와 내구 작업 계약
 
+0.10.0 로컬의 [배정 추천](assignment-recommendations.md)은 조회 전용입니다. 실제 `app.recommendations.view` 및 `repository.agent_eligibility`/`workload.ticket_facts`의 입력·인증·snapshot 책임은 해당 문서에 적었습니다. 후보/유효기간은 실행 허가가 아니며 B가 최신 ticket/cycle/route/직원 자격·부하·유효/물리 배정을 다시 검증해야 합니다. FAILED AUTO 보존 HUMAN 조회는 가능하지만 기존 미구현 실패/이관/배정 writer를 구현한 것은 아닙니다.
+
+
 0.9.0 선택 확장: 내부 `AutomaticReply.provenance`에 실제 질문·suggestion id/revision/hash·approval·model/prompt·retrieval ref·당시 정책 id/version/hash/chunk를 전달할 수 있습니다. [실제 시그니처·예시·거부/원자 경계](quality-review.md)를 따릅니다. 미제공도 기존 성공 흐름을 유지하며 MISSING으로 기록합니다. 다른 회차/답변/근거는 거부합니다. 최신 제안/정책을 과거 응답에 추정 연결하지 않습니다. B 실패·HUMAN 전환·배정 writer는 추가하지 않았습니다.
 
 

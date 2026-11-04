@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "CS Flow AI Backend A",
-    "version": "0.9.0"
+    "version": "0.10.0"
   },
   "paths": {
     "/health/live": {
@@ -4331,6 +4331,190 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WorkloadPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Content Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/staff/assignment-recommendations": {
+      "get": {
+        "tags": [
+          "staff operations"
+        ],
+        "summary": "Assignment Recommendations",
+        "description": "ADMIN + ASSIGNMENT_RECOMMEND + current route team scope.\nRead-only 30-second workload hints, not assignment authority or a lease.\nUnrouted ticket lookup needs UNROUTED_QUEUE_READ and returns no candidates.",
+        "operationId": "assignment_recommendations_api_v1_staff_assignment_recommendations_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "team_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Team Id"
+            }
+          },
+          {
+            "name": "ticket_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ticket Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "candidate_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 10,
+              "minimum": 1,
+              "default": 3,
+              "title": "Candidate Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationPage"
                 }
               }
             }
@@ -12241,6 +12425,329 @@
         ],
         "title": "Receipt"
       },
+      "RecommendationCandidate": {
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Agent Id"
+          },
+          "team_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Team Id"
+          },
+          "tickets": {
+            "$ref": "#/components/schemas/TicketCounts"
+          },
+          "followups": {
+            "$ref": "#/components/schemas/DeadlineCounts"
+          },
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACTIVE_AGENT",
+                "ROUTE_TEAM_MATCH",
+                "CATEGORY_SUPPORTED",
+                "NORMALIZED_SCOPE_PRESENT",
+                "ORDERED_BY_ACTIVE_TICKET_COUNT",
+                "ORDERED_BY_OVERDUE_COUNT",
+                "STABLE_USER_ID_TIEBREAK"
+              ]
+            },
+            "type": "array",
+            "title": "Reason Codes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "agent_id",
+          "team_id",
+          "tickets",
+          "followups",
+          "rank",
+          "reason_codes"
+        ],
+        "title": "RecommendationCandidate"
+      },
+      "RecommendationItem": {
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ticket Id"
+          },
+          "cycle_no": {
+            "type": "integer",
+            "title": "Cycle No"
+          },
+          "ticket_revision": {
+            "type": "integer",
+            "title": "Ticket Revision"
+          },
+          "route_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Revision"
+          },
+          "route_team_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Team Id"
+          },
+          "route_recorded_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Recorded At"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "deadline_state": {
+            "type": "string",
+            "enum": [
+              "overdue",
+              "due_soon",
+              "on_time",
+              "no_due_date"
+            ],
+            "title": "Deadline State"
+          },
+          "due_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due At"
+          },
+          "waiting_since": {
+            "type": "null",
+            "title": "Waiting Since"
+          },
+          "waiting_basis": {
+            "type": "string",
+            "const": "NOT_RECORDED_NOT_INFERRED",
+            "title": "Waiting Basis",
+            "default": "NOT_RECORDED_NOT_INFERRED"
+          },
+          "recommendation_state": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "CONDITIONAL",
+              "UNAVAILABLE"
+            ],
+            "title": "Recommendation State"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "HUMAN_HANDOFF_PENDING",
+                "DEADLINE_OVERDUE",
+                "DEADLINE_DUE_SOON",
+                "DEADLINE_ON_TIME",
+                "NO_DUE_DATE",
+                "WAITING_START_UNRECORDED",
+                "FAILED_AUTO_HISTORY_PRESERVED",
+                "PHYSICAL_ASSIGNMENT_RECONCILIATION_REQUIRED",
+                "UNROUTED_NO_RECOMMENDATION",
+                "NOT_HUMAN_PATH",
+                "STATE_NOT_ASSIGNABLE",
+                "ALREADY_VALIDLY_ASSIGNED",
+                "CATEGORY_UNKNOWN",
+                "ROUTE_CATEGORY_UNSUPPORTED",
+                "NO_ELIGIBLE_AGENT"
+              ]
+            },
+            "type": "array",
+            "title": "Reason Codes"
+          },
+          "invalid_active_assignment_present": {
+            "type": "boolean",
+            "title": "Invalid Active Assignment Present"
+          },
+          "eligible_candidate_count": {
+            "type": "integer",
+            "title": "Eligible Candidate Count"
+          },
+          "candidates_truncated": {
+            "type": "boolean",
+            "title": "Candidates Truncated"
+          },
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/RecommendationCandidate"
+            },
+            "type": "array",
+            "title": "Candidates"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ticket_id",
+          "cycle_no",
+          "ticket_revision",
+          "route_revision",
+          "route_team_id",
+          "route_recorded_at",
+          "category",
+          "deadline_state",
+          "due_at",
+          "recommendation_state",
+          "reason_codes",
+          "invalid_active_assignment_present",
+          "eligible_candidate_count",
+          "candidates_truncated",
+          "candidates"
+        ],
+        "title": "RecommendationItem"
+      },
+      "RecommendationPage": {
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "rule_version": {
+            "type": "string",
+            "const": "WORKLOAD_PRIORITY_V1",
+            "title": "Rule Version",
+            "default": "WORKLOAD_PRIORITY_V1"
+          },
+          "freshness_seconds": {
+            "type": "integer",
+            "const": 30,
+            "title": "Freshness Seconds",
+            "default": 30
+          },
+          "deadline_basis": {
+            "type": "string",
+            "const": "STORED_DEADLINES_NOT_SLA_COMPLIANCE",
+            "title": "Deadline Basis",
+            "default": "STORED_DEADLINES_NOT_SLA_COMPLIANCE"
+          },
+          "waiting_time_basis": {
+            "type": "string",
+            "const": "UNAVAILABLE_NO_HUMAN_WAIT_START_HISTORY",
+            "title": "Waiting Time Basis",
+            "default": "UNAVAILABLE_NO_HUMAN_WAIT_START_HISTORY"
+          },
+          "execution_authority": {
+            "type": "string",
+            "const": "READ_ONLY_HINT_NOT_RESERVATION_OR_ASSIGNMENT",
+            "title": "Execution Authority",
+            "default": "READ_ONLY_HINT_NOT_RESERVATION_OR_ASSIGNMENT"
+          },
+          "team_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Team Ids"
+          },
+          "ticket_filter": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ticket Filter"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RecommendationItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "as_of",
+          "expires_at",
+          "team_ids",
+          "ticket_filter",
+          "total",
+          "items",
+          "next_cursor"
+        ],
+        "title": "RecommendationPage"
+      },
       "ReopenRequest": {
         "properties": {
           "expected_revision": {
@@ -13395,7 +13902,8 @@
                 "QUALITY_SAMPLE_MANAGE",
                 "QUALITY_REVIEW",
                 "QUALITY_METRICS_READ",
-                "QUALITY_UNATTRIBUTED_MANAGE"
+                "QUALITY_UNATTRIBUTED_MANAGE",
+                "ASSIGNMENT_RECOMMEND"
               ]
             },
             "type": "array",

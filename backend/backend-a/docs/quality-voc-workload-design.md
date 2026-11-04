@@ -1,5 +1,8 @@
 # AI 품질·VOC 개선·업무량/SLA 확장 설계안
 
+후속0.10.0/0010 로컬: **읽기 전용 업무량 기반 배정 추천**을 구현했습니다. [실제 계약](assignment-recommendations.md)을 우선합니다. B의 배정 실행/실패·HUMAN 전환, 팀 잠금·용량 엔진·Fabric/Export는 여전히 미구현/별도 담당입니다. 품질0.9.0은 먼저30fbfff로 공유했으며 이번 추천0.10.0은 후속 공유 대상입니다. Azure 배포는 포함하지 않습니다.
+
+
 후속 **0.9.0/0009**에서 이번 최소 범위의 전향적 응답 기록·수동 표본/평가 이력·현재 snapshot 지표를 로컬 구현했습니다. [실제 계약](quality-review.md)이 아래 제안보다 우선합니다. ticket_cycles·과거 as_of·안전한 자동 완료·새 SLA·AI 호출/자기평가·Fabric 품질 mart는 여전히 미구현입니다.
 
 
@@ -7,7 +10,7 @@
 
 공유본에서는 개인 PC의 절대 경로를 `<PROJECT_ROOT>`로 표시한다. 후속0.7.1은 업무량의 미배정 의미와 경로별 분류를 보완했으며 [현재 계약](workload.md)을 따른다. 나머지 기능의 제안 범위는 그대로다.
 
-작성일: 2026-11-04 KST. 후속 갱신: **첫 단계인 현재 업무량 조회를 로컬0.7.0/head0007에 구현**했다. 실제 API·권한·응답·검증은 [업무량 계약](workload.md)을 따른다. 아래 1절·5.3절은 설계 당시0.6.1/0006 확인 기록이다. 품질 평가·추천·새 SLA/analytics-v2/Export는 여전히 제안이며 미구현이다. VOC profile/계획의 현재 구현은 위0.8.0 계약을 따른다. Azure·실제 계정 권한·commit/push는 변경하지 않았다.
+작성일: 2026-11-04 KST. 후속 갱신: **첫 단계인 현재 업무량 조회를 로컬0.7.0/head0007에 구현**했다. 실제 API·권한·응답·검증은 [업무량 계약](workload.md)을 따른다. 아래 1절·5.3절은 설계 당시0.6.1/0006 확인 기록이다. 설계 당시 품질 평가·추천은 제안이었으며 현재 구현 상태는 위0.9.0/0.10.0 계약을 따른다. 새 SLA/analytics-v2/Export는 미구현이다. VOC profile/계획은 위0.8.0 계약을 따른다. 당시 검증에서는 Azure·실제 계정 권한·commit/push를 변경하지 않았다.
 
 ## 1. 설계 당시 구현 확인 (0.6.1 / 0006)
 
@@ -414,7 +417,7 @@ before/after에 같은 ticket 문의가 이어져도 최초 문의 cohort 배치
 | 2 — 로컬 구현 완료(0.8.0/0008) | **상품 개선 profile·계획 이력**과 기존 product followup wrapper. owner/status는 재사용, 실제 시행일·비교창 저장 | Fabric 효과 연동 미구현은 UNAVAILABLE/EFFECT_INTEGRATION_NOT_IMPLEMENTED 및 null로 표시하고 등록 업무부터 사용. 기존 후속 terminal/권한 회귀 유지 |
 | 3 — 최소 provenance 구현(0.9.0), ticket_cycles 미구현 | **확정 응답 provenance + 전향 ticket_cycles 제안**. 기존 writer transaction에 optional 확장, 과거 UNKNOWN 유지 | B에 새 필수 인자를 강제하기 전에 계약 sample으로 확인. 고정 합성 writer는 실제 AI 품질 증거가 아님 |
 | 4 — 최소 로컬 구현(0.9.0/0009) | **품질 표본·사람 평가**. 좁은 검토 권한/자료 조회·불변 revision·표본 내 지표 | AI 없이 합성 provenance와 수동 평가로 API 계약 검증. 사람 rubric 검증은 실제 상담/정책 담당 참여 필요 |
-| 5 | **규칙 추천 읽기** 및 B의 재검증·공통 guard 배정 연동 | A 단독 추천은 가능, 실제 실행·동시배정 보장은 B 공동 PG 회귀 뒤에만 보고 |
+| 5 — 읽기 로컬 구현(0.10.0), 실행 미구현 | **규칙 추천 읽기** 및 B의 재검증·공통 guard 배정 연동 | A 단독 추천은 가능, 실제 실행·동시배정 보장은 B 공동 PG 회귀 뒤에만 보고 |
 | 6 | **Fabric analytics-v2 효과 mart**의 수신/검증/불변·원자 게시/조회 | 합성 제출로 parser/정합·scope·게시만 검증. 실제 Export/원천 계산·Fabric 연결은 별도 팀 통합 |
 | 7 | 합의된 SLA clock·calendar/pause 정책·역사 지표, 안전한 자동 완료 정의 | 합의 전은 기존 기한 표시/unknown 유지. ML/새 scheduler 도입 없음 |
 

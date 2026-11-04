@@ -1,5 +1,8 @@
 # Backend B 로컬 인수
 
+추천 연결(로컬0.10.0): [읽기 전용 Python/HTTP 계약](assignment-recommendations.md)을 따릅니다. 새 B 서비스 HTTP·실제 배정·팀 잠금 실행기는 없습니다. 서비스 identity를 ADMIN으로 위장해 호출하지 않습니다. Frontend의 힌트 payload는 B의 최신 CAS/lease/권한/중복 배정 검사를 대체하지 않습니다.
+
+
 0.9.0 인수: `commit_automatic_reply(session, command)`의 반환값·호출자 commit 책임은 그대로입니다. 선택 `provenance` 및 새 PROVENANCE_* 거부 코드는 [품질 계약](quality-review.md)에 정리했습니다. policy body hash/원문과 실제 사용한 입력/근거를 제공하지 못하면 누락 상태로 남습니다. 이는 HTTP endpoint가 아니고 실제 AI/RAG/B Worker 연동 성공도 아닙니다. 기존 실패/이관 검토 제안은 그대로 미구현입니다.
 
 

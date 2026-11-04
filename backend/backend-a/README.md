@@ -1,6 +1,9 @@
 # CS Flow AI Backend A
 
-**0.9.0 / migration0009 (로컬 소스)**: [수동 품질 평가](docs/quality-review.md)를 추가했습니다. 실제 자동 확정 응답의 선택 근거 기록, 제한된 표본 자료, append-only 평가, 현재 snapshot 지표를 제공합니다. 실제 AI 품질·외부 연동의 성공을 뜻하지 않습니다. 기존 VOC/업무량/analytics-v1 및 B 실행 책임은 유지합니다.
+**0.10.0 / migration0010 (공유 대상, Azure 이번 미확인·미변경)**: [읽기 전용 배정 우선순위 추천](docs/assignment-recommendations.md)을 추가했습니다. 먼저 품질0.9.0은30fbfff로 공유했습니다. 추천은 현재 업무량 힌트이며 실제 배정·예약·B 실행 변경은 없습니다.
+
+
+**이전 공유 기준 0.9.0 / migration0009**: [수동 품질 평가](docs/quality-review.md)를 추가했습니다. 실제 자동 확정 응답의 선택 근거 기록, 제한된 표본 자료, append-only 평가, 현재 snapshot 지표를 제공합니다. 실제 AI 품질·외부 연동의 성공을 뜻하지 않습니다. 기존 VOC/업무량/analytics-v1 및 B 실행 책임은 유지합니다.
 
 
 **이전 로컬 단계 0.8.0 / migration0008**: [VOC 상품 개선 조치·계획 이력](docs/voc-improvements.md)을 구현했습니다. 기존 상품 후속의 담당/상태/기한을 재사용하며 효과 분석은 미구현/null입니다. ADMIN+VOC_IMPROVEMENT_MANAGE와 현재 팀 scope가 필요합니다. 실제 권한 부여·Azure·commit/push는 수행하지 않았습니다.

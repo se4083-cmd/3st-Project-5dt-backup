@@ -21,6 +21,7 @@ from app.quality_schemas import (
     SampleCreate,
     VoidSample,
 )
+from app.recommendation_schemas import RecommendationPage
 from app.retention import RetentionRequest
 from app.schemas import AgentRequest, ReopenRequest, TicketCreate
 from app.staff_detail import DetailPurpose
@@ -127,6 +128,25 @@ def main():
     if schemas["StaffTicketDetail"].get("additionalProperties") is not False:
         raise RuntimeError("STAFF_DETAIL_ALLOWLIST_NOT_CLOSED")
     workload = actual["paths"]["/api/v1/staff/workload"]["get"]
+    recommendation_path = "/api/v1/staff/assignment-recommendations"
+    recommendation = actual["paths"][recommendation_path]
+    if set(recommendation) != {"get"} or recommendation["get"]["security"] != [{"HTTPBearer": []}]:
+        raise RuntimeError("RECOMMENDATION_READ_AUTH_CONTRACT_CHANGED")
+    for name in ("RecommendationPage", "RecommendationItem", "RecommendationCandidate"):
+        if schemas[name].get("additionalProperties") is not False:
+            raise RuntimeError("RECOMMENDATION_ALLOWLIST_NOT_CLOSED")
+    recommendation_example = RecommendationPage.model_validate_json(
+        (ROOT / "docs/examples/assignment-recommendations.json").read_text(encoding="utf-8")
+    )
+    if recommendation_example.expires_at - recommendation_example.as_of != timedelta(seconds=30):
+        raise RuntimeError("RECOMMENDATION_EXAMPLE_EXPIRY_INVALID")
+    for item in recommendation_example.items:
+        if item.waiting_since is not None or item.eligible_candidate_count < len(item.candidates):
+            raise RuntimeError("RECOMMENDATION_EXAMPLE_EVIDENCE_INVALID")
+        for candidate in item.candidates:
+            counts = candidate.tickets
+            if sum(counts.by_category.values()) != counts.total or counts.waiting_customer > counts.total:
+                raise RuntimeError("RECOMMENDATION_EXAMPLE_WORKLOAD_INVALID")
     quality_example = QualityMetrics.model_validate_json(
         (ROOT / "docs/examples/quality-metrics.json").read_text(encoding="utf-8")
     )

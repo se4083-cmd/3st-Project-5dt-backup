@@ -1,11 +1,43 @@
-# Backend A 7단계 로컬 구현·팀 인수 점검
+# Backend A 구현·팀 인수 현황
 
-현재 로컬 소스는 **0.9.0 / 0009**, [수동 품질 평가 계약](quality-review.md)을 따릅니다. 기존 AutomaticReply 호출은 호환하고 provenance만 선택 확장했습니다. 실제 AI 호출·평가 정답 입증·외부 연동/배포·계정 grant·commit/push는 이번에 하지 않았습니다. 아래0.8.0 및 과거 기록과 구분합니다.
+## 현재 공유 대상 — 0.10.0 / migration0010
+
+2026-11-04 KST. feature/backend-a의 품질 평가 공유 기준은 `30fbfff047f1d316b73cb33b6cc2b0fb4fe167db`이며, 그 뒤 구현한 [읽기 전용 배정 추천](assignment-recommendations.md)을 이번 공유 커밋에 포함한다. 소스/파일 migration head 기준이며 Azure 배포 버전을 뜻하지 않는다. 이번 공유 검토는 기록 hash/JUnit·diff·정적 계약 검사이며, 이전 PostgreSQL 21개·350개·마지막2개를 재실행하거나 합산하지 않았다. [검증/공유 검토 기록](evidence/recommendation-local/README.md)을 따른다.
+
+### 인수님 요청 3가지의 현재 상태
+
+| 요청 | A에서 구현·로컬 검증한 것 | 완료로 볼 수 없는 부분 |
+|---|---|---|
+| AI 상담 품질 평가·모니터링 | 0.9.0/0009: 실제 자동 확정 PUBLIC OUT final의 전향적 근거 연결, 관리자 수동 표본/검토자 지정, 제한 자료 열람, append-only 평가/변경/VOID, rubric·origin별 현재 snapshot 지표. 정확성은 CORRECT/(CORRECT+INCORRECT), 정책 일치는 MATCH/(MATCH+MISMATCH), 미평가/판단 불가/비적용/무효·근거 누락을 구분. coverage는 같은 확정 기간·scope의 확인 가능한 전체 자동 응답 기준 | 실제 AI 정답률/정책 품질을 검증한 것이 아니다. 수동 표본 결과를 전체 AI 성과로 일반화하지 않는다. DEV_QUALITY_V1은 개발 제안이며 운영 rubric·표본 운영·평가자 합의는 미완료. 과거 근거 복원/자기평가/안전한 자동 완료율은 제공하지 않음. [품질 계약](quality-review.md) |
+| VOC 상품 개선 조치·효과 추적 | 0.8.0/0008: 기존 product followup+1:1 profile, append-only 계획/시행 사실 정정, 관련 티켓·게시 배치/exact scope 연결. 담당/상태/기한은 followup 정본. 실제 시행일/동일 길이 비교창은 명시 입력 | DONE은 개선 업무 완료다. 실제 Fabric 전후 효과 수신/저장/조회·인과효과 입증은 미구현. availability=UNAVAILABLE, reason=EFFECT_INTEGRATION_NOT_IMPLEMENTED, metrics=null. 판매량 없으면 문의율을 만들지 않음. [VOC 계약](voc-improvements.md) |
+| 상담사 업무량·SLA 최적화 | 0.7.1/0007: 현재 유효 배정 업무량, 미배정/무효 부분집합·처리경로, WAITING_CUSTOMER/후속 분리. 0.10.0/0010: ADMIN+ASSIGNMENT_RECOMMEND+현재 팀 scope의 HUMAN/HANDOFF_PENDING 추천, 후보 자격·현재 문의 수/초과 수/ID 정렬 | 읽기 전용 힌트이며 실제 B 배정·예약·동시 부하 균형/공정성·운영 개선 효과는 미검증. 기한은 저장된 임시24시간 연속 기한 상태이며 정식 SLA 준수율/업무시간·휴일·일시정지 엔진이 아님. 사람 대기 시작은 불명, route/job 시각으로 추정하지 않음. 30초 만료는 실행 권한/lease가 아님. [업무량](workload.md), [추천](assignment-recommendations.md) |
+
+### 자동 처리율·이관율: 기존 제공 지표와 새 요구의 차이
+
+실제 `GET /api/v1/admin/analytics/kpi` → `app.analytics_views.operational_kpi`는 게시 analytics-v1의 허용 팀 `analytics_daily` 행을 읽는다. 기존 `auto_closed_ratio = Σauto_closed_count / Σticket_count`, `handoff_ratio = Σhandoff_count / Σticket_count`이며 분모0은null이다. 기간/단위는 upstream 선언의 티켓 생성 cohort/day/team/category이고 cycle/message/VOC episode 단위가 아니다. 전체 manifest 팀 범위에서만 미귀속 AUTO를 포함하고 부분 팀 조회에는 귀속된 행만 사용한다. fixture-ticket-v1은 SYNTHETIC_APPROXIMATION, ticket-cohort-v1은 UPSTREAM_DECLARED_COHORT로 표시하며 실제 운영 Fabric 연결/정의 합의를 입증하지 않는다. 미게시 시 metrics=null이고 재문의·승인·review·sla는 기존 unavailable 사유를 유지한다.
+
+새 요청의 AUTO 시작 회차 기준 자동 처리/사람 이관·최종 실패/이관 사유·안전한 자동 완료는 위 티켓 비율만으로 확인할 수 없다. B의 구조화 실패/전환/사유·원본 AUTO 회차 연결, 재문의/재시도 중복 제외 단위, 팀 귀속과 Fabric 분모/기간 합의가 필요하다. 현재 snapshot/audit에 없는 과거 회차를 추정 복원하거나 실패 reason 문구를 분류하지 않는다. 이번 추천/품질 기능은 그 KPI를 새로 계산하거나 analytics-v1 wire를 바꾸지 않았다. [Fabric 계약](fabric-contract.md), [확장 설계의 미구현 지표](quality-voc-workload-design.md)를 따른다.
+
+### 다음 행동과 담당
+
+| 담당 | 다음 행동 | 연동 확인 기준 |
+|---|---|---|
+| Frontend 담당 + A | capabilities/팀 scope 기반 화면 연결. 품질 후보→표본/자료/평가/지표, VOC action/plan revision·멱등, workload/추천 만료·이유·문의/후속 분리 표시. 없는 실행 API 버튼을 만들지 않음 | 실제 팀 화면에서 권한 회수/403·404·409/빈 목록·null/unavailable·30초 만료 재조회 확인. 현재 실제 Frontend 연동 미검증 |
+| Backend B 준혁님 + A | 실제 확정 writer에 선택 provenance를 실제 사용 값으로 전달. 실패/HUMAN 전환/배정은 기존 검토의 미구현 제안을 확정 계약으로 오해하지 않고 별도 협의. 추천 사용 직전 현재 cycle/version/route revision·후보 자격·유효/물리 배정을 재검사하고 B 실행 경계의 lease/generation/PAUSED/CAS·멱등 적용 | 실제 B Worker와 fencing/중복·늦은 실행·실패 보존을 통합 검증. 추천을 받았다는 사실만으로 배정 권한이나 성공을 인정하지 않음. [B 인수](backend-b-handoff.md) |
+| AI/RAG 담당 + A/운영 평가 책임자 | 당시 model/prompt·실제 suggestion/approval·질문·정책 version/hash/검증 가능한 본문·retrieval 참조 제공 계약 확정. 운영 rubric/판단 불가/비적용 기준·평가 권한·표본 편향/coverage 합의 | 실제 확정 응답과 당시 근거 연결 및 사람 검토 결과 확인. 누락은 MISSING/UNKNOWN 유지. 합성 데이터 테스트를 실제 AI 품질로 보고하지 않음 |
+| Fabric 주현님 + A | VOC 전후 동일 길이 기간·UTC/일별 경계·상품 식별·비교 scope·판매량 분모·중첩 조치/미성숙/자료 부족 표시와 별도 효과 수신 계약 합의. 기존 게시/원자 검증 재사용 우선. 기존 KPI cohort/귀속 및 새 회차 분모도 합의 | 실제 Fabric emitter→A 수신/검증/게시→조회와 결과 출처 확인. 현재 효과 연동/DB→Blob Export 미구현이며 analytics-v1 schema를 이번에 바꾸지 않음. [Fabric 인수](fabric-handoff.md) |
+| 배포 담당 + A + 운영 책임자 | 별도 승인된 작업에서 배포 패키지/0010 additive migration·rollback 제한·환경 차이 검토. 새 capability는 기본 미부여이므로 역할/팀 scope에 맞는 계정 grant는 별도 승인 후 수행. 기존0.6.1/0006용 도구를 바로 실행하지 않음 | 대상 Azure 실제 버전/DB head·readiness·회귀·PAUSED/실행 경계 확인. 이번 작업은 Azure 미확인·미변경이며 배포/실제 grant/팀 메시지 발송 없음 |
+
+## 이전 단계별 인수 기록
+
+아래의 버전·통과 수·미push/배포 서술은 각 단계 당시 기록이다. 현재 공유 범위와 운영 상태는 위 요약을 우선하고, 과거 Azure 기록을 이번 확인 결과로 사용하지 않는다.
+
+품질 구현 당시 로컬 소스는 **0.9.0 / 0009**, [수동 품질 평가 계약](quality-review.md)을 따릅니다. 기존 AutomaticReply 호출은 호환하고 provenance만 선택 확장했습니다. 실제 AI 호출·평가 정답 입증·외부 연동/배포·계정 grant·commit/push는 이번에 하지 않았습니다. 아래0.8.0 및 과거 기록과 구분합니다.
 
 
-현재 로컬 구현은 **0.8.0 / migration0008**입니다. [VOC 상품 개선 조치·계획 이력](voc-improvements.md)을 추가했고 담당/상태는 기존 product followup이 정본입니다. 실제 Fabric 효과 수신/계산/Export는 미구현이며 metrics=null입니다. VOC_IMPROVEMENT_MANAGE는 기본 미부여입니다. Backend B 실패/이관 검토 문서는 보존했고 B 실행 코드는 변경하지 않았습니다. Azure 버전/DB 상태는 이번에 확인하거나 변경하지 않았고 commit/push도 하지 않았습니다. 아래 과거 배포/검증 기록과 구분하세요.
+VOC 구현 당시 로컬은 **0.8.0 / migration0008**입니다. [VOC 상품 개선 조치·계획 이력](voc-improvements.md)을 추가했고 담당/상태는 기존 product followup이 정본입니다. 실제 Fabric 효과 수신/계산/Export는 미구현이며 metrics=null입니다. VOC_IMPROVEMENT_MANAGE는 기본 미부여입니다. Backend B 실패/이관 검토 문서는 보존했고 B 실행 코드는 변경하지 않았습니다. Azure 버전/DB 상태는 이번에 확인하거나 변경하지 않았고 commit/push도 하지 않았습니다. 아래 과거 배포/검증 기록과 구분하세요.
 
-현재는 **0.6.1 / migration0006**, 최종 코드 이후 전체 PostgreSQL **368개 통과**(실패/skip0)와 실제 HTTP **33개 흐름 통과**입니다. 관련 부분PG38개·SQLite37개/1skip은 합산하지 않습니다. [독립 검토 수정](review-fixes.md)은 배정 권한/큐·lease 최종 만료·cursor422·Python HTTP 설명 차이를 다룹니다. 이전0.6.0의330개 결과와 구분하며 실제 B/AI/Fabric/발송 엔진 통합 완료를 의미하지 않습니다.
+7단계 당시 로컬은 **0.6.1 / migration0006**, 최종 코드 이후 전체 PostgreSQL **368개 통과**(실패/skip0)와 실제 HTTP **33개 흐름 통과**입니다. 관련 부분PG38개·SQLite37개/1skip은 합산하지 않습니다. [독립 검토 수정](review-fixes.md)은 배정 권한/큐·lease 최종 만료·cursor422·Python HTTP 설명 차이를 다룹니다. 이전0.6.0의330개 결과와 구분하며 실제 B/AI/Fabric/발송 엔진 통합 완료를 의미하지 않습니다.
 
 공식 v4.1 DOCX를 로컬 OOXML로 읽고 코드/OpenAPI/2–4단계 설계·검증/Frontend·B·Fabric 계약과 대조했습니다. 원본 SHA256은 `a25d03e3b7ce9c35ccdfa98e8f46ebef0207e4e22fbd1b9746e3a7d429ab1f33`입니다. 문서의 실행 지시를 추가 사용자 승인으로 간주하지 않았고, 현재 사용자 지시대로 클라우드 작업은 제외했습니다.
 

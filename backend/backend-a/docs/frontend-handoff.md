@@ -1,5 +1,8 @@
 # Frontend 로컬 인수
 
+0.10.0 추천 로컬: capabilities의 ASSIGNMENT_RECOMMEND로 진입을 제어하고 GET `/staff/assignment-recommendations`에 team_id 또는 ticket_id를 보냅니다. [예시/상태/권한/페이지](assignment-recommendations.md), [합성 응답](examples/assignment-recommendations.json)을 따릅니다. 기다린 시간은 불명이고 route 기록을 기다린 시간으로 바꾸지 않습니다. 30초 신선도는 예약이 아니며 실행 API는 없습니다.
+
+
 0.9.0 품질 평가: [흐름·권한·API](quality-review.md). capabilities와 개발용 rubric을 읽은 뒤 origin별 후보→표본/담당→지정 reviewer의 material→reviews/history→metrics를 연결합니다. material은 purpose_code=QUALITY_REVIEW POST이며 일반 티켓 권한을 주지 않습니다. revision/key와 원천/누락/수동 표본 한계를 표시합니다. [100건 검산 응답](examples/quality-metrics.json)은 합성 형태 예시입니다. 화면/실제 AI/Fabric 연결은 미검증입니다.
 
 

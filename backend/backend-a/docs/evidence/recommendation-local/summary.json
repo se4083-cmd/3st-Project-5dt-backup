@@ -1,0 +1,138 @@
+{
+  "version": "0.10.0",
+  "migration_file_head": "0010",
+  "branch": "feature/backend-a",
+  "basis_head": "30fbfff047f1d316b73cb33b6cc2b0fb4fe167db",
+  "stage_1": {
+    "quality_version": "0.9.0",
+    "migration": "0009",
+    "commit": "30fbfff047f1d316b73cb33b6cc2b0fb4fe167db",
+    "normal_push_success": true,
+    "remote_head_verified_equal": true,
+    "remote_branch": "feature/backend-a",
+    "previous_quality_runs_not_rerun_or_summed": true,
+    "sharing_checks": "15 recorded source hashes matched; five previous JUnit summaries matched; Ruff/OpenAPI checker/Alembic file head/diff/staged paths and secret scan"
+  },
+  "stage_2": {
+    "committed": false,
+    "pushed": false,
+    "actual_assignment_writes": false,
+    "actual_account_grants": false
+  },
+  "runs": {
+    "initial.xml": {
+      "tests": 20,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 28.5
+    },
+    "focused.xml": {
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 2.854
+    },
+    "recommendation-final.xml": {
+      "tests": 21,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 38.099
+    },
+    "recommendation-reviewed.xml": {
+      "tests": 21,
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "time_seconds": 34.294
+    },
+    "migration-reviewed.xml": {
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 3.612
+    },
+    "regression.xml": {
+      "tests": 350,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 571.756
+    },
+    "recommendation-complete.xml": {
+      "tests": 21,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 29.108
+    },
+    "cursor-reviewed.xml": {
+      "tests": 2,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "time_seconds": 3.928
+    }
+  },
+  "runs_overlap_do_not_sum": true,
+  "canonical_new_feature_run": "recommendation-complete.xml",
+  "canonical_regression_run": "regression.xml",
+  "final_targeted_cursor_run": "cursor-reviewed.xml",
+  "failure_and_fix": "recommendation-reviewed.xml: 20 passed / 1 failed. Table inventory comparison relied on unspecified PostgreSQL catalog order. Compare sorted names. migration-reviewed.xml 2 passed, then recommendation-complete.xml 21 passed. No app/migration behavior change for this failure.",
+  "final_cursor_hardening": "After complete21, source review added cursor ID type validation (422 instead of potential 500 on non-string ID). Boundary/page/limit tests extended; cursor-reviewed.xml 2 passed. No full regression repeated for this isolated input check.",
+  "warning": "Each run has the existing FastAPI TestClient/httpx deprecation warning; dependencies unchanged.",
+  "postgres": "16.15 owned loopback cluster; unique temporary schema per test, no SQLite fallback",
+  "fixtures": "synthetic only; application clocks overridden in tests, actual RR isolation checked",
+  "static_checks": {
+    "ruff": "passed app/scripts/tests/migrations",
+    "ruff_format": "passed five recommendation/checker files",
+    "alembic_file_head": "0010 (single head)",
+    "openapi_examples_checker": "passed, includes closed recommendation DTO and full synthetic response",
+    "git_diff_check": "passed",
+    "original_migrations_0001_0009_unchanged": 9,
+    "protected_quality_voc_analytics_retention_execution_seed_sources_unchanged": 23,
+    "existing_http_paths_unchanged": 50,
+    "existing_shared_schema_change": "StaffCapabilities additive ASSIGNMENT_RECOMMEND only"
+  },
+  "limitations": [
+    "No actual B Worker/assignment/lease/reservation/concurrent load-balancing verification",
+    "No Azure/shared DB/Fabric/Frontend/AI/Export calls",
+    "No attendance/leave/online/skill/capacity source",
+    "No authoritative HUMAN wait-start history; NULL, not inferred from route/job/created timestamps",
+    "Each page is a fresh current snapshot, not one snapshot across pages",
+    "sla_due_at remains NOT NULL; defensive NULL branch tested only by altering disposable test schema",
+    "Not a production-scale performance benchmark"
+  ],
+  "owned_local_postgres_stopped": true,
+  "temporary_test_schemas_remaining": 0,
+  "final_worktree_review": {
+    "changed_files": 41,
+    "all_under_backend_a": true,
+    "index_empty": true,
+    "source_hashes_match": true,
+    "secret_pattern_findings": 0,
+    "env_database_cache_backups_excluded": true
+  },
+  "record_scope": "LOCAL_IMPLEMENTATION_AND_VALIDATION_BEFORE_SHARING",
+  "sharing_review": {
+    "date_kst": "2026-11-04",
+    "basis_head": "30fbfff047f1d316b73cb33b6cc2b0fb4fe167db",
+    "initial_changed_files": 41,
+    "source_hashes_matched": 21,
+    "JUnit_summaries_matched": 8,
+    "business_tests_rerun": false,
+    "old_results_not_summed": true,
+    "current_original_migrations_unchanged": 9,
+    "current_protected_sources_unchanged": 25,
+    "existing_http_paths_unchanged": 50,
+    "code_tests_migrations_openapi_unchanged_since_final_validation": true,
+    "documentation_updates": "Existing handoff: three requests, old KPI denominator and missing cycle/transfer provenance, owners/next integration actions; distinguish historical local records from sharing scope",
+    "checks": "Ruff/format, Alembic file graph, OpenAPI/examples checker, diff, document links, secret patterns/excluded paths, explicit staged bytes",
+    "external_integration_verified": false,
+    "azure_checked_or_changed": false,
+    "JUnit_whitespace_normalization": "Only trailing whitespace in historical failure diagnostic removed after staged diff check; counts/timestamps/failure preserved; ignored original retained. No test rerun."
+  }
+}

@@ -8,9 +8,10 @@ from sqlalchemy import select
 
 from app import automation_control as control
 from app import exception_queue as queue
-from app import retention, staff_detail, workload
+from app import recommendations, retention, staff_detail, workload
 from app.dependencies import DB, SnapshotDB, SnapshotUser, User
 from app.errors import APIError
+from app.recommendation_schemas import RecommendationPage
 from app.resolution import WorkRejected
 from app.routers import Cursor, Limit
 from app.staff_models import automation_control_history, staff_permissions
@@ -50,6 +51,7 @@ class StaffCapabilities(BaseModel):
             "QUALITY_REVIEW",
             "QUALITY_METRICS_READ",
             "QUALITY_UNATTRIBUTED_MANAGE",
+            "ASSIGNMENT_RECOMMEND",
         ]
     ]
 
@@ -75,6 +77,7 @@ def capabilities(session: SnapshotDB, user: SnapshotUser):
             "QUALITY_REVIEW",
             "QUALITY_METRICS_READ",
             "QUALITY_UNATTRIBUTED_MANAGE",
+            "ASSIGNMENT_RECOMMEND",
         }
     )
     granted = session.scalars(
@@ -100,6 +103,31 @@ def workload_view(
         agent_id=str(agent_id) if agent_id else None,
         include_unrouted=include_unrouted,
         limit=limit,
+        cursor=cursor,
+    )
+
+
+@router.get("/assignment-recommendations", response_model=RecommendationPage)
+def assignment_recommendations(
+    session: SnapshotDB,
+    user: SnapshotUser,
+    team_id: UUID | None = None,
+    ticket_id: UUID | None = None,
+    limit: Annotated[int, Query(ge=1, le=50)] = 20,
+    candidate_limit: Annotated[int, Query(ge=1, le=10)] = 3,
+    cursor: Cursor = None,
+):
+    """ADMIN + ASSIGNMENT_RECOMMEND + current route team scope.
+    Read-only 30-second workload hints, not assignment authority or a lease.
+    Unrouted ticket lookup needs UNROUTED_QUEUE_READ and returns no candidates.
+    """
+    return recommendations.view(
+        session,
+        user,
+        team_id=str(team_id) if team_id else None,
+        ticket_id=str(ticket_id) if ticket_id else None,
+        limit=limit,
+        candidate_limit=candidate_limit,
         cursor=cursor,
     )
 

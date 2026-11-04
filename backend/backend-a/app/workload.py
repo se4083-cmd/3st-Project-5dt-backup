@@ -159,9 +159,9 @@ def unassigned_counts(session, as_of, team_ids, *, unrouted=False):
     return result
 
 
-def ticket_counts(session, roster, page_ids, as_of):
+def ticket_facts(roster, as_of):
     # EXISTS preserves one fact per ticket/cycle despite historical assignment rows.
-    facts = (
+    return (
         select(
             roster.c.agent_id,
             tickets.c.ticket_id,
@@ -175,6 +175,10 @@ def ticket_counts(session, roster, page_ids, as_of):
         .distinct()
         .cte("workload_ticket_facts")
     )
+
+
+def ticket_counts(session, roster, page_ids, as_of):
+    facts = ticket_facts(roster, as_of)
     # Non-page agents collapse into a NULL bucket: bounded aggregate result size,
     # while scope totals cover the complete roster, independently of pagination.
     bucket = case((facts.c.agent_id.in_(page_ids), facts.c.agent_id), else_=None)
