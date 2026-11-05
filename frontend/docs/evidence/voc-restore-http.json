@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "date": "2026-11-05T00:33:19.688Z",
+  "real_http": {
+    "generate": 201,
+    "replay": 200,
+    "detail": 200,
+    "history": 200,
+    "approve": 200,
+    "reject": 200,
+    "conflict": 409,
+    "disabled": 503,
+    "insufficient": "INSUFFICIENT_DATA",
+    "failed": "AZURE_CALLS_DISABLED"
+  },
+  "browser": {
+    "desktop": "1440x1000",
+    "mobile": "390x844",
+    "generate": true,
+    "approve": true,
+    "real409AndRefetch": true,
+    "uncaughtErrors": 0,
+    "storageEmpty": true
+  },
+  "provider": "MOCK",
+  "source": "LOCAL_SYNTHETIC",
+  "azureCallsEnabled": false,
+  "externalAzureFabricRagVerified": false
+}

@@ -46,4 +46,6 @@ Node.js 22.12 이상이 필요합니다. 화면의 `개발용 상태 시연`에�
 
 `#/p1` 또는 기존 Mock 화면의 `P1 API 로그인`으로 실제 Backend A 로그인·P1 세션을 확인할 수 있습니다. JWT는 메모리에만 보관하고 P1 메뉴/직접 경로는 서버의 capability를 검사합니다. 기본 P0 합성 화면·KPI는 유지합니다. [실행·API 통신·미연결 목록](docs/p1-auth-foundation.md), [인증 기반 검증 기록](docs/p1-auth-verification.md)을 참고하세요.
 
-`#/p1/monitoring`은 실제 monitoring summary·jobs·ai-calls 조회 화면입니다. 서버 `P1_ENABLED=true`, 활성 ADMIN의 팀 grant와 `P1_MONITOR_READ`가 필요합니다. 팀·작업 종류·목록 상태 필터와 커서 페이지 조회를 지원하며 0건·미관측·미게시·오래된 분석·조회 실패를 구분합니다. VOC·정책 본 화면은 아직 준비 상태입니다. [모니터링 계약·로컬 PostgreSQL HTTP/브라우저 검증·남은 연결 범위](docs/p1-monitoring.md)를 참고하세요. 실제 Azure/Fabric 연결 완료를 뜻하지 않습니다.
+`#/p1/monitoring`은 실제 monitoring summary·jobs·ai-calls 조회 화면입니다. 서버 `P1_ENABLED=true`, 활성 ADMIN의 팀 grant와 `P1_MONITOR_READ`가 필요합니다. 팀·작업 종류·목록 상태 필터와 커서 페이지 조회를 지원하며 0건·미관측·미게시·오래된 분석·조회 실패를 구분합니다. [모니터링 계약·로컬 PostgreSQL HTTP/브라우저 검증·남은 연결 범위](docs/p1-monitoring.md)를 참고하세요. 실제 Azure/Fabric 연결 완료를 뜻하지 않습니다.
+
+`#/p1/voc`와 `#/p1/voc/:requestId`는 VOC 생성·이력·근거·검토 화면입니다. 서버 `P1_VOC_ENABLED=true`, 명시 SQL 팀 grant와 `P1_VOC_READ`, 생성/검토에는 각각 `P1_VOC_GENERATE`/`P1_VOC_REVIEW`가 필요합니다. 로컬 검증은 MOCK, Azure 전송 false로 실행합니다. [VOC 재구현·멱등 처리·검증](docs/restored-voc.md)을 참고하세요. 정책 화면은 아직 준비 상태입니다.

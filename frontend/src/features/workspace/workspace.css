@@ -1,0 +1,21 @@
+.p1-workspace { display: grid; gap: 20px; }
+.p1-workspace .page-heading { margin-bottom: 0; }
+.p1-workspace .card { min-width: 0; }
+.p1-workspace .card > h2:first-child { margin-top: 0; }
+.p1-workspace .p1-id, .p1-workspace dd { overflow-wrap: anywhere; }
+.p1-form { display: grid; gap: 16px; margin: 16px 0; }
+.p1-form label { display: grid; gap: 8px; font-size: 13px; }
+.p1-form fieldset { min-width: 0; display: grid; gap: 12px; border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+.p1-form input:not([type=checkbox]), .p1-form select, .p1-form textarea { width: 100%; max-width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: white; }
+.p1-form textarea { min-height: 120px; resize: vertical; }
+.p1-teams, .p1-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.p1-teams label { display: flex; gap: 8px; align-items: center; overflow-wrap: anywhere; }
+.p1-actions { margin: 16px 0; }
+.p1-workspace td small { display: block; margin-top: 8px; }
+.p1-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.p1-facts dt { color: var(--muted); font-size: 12px; }
+.p1-facts dd { margin: 8px 0; }
+.p1-workspace pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.p1-workspace .p1-prose { white-space: pre-wrap; overflow-wrap: anywhere; }
+.p1-workspace details summary { cursor: pointer; padding: 8px 0; }
+@media(max-width:600px) { .p1-facts { grid-template-columns: minmax(0, 1fr); } .p1-workspace .notice { overflow-wrap: anywhere; } .p1-workspace td { min-width: 140px; } }

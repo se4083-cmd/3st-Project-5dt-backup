@@ -1,0 +1,213 @@
+{
+  "products": {
+    "availability": "AVAILABLE",
+    "reason": null,
+    "meta": {
+      "batch_id": "a3b7b122-c9dd-41b9-a483-c1f1a97984e8",
+      "schema_version": "analytics-v1",
+      "rule_version": "voc_rule_v1",
+      "source": "LOCAL_SYNTHETIC",
+      "source_as_of": "2026-10-31T03:00:00Z",
+      "generated_at": "2026-10-31T03:00:00Z",
+      "window_end": "2026-10-30T15:00:00Z",
+      "windows": {
+        "history_start": "2026-10-02T15:00:00Z",
+        "operational_start": "2026-10-02T15:00:00Z",
+        "sales_start": "2026-10-02T15:00:00Z",
+        "prior_start": "2026-10-16T15:00:00Z",
+        "recent_start": "2026-10-23T15:00:00Z",
+        "window_end": "2026-10-30T15:00:00Z"
+      },
+      "published_at": "2026-11-05T00:33:10.392998Z",
+      "is_current": true,
+      "scope_key": "T1",
+      "team_ids": [
+        "30823eec-3021-5baa-aa22-cf7f8bf23e08"
+      ],
+      "stale": false,
+      "origin_verification": "SERVICE_DECLARED_NOT_INDEPENDENTLY_VERIFIED",
+      "cache_fingerprint": "5e597a68e2076e15d09ced7da95d6505efffd93203a841e73ea9f7ba7d2a7c63",
+      "sales_denominator_scope": "GLOBAL_PRODUCT_PAID_28D"
+    },
+    "items": [
+      {
+        "scope_key": "T1",
+        "product_id": "3ac5f79e-0428-5317-9a07-1fd81f2ad932",
+        "rule_version": "voc_rule_v1",
+        "data_status": "ELIGIBLE",
+        "score": "50.000000",
+        "rank": 1,
+        "risk_band": "WATCH",
+        "metrics": {
+          "C": 5,
+          "P": 1,
+          "S": 100,
+          "N": 4,
+          "M": 1,
+          "U": 2,
+          "K": 3,
+          "raw_rate": 0.05,
+          "smoothed_rate": 0.05,
+          "growth": 4.0,
+          "top_issue": "DAMAGED",
+          "outside_cohort": 0,
+          "excluded_count": 0,
+          "sales_complete": true,
+          "quality_ok": true,
+          "complaints_complete": true,
+          "episode_state_complete": true
+        },
+        "components": {
+          "volume": {
+            "normalized": 0.5,
+            "weight": 0.1,
+            "contribution": 5.0
+          },
+          "rate": {
+            "normalized": 0.5,
+            "weight": 0.35,
+            "contribution": 17.5
+          },
+          "growth": {
+            "normalized": 0.5,
+            "weight": 0.25,
+            "contribution": 12.5
+          },
+          "repeat": {
+            "normalized": 0.5,
+            "weight": 0.2,
+            "contribution": 10.0
+          },
+          "unresolved": {
+            "normalized": 0.5,
+            "weight": 0.1,
+            "contribution": 5.0
+          }
+        },
+        "source_as_of": "2026-10-31T03:00:00Z",
+        "window_end": "2026-10-30T15:00:00Z"
+      }
+    ]
+  },
+  "proposal": {
+    "request_id": "40d50448-908c-45df-bbc8-a1c64dc4ac23",
+    "product_id": "3ac5f79e-0428-5317-9a07-1fd81f2ad932",
+    "batch_id": "a3b7b122-c9dd-41b9-a483-c1f1a97984e8",
+    "created_by": "921e2908-c1ed-5cff-883b-b689ffe333a1",
+    "team_ids": [
+      "30823eec-3021-5baa-aa22-cf7f8bf23e08"
+    ],
+    "status": "PENDING_REVIEW",
+    "revision": 1,
+    "provider": "MOCK",
+    "model_deployment": null,
+    "evidence": {
+      "meta": {
+        "stale": false,
+        "source": "LOCAL_SYNTHETIC",
+        "windows": {
+          "window_end": "2026-10-30T15:00:00Z",
+          "prior_start": "2026-10-16T15:00:00Z",
+          "sales_start": "2026-10-02T15:00:00Z",
+          "recent_start": "2026-10-23T15:00:00Z",
+          "history_start": "2026-10-02T15:00:00Z",
+          "operational_start": "2026-10-02T15:00:00Z"
+        },
+        "batch_id": "a3b7b122-c9dd-41b9-a483-c1f1a97984e8",
+        "team_ids": [
+          "30823eec-3021-5baa-aa22-cf7f8bf23e08"
+        ],
+        "scope_key": "T1",
+        "is_current": true,
+        "window_end": "2026-10-30T15:00:00Z",
+        "generated_at": "2026-10-31T03:00:00Z",
+        "published_at": "2026-11-05T00:33:10.392998Z",
+        "rule_version": "voc_rule_v1",
+        "source_as_of": "2026-10-31T03:00:00Z",
+        "schema_version": "analytics-v1",
+        "cache_fingerprint": "5e597a68e2076e15d09ced7da95d6505efffd93203a841e73ea9f7ba7d2a7c63",
+        "origin_verification": "SERVICE_DECLARED_NOT_INDEPENDENTLY_VERIFIED",
+        "sales_denominator_scope": "GLOBAL_PRODUCT_PAID_28D"
+      },
+      "facts": {
+        "rate": {
+          "N": 4,
+          "S": 100,
+          "meaning": "N=distinct recent complaint orders in paid sales cohort; S=global product paid orders, 28d. raw_rate/smoothed_rate are upstream published values, not recomputed",
+          "raw_rate": 0.05,
+          "smoothed_rate": 0.05,
+          "denominator_scope": "GLOBAL_PRODUCT_PAID_28D",
+          "cohort_inquiry_ratio": 0.04
+        },
+        "risk": {
+          "score": "50.000000",
+          "risk_band": "WATCH",
+          "data_status": "ELIGIBLE",
+          "rule_version": "voc_rule_v1"
+        },
+        "trend": {
+          "daily": [
+            {
+              "day": "2026-10-29",
+              "scope_key": "T1",
+              "product_id": "3ac5f79e-0428-5317-9a07-1fd81f2ad932",
+              "episode_count": 2,
+              "primary_issue": "DAMAGED",
+              "unresolved_count": 1
+            },
+            {
+              "day": "2026-10-30",
+              "scope_key": "T1",
+              "product_id": "3ac5f79e-0428-5317-9a07-1fd81f2ad932",
+              "episode_count": 3,
+              "primary_issue": "DAMAGED",
+              "unresolved_count": 1
+            }
+          ],
+          "growth": 4.0,
+          "windows": {
+            "window_end": "2026-10-30T15:00:00Z",
+            "prior_start": "2026-10-16T15:00:00Z",
+            "sales_start": "2026-10-02T15:00:00Z",
+            "recent_start": "2026-10-23T15:00:00Z",
+            "history_start": "2026-10-02T15:00:00Z",
+            "operational_start": "2026-10-02T15:00:00Z"
+          },
+          "prior_count": 1,
+          "recent_count": 5
+        },
+        "repeat": {
+          "C": 5,
+          "K": 3,
+          "M": 1,
+          "meaning": "C=recent VOC episodes; M=largest primary-issue episode count; K=distinct customers. Concentration is not repeat-contact frequency or confirmed defect rate",
+          "top_issue": "DAMAGED",
+          "issue_concentration": 0.2
+        }
+      },
+      "product_id": "3ac5f79e-0428-5317-9a07-1fd81f2ad932",
+      "score_meaning": "MANAGEMENT_PRIORITY_NOT_DEFECT_RATE_OR_CONFIRMED_DEFECT",
+      "method_version": "voc-proposal-v1",
+      "fabric_connection": "UNVERIFIED"
+    },
+    "evidence_hash": "2c898e3569b284fa69dd703924678589b0d8f4a801835d12ae1949e48325c2c0",
+    "proposal": {
+      "recommendations": [
+        {
+          "title": "[MOCK] DAMAGED 불만 집중 원인 점검 후보",
+          "action": "포장 및 출고 점검 절차의 개선 실험 후보를 검토하세요. 위험도·집중도·문의율·기간 추세는 검토 근거이며 실제 원인이나 개선 효과가 확인된 것은 아닙니다.",
+          "evidence_ids": [
+            "risk",
+            "repeat",
+            "rate",
+            "trend"
+          ]
+        }
+      ]
+    },
+    "reason_code": null,
+    "created_at": "2026-11-05T00:33:10.540211Z",
+    "updated_at": "2026-11-05T00:33:10.540212Z",
+    "reviews": []
+  }
+}

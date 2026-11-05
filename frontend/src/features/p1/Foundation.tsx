@@ -7,6 +7,7 @@ import { LoginPanel } from "../../auth/LoginPanel";
 import { hasCapability } from "../../auth/session";
 import type { P1Session } from "../../auth/session";
 import { MonitoringPage } from "../monitoring/MonitoringPage";
+import { VOCList, VOCDetailRoute } from "../voc/Pages";
 import "./foundation.css";
 
 const features = [
@@ -62,7 +63,9 @@ export function ConnectedApp({ p1Route, renderLegacy }: { p1Route: boolean; rend
     <Routes>
       <Route path="/p1" element={<ConnectionStatus />} />
       <Route path="/p1/monitoring" element={<RequireCapability capability="P1_MONITOR_READ"><MonitoringPage /></RequireCapability>} />
-      {features.filter(f => f.path !== "/p1/monitoring").map(f => <Route key={f.path} path={`${f.path}/*`} element={<RequireCapability capability={f.capability}><Preparation title={f.label} /></RequireCapability>} />)}
+      <Route path="/p1/voc" element={<RequireCapability capability="P1_VOC_READ"><VOCList /></RequireCapability>} />
+      <Route path="/p1/voc/:requestId" element={<RequireCapability capability="P1_VOC_READ"><VOCDetailRoute /></RequireCapability>} />
+      {features.filter(f => f.path === "/p1/policies").map(f => <Route key={f.path} path={`${f.path}/*`} element={<RequireCapability capability={f.capability}><Preparation title={f.label} /></RequireCapability>} />)}
       <Route path="/p1/policy-comparisons/*" element={<RequireCapability capability="P1_POLICY_READ"><Preparation title="정책 비교 검토" /></RequireCapability>} />
       <Route path="*" element={<AsyncState kind="error" error={new ApiError(404, "NOT_FOUND")} />} />
     </Routes>
