@@ -69,7 +69,7 @@ client는 B가 주입하고 timeout과 SDK `max_retries=0`을 명시해 중첩 �
 
 성공 객체의 최상위 필드는 `job`, `category`, `analysis`, `execution`이다.
 `analysis`는 `category, summary, risk_tags, risk_evidence, review_required,
-voc_predicted_is_complaint`를 포함한다. 새 필드는 기본 null이고 예측 활성화 시 bool/null이다.
+voc_predicted_is_complaint`를 포함한다. 새 필드는 기본 분석에서 bool/null을 예측하고, 명시 비활성화 시 null이다.
 분류는 DELIVERY/RETURN/REFUND/PRODUCT/PAYMENT/ACCOUNT/UNKNOWN.
 최상위 category만 UNKNOWN→UNCLASSIFIED로 바뀌며 원본 analysis.category는 유지한다.
 신호는 HUMAN_REQUEST/EXCEPTION/ACCOUNT_SECURITY.
@@ -135,8 +135,8 @@ python -m ai.examples.backend_b_analysis --predict-complaint
 
 ## 민원 여부와 다음 합의
 
-현재 `voc_predicted_is_complaint`는 구현했다. 기본 null이며 predict_complaint=True에서만
-제안 기준으로 예측한다. nullable boolean 의미는 팀 전달 내용을 반영했고 내용 판단 기준은
-합의 대기다. `is_complaint`/label_status의 확정·저장은 백엔드 영역으로 구현하지 않는다.
+현재 `voc_predicted_is_complaint`는 기본 활성화했다. 프로젝트 소유자가 제안 기준을 채택하도록
+요청했으며, predict_complaint=False를 명시한 경우에만 미실행 null을 반환한다.
+팀 전체 승인이나 실제 모델 품질 검증 완료를 뜻하지 않는다. `is_complaint`/label_status의 확정·저장은 백엔드 영역으로 구현하지 않는다.
 신호나 기존 분류를 임의로 불만 여부로 변환하지 않으며 예측값을 최종값에 복사하지 않는다.
 RAG·답변 생성·정책 승인·B 작업 완료는 이번 계약과 분리한다. 테스트 날짜를 임의 약속하지 않는다.

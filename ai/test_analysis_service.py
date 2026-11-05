@@ -31,7 +31,7 @@ class AnalysisServiceTests(unittest.TestCase):
                 context = job()
                 before = copy.deepcopy(context)
                 result = analyze_job_checked(client, "mock", context, client.fixture["inquiry"])
-                self.assertIsNone(result["analysis"]["voc_predicted_is_complaint"])
+                self.assertIs(result["analysis"]["voc_predicted_is_complaint"], None if scenario == "unknown" else False)
                 self.assertEqual(context, before)
                 self.assertEqual(result, analyze_job(client, "mock", context, client.fixture["inquiry"]))
                 self.assertEqual(set(result), {"job", "category", "analysis", "execution"})
@@ -125,7 +125,7 @@ class AnalysisServiceTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         result = subprocess.run([sys.executable, "-m", "ai.examples.backend_b_analysis"],
                                 cwd=root, capture_output=True, text=True, check=True)
-        self.assertEqual(len(result.stdout.strip().splitlines()), 3)
+        self.assertEqual(len(result.stdout.strip().splitlines()), 4)
         self.assertNotIn("lease_token", result.stdout)
         self.assertNotIn("12345678-1234-4234-8234-123456789abe", result.stdout)
 

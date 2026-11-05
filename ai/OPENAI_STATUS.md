@@ -1,5 +1,16 @@
 # OpenAI 담당 작업 상태
 
+## 2026-11-05 불만 예측 기준 채택 및 기본 활성화 (최신)
+
+- 프로젝트 소유자의 요청으로 제안 기준을 개인 main에 적용했다.
+- analyze_job/analyze_job_checked/analyze_inquiry의 predict_complaint 기본값은 True다.
+  명시 False에서만 미실행 null을 반환한다. 기본 프롬프트 버전은 signals_v4_voc_v1이다.
+- true=명시적 불만, false=단순 정보 문의, null=모호/문맥 부족·경계 사례로 유지한다.
+  review_required와 최종 is_complaint/label_status·자동 실행 판단은 독립적이다.
+- 과거 신호 점검 도구는 비교 가능성을 위해 기존 프롬프트를 명시적으로 유지한다.
+- 갱신한 전체 단위 테스트 27개 통과. 실제 모델·DB 호출 0회, 실모델 품질 검증은 미실행.
+- 아래의 기본 비활성화 기록은 이전 커밋 이력이며 최신 동작은 이 절과 VOC 계약을 따른다.
+
 ## 2026-11-05 VOC 예측 및 오류 경계 보완 (최신)
 
 - 11.05.14 이후 요청을 반영해 analysis.voc_predicted_is_complaint를 추가했다.

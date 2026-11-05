@@ -12,8 +12,10 @@ from ai.mock_analysis import MockAnalysisClient
 
 def main():
     parser = argparse.ArgumentParser(description="Synthetic analysis only; no model or DB calls")
-    parser.add_argument("--predict-complaint", action="store_true",
-                        help="Enable proposed complaint criteria in offline fixtures")
+    parser.add_argument("--predict-complaint", action="store_true", default=True,
+                        help="Complaint prediction is enabled by default")
+    parser.add_argument("--no-predict-complaint", action="store_false", dest="predict_complaint",
+                        help="Explicitly disable complaint prediction; returns null")
     args = parser.parse_args()
     job = {
         "job_id": "12345678-1234-4234-8234-123456789abc",

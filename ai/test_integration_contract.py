@@ -28,7 +28,7 @@ class IntegrationTests(unittest.TestCase):
         for function in (classify_inquiry, analyze_inquiry):
             payload = {"category": "DELIVERY", "summary": "배송 문의와 사람 연결 요청"}
             if function is analyze_inquiry:
-                payload.update(risk_tags=["HUMAN_REQUEST"],
+                payload.update(voc_predicted_is_complaint=None, risk_tags=["HUMAN_REQUEST"],
                                risk_evidence=[{"tag": "HUMAN_REQUEST", "quote": tail}])
             response = SimpleNamespace(status="completed", output=[],
                                        output_text=json.dumps(payload), model="actual-model")

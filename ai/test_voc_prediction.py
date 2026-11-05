@@ -19,21 +19,20 @@ class VOCPredictionTests(unittest.TestCase):
         client = MockAnalysisClient("complaint")
         create = client.responses.create
         client.responses.create = Mock(side_effect=create)
-        result = analyze_job_checked(client, "mock", job(), client.fixture["inquiry"])
+        result = analyze_job_checked(client, "mock", job(), client.fixture["inquiry"], predict_complaint=False)
         self.assertIsNone(result["analysis"]["voc_predicted_is_complaint"])
         sent = client.responses.create.call_args.kwargs
         self.assertNotIn("voc_predicted_is_complaint", sent["text"]["format"]["schema"]["properties"])
         self.assertNotEqual(result["execution"]["prompt_version"], VOC_PROMPT_VERSION)
 
-    def test_opt_in_true_false_null_independent_of_review(self):
+    def test_default_true_false_null_independent_of_review(self):
         for name, prediction, review in (
             ("complaint", True, False), ("delivery", False, False),
             ("human_request", False, True), ("unknown", None, True),
         ):
             with self.subTest(name=name):
                 client = MockAnalysisClient(name)
-                result = analyze_job_checked(client, "mock", job(), client.fixture["inquiry"],
-                                             predict_complaint=True)
+                result = analyze_job_checked(client, "mock", job(), client.fixture["inquiry"])
                 self.assertIs(result["analysis"]["voc_predicted_is_complaint"], prediction)
                 self.assertIs(result["analysis"]["review_required"], review)
                 self.assertEqual(result["execution"]["prompt_version"], VOC_PROMPT_VERSION)
@@ -62,7 +61,7 @@ class VOCPredictionTests(unittest.TestCase):
                     analyze_job_checked(Mock(), "mock", job(), "문의")
 
     def test_malformed_responses_are_explicit_response_errors(self):
-        payload = json.dumps(MockAnalysisClient().fixture["payload"])
+        payload = json.dumps({**MockAnalysisClient().fixture["payload"], "voc_predicted_is_complaint": False})
         base = dict(status="completed", output=[], output_text=payload, model="mock")
         broken = [
             {k: v for k, v in base.items() if k != "output"},

@@ -126,13 +126,13 @@ OUTPUT_SCHEMA = {
     "additionalProperties": False,
 }
 
-# Opt-in pending team agreement. No final label or automation decision.
-VOC_PROMPT_VERSION = "signals_v4_voc_proposal_v1"
+# Adopted by project owner on 2026-11-05. No final label or automation decision.
+VOC_PROMPT_VERSION = "signals_v4_voc_v1"
 VOC_PROMPT = """
 추가 업무: 현재 문의 원문의 불만 여부만 예측하여 voc_predicted_is_complaint로 반환하세요.
 true: 상품·서비스·처리에 대한 불만이나 불만족을 명시적으로 표현.
 false: 불만 표현 없이 정보·절차·상태만 문의.
-null: 문맥 부족, 상충/모호한 표현, 불만 표현 없는 파손 등 문제 사실만 신고하여 기준 미확정.
+null: 문맥 부족, 상충/모호한 표현, 불만 표현 없는 파손 등 문제 사실만 신고하여 별도 판정 기준이 필요한 경우.
 환불·반품 요청, 반말, 상담사 연결 요청, 위험 신호만으로 true를 부여하지 마세요.
 분류 및 위험 신호와 독립적으로 판단하세요. 예측은 최종 확정이나 자동답변 허가가 아닙니다.
 is_complaint, label_status, 승인·이관 결과는 출력하지 마세요.
@@ -223,7 +223,7 @@ def parse_result(response, inquiry, *, predict_complaint=False):
     return validate_payload(payload, inquiry, predict_complaint=predict_complaint)
 
 
-def analyze_inquiry(client, deployment, inquiry, *, predict_complaint=False):
+def analyze_inquiry(client, deployment, inquiry, *, predict_complaint=True):
     if not isinstance(inquiry, str) or not inquiry.strip() or len(inquiry) > 10000:
         raise ValueError("합성 문의는 1~10,000자의 문자열로 입력하세요.")
     if type(predict_complaint) is not bool:
@@ -267,7 +267,7 @@ def main():
         except (ValueError, TypeError) as error:
             raise SystemExit(f"분석 실패: {error}") from None
     print("응답 상태:", response.status)
-    print("프롬프트:", PROMPT_VERSION, "/ 추론 강도:", REASONING_EFFORT)
+    print("프롬프트:", VOC_PROMPT_VERSION, "/ 추론 강도:", REASONING_EFFORT)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     print("문의 유형:", CATEGORY_LABELS[result["category"]])
     labels = [RISK_LABELS[tag] for tag in result["risk_tags"]]

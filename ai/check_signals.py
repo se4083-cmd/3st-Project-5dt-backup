@@ -7,7 +7,7 @@
     python check_signals.py --limit 4
     python check_signals.py --cases S02 S10 S12 S14
 
-기존 analyze_inquiry를 그대로 호출합니다. 재시도와 병렬 호출은 하지 않습니다.
+과거 분류·신호 재검증을 위해 predict_complaint=False로 기존 프롬프트를 명시 호출합니다. 재시도와 병렬 호출은 하지 않습니다.
 호출·인증·HTTP 오류는 이후 호출을 중단합니다. 잘못된 출력은 오류로 집계합니다.
 각 시도 후 check_results에 진행 상태를 저장합니다. 개인정보는 입력하지 마세요.
 개발용 점검이며 독립 평가가 아닙니다. 요약의 사실 일치와 근거의 의미 적절성은
@@ -301,7 +301,7 @@ def main():
         ) as client:
             run_checks(
                 cases,
-                lambda inquiry: analyze_inquiry(client, deployment, inquiry),
+                lambda inquiry: analyze_inquiry(client, deployment, inquiry, predict_complaint=False),
                 report,
                 checkpoint,
             )

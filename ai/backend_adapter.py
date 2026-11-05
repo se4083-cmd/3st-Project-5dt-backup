@@ -52,7 +52,7 @@ def assert_same_job(expected, current):
         raise StaleJobContextError("STALE_JOB_CONTEXT")
 
 
-def analyze_job(client, deployment, job, inquiry, *, predict_complaint=False):
+def analyze_job(client, deployment, job, inquiry, *, predict_complaint=True):
     """Analyze one claimed job without creating draft, approval or send fields.
 
     inquiry must come from the caller's authorized current-cycle source message.
@@ -64,7 +64,7 @@ def analyze_job(client, deployment, job, inquiry, *, predict_complaint=False):
     if predict_complaint:
         analysis, response = analyze_inquiry(client, deployment, inquiry, predict_complaint=True)
     else:
-        analysis, response = analyze_inquiry(client, deployment, inquiry)
+        analysis, response = analyze_inquiry(client, deployment, inquiry, predict_complaint=False)
     assert_same_job(context, job)
     # Validate again at the boundary; do not trust substituted providers.
     keys = ["category", "summary", "risk_tags", "risk_evidence"]

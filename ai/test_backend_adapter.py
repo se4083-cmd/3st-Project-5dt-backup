@@ -19,7 +19,7 @@ class BackendAdapterTests(unittest.TestCase):
         self.client.responses.create.return_value = SimpleNamespace(
             status="completed", output=[], model="actual-model",
             output_text=json.dumps(dict(category="UNKNOWN", summary="확인 요청",
-                                        risk_tags=[], risk_evidence=[])))
+                                        risk_tags=[], risk_evidence=[], voc_predicted_is_complaint=None)))
 
     def test_backend_category_and_original_analysis(self):
         original = copy.deepcopy(self.job)

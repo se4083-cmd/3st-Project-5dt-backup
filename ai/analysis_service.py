@@ -30,7 +30,7 @@ class AIAnalysisError(Exception):
         return {"code": self.code, "retryable": self.retryable}
 
 
-def analyze_job_checked(client, deployment, job, inquiry, *, predict_complaint=False):
+def analyze_job_checked(client, deployment, job, inquiry, *, predict_complaint=True):
     """Return the legacy success shape; raise AIAnalysisError on known failures.
 
     Caller configures SDK timeouts/retries, rechecks DB state and owns all
@@ -49,7 +49,7 @@ def analyze_job_checked(client, deployment, job, inquiry, *, predict_complaint=F
     try:
         if predict_complaint:
             return analyze_job(client, deployment, job, inquiry, predict_complaint=True)
-        return analyze_job(client, deployment, job, inquiry)
+        return analyze_job(client, deployment, job, inquiry, predict_complaint=False)
     except APITimeoutError:
         raise AIAnalysisError("AI_TIMEOUT", retryable=True) from None
     except RateLimitError:
