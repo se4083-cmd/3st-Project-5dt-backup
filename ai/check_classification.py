@@ -30,8 +30,8 @@ def load_cases(path):
         for key in ("id", "text", "expected_category", "review_note"):
             if not isinstance(case.get(key), str) or not case[key].strip():
                 raise ValueError(f"사례의 {key} 항목을 확인하세요.")
-        if case["id"] in seen or len(case["text"]) > 4000:
-            raise ValueError("중복 사례 ID 또는 4,000자를 넘는 문의가 있습니다.")
+        if case["id"] in seen or len(case["text"]) > 10000:
+            raise ValueError("중복 사례 ID 또는 10,000자를 넘는 문의가 있습니다.")
         seen.add(case["id"])
     return cases
 

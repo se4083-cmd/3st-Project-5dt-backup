@@ -174,8 +174,8 @@ def parse_result(response, inquiry):
 
 
 def analyze_inquiry(client, deployment, inquiry):
-    if not isinstance(inquiry, str) or not inquiry.strip() or len(inquiry) > 4000:
-        raise ValueError("합성 문의는 1~4,000자의 문자열로 입력하세요.")
+    if not isinstance(inquiry, str) or not inquiry.strip() or len(inquiry) > 10000:
+        raise ValueError("합성 문의는 1~10,000자의 문자열로 입력하세요.")
     response = client.responses.create(
         model=deployment,
         instructions=PROMPT,
@@ -197,9 +197,9 @@ def main():
     parser = argparse.ArgumentParser(description="문의 유형과 세 가지 검토 신호를 추출합니다.")
     parser.add_argument("--text", default=DEFAULT_INQUIRY, help="개인정보 없는 합성 문의")
     args = parser.parse_args()
-    inquiry = args.text.strip()
-    if not inquiry or len(inquiry) > 4000:
-        raise SystemExit("합성 문의를 1~4,000자로 입력하세요.")
+    inquiry = args.text
+    if not inquiry.strip() or len(inquiry) > 10000:
+        raise SystemExit("합성 문의를 1~10,000자로 입력하세요.")
     endpoint, deployment = load_settings()
     token_provider = get_bearer_token_provider(
         AzureCliCredential(), "https://cognitiveservices.azure.com/.default"

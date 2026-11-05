@@ -18,6 +18,8 @@ from openai import OpenAI
 
 from test_openai import load_settings
 
+PROMPT_VERSION = "inquiry_classification_draft_v1"
+
 CATEGORY_LABELS = {
     "DELIVERY": "배송",
     "RETURN": "반품·교환",
@@ -95,15 +97,37 @@ def parse_result(response):
     return result
 
 
+def classify_inquiry(client, deployment, inquiry):
+    if not isinstance(inquiry, str) or not inquiry.strip() or len(inquiry) > 10000:
+        raise ValueError("문의는 1~10,000자의 문자열로 입력하세요.")
+    response = client.responses.create(
+        model=deployment,
+        instructions=PROMPT,
+        input=inquiry,
+        text={
+            "format": {
+                "type": "json_schema",
+                "name": PROMPT_VERSION,
+                "strict": True,
+                "schema": OUTPUT_SCHEMA,
+            }
+        },
+        reasoning={"effort": "minimal"},
+        max_output_tokens=800,
+        store=False,
+    )
+    return parse_result(response), response
+
+
 def main():
     parser = argparse.ArgumentParser(description="가상 고객 문의 1건을 분류합니다.")
     parser.add_argument("--text", default=DEFAULT_INQUIRY, help="개인정보 없는 합성 문의")
     args = parser.parse_args()
-    inquiry = args.text.strip()
-    if not inquiry:
+    inquiry = args.text
+    if not inquiry.strip():
         raise SystemExit("문의 문장을 입력하세요.")
-    if len(inquiry) > 4000:
-        raise SystemExit("첫 예제에서는 문의를 4,000자 이내로 입력하세요.")
+    if len(inquiry) > 10000:
+        raise SystemExit("첫 예제에서는 문의를 10,000자 이내로 입력하세요.")
 
     endpoint, deployment = load_settings()
     token_provider = get_bearer_token_provider(
@@ -116,27 +140,10 @@ def main():
         timeout=60.0,
         max_retries=0,
     ) as client:
-        response = client.responses.create(
-            model=deployment,
-            instructions=PROMPT,
-            input=inquiry,
-            text={
-                "format": {
-                    "type": "json_schema",
-                    "name": "inquiry_classification_draft_v1",
-                    "strict": True,
-                    "schema": OUTPUT_SCHEMA,
-                }
-            },
-            reasoning={"effort": "minimal"},
-            max_output_tokens=800,
-            store=False,
-        )
-
-    try:
-        result = parse_result(response)
-    except (ValueError, TypeError) as error:
-        raise SystemExit(f"분류 실패: {error}") from None
+        try:
+            result, response = classify_inquiry(client, deployment, inquiry)
+        except (ValueError, TypeError) as error:
+            raise SystemExit(f"분류 실패: {error}") from None
     print("응답 상태:", response.status)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     print("문의 유형:", CATEGORY_LABELS[result["category"]])

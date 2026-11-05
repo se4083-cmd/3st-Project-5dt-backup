@@ -50,8 +50,8 @@ def load_cases(path):
             raise ValueError("기대 검토 표시는 true 또는 false여야 합니다.")
         if review != (case["expected_category"] == "UNKNOWN" or bool(tags)):
             raise ValueError("기대 분류·태그와 기대 검토 표시가 일치하지 않습니다.")
-        if case["id"] in seen or len(case["text"]) > 4000:
-            raise ValueError("중복 ID 또는 4,000자를 넘는 문의가 있습니다.")
+        if case["id"] in seen or len(case["text"]) > 10000:
+            raise ValueError("중복 ID 또는 10,000자를 넘는 문의가 있습니다.")
         seen.add(case["id"])
     return cases
 
