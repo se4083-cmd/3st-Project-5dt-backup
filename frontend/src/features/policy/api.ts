@@ -1,0 +1,21 @@
+import { ApiError } from "../../api";
+import type { AuthManager } from "../../auth/store";
+import { workspaceClient } from "../workspace/client";
+import { invalid, same, uuid } from "../workspace/validate";
+import { comparisonsPage, parseComparison, parsePolicy, parseVersion, parseVersions, policiesPage } from "./contracts";
+import { prepare, registerError, type AppendBody, type CompareBody, type RegisterBody, type ReviewBody } from "./input";
+export function createPolicyClient(auth: AuthManager) {
+  const c = workspaceClient(auth), root = "/api/v1/admin/p1";
+  async function policy(id: string, signal: AbortSignal) { const allowed = c.access("P1_POLICY_READ"); id = uuid(id); return c.decode(c.get(`${root}/policies/${id}`, signal), v => parsePolicy(v, allowed, id)); }
+  return {
+    policy,
+    async list(cursor: string | null, signal: AbortSignal) { const allowed = c.access("P1_POLICY_READ"), q = new URLSearchParams({ limit: "20" }); if (cursor) q.set("cursor", cursor); return c.decode(c.get(`${root}/policies?${q}`, signal), v => policiesPage(v, allowed)); },
+    async versions(id: string, before: number | null, signal: AbortSignal) { c.access("P1_POLICY_READ"); id = uuid(id); const q = new URLSearchParams({ limit: "20" }); if (before !== null) q.set("before_version", String(before)); return c.decode(c.get(`${root}/policies/${id}/versions?${q}`, signal), v => parseVersions(v, id, before)); },
+    async comparisons(id: string, cursor: string | null, signal: AbortSignal) { c.access("P1_POLICY_READ"); id = uuid(id); const q = new URLSearchParams({ limit: "20" }); if (cursor) q.set("cursor", cursor); return c.decode(c.get(`${root}/policies/${id}/comparisons?${q}`, signal), v => comparisonsPage(v, id)); },
+    async comparison(id: string, signal: AbortSignal) { c.access("P1_POLICY_READ"); id = uuid(id); const r = await c.decode(c.get(`${root}/policy-comparisons/${id}`, signal), v => parseComparison(v, id)); const parent = await policy(r.data.policy_id, signal); return { ...r, data: { comparison: r.data, policy: parent.data } }; },
+    async register(body: RegisterBody, key: string) { const allowed = c.access("P1_POLICY_WRITE", body.team_ids); if (registerError(body)) throw new ApiError(422, "INVALID_POLICY_CONTENT"); const payload = { ...prepare(body), policy_key: body.policy_key, team_ids: [...body.team_ids].sort() }; return c.decode(c.post(`${root}/policies`, payload, key), v => { const p = parsePolicy(v, allowed); if (p.policy_key !== payload.policy_key || !same(p.team_ids, payload.team_ids)) invalid(); return p; }); },
+    async append(id: string, body: AppendBody, key: string) { c.access("P1_POLICY_WRITE"); id = uuid(id); if (!Number.isSafeInteger(body.expected_previous_version) || body.expected_previous_version < 1) throw new ApiError(422, "INVALID_PREVIOUS_VERSION"); const payload = { ...prepare(body), expected_previous_version: body.expected_previous_version }; return c.decode(c.post(`${root}/policies/${id}/versions`, payload, key), v => { const a = parseVersion(v, id); if (a.version_no !== body.expected_previous_version + 1) invalid(); return a; }); },
+    async compare(id: string, body: CompareBody, key: string) { c.access("P1_POLICY_WRITE"); id = uuid(id); uuid(body.to_version_id); if (body.from_version_id !== null) uuid(body.from_version_id); if (body.to_version_id === body.from_version_id) throw new ApiError(422, "INVALID_POLICY_VERSION_PAIR"); return c.decode(c.post(`${root}/policies/${id}/comparisons`, body, key), v => { const a = parseComparison(v, undefined, id); if (a.from_version_id !== body.from_version_id || a.to_version_id !== body.to_version_id) invalid(); return a; }); },
+    async review(id: string, body: ReviewBody, key: string) { c.access("P1_POLICY_REVIEW"); id = uuid(id); if (!Number.isSafeInteger(body.expected_revision) || body.expected_revision < 1 || !["APPROVED", "REJECTED"].includes(body.decision) || !body.reason.trim() || [...body.reason].length > 500) throw new ApiError(422, "INVALID_REVIEW"); return c.decode(c.post(`${root}/policy-comparisons/${id}/reviews`, body, key), v => { const a = parseComparison(v, id); if (a.status !== body.decision || a.revision !== body.expected_revision + 1) invalid(); return a; }); },
+  };
+}

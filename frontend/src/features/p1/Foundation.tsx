@@ -8,6 +8,7 @@ import { hasCapability } from "../../auth/session";
 import type { P1Session } from "../../auth/session";
 import { MonitoringPage } from "../monitoring/MonitoringPage";
 import { VOCList, VOCDetailRoute } from "../voc/Pages";
+import { PolicyList, PolicyRoute, ComparisonRoute } from "../policy/Pages";
 import "./foundation.css";
 
 const features = [
@@ -19,11 +20,6 @@ export function RequireCapability({ capability, children }: { capability: string
   const state = useAuth();
   return state.phase === "ready" && hasCapability(state.session, capability)
     ? children : <AsyncState kind="error" error={new ApiError(403, "EXPLICIT_PERMISSION_REQUIRED")} />;
-}
-function Preparation({ title }: { title: string }) {
-  return <section className="card"><PageHeading title={title} subtitle="인증·통신 연결 준비" />
-    <p>이 단계에서는 기능별 본 화면을 구현하지 않았습니다.</p>
-    <p className="notice">API 요청은 서버에서 현재 권한과 팀 범위를 다시 검사합니다.</p></section>;
 }
 function Toolbar() {
   const auth = useAuthManager(), state = useAuth();
@@ -65,8 +61,9 @@ export function ConnectedApp({ p1Route, renderLegacy }: { p1Route: boolean; rend
       <Route path="/p1/monitoring" element={<RequireCapability capability="P1_MONITOR_READ"><MonitoringPage /></RequireCapability>} />
       <Route path="/p1/voc" element={<RequireCapability capability="P1_VOC_READ"><VOCList /></RequireCapability>} />
       <Route path="/p1/voc/:requestId" element={<RequireCapability capability="P1_VOC_READ"><VOCDetailRoute /></RequireCapability>} />
-      {features.filter(f => f.path === "/p1/policies").map(f => <Route key={f.path} path={`${f.path}/*`} element={<RequireCapability capability={f.capability}><Preparation title={f.label} /></RequireCapability>} />)}
-      <Route path="/p1/policy-comparisons/*" element={<RequireCapability capability="P1_POLICY_READ"><Preparation title="정책 비교 검토" /></RequireCapability>} />
+      <Route path="/p1/policies" element={<RequireCapability capability="P1_POLICY_READ"><PolicyList /></RequireCapability>} />
+      <Route path="/p1/policies/:policyId" element={<RequireCapability capability="P1_POLICY_READ"><PolicyRoute /></RequireCapability>} />
+      <Route path="/p1/policy-comparisons/:comparisonId" element={<RequireCapability capability="P1_POLICY_READ"><ComparisonRoute /></RequireCapability>} />
       <Route path="*" element={<AsyncState kind="error" error={new ApiError(404, "NOT_FOUND")} />} />
     </Routes>
   </div></AppShell>;

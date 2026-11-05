@@ -30,11 +30,12 @@ it("uses real login/session, shows only granted menus and guards direct P1 URLs"
   await screen.findByRole("form", { name: "백엔드 로그인" });
   expect(screen.queryByRole("navigation", { name: "P1 기능 메뉴" })).not.toBeInTheDocument();
 });
-it("keeps the capability-guarded policy preparation page while VOC develops independently", async () => {
-  vi.stubGlobal("fetch", vi.fn<typeof fetch>(async input => String(input).endsWith("/auth/login") ? json({ access_token: "ui-memory-token", expires_in: 60 }) : json(data(["P1_POLICY_READ"]))));
+it("opens the READ-only policy page without inventing WRITE capability", async () => {
+  vi.stubGlobal("fetch", vi.fn<typeof fetch>(async input => String(input).endsWith("/auth/login") ? json({ access_token: "ui-memory-token", expires_in: 60 }) : String(input).includes("/p1/policies?") ? json({ items: [], next_cursor: null }) : json(data(["P1_POLICY_READ"]))));
   render(<MemoryRouter initialEntries={["/p1/policies"]}><App /></MemoryRouter>);
   login();
-  await screen.findByText("이 단계에서는 기능별 본 화면을 구현하지 않았습니다.");
+  await screen.findByText("이 페이지의 정책은 정상 조회된 0건입니다.");
+  expect(screen.queryByRole("form", { name: "정책 등록" })).not.toBeInTheDocument();
   expect(screen.queryByText("검토 대기 4건 목록")).not.toBeInTheDocument();
 });
 it("distinguishes disabled P1 from failed login and permits manual session retry", async () => {

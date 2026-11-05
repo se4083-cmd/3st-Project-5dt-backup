@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "date": "2026-11-05T00:47:13.870Z",
+  "real_http": {
+    "register": 201,
+    "replay": 200,
+    "append": 201,
+    "compare": 201,
+    "approve": 200,
+    "reject": 200,
+    "conflict": 409,
+    "readonlyWrite": 403,
+    "disabled": 503,
+    "initialEmpty": true
+  },
+  "versions": {
+    "sizes": [
+      20,
+      1
+    ],
+    "next_before_version": 2
+  },
+  "diffKinds": [
+    "INITIAL_VERSION",
+    "NO_CHANGE",
+    "METADATA_ONLY",
+    "CONTENT_CHANGED"
+  ],
+  "recordedLocalReferences": {
+    "faq": 1,
+    "auto_replies": 1,
+    "automation_rules": 1
+  },
+  "activation": "NOT_SUPPORTED",
+  "runtimeEffect": "UNCONFIRMED",
+  "browser": {
+    "desktop": "1440x1000",
+    "mobile": "390x844",
+    "register": true,
+    "append": true,
+    "crossPageCompare": true,
+    "approve": true,
+    "reject": true,
+    "real409AndRefetch": true,
+    "uncaughtErrors": 0,
+    "storageEmpty": true
+  },
+  "externalAzureFabricRagVerified": false
+}

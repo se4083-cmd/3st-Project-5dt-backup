@@ -1,0 +1,174 @@
+{
+  "policy": {
+    "policy_id": "c259c982-98c8-4954-814d-d662ce603a61",
+    "policy_key": "LOCAL_POLICY",
+    "scope_hash": "c302de225b9125c5742a24a4b4368fa2ce48765e37e5f54e858f5b47b4e15d35",
+    "latest_version": 2,
+    "created_by": "921e2908-c1ed-5cff-883b-b689ffe333a1",
+    "created_at": "2026-11-05T00:44:14.008652Z",
+    "team_ids": [
+      "30823eec-3021-5baa-aa22-cf7f8bf23e08"
+    ],
+    "versions": [
+      {
+        "version_id": "c825f65b-1c9f-4158-b09f-7c580743137b",
+        "policy_id": "c259c982-98c8-4954-814d-d662ce603a61",
+        "version_no": 2,
+        "title": "합성 정책",
+        "body": "변경 절차\n추가 안내\n",
+        "content_hash": "54d14ea9473d030db92fe4844ed43bff1bc36db9c332b7c7c06876bcba16f31a",
+        "source_document_id": null,
+        "source_snapshot": {},
+        "status": "PENDING_REVIEW",
+        "revision": 1,
+        "created_by": "921e2908-c1ed-5cff-883b-b689ffe333a1",
+        "created_at": "2026-11-05T00:44:14.031711Z"
+      },
+      {
+        "version_id": "9bf0be94-3bc6-4346-964c-91e7ed9ce24f",
+        "policy_id": "c259c982-98c8-4954-814d-d662ce603a61",
+        "version_no": 1,
+        "title": "합성 정책",
+        "body": "PRIVATE_POLICY_BODY",
+        "content_hash": "705e4cd44e8fffa2b6a9c14d11849085422dd18bc270662722352248677fd60c",
+        "source_document_id": "75214117-5ed8-4754-bdbd-8c77a9c34bd5",
+        "source_snapshot": {
+          "origin": "SYNTHETIC",
+          "version": 1,
+          "body_hash": "97716c76aa42306cd5ab00e85017522c43b5d86f1464ab7dabc730ccdd95039d",
+          "policy_key": "LOCAL_POLICY",
+          "document_id": "75214117-5ed8-4754-bdbd-8c77a9c34bd5",
+          "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "verification": "LOCAL_RECORD_MATCH_NOT_EXTERNAL_RAG_VERIFICATION"
+        },
+        "status": "PENDING_REVIEW",
+        "revision": 1,
+        "created_by": "921e2908-c1ed-5cff-883b-b689ffe333a1",
+        "created_at": "2026-11-05T00:44:14.013153Z"
+      }
+    ],
+    "versions_truncated": false,
+    "activation": "NOT_SUPPORTED"
+  },
+  "comparison": {
+    "comparison_id": "10d25e0b-ef87-4299-a0b8-f93ff8e9f6fe",
+    "policy_id": "c259c982-98c8-4954-814d-d662ce603a61",
+    "from_version_id": "9bf0be94-3bc6-4346-964c-91e7ed9ce24f",
+    "to_version_id": "c825f65b-1c9f-4158-b09f-7c580743137b",
+    "diff": {
+      "kind": "CONTENT_CHANGED",
+      "title_before": "합성 정책",
+      "title_after": "합성 정책",
+      "body_changed": true,
+      "changes": [
+        {
+          "operation": "replace",
+          "old_start": 0,
+          "old_end": 1,
+          "new_start": 0,
+          "new_end": 2,
+          "before": [
+            "PRIVATE_POLICY_BODY"
+          ],
+          "after": [
+            "변경 절차\n",
+            "추가 안내\n"
+          ]
+        }
+      ],
+      "from_hash": "705e4cd44e8fffa2b6a9c14d11849085422dd18bc270662722352248677fd60c",
+      "to_hash": "54d14ea9473d030db92fe4844ed43bff1bc36db9c332b7c7c06876bcba16f31a"
+    },
+    "impact": {
+      "as_of": "2026-11-05T00:44:14.044116Z",
+      "coverage": "SCOPED_LOCAL_RECORDED_SUGGESTIONS",
+      "source_validation": "VERIFIED_SNAPSHOT",
+      "source_reason": "RECORDED_DOCUMENT_VERSION_HASH_AND_BODY_MATCH",
+      "scanned_count": 1,
+      "truncated": false,
+      "faq": {
+        "status": "RECORDED_LINKS",
+        "reason": "HISTORICAL_CITATIONS_NOT_FUTURE_USAGE",
+        "observed_reference_count": 1,
+        "links": [
+          {
+            "suggestion_id": "d6d417d0-147f-43f0-bea4-a169a9db77fc",
+            "document_id": "75214117-5ed8-4754-bdbd-8c77a9c34bd5",
+            "document_version": 1,
+            "source_active_at_analysis": false,
+            "rule_id": null,
+            "rule_version": null,
+            "rule_origin": null,
+            "rule_active": null,
+            "category": "FAQ",
+            "origin": "SYNTHETIC",
+            "document_origin": "SYNTHETIC",
+            "relation": "RECORDED_POLICY_CITATION"
+          }
+        ],
+        "actual_affected_count": null,
+        "runtime_effect": "UNCONFIRMED"
+      },
+      "auto_replies": {
+        "status": "RECORDED_LINKS",
+        "reason": "HISTORICAL_CITATIONS_NOT_FUTURE_USAGE",
+        "observed_reference_count": 1,
+        "links": [
+          {
+            "suggestion_id": "d6d417d0-147f-43f0-bea4-a169a9db77fc",
+            "document_id": "75214117-5ed8-4754-bdbd-8c77a9c34bd5",
+            "document_version": 1,
+            "source_active_at_analysis": false,
+            "rule_id": null,
+            "rule_version": null,
+            "rule_origin": null,
+            "rule_active": null,
+            "category": "FAQ",
+            "origin": "SYNTHETIC",
+            "document_origin": "SYNTHETIC",
+            "relation": "RECORDED_POLICY_CITATION"
+          }
+        ],
+        "actual_affected_count": null,
+        "runtime_effect": "UNCONFIRMED"
+      },
+      "automation_rules": {
+        "status": "RECORDED_LINKS",
+        "reason": "HISTORICAL_CO_USAGE_NOT_SEMANTIC_DEPENDENCY",
+        "observed_reference_count": 1,
+        "links": [
+          {
+            "suggestion_id": "d6d417d0-147f-43f0-bea4-a169a9db77fc",
+            "document_id": "75214117-5ed8-4754-bdbd-8c77a9c34bd5",
+            "document_version": 1,
+            "source_active_at_analysis": false,
+            "rule_id": "c817316b-16a1-4abb-8a96-792258e1492b",
+            "rule_version": 1,
+            "rule_origin": "SYNTHETIC",
+            "rule_active": false,
+            "category": "FAQ",
+            "origin": "SYNTHETIC",
+            "document_origin": "SYNTHETIC",
+            "relation": "RULE_CO_USED_WITH_POLICY_CITATION"
+          }
+        ],
+        "actual_affected_count": null,
+        "runtime_effect": "UNCONFIRMED"
+      },
+      "faq_catalog": "UNCONFIRMED",
+      "rule_condition_dependency": "UNCONFIRMED",
+      "backend_b_runtime": "UNCONFIRMED",
+      "rag_index": "UNCONFIRMED",
+      "azure_ai_search": "UNCONFIRMED"
+    },
+    "analysis_hash": "f0dc02fef0355060a8eb0516cd97115e591c5aea068e3ea6f65a0b54f2378b8d",
+    "status": "PENDING_REVIEW",
+    "revision": 1,
+    "created_by": "921e2908-c1ed-5cff-883b-b689ffe333a1",
+    "created_at": "2026-11-05T00:44:14.050685Z",
+    "reviews": [],
+    "candidate_status": "PENDING_REVIEW",
+    "reviewable": true,
+    "activation": "NOT_SUPPORTED"
+  }
+}
