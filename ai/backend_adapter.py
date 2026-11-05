@@ -8,8 +8,12 @@ from collections.abc import Mapping
 from copy import deepcopy
 from uuid import UUID
 
-from classify_with_signals import PROMPT_VERSION, analyze_inquiry, validate_payload
-from integration_contract import backend_category, execution_metadata
+if __package__:
+    from .classify_with_signals import PROMPT_VERSION, analyze_inquiry, validate_payload
+    from .integration_contract import backend_category, execution_metadata
+else:  # Preserve existing ai-directory callers and unittest discovery.
+    from classify_with_signals import PROMPT_VERSION, analyze_inquiry, validate_payload
+    from integration_contract import backend_category, execution_metadata
 
 
 def job_context(job):

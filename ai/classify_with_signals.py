@@ -20,8 +20,12 @@ import json
 from azure.identity import AzureCliCredential, get_bearer_token_provider
 from openai import OpenAI
 
-from classify_inquiry import CATEGORY_LABELS, PROMPT as BASE_PROMPT
-from test_openai import load_settings
+if __package__:
+    from .classify_inquiry import CATEGORY_LABELS, PROMPT as BASE_PROMPT
+    from .test_openai import load_settings
+else:
+    from classify_inquiry import CATEGORY_LABELS, PROMPT as BASE_PROMPT
+    from test_openai import load_settings
 
 RISK_LABELS = {
     "HUMAN_REQUEST": "사람 상담 요청",

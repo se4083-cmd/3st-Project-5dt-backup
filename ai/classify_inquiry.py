@@ -16,7 +16,10 @@ import json
 from azure.identity import AzureCliCredential, get_bearer_token_provider
 from openai import OpenAI
 
-from test_openai import load_settings
+if __package__:
+    from .test_openai import load_settings
+else:
+    from test_openai import load_settings
 
 PROMPT_VERSION = "inquiry_classification_draft_v1"
 

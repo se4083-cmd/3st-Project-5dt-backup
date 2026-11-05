@@ -1,5 +1,23 @@
 # OpenAI 담당 작업 상태
 
+## 2026-11-05 Backend B 분석 인계 보완 (현재)
+
+- 사용자 요청으로 개인 백업 저장소 main의 ai/만 보완했다. 팀 저장소 openai와 다른
+  팀 브랜치·v2는 수정하지 않았다. 아래 11월 3일 기록은 당시 이력으로 유지한다.
+- 저장소 루트의 `from ai.backend_adapter import analyze_job`을 지원한다.
+  기존 ai/ 내부 import와 CLI·analyze_job 성공 응답/예외 계약도 유지한다.
+- 선택적 `ai.analysis_service.analyze_job_checked`와 AIAnalysisError를 추가했다.
+  code/retryable은 B와 합의할 제안이며 기존 B 작업자에 자동 주입하지 않는다.
+  SDK 오류의 안전한 코드 변환만 수행하고 자동 재시도·DB 상태 변경·이관은 하지 않는다.
+- 명시 주입용 합성 Mock client 및 실행 예시 `python -m ai.examples.backend_b_analysis`를 추가했다.
+  시연 출력은 job/lease 값을 제외하고 실제 모델 값과 다른 MOCK_ANALYSIS_ONLY를 사용한다.
+- 신규 9개 + 기존 연결 4개 + 공통 계약 4개 + 반품 대기 2개, 총 19개 단위 테스트 통과.
+  이 검증에서 실제 모델/DB 호출은 0회다. B/PostgreSQL E2E는 미실행이다.
+- OpenAI 담당은 문의 분석과 향후 답변 생성이다. AI Search/RAG 검색 엔진 구현은 별도다.
+  민원 여부 예측/최종 확정 필드는 판단 기준·저장 계약 미확정으로 추가하지 않았다.
+- 현재 요청/응답, Mock, 오류 코드와 미확정 항목은
+  [Backend B 인계 문서](BACKEND_B_ANALYSIS_HANDOFF_KO.md)를 기준으로 한다.
+
 기록일: 2026-11-03 (한국 시간)
 
 ## 지식베이스 v01 연결 준비 (이번 작업)

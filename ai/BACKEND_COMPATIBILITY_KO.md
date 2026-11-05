@@ -2,12 +2,15 @@
 
 검토한 원격 커밋: Backend A `aa7ba6d`, Backend B `5596fdd`,
 Backend Plus `5cae230`, Frontend `f983054`.
-변경 대상은 로컬 실행 사본과 openai 브랜치의 ai/이며 main은 수정하지 않는다.
+최초 구현은 openai 브랜치에서 수행했다. 이후 사용자 요청으로 개인 백업 저장소 main에
+분석 인계를 보완했다. 현재 import·Mock·선택적 오류 계약은
+[BACKEND_B_ANALYSIS_HANDOFF_KO.md](BACKEND_B_ANALYSIS_HANDOFF_KO.md)를 우선 참조한다.
+팀 저장소/다른 팀 브랜치에는 이번 인계 변경을 반영하지 않았다.
 
 ## 실제 호출
 
 ```python
-from backend_adapter import analyze_job, assert_same_job
+from ai.backend_adapter import analyze_job, assert_same_job
 
 # Backend A claim_jobs가 반환한 AUTO job과 권한 확인된 현 회차 원문
 result = analyze_job(client, deployment, job, inquiry)
@@ -52,7 +55,7 @@ P1 정책 본문 줄바꿈 정규화/hash와 knowledge_documents의 원문 hash�
 python -m unittest test_backend_adapter test_integration_contract -v
 ```
 
-저장소에서는 ai/를 검색 경로로 사용:
+저장소 루트에서(기존 ai/ 내부 import도 호환 유지):
 
 ```text
 python -m unittest discover -s ai -p test_backend_adapter.py -v
