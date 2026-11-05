@@ -1,0 +1,19 @@
+# AI-only local settings; shared Python ignores live in the repository root.
+.env.*
+!.env.example
+check_results/
+.vscode/
+.idea/
+*.local
+*.local.*
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.tgz
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
