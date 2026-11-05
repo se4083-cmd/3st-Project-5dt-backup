@@ -224,3 +224,5 @@ __marimo__/
 
 .env.*
 *.db
+# Local backup files
+*.bak
