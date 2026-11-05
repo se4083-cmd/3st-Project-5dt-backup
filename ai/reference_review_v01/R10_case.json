@@ -1,0 +1,47 @@
+{
+  "case_id": "R10",
+  "definition_source": "user_provided_review_case",
+  "question": "반품 신청 후 언제 환불되는지 진행 단계를 알고 싶어요.",
+  "input_conditions": {
+    "shipping_type": "seller",
+    "simulation_mode": false
+  },
+  "corpus_filter": {
+    "dataset_role": "official_reference"
+  },
+  "expected_document": {
+    "id": "COUPANG_REFUND_64201_01",
+    "title": "반품 후 환불 단계",
+    "content": "회수·검수 및 결제수단을 확인하고 마이쿠팡의 취소/반품/교환/환불내역에서 예정일을 조회한다.",
+    "required_facts": [
+      "return_status",
+      "inspection_status",
+      "payment_method"
+    ]
+  },
+  "pass_criterion": {
+    "metric": "expected_document_in_top_k",
+    "top_k": 5
+  },
+  "prior_local_experiment": {
+    "search_method": "TF-IDF",
+    "reported_result": "보완 필요",
+    "expected_document_in_top_5": false,
+    "provenance": "user_reported",
+    "independently_reproduced": false
+  },
+  "project_search": {
+    "status": "미실행 — 연결 대상 미확인",
+    "executed": false,
+    "expected_document_rank": null,
+    "top_document_ids": null,
+    "passed": null
+  },
+  "evaluation_scope": "근거 문서 검색 여부",
+  "not_evaluated": [
+    "LLM 답변 품질",
+    "실제 환불 처리",
+    "주문 API",
+    "상담사 승인·발송 연동"
+  ]
+}
