@@ -1,5 +1,8 @@
 # Backend B 분석 단계 인계 — 2026-11-05
 
+최신 추가: VOC nullable 예측 필드와 타입별 오류 경계 보완.
+상세는 [VOC_PREDICTION_CONTRACT_KO.md](VOC_PREDICTION_CONTRACT_KO.md)를 따른다.
+
 11.05.8~11.05.12 대화의 책임 분리를 반영한 개인 백업 main 변경이다.
 팀 저장소의 openai 브랜치에 반영하거나 B 담당자가 오류 계약을 채택한 것은 아니다.
 v2·다른 팀 브랜치는 변경하지 않는다.
@@ -65,7 +68,8 @@ client는 B가 주입하고 timeout과 SDK `max_retries=0`을 명시해 중첩 �
 이전 이력·상품·주문 객체는 현재 함수 인자가 아니다. 답변 생성 단계에서 별도 합의한다.
 
 성공 객체의 최상위 필드는 `job`, `category`, `analysis`, `execution`이다.
-`analysis`는 `category, summary, risk_tags, risk_evidence, review_required`를 포함한다.
+`analysis`는 `category, summary, risk_tags, risk_evidence, review_required,
+voc_predicted_is_complaint`를 포함한다. 새 필드는 기본 null이고 예측 활성화 시 bool/null이다.
 분류는 DELIVERY/RETURN/REFUND/PRODUCT/PAYMENT/ACCOUNT/UNKNOWN.
 최상위 category만 UNKNOWN→UNCLASSIFIED로 바뀌며 원본 analysis.category는 유지한다.
 신호는 HUMAN_REQUEST/EXCEPTION/ACCOUNT_SECURITY.
@@ -89,6 +93,7 @@ DB 트랜잭션의 만료·중지·권한·중복 발송 검사를 대체하지 
 | INVALID_JOB_CONTEXT | false | 잘못된 작업 필드 또는 AUTO 이외 작업 |
 | INVALID_INQUIRY | false | 입력 자료형·공백·길이 오류 |
 | INVALID_DEPLOYMENT | false | 빈/잘못된 배포명 |
+| INVALID_ANALYSIS_OPTIONS | false | predict_complaint가 정확한 bool이 아님 |
 | STALE_JOB_CONTEXT | false | 전달 작업 정보가 분석 중 변경 |
 | AI_TIMEOUT | true | SDK 타임아웃 |
 | AI_CONNECTION_FAILED | true | SDK 연결 오류 |
@@ -101,14 +106,17 @@ DB 트랜잭션의 만료·중지·권한·중복 발송 검사를 대체하지 
 
 retryable=true는 일시적 실패의 재시도 후보라는 뜻이다. B가 최신 DB 상태·lease·중지·횟수·지연을
 검사하기 전에는 재시도하지 않는다. false도 자동 HANDOFF 명령이 아니다. 설정 오류·오래된 결과·
-출력 오류는 서로 다르게 처리할 수 있다. 알 수 없는 프로그래밍 오류는 숨기거나 재시도 실패로
-바꾸지 않고 원래 예외를 전파한다. 운영 로그에서 임의 예외/요청 객체 전체를 출력하지 않는다.
+출력 오류는 서로 다르게 처리할 수 있다. 명시 검증 실패 전용 AnalysisResponseError,
+JobContextError, StaleJobContextError만 wrapper에서 변환한다(기존 ValueError의 하위 타입).
+임의 ValueError/TypeError/KeyError/AttributeError 등 프로그래밍 오류는 원래 예외를 전파한다.
+응답의 status/output/message content/output_text/model 누락·형식은 명시 검증한다.
+운영 로그에서 임의 예외/요청 객체 전체를 출력하지 않는다.
 근거 부족 코드는 아직 없다. 현재 분석 단계가 정책 검색을 하지 않기 때문이다.
 
 ## Mock과 검증
 
-`ai/mock_analysis.py`의 MockAnalysisClient를 명시적으로 주입한다. delivery/human_request/unknown
-합성 시나리오만 제공하며 fixture 원문과 다른 문의는 거부한다. 실모델 실패 시 Mock으로
+`ai/mock_analysis.py`의 MockAnalysisClient를 명시적으로 주입한다. delivery/human_request/unknown/complaint
+합성 시나리오를 제공하며 fixture 원문과 다른 문의는 거부한다. 실모델 실패 시 Mock으로
 자동 대체하지 않는다. mock model_version은 MOCK_ANALYSIS_ONLY이고 운영 관측값으로 집계하지 않는다.
 이 예시는 B의 발송용 mock provider와 다르며 승인된 고객 답변을 생성하지 않는다.
 
@@ -118,6 +126,8 @@ python -m unittest discover -s ai -p test_backend_adapter.py -v
 python -m unittest discover -s ai -p test_integration_contract.py -v
 python -m unittest discover -s ai -p test_draft_return.py -v
 python -m ai.examples.backend_b_analysis
+python -m unittest discover -s ai -p test_voc_prediction.py -v
+python -m ai.examples.backend_b_analysis --predict-complaint
 ```
 
 이 명령은 모델·DB 호출 없이 실행한다. SDK/Azure 의존성은 import용으로 설치해야 한다.
@@ -125,8 +135,8 @@ python -m ai.examples.backend_b_analysis
 
 ## 민원 여부와 다음 합의
 
-현재 `voc_predicted_is_complaint` / `is_complaint`는 구현하지 않는다.
-예측값과 확정값을 분리하는 방향만 제안한 상태이며 판단 기준·자료형·미실행/판단불가/미확정
-표현·확정 주체·저장 경로가 필요하다. 신호나 기존 분류를 임의로 민원 여부로 변환하지 않는다.
-AI 예측이 최종 확정값을 덮어쓰지 않도록 하는 계약을 담당자와 합의한 뒤 별도 변경한다.
+현재 `voc_predicted_is_complaint`는 구현했다. 기본 null이며 predict_complaint=True에서만
+제안 기준으로 예측한다. nullable boolean 의미는 팀 전달 내용을 반영했고 내용 판단 기준은
+합의 대기다. `is_complaint`/label_status의 확정·저장은 백엔드 영역으로 구현하지 않는다.
+신호나 기존 분류를 임의로 불만 여부로 변환하지 않으며 예측값을 최종값에 복사하지 않는다.
 RAG·답변 생성·정책 승인·B 작업 완료는 이번 계약과 분리한다. 테스트 날짜를 임의 약속하지 않는다.

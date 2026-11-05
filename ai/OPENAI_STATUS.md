@@ -1,5 +1,19 @@
 # OpenAI 담당 작업 상태
 
+## 2026-11-05 VOC 예측 및 오류 경계 보완 (최신)
+
+- 11.05.14 이후 요청을 반영해 analysis.voc_predicted_is_complaint를 추가했다.
+  기본 미실행 null, predict_complaint=True 명시 호출에서만 제안 기준을 적용한다.
+  최종 is_complaint/label_status·DB·AI Search는 변경하지 않는다. 판단 기준 팀 합의는 대기다.
+- 활성화한 분석은 signals_v4_voc_proposal_v1 버전을 사용한다. 기존 검토 필요 계산은 유지한다.
+- AnalysisResponseError/JobContextError/StaleJobContextError를 추가해 알려진 검증 실패만
+  안전한 오류 코드로 변환한다. 임의 ValueError/TypeError/KeyError/AttributeError를 숨기지 않는다.
+- response.output 누락·잘못된 상태/출력/본문/메타데이터 등을 명시 검증한다.
+- 전체 27개 단위 테스트 통과(기존 19 + 신규 8), 모델·Azure·DB 호출 0회.
+  Mock 예측 예시 true/false/null 확인. 실제 모델 예측 품질과 B/DB 통합은 미검증.
+- [VOC 필드 계약](VOC_PREDICTION_CONTRACT_KO.md)과
+  [Backend B 인계](BACKEND_B_ANALYSIS_HANDOFF_KO.md)가 최신 계약이며 아래는 변경 이력이다.
+
 ## 2026-11-05 Backend B 분석 인계 보완 (현재)
 
 - 사용자 요청으로 개인 백업 저장소 main의 ai/만 보완했다. 팀 저장소 openai와 다른

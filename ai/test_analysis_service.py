@@ -31,10 +31,11 @@ class AnalysisServiceTests(unittest.TestCase):
                 context = job()
                 before = copy.deepcopy(context)
                 result = analyze_job_checked(client, "mock", context, client.fixture["inquiry"])
+                self.assertIsNone(result["analysis"]["voc_predicted_is_complaint"])
                 self.assertEqual(context, before)
                 self.assertEqual(result, analyze_job(client, "mock", context, client.fixture["inquiry"]))
                 self.assertEqual(set(result), {"job", "category", "analysis", "execution"})
-                self.assertTrue({"draft", "allowed", "confidence", "voc_predicted_is_complaint",
+                self.assertTrue({"draft", "allowed", "confidence",
                                  "is_complaint", "handoff"}.isdisjoint(result["analysis"]))
                 self.assertEqual(result["analysis"]["review_required"], scenario != "delivery")
                 self.assertEqual(result["execution"]["model_version"], "MOCK_ANALYSIS_ONLY")

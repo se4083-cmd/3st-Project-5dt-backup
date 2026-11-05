@@ -16,14 +16,17 @@ false는 자동 처리 허용이나 안전 판정을 의미하지 않습니다.
 
 import argparse
 import json
+from copy import deepcopy
 
 from azure.identity import AzureCliCredential, get_bearer_token_provider
 from openai import OpenAI
 
 if __package__:
+    from .analysis_errors import AnalysisResponseError
     from .classify_inquiry import CATEGORY_LABELS, PROMPT as BASE_PROMPT
     from .test_openai import load_settings
 else:
+    from analysis_errors import AnalysisResponseError
     from classify_inquiry import CATEGORY_LABELS, PROMPT as BASE_PROMPT
     from test_openai import load_settings
 
@@ -123,78 +126,123 @@ OUTPUT_SCHEMA = {
     "additionalProperties": False,
 }
 
+# Opt-in pending team agreement. No final label or automation decision.
+VOC_PROMPT_VERSION = "signals_v4_voc_proposal_v1"
+VOC_PROMPT = """
+추가 업무: 현재 문의 원문의 불만 여부만 예측하여 voc_predicted_is_complaint로 반환하세요.
+true: 상품·서비스·처리에 대한 불만이나 불만족을 명시적으로 표현.
+false: 불만 표현 없이 정보·절차·상태만 문의.
+null: 문맥 부족, 상충/모호한 표현, 불만 표현 없는 파손 등 문제 사실만 신고하여 기준 미확정.
+환불·반품 요청, 반말, 상담사 연결 요청, 위험 신호만으로 true를 부여하지 마세요.
+분류 및 위험 신호와 독립적으로 판단하세요. 예측은 최종 확정이나 자동답변 허가가 아닙니다.
+is_complaint, label_status, 승인·이관 결과는 출력하지 마세요.
+""".strip()
+VOC_OUTPUT_SCHEMA = deepcopy(OUTPUT_SCHEMA)
+VOC_OUTPUT_SCHEMA["properties"]["voc_predicted_is_complaint"] = {"type": ["boolean", "null"]}
+VOC_OUTPUT_SCHEMA["required"].append("voc_predicted_is_complaint")
+
+
 DEFAULT_INQUIRY = "배송이 계속 늦어지고 있어요. 상담사와 직접 이야기하고 싶어요."
 
 
-def validate_payload(payload, inquiry):
+def validate_payload(payload, inquiry, *, predict_complaint=False):
     required = {"category", "summary", "risk_tags", "risk_evidence"}
+    if predict_complaint:
+        required.add("voc_predicted_is_complaint")
     if not isinstance(payload, dict) or set(payload) != required:
-        raise ValueError("검토 신호 JSON의 항목이 올바르지 않습니다.")
+        raise AnalysisResponseError("검토 신호 JSON의 항목이 올바르지 않습니다.")
     category = payload["category"]
     if not isinstance(category, str) or category not in CATEGORY_LABELS:
-        raise ValueError("허용되지 않은 문의 유형입니다.")
+        raise AnalysisResponseError("허용되지 않은 문의 유형입니다.")
     summary = payload["summary"]
     if not isinstance(summary, str) or not summary.strip():
-        raise ValueError("문의 요약을 확인하세요.")
+        raise AnalysisResponseError("문의 요약을 확인하세요.")
     tags = payload["risk_tags"]
     if not isinstance(tags, list) or any(not isinstance(tag, str) or tag not in RISK_LABELS for tag in tags):
-        raise ValueError("허용되지 않은 검토 신호입니다.")
+        raise AnalysisResponseError("허용되지 않은 검토 신호입니다.")
     if len(tags) != len(set(tags)):
-        raise ValueError("검토 신호가 중복되었습니다.")
+        raise AnalysisResponseError("검토 신호가 중복되었습니다.")
     evidence = payload["risk_evidence"]
     if not isinstance(evidence, list):
-        raise ValueError("검토 신호 근거는 배열이어야 합니다.")
+        raise AnalysisResponseError("검토 신호 근거는 배열이어야 합니다.")
     evidence_tags = []
     for item in evidence:
         if not isinstance(item, dict) or set(item) != {"tag", "quote"}:
-            raise ValueError("근거 항목의 형식이 올바르지 않습니다.")
+            raise AnalysisResponseError("근거 항목의 형식이 올바르지 않습니다.")
         tag, quote = item["tag"], item["quote"]
         if not isinstance(tag, str) or tag not in RISK_LABELS:
-            raise ValueError("근거 항목의 태그가 올바르지 않습니다.")
+            raise AnalysisResponseError("근거 항목의 태그가 올바르지 않습니다.")
         if not isinstance(quote, str) or not quote.strip() or quote not in inquiry:
-            raise ValueError("검토 신호 근거가 문의 원문에 그대로 존재하지 않습니다.")
+            raise AnalysisResponseError("검토 신호 근거가 문의 원문에 그대로 존재하지 않습니다.")
         evidence_tags.append(tag)
     if len(evidence_tags) != len(tags) or set(evidence_tags) != set(tags):
-        raise ValueError("검토 신호와 근거가 일치하지 않습니다.")
+        raise AnalysisResponseError("검토 신호와 근거가 일치하지 않습니다.")
+
+    prediction = payload.get("voc_predicted_is_complaint") if predict_complaint else None
+    if prediction is not None and type(prediction) is not bool:
+        raise AnalysisResponseError("Invalid complaint prediction type")
 
     # 모델이 허용 여부를 결정하지 않도록 표시값은 Python에서 계산합니다.
     return {
         **payload,
+        "voc_predicted_is_complaint": prediction,
         "review_required": category == "UNKNOWN" or bool(tags),
     }
 
 
-def parse_result(response, inquiry):
-    if response.status != "completed":
-        details = response.incomplete_details
-        reason = details.reason if details is not None else response.status
-        raise ValueError(f"분석 응답이 완료되지 않았습니다: {reason}")
-    for item in response.output:
-        if item.type == "message" and any(part.type == "refusal" for part in item.content):
-            raise ValueError("모델이 분석 요청을 거절했습니다.")
-    if not response.output_text:
-        raise ValueError("분석 결과가 비어 있습니다.")
-    return validate_payload(json.loads(response.output_text), inquiry)
+def parse_result(response, inquiry, *, predict_complaint=False):
+    status = getattr(response, "status", None)
+    if not isinstance(status, str) or not status:
+        raise AnalysisResponseError("Invalid response status")
+    if status != "completed":
+        raise AnalysisResponseError("Analysis response incomplete")
+    output = getattr(response, "output", None)
+    if not isinstance(output, list):
+        raise AnalysisResponseError("Invalid response output")
+    for item in output:
+        item_type = getattr(item, "type", None)
+        if not isinstance(item_type, str):
+            raise AnalysisResponseError("Invalid response output item")
+        if item_type == "message":
+            content = getattr(item, "content", None)
+            if not isinstance(content, list):
+                raise AnalysisResponseError("Invalid message content")
+            for part in content:
+                part_type = getattr(part, "type", None)
+                if not isinstance(part_type, str):
+                    raise AnalysisResponseError("Invalid content part")
+                if part_type == "refusal":
+                    raise AnalysisResponseError("Analysis refused")
+    output_text = getattr(response, "output_text", None)
+    if not isinstance(output_text, str) or not output_text.strip():
+        raise AnalysisResponseError("Invalid analysis text")
+    try:
+        payload = json.loads(output_text)
+    except json.JSONDecodeError:
+        raise AnalysisResponseError("Invalid analysis JSON") from None
+    return validate_payload(payload, inquiry, predict_complaint=predict_complaint)
 
 
-def analyze_inquiry(client, deployment, inquiry):
+def analyze_inquiry(client, deployment, inquiry, *, predict_complaint=False):
     if not isinstance(inquiry, str) or not inquiry.strip() or len(inquiry) > 10000:
         raise ValueError("합성 문의는 1~10,000자의 문자열로 입력하세요.")
+    if type(predict_complaint) is not bool:
+        raise ValueError("predict_complaint must be bool")
     response = client.responses.create(
         model=deployment,
-        instructions=PROMPT,
+        instructions=PROMPT + ("\n\n" + VOC_PROMPT if predict_complaint else ""),
         input=inquiry,
         text={"format": {
             "type": "json_schema",
-            "name": "inquiry_review_signals_draft_v3",
+            "name": VOC_PROMPT_VERSION if predict_complaint else "inquiry_review_signals_draft_v3",
             "strict": True,
-            "schema": OUTPUT_SCHEMA,
+            "schema": VOC_OUTPUT_SCHEMA if predict_complaint else OUTPUT_SCHEMA,
         }},
         reasoning={"effort": REASONING_EFFORT},
         max_output_tokens=MAX_OUTPUT_TOKENS,
         store=False,
     )
-    return parse_result(response, inquiry), response
+    return parse_result(response, inquiry, predict_complaint=predict_complaint), response
 
 
 def main():

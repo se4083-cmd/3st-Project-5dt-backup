@@ -10,8 +10,10 @@ from openai import (
 )
 
 if __package__:
+    from .analysis_errors import AnalysisResponseError, JobContextError, StaleJobContextError
     from .backend_adapter import analyze_job, job_context
 else:
+    from analysis_errors import AnalysisResponseError, JobContextError, StaleJobContextError
     from backend_adapter import analyze_job, job_context
 
 
@@ -28,7 +30,7 @@ class AIAnalysisError(Exception):
         return {"code": self.code, "retryable": self.retryable}
 
 
-def analyze_job_checked(client, deployment, job, inquiry):
+def analyze_job_checked(client, deployment, job, inquiry, *, predict_complaint=False):
     """Return the legacy success shape; raise AIAnalysisError on known failures.
 
     Caller configures SDK timeouts/retries, rechecks DB state and owns all
@@ -36,13 +38,17 @@ def analyze_job_checked(client, deployment, job, inquiry):
     """
     try:
         job_context(job)
-    except (ValueError, TypeError, AttributeError):
+    except JobContextError:
         raise AIAnalysisError("INVALID_JOB_CONTEXT", retryable=False) from None
     if not isinstance(inquiry, str) or not inquiry.strip() or len(inquiry) > 10000:
         raise AIAnalysisError("INVALID_INQUIRY", retryable=False)
     if not isinstance(deployment, str) or not deployment.strip():
         raise AIAnalysisError("INVALID_DEPLOYMENT", retryable=False)
+    if type(predict_complaint) is not bool:
+        raise AIAnalysisError("INVALID_ANALYSIS_OPTIONS", retryable=False)
     try:
+        if predict_complaint:
+            return analyze_job(client, deployment, job, inquiry, predict_complaint=True)
         return analyze_job(client, deployment, job, inquiry)
     except APITimeoutError:
         raise AIAnalysisError("AI_TIMEOUT", retryable=True) from None
@@ -58,8 +64,9 @@ def analyze_job_checked(client, deployment, job, inquiry):
         transient = error.status_code in (408, 409, 429) or error.status_code >= 500
         raise AIAnalysisError("AI_SERVICE_UNAVAILABLE" if transient else "AI_REQUEST_REJECTED",
                               retryable=transient) from None
-    except (ValueError, TypeError, KeyError) as error:
-        code = "STALE_JOB_CONTEXT" if (
-            isinstance(error, ValueError) and error.args == ("STALE_JOB_CONTEXT",)
-        ) else "INVALID_ANALYSIS_RESPONSE"
-        raise AIAnalysisError(code, retryable=False) from None
+    except StaleJobContextError:
+        raise AIAnalysisError("STALE_JOB_CONTEXT", retryable=False) from None
+    except JobContextError:
+        raise AIAnalysisError("INVALID_JOB_CONTEXT", retryable=False) from None
+    except AnalysisResponseError:
+        raise AIAnalysisError("INVALID_ANALYSIS_RESPONSE", retryable=False) from None

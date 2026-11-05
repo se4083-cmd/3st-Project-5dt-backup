@@ -3,6 +3,7 @@
 Synthetic IDs only. In live use, the caller must pass the real claimed job and
 authorized current inquiry; never reuse these IDs or output internal job data.
 """
+import argparse
 import json
 
 from ai.analysis_service import AIAnalysisError, analyze_job_checked
@@ -10,6 +11,10 @@ from ai.mock_analysis import MockAnalysisClient
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Synthetic analysis only; no model or DB calls")
+    parser.add_argument("--predict-complaint", action="store_true",
+                        help="Enable proposed complaint criteria in offline fixtures")
+    args = parser.parse_args()
     job = {
         "job_id": "12345678-1234-4234-8234-123456789abc",
         "ticket_id": "12345678-1234-4234-8234-123456789abd",
@@ -18,10 +23,13 @@ def main():
         "cycle_no": 1, "expected_ticket_version": 1,
         "automation_generation": 1, "job_kind": "AUTO",
     }
-    for name in ("delivery", "human_request", "unknown"):
+    scenarios = ("delivery", "human_request", "unknown", "complaint") if args.predict_complaint else (
+        "delivery", "human_request", "unknown")
+    for name in scenarios:
         client = MockAnalysisClient(name)
         try:
-            result = analyze_job_checked(client, "mock-only", job, client.fixture["inquiry"])
+            result = analyze_job_checked(client, "mock-only", job, client.fixture["inquiry"],
+                                         predict_complaint=args.predict_complaint)
         except AIAnalysisError as error:
             print(json.dumps({"scenario": name, "error": error.as_dict()}, ensure_ascii=False))
         else:

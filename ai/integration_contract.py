@@ -8,6 +8,11 @@ import re
 from datetime import datetime
 from uuid import UUID
 
+if __package__:
+    from .analysis_errors import AnalysisResponseError
+else:
+    from analysis_errors import AnalysisResponseError
+
 
 def backend_category(category):
     if not isinstance(category, str) or category not in {
@@ -70,9 +75,9 @@ def execution_metadata(response, *, prompt_version):
     """Record actual response model and caller's active prompt version."""
     model = getattr(response, "model", None)
     if not isinstance(model, str) or not model.strip() or model == "NONE":
-        raise ValueError("Actual response model required")
+        raise AnalysisResponseError("Actual response model required")
     if not isinstance(prompt_version, str) or not prompt_version.strip():
-        raise ValueError("Active prompt version required")
+        raise AnalysisResponseError("Active prompt version required")
     return {"prompt_version": prompt_version, "model_version": model}
 
 
